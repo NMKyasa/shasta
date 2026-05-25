@@ -1,0 +1,71 @@
+#!/usr/bin/env php
+<?php
+
+/**
+ * Load application bootstrap
+ */
+require_once __DIR__ . '/bootstrap/app.php';
+
+/**
+ * Import console commands
+ */
+use App\Core\Console\Commands\MigrateCommand;
+use App\Core\Console\Commands\RollbackCommand;
+use App\Core\Console\Commands\MakeMigrationCommand;
+use App\Core\Console\Commands\SeedCommand;
+
+/**
+ * Get command from terminal
+ *
+ * Example:
+ * php console migrate
+ */
+$command = $argv[1] ?? null;
+
+/**
+ * Match command
+ */
+switch ($command) {
+
+    /**
+     * Run migrations
+     */
+    case 'migrate':
+
+        (new MigrateCommand())->handle();
+
+        break;
+
+    /**
+     * Rollback latest migration batch
+     */
+    case 'migrate:rollback':
+
+        (new RollbackCommand())->handle();
+
+        break;
+
+    /**
+     * Generate new migration file
+     */
+    case 'make:migration':
+
+            $name = $argv[2] ?? null;
+
+            (new MakeMigrationCommand())->handle($name);
+
+            break;
+
+            case 'db:seed':
+
+        (new SeedCommand())->handle();
+
+        break;
+
+    /**
+     * Unknown command
+     */
+    default:
+
+        echo "Command not found.\n";
+}
