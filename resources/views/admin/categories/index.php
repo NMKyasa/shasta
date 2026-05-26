@@ -7,17 +7,17 @@
             <div class="col-sm-6">
 
                 <h1 class="m-0">
-                    Services
+                    Categories
                 </h1>
 
             </div>
 
             <div class="col-sm-6 text-right">
 
-                <a href="<?= url('dashboard/services/create') ?>"
+                <a href="<?= url('dashboard/categories/create') ?>"
                    class="btn btn-primary">
 
-                    Add Service
+                    Add Category
 
                 </a>
 
@@ -47,15 +47,9 @@
 
                             <th>ID</th>
 
-                            <th>Image</th>
-
-                            <th>Title</th>
-
-                            <th>Slug</th>
+                            <th>Category Name</th>
 
                             <th>Status</th>
-
-                            <th>Featured</th>
 
                             <th>Actions</th>
 
@@ -65,48 +59,24 @@
 
                     <tbody>
 
-                        <?php foreach ($services as $service): ?>
+                        <?php foreach ($categories as $category): ?>
 
                             <tr>
 
                                 <td>
-                                    <?= $service['id'] ?>
-                                </td>
-
-                                <td>
-
-                                    <?php if ($service['featured_image']): ?>
-
-                                        <img
-                                            src="<?= asset($service['featured_image']) ?>"
-                                            style="
-                                                width: 80px;
-                                                height: 60px;
-                                                object-fit: cover;
-                                                border-radius: 6px;
-                                            "
-                                        >
-
-                                    <?php endif; ?>
-
+                                    <?= $category['id'] ?>
                                 </td>
 
                                 <td>
                                     <?= htmlspecialchars(
-                                        $service['title']
+                                        $category['name']
                                     ) ?>
                                 </td>
-
-                                <td>
-                                    <?= htmlspecialchars(
-                                        $service['slug']
-                                    ) ?>
-                                </td>
-
+                                
                                 <td>
 
                                     <?php if (
-                                        $service['status']
+                                        $category['status']
                                         ===
                                         'active'
                                     ): ?>
@@ -127,21 +97,7 @@
 
                                 <td>
 
-                                    <?php if (
-                                        $service['featured']
-                                    ): ?>
-
-                                        <span class="badge badge-primary">
-                                            Featured
-                                        </span>
-
-                                    <?php endif; ?>
-
-                                </td>
-
-                                <td>
-
-                                    <a href="<?= url('dashboard/services/edit/' . $service['id']) ?>"
+                                    <a href="<?= url('dashboard/categories/edit/' . $category['id']) ?>"
                                        class="btn btn-sm btn-info">
 
                                         Edit

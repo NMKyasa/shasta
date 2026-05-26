@@ -97,11 +97,6 @@
 
                 </li>
 
-                <!-- CONTENT MANAGEMENT -->
-                <li class="nav-header">
-                    CONTENT MANAGEMENT
-                </li>
-
                 <!-- Services -->
                 <li class="nav-item">
 
@@ -121,7 +116,7 @@
                 <!-- Projects -->
                 <li class="nav-item">
 
-                    <a href="#"
+                    <a href="<?= url('dashboard/projects') ?>"
                        class="nav-link">
 
                         <i class="nav-icon fas fa-project-diagram"></i>
@@ -134,87 +129,64 @@
 
                 </li>
 
-                <!-- Pages -->
+                <!-- Categories -->
                 <li class="nav-item">
 
-                    <a href="#"
+                    <a href="<?= url('dashboard/categories') ?>"
                        class="nav-link">
 
                         <i class="nav-icon fas fa-file-alt"></i>
 
                         <p>
-                            Pages
+                            Categories
                         </p>
 
                     </a>
 
                 </li>
 
-                <!-- Blog -->
+                <!-- Pricing -->
                 <li class="nav-item">
 
-                    <a href="#"
+                    <a href="<?= url('dashboard/pricing') ?>"
                        class="nav-link">
 
-                        <i class="nav-icon fas fa-blog"></i>
+                        <i class="nav-icon fas fa-tag"></i>
 
                         <p>
-                            Blog Posts
+                            Pricing
                         </p>
 
                     </a>
 
                 </li>
 
-                <!-- MEDIA -->
-                <li class="nav-header">
-                    MEDIA
-                </li>
-
+                <!-- Team -->
                 <li class="nav-item">
 
-                    <a href="#"
-                       class="nav-link">
-
-                        <i class="nav-icon fas fa-photo-video"></i>
-
-                        <p>
-                            Media Library
-                        </p>
-
-                    </a>
-
-                </li>
-
-                <!-- COMMUNICATION -->
-                <li class="nav-header">
-                    COMMUNICATION
-                </li>
-
-                <li class="nav-item">
-
-                    <a href="#"
-                       class="nav-link">
-
-                        <i class="nav-icon fas fa-envelope"></i>
-
-                        <p>
-                            Inquiries
-                        </p>
-
-                    </a>
-
-                </li>
-
-                <li class="nav-item">
-
-                    <a href="#"
+                    <a href="<?= url('dashboard/team') ?>"
                        class="nav-link">
 
                         <i class="nav-icon fas fa-users"></i>
 
                         <p>
-                            Subscribers
+                            Team
+                        </p>
+
+                    </a>
+
+                </li>
+
+                <!-- Testimonials -->
+                <li class="nav-item">
+
+                    <a href="<?= url('dashboard/testimonials') ?>"
+                       class="nav-link">
+
+                        <i class="nav-icon fas fa-comment-dots"></i>
+
+                        <p>
+                            Testimonials
                         </p>
 
                     </a>
@@ -293,7 +265,7 @@
 
                 <li class="nav-item">
 
-                    <a href="#"
+                    <a href="<?= url('dashboard/settings') ?>"
                        class="nav-link">
 
                         <i class="nav-icon fas fa-cog"></i>

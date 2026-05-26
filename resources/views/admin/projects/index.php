@@ -7,17 +7,17 @@
             <div class="col-sm-6">
 
                 <h1 class="m-0">
-                    Services
+                    Projects
                 </h1>
 
             </div>
 
             <div class="col-sm-6 text-right">
 
-                <a href="<?= url('dashboard/services/create') ?>"
+                <a href="<?= url('dashboard/projects/create') ?>"
                    class="btn btn-primary">
 
-                    Add Service
+                    Add Project
 
                 </a>
 
@@ -51,11 +51,11 @@
 
                             <th>Title</th>
 
-                            <th>Slug</th>
+                            <th>Client</th>
 
                             <th>Status</th>
 
-                            <th>Featured</th>
+                            <th>Scope</th>
 
                             <th>Actions</th>
 
@@ -65,20 +65,20 @@
 
                     <tbody>
 
-                        <?php foreach ($services as $service): ?>
+                        <?php foreach ($projects as $project): ?>
 
                             <tr>
 
                                 <td>
-                                    <?= $service['id'] ?>
+                                    <?= $project['id'] ?>
                                 </td>
 
                                 <td>
 
-                                    <?php if ($service['featured_image']): ?>
+                                    <?php if ($project['featured_image']): ?>
 
                                         <img
-                                            src="<?= asset($service['featured_image']) ?>"
+                                            src="<?= asset($project['featured_image']) ?>"
                                             style="
                                                 width: 80px;
                                                 height: 60px;
@@ -93,20 +93,20 @@
 
                                 <td>
                                     <?= htmlspecialchars(
-                                        $service['title']
+                                        $project['title']
                                     ) ?>
                                 </td>
 
                                 <td>
                                     <?= htmlspecialchars(
-                                        $service['slug']
+                                        $project['client_name']
                                     ) ?>
                                 </td>
 
                                 <td>
 
                                     <?php if (
-                                        $service['status']
+                                        $project['status']
                                         ===
                                         'active'
                                     ): ?>
@@ -126,22 +126,14 @@
                                 </td>
 
                                 <td>
-
-                                    <?php if (
-                                        $service['featured']
-                                    ): ?>
-
-                                        <span class="badge badge-primary">
-                                            Featured
-                                        </span>
-
-                                    <?php endif; ?>
-
+                                    <?= htmlspecialchars(
+                                        $project['scope']
+                                    ) ?>
                                 </td>
 
                                 <td>
 
-                                    <a href="<?= url('dashboard/services/edit/' . $service['id']) ?>"
+                                    <a href="<?= url('dashboard/projects/edit/' . $project['id']) ?>"
                                        class="btn btn-sm btn-info">
 
                                         Edit

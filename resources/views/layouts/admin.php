@@ -98,23 +98,21 @@
 
 $(document).ready(function () {
 
-    if ($('#services-table').length) {
+    $('.datatable').DataTable({
 
-        $('#services-table').DataTable({
+        responsive: true,
 
-            responsive: true,
+        autoWidth: false,
 
-            autoWidth: false,
+        pageLength: 10,
 
-            pageLength: 10,
+        ordering: true,
 
-            ordering: true,
+        searching: true,
 
-            searching: true,
+        lengthChange: true
+    });
 
-            lengthChange: true
-        });
-    }
 });
 
 </script>

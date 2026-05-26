@@ -131,6 +131,30 @@ class UploadService
             .
             $fileName;
 
+            
+            /**
+             * Upload directory
+             */
+            $uploadDirectory =
+                dirname($destination);
+
+            /**
+             * Auto-create directory
+             */
+            if (
+                !is_dir($uploadDirectory)
+            ) {
+
+                mkdir(
+
+                    $uploadDirectory,
+
+                    0777,
+
+                    true
+                );
+            }
+
         /**
          * Move uploaded file
          */
