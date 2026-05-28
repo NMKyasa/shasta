@@ -193,6 +193,22 @@
 
                 </li>
 
+                <!-- Inquiries -->
+                <li class="nav-item">
+
+                    <a href="<?= url('dashboard/inquiries') ?>"
+                       class="nav-link">
+
+                        <i class="nav-icon fas fa-question-circle"></i>
+
+                        <p>
+                            Inquiries
+                        </p>
+
+                    </a>
+
+                </li>
+
                 <!-- USERS & ACCESS -->
                 <li class="nav-header">
                     USERS & ACCESS
@@ -263,6 +279,23 @@
 
                 </li>
 
+                <!-- Sliders -->
+                <li class="nav-item">
+
+                    <a href="<?= url('dashboard/sliders') ?>"
+                       class="nav-link">
+
+                        <i class="nav-icon fas fa-sliders-h"></i>
+
+                        <p>
+                            Sliders
+                        </p>
+
+                    </a>
+
+                </li>
+
+                <!-- Settings -->
                 <li class="nav-item">
 
                     <a href="<?= url('dashboard/settings') ?>"
@@ -277,6 +310,70 @@
                     </a>
 
                 </li>
+
+                <!-- About settings -->
+                <li class="nav-item">
+
+                    <a href="<?= url('dashboard/settings/about') ?>"
+                       class="nav-link">
+
+                        <i class="nav-icon fas fa-info-circle"></i>
+
+                        <p>
+                            About
+                        </p>
+
+                    </a>
+
+                </li>
+
+                    <!-- Impacts -->
+                    <li class="nav-item">
+    
+                        <a href="<?= url('dashboard/impact') ?>"
+                        class="nav-link">
+    
+                            <i class="nav-icon fas fa-chart-bar"></i>
+    
+                            <p>
+                                Impacts
+                            </p>
+    
+                        </a>
+    
+                    </li>
+
+                    <!-- Menus -->
+                    <li class="nav-item">
+
+                        <a href="<?= url('dashboard/menus') ?>"
+                           class="nav-link">
+
+                            <i class="nav-icon fas fa-bars"></i>
+
+                            <p>
+                                Menus
+                            </p>
+
+                        </a>
+
+                    </li>
+
+                    <!-- Menu Items -->
+                    <li class="nav-item">
+
+                        <a href="<?= url('dashboard/menu-items') ?>"
+                           class="nav-link">
+
+                            <i class="nav-icon fas fa-list"></i>
+
+                            <p>
+                                Menu Items
+                            </p>
+
+                        </a>
+
+                    </li>
 
                 <!-- ACCOUNT -->
                 <li class="nav-header">
