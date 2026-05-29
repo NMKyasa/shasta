@@ -2,6 +2,12 @@
 
 namespace App\Core\Validation;
 
+/**
+ * Validation Service
+ *
+ * Provides reusable validation rules
+ * across the entire framework.
+ */
 class Validator
 {
     /**
@@ -10,12 +16,12 @@ class Validator
     protected array $errors = [];
 
     /**
-     * Validate data
+     * Create validator instance
      */
     public static function make(
         array $data,
         array $rules
-    )
+    ): self
     {
         $instance = new self();
 
@@ -33,8 +39,11 @@ class Validator
     protected function validate(
         array $data,
         array $rules
-    )
+    ): void
     {
+        /**
+         * Loop through fields
+         */
         foreach (
             $rules
             as
@@ -59,17 +68,66 @@ class Validator
                 null;
 
             /**
+             * Normalize strings
+             */
+            if (
+                is_string($value)
+            ) {
+
+                $value =
+                    trim($value);
+            }
+
+            /**
+             * Nullable rule
+             *
+             * If nullable is present
+             * and value is empty,
+             * skip remaining rules.
+             */
+            if (
+
+                in_array(
+                    'nullable',
+                    $rulesArray
+                )
+
+                &&
+
+                (
+                    $value === null
+                    ||
+                    $value === ''
+                )
+
+            ) {
+
+                continue;
+            }
+
+            /**
              * Process rules
              */
-            foreach ($rulesArray as $rule) {
+            foreach (
+                $rulesArray
+                as
+                $rule
+            ) {
 
                 /**
-                 * Rule with parameter
+                 * Split rule parameter
+                 *
+                 * Example:
+                 * max:255
                  */
                 $parts =
-                    explode(':', $rule);
+                    explode(
+                        ':',
+                        $rule
+                    );
 
-                $ruleName = $parts[0];
+                $ruleName =
+                    $parts[0];
 
                 $parameter =
                     $parts[1]
@@ -77,71 +135,71 @@ class Validator
                     null;
 
                 /**
-                 * Required
+                 * REQUIRED
                  */
                 if (
                     $ruleName === 'required'
-                    &&
-                    empty($value)
                 ) {
 
-                    $this->errors[$field][] =
-                        "{$field} is required";
+                    if (
+
+                        $value === null
+                        ||
+                        $value === ''
+
+                    ) {
+
+                        $this->errors[$field][] =
+                            "{$field} is required";
+
+                        /**
+                         * Stop processing
+                         * remaining rules
+                         * for this field
+                         */
+                        break;
+                    }
                 }
 
                 /**
-                 * Email
+                 * EMAIL
                  */
                 if (
+
                     $ruleName === 'email'
+
                     &&
+
+                    $value !== null
+
+                    &&
+
                     !filter_var(
                         $value,
                         FILTER_VALIDATE_EMAIL
                     )
+
                 ) {
 
                     $this->errors[$field][] =
-                        "{$field} must be valid";
+                        "{$field} must be a valid email address";
                 }
 
                 /**
-                 * Minimum length
+                 * NUMERIC
                  */
                 if (
-                    $ruleName === 'min'
-                    &&
-                    strlen($value)
-                    <
-                    $parameter
-                ) {
 
-                    $this->errors[$field][] =
-                        "{$field} minimum length is {$parameter}";
-                }
-
-                /**
-                 * Maximum length
-                 */
-                if (
-                    $ruleName === 'max'
-                    &&
-                    strlen($value)
-                    >
-                    $parameter
-                ) {
-
-                    $this->errors[$field][] =
-                        "{$field} maximum length is {$parameter}";
-                }
-
-                /**
-                 * Numeric
-                 */
-                if (
                     $ruleName === 'numeric'
+
                     &&
+
+                    $value !== null
+
+                    &&
+
                     !is_numeric($value)
+
                 ) {
 
                     $this->errors[$field][] =
@@ -149,19 +207,184 @@ class Validator
                 }
 
                 /**
-                 * Confirmed field
+                 * INTEGER
+                 */
+                if (
+
+                    $ruleName === 'integer'
+
+                    &&
+
+                    $value !== null
+
+                    &&
+
+                    filter_var(
+                        $value,
+                        FILTER_VALIDATE_INT
+                    ) === false
+
+                ) {
+
+                    $this->errors[$field][] =
+                        "{$field} must be an integer";
+                }
+
+                /**
+                 * URL
+                 */
+                if (
+
+                    $ruleName === 'url'
+
+                    &&
+
+                    $value !== null
+
+                    &&
+
+                    !filter_var(
+                        $value,
+                        FILTER_VALIDATE_URL
+                    )
+
+                ) {
+
+                    $this->errors[$field][] =
+                        "{$field} must be a valid URL";
+                }
+
+                /**
+                 * BOOLEAN
+                 */
+                if (
+
+                    $ruleName === 'boolean'
+
+                    &&
+
+                    !in_array(
+
+                        $value,
+
+                        [
+                            0,
+                            1,
+                            '0',
+                            '1',
+                            true,
+                            false
+                        ],
+
+                        true
+                    )
+
+                ) {
+
+                    $this->errors[$field][] =
+                        "{$field} must be boolean";
+                }
+
+                /**
+                 * MIN LENGTH
+                 */
+                if (
+
+                    $ruleName === 'min'
+
+                    &&
+
+                    $value !== null
+
+                    &&
+
+                    strlen((string) $value)
+                    <
+                    (int) $parameter
+
+                ) {
+
+                    $this->errors[$field][] =
+                        "{$field} minimum length is {$parameter}";
+                }
+
+                /**
+                 * MAX LENGTH
+                 */
+                if (
+
+                    $ruleName === 'max'
+
+                    &&
+
+                    $value !== null
+
+                    &&
+
+                    strlen((string) $value)
+                    >
+                    (int) $parameter
+
+                ) {
+
+                    $this->errors[$field][] =
+                        "{$field} maximum length is {$parameter}";
+                }
+
+                /**
+                 * IN ARRAY
+                 *
+                 * Example:
+                 * in:active,inactive
+                 */
+                if (
+                    $ruleName === 'in'
+                ) {
+
+                    $allowed =
+                        explode(
+                            ',',
+                            $parameter
+                        );
+
+                    if (
+
+                        !in_array(
+                            $value,
+                            $allowed
+                        )
+
+                    ) {
+
+                        $this->errors[$field][] =
+                            "{$field} contains an invalid value";
+                    }
+                }
+
+                /**
+                 * CONFIRMED
+                 *
+                 * Example:
+                 * password
+                 * password_confirmation
                  */
                 if (
                     $ruleName === 'confirmed'
                 ) {
 
                     $confirmationField =
-                        $field . '_confirmation';
+                        $field
+                        .
+                        '_confirmation';
 
                     if (
+
                         ($data[$confirmationField] ?? null)
+
                         !==
+
                         $value
+
                     ) {
 
                         $this->errors[$field][] =
@@ -173,18 +396,49 @@ class Validator
     }
 
     /**
-     * Check validation failure
+     * Check if validation failed
      */
-    public function fails()
+    public function fails(): bool
     {
-        return !empty($this->errors);
+        return !empty(
+            $this->errors
+        );
     }
 
     /**
      * Get validation errors
      */
-    public function errors()
+    public function errors(): array
     {
         return $this->errors;
+    }
+
+    /**
+     * Get flattened errors
+     *
+     * Useful for flash messages.
+     */
+    public function all(): array
+    {
+        $errors = [];
+
+        foreach (
+            $this->errors
+            as
+            $fieldErrors
+        ) {
+
+            foreach (
+                $fieldErrors
+                as
+                $error
+            ) {
+
+                $errors[] =
+                    $error;
+            }
+        }
+
+        return $errors;
     }
 }

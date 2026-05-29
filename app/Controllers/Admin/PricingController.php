@@ -7,6 +7,7 @@ use App\Models\Pricing;
 use App\Core\Database\Connection;
 use App\Core\Services\Flash;
 use App\Core\Services\Auth;
+use App\Core\Validation\Validator;
 
 class PricingController
 extends BaseController
@@ -140,6 +141,45 @@ extends BaseController
         $serviceId =
             $_POST['service_id']
             ?? null;
+
+
+            // Validate request
+        $validator = Validator::make(
+
+            $_POST,
+
+            [
+
+                'service_id' => 'required|exists:services,id',
+
+                'title' => 'required|max:255',
+
+                'pricing_type' => 'required|in:fixed,negotiable',
+
+                'price' => 'required_if:pricing_type,fixed|numeric',
+
+                'currency' => 'required|max:10',
+
+                'status' => 'required|in:active,inactive'
+
+            ]
+
+        );
+
+        if ($validator->fails()) {
+
+            Flash::set(
+
+                'danger',
+
+                implode('<br>', $validator->all())
+            );
+
+            return $response->redirect(
+
+                url('dashboard/pricing/create')
+            );
+        }
 
         /**
          * Pricing title
@@ -533,6 +573,45 @@ extends BaseController
         $serviceId =
             $_POST['service_id']
             ?? null;
+
+
+        // Validate request
+        $validator = Validator::make(
+
+            $_POST,
+
+            [
+
+                'service_id' => 'required|exists:services,id',
+
+                'title' => 'required|max:255',
+
+                'pricing_type' => 'required|in:fixed,negotiable',
+
+                'price' => 'required_if:pricing_type,fixed|numeric',
+
+                'currency' => 'required|max:10',
+
+                'status' => 'required|in:active,inactive'
+
+            ]
+
+        );
+
+        if ($validator->fails()) {
+
+            Flash::set(
+
+                'danger',
+
+                implode('<br>', $validator->all())
+            );
+
+            return $response->redirect(
+
+                url('dashboard/pricing/edit/' . $id)
+            );
+        }
 
         /**
          * Pricing title

@@ -5,6 +5,7 @@ namespace App\Controllers\Admin;
 use App\Controllers\BaseController;
 use App\Core\Database\Connection;
 use App\Core\Services\Flash;
+use App\Core\Validation\Validator;
 
 class CategoryController
 extends BaseController
@@ -106,15 +107,38 @@ extends BaseController
             'active';
 
         /**
-         * Validate category name
+         * Validate category
          */
-        if (empty($name)) {
+        $validator =
+            Validator::make(
 
+                $_POST,
+
+                [
+
+                    'name' =>
+                        'required|max:255',
+
+                    'status' =>
+                        'required|in:active,inactive'
+                ]
+            );
+
+        /**
+         * Validation failed
+         */
+        if (
+            $validator->fails()
+        )
+        {
             Flash::set(
 
                 'danger',
 
-                'Category name is required.'
+                implode(
+                    '<br>',
+                    $validator->all()
+                )
             );
 
             return $response->redirect(
@@ -327,21 +351,43 @@ extends BaseController
             'active';
 
         /**
-         * Validate category name
+         * Validate category
          */
-        if (empty($name)) {
+        $validator =
+            Validator::make(
 
+                $_POST,
+
+                [
+
+                    'name' =>
+                        'required|max:255',
+
+                    'status' =>
+                        'required|in:active,inactive'
+                ]
+            );
+
+        /**
+         * Validation failed
+         */
+        if (
+            $validator->fails()
+        )
+        {
             Flash::set(
 
                 'danger',
 
-                'Category name is required.'
+                implode(
+                    '<br>',
+                    $validator->all()
+                )
             );
 
             return $response->redirect(
 
                 url(
-
                     'dashboard/categories/edit/'
                     .
                     $id

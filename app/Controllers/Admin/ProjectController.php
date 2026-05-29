@@ -120,17 +120,32 @@ extends BaseController
     )
     {
         /**
-         * Validate title
+         * Validate request
          */
-        if (
-            empty($_POST['title'])
-        ) {
+        $validator = Validator::make(
+
+            $_POST,
+
+            [
+
+                'title' => 'required|max:255',
+
+                'category_id' => 'required|exists:categories,id',
+
+                'images' => 'required|array|min:1',
+
+                 'status' => 'required|in:active,inactive'
+            ]
+
+        );
+
+        if ($validator->fails()) {
 
             Flash::set(
 
                 'danger',
 
-                'Title is required.'
+                implode('<br>', $validator->all())
             );
 
             return $response->redirect(
@@ -139,29 +154,6 @@ extends BaseController
             );
         }
 
-        /**
-         * Validate category
-         */
-        if (
-            empty($_POST['category_id'])
-        ) {
-
-            return $response->send(
-                'Category is required.'
-            );
-        }
-
-        /**
-         * Validate images
-         */
-        if (
-            empty($_FILES['images'])
-        ) {
-
-            return $response->send(
-                'At least one image is required.'
-            );
-        }
 
         /**
          * Generate slug
@@ -597,42 +589,38 @@ extends BaseController
         }
 
         /**
-         * Validate title
+         * Validate request
          */
-        if (
-            empty($_POST['title'])
-        ) {
+        $validator = Validator::make(
+
+            $_POST,
+
+            [
+
+                'title' => 'required|max:255',
+
+                'category_id' => 'required|exists:categories,id',
+
+                'images' => 'sometimes|array|min:1',
+
+                'status' => 'required|in:active,inactive'
+
+            ]
+
+        );
+
+        if ($validator->fails()) {
 
             Flash::set(
 
                 'danger',
 
-                'Title is required.'
+                implode('<br>', $validator->all())
             );
 
             return $response->redirect(
 
                 url('dashboard/projects/edit/' . $id)
-            );
-        }
-
-        /**
-         * Validate category
-         */
-        if (
-            empty($_POST['category_id'])
-        ) {
-
-            Flash::set(
-
-                'danger',
-
-                'Category is required.'
-            );
-
-            return $response->redirect(
-
-                url('dashboard/projects/create')
             );
         }
 

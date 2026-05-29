@@ -9,6 +9,7 @@ use App\Core\Services\Auth;
 use App\Core\Services\Flash;
 use App\Core\Services\UploadService;
 use App\Core\Database\Connection;
+use App\Core\Validation\Validator;
 
 class SliderController
 extends BaseController
@@ -105,17 +106,25 @@ extends BaseController
     )
     {
         /**
-         * Validate title
+         * Validate request
          */
-        if (
-            empty($_POST['title'])
-        ) {
+        $validator = Validator::make(
+            $_POST,
+            [
+                'title' => 'required|max:255',
+                'subtitle' => 'max:255',
+                'button_text' => 'max:255',
+                'sort_order' => 'integer|min:0',
+                'status' => 'required|in:active,inactive'
+            ]
+        );
+        if ($validator->fails()) {
 
             Flash::set(
 
                 'danger',
 
-                'Title is required.'
+                implode('<br>', $validator->all())
             );
 
             return $response->redirect(
@@ -124,17 +133,6 @@ extends BaseController
             );
         }
 
-        /**
-         * Validate image
-         */
-        if (
-            empty($_FILES['images'])
-        ) {
-
-            return $response->send(
-                'At least one image is required.'
-            );
-        }
 
         /**
          * Database connection
@@ -440,17 +438,25 @@ extends BaseController
         }
 
         /**
-         * Validate title
+         * Validate request
          */
-        if (
-            empty($_POST['title'])
-        ) {
+        $validator = Validator::make(
+            $_POST,
+            [
+                'title' => 'required|max:255',
+                'subtitle' => 'max:255',
+                'button_text' => 'max:255',
+                'sort_order' => 'integer|min:0',
+                'status' => 'required|in:active,inactive'
+            ]
+        );
+        if ($validator->fails()) {
 
             Flash::set(
 
                 'danger',
 
-                'Title is required.'
+                implode('<br>', $validator->all())
             );
 
             return $response->redirect(
@@ -458,6 +464,7 @@ extends BaseController
                 url('dashboard/sliders/edit/' . $id)
             );
         }
+
 
         /**
          * Update slider

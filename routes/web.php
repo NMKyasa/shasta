@@ -644,13 +644,13 @@ $router->middleware('auth')
 /**
  * Store menu
  */
-$router->middleware('auth')
-    ->post('/dashboard/menus/store', [
-
-        MenuController::class,
-
-        'store'
-    ]);
+$router
+    ->middleware('auth')
+    ->middleware('csrf')
+    ->post(
+        '/dashboard/menus/store',
+        [MenuController::class, 'store']
+    );
 
 /**
  * Edit menu
@@ -666,13 +666,13 @@ $router->middleware('auth')
 /**
  * Update menu
  */
-$router->middleware('auth')
-    ->post('/dashboard/menus/update/{id}', [
-
-        MenuController::class,
-
-        'update'
-    ]);
+$router
+    ->middleware('auth')
+    ->middleware('csrf')
+    ->post(
+        '/dashboard/menus/update/{id}',
+        [MenuController::class, 'update']
+    );
 
     /**
  * Menu items listing

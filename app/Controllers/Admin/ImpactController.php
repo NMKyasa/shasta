@@ -5,6 +5,7 @@ namespace App\Controllers\Admin;
 use App\Controllers\BaseController;
 use App\Core\Database\Connection;
 use App\Core\Services\Flash;
+use App\Core\Validation\Validator;
 
 class ImpactController
 extends BaseController
@@ -104,6 +105,37 @@ extends BaseController
                 ''
             );
 
+
+            //validate request
+            $validator = Validator::make(
+
+                $_POST,
+
+                [
+
+                    'label' => 'required|max:255',
+
+                    'value' => 'required|numeric',
+
+                    'sort_order' => 'required|integer',
+
+                    'status' => 'required|in:active,inactive'
+                ]
+            );
+            if ($validator->fails()) {
+
+                Flash::set(
+
+                    'danger',
+
+                    implode('<br>', $validator->all())
+                );
+
+                return $response->redirect(
+
+                    url('dashboard/impact/create')
+                );
+            }
 
 
         /**
@@ -308,6 +340,38 @@ extends BaseController
                     ??
                     '0'
                 );
+
+        //validate request
+        $validator = Validator::make(
+
+            $_POST,
+
+            [
+
+                'label' => 'required|max:255',
+
+                'value' => 'required|numeric',
+
+                'sort_order' => 'required|integer',
+
+                'status' => 'required|in:active,inactive'
+            ]
+        );
+        if ($validator->fails()) {
+
+            Flash::set(
+
+                'danger',
+
+                implode('<br>', $validator->all())
+            );
+
+            return $response->redirect(
+
+                url('dashboard/impact/edit/' . $id)
+            );
+        }
+
 
         /**
          * Impact status

@@ -44,6 +44,13 @@
                     action="<?= url('dashboard/menus/store') ?>"
                 >
 
+                    <!-- CSRF TOKEN -->
+                    <input
+                        type="hidden"
+                        name="_token"
+                        value="<?= csrf_token() ?>"
+                    >
+
                     <!-- MENU NAME -->
                     <div class="form-group">
 
@@ -57,6 +64,7 @@
                         <input
                             type="text"
                             name="name"
+                            value=""
                             class="form-control"
                             required
                         >

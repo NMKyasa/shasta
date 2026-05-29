@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use App\Models\MenuItem;
 use App\Core\Database\Connection;
 use App\Core\Services\Flash;
+use App\Core\Validation\Validator;
 
 class MenuItemController
 extends BaseController
@@ -149,30 +150,35 @@ extends BaseController
         /**
          * Validate
          */
-        if (
+        $validator = Validator::make(
 
-            empty($_POST['label'])
+            $_POST,
 
-            ||
+            [
 
-            empty($_POST['menu_id'])
+                'label' => 'required|max:255',
 
-        ) {
+                'menu_id' => 'required|exists:menus,id'
+
+            ]
+
+        );
+
+        if ($validator->fails()) {
 
             Flash::set(
 
                 'danger',
 
-                'Title and menu are required.'
+                implode('<br>', $validator->all())
             );
 
             return $response->redirect(
 
-                url(
-                    'dashboard/menu-items/create'
-                )
+                url('dashboard/menu-items/create')
             );
         }
+
 
         /**
          * Database connection
@@ -353,6 +359,41 @@ extends BaseController
          */
         $menuItem =
             MenuItem::find($id);
+
+
+            // Validate
+        $validator = Validator::make(
+
+            $_POST,
+
+            [
+
+                'label' => 'required|max:255',
+
+                'menu_id' => 'required|exists:menus,id',
+
+                'sort_order' => 'required|integer',
+
+                'status' => 'required|in:active,inactive'
+
+            ]
+
+        );
+
+        if ($validator->fails()) {
+
+            Flash::set(
+
+                'danger',
+
+                implode('<br>', $validator->all())
+            );
+
+            return $response->redirect(
+
+                url('dashboard/menu-items/edit/' . $id)
+            );
+        }
 
         /**
          * Not found

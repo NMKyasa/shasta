@@ -7,6 +7,7 @@ use App\Models\Testimonial;
 use App\Core\Services\UploadService;
 use App\Core\Database\Connection;
 use App\Core\Services\Flash;
+use App\Core\Validation\Validator;
 
 class TestimonialController
 extends BaseController
@@ -109,76 +110,37 @@ extends BaseController
     )
     {
         /**
-         * Validate name
+         * Validate request
          */
-        if (
-            empty($_POST['name'])
-        ) {
+        $validator = Validator::make(
+
+            $_POST,
+
+            [
+
+                'name' => 'required',
+
+                'message' => 'required',
+
+                'rating' => 'required|integer|min:1|max:5',
+
+                'status' => 'required|in:active,inactive'
+
+            ]
+
+        );
+        if ($validator->fails()) {
 
             Flash::set(
 
                 'danger',
 
-                'Client name is required.'
+                'Please correct the errors in the form.'
             );
 
             return $response->redirect(
 
-                url(
-                    'dashboard/testimonials/create'
-                )
-            );
-        }
-
-        /**
-         * Validate message
-         */
-        if (
-            empty($_POST['message'])
-        ) {
-
-            Flash::set(
-
-                'danger',
-
-                'Testimonial message is required.'
-            );
-
-            return $response->redirect(
-
-                url(
-                    'dashboard/testimonials/create'
-                )
-            );
-        }
-
-        /**
-         * Validate rating
-         */
-        $rating =
-            (int) (
-                $_POST['rating']
-                ?? 5
-            );
-
-        if (
-            $rating < 1
-            ||
-            $rating > 5
-        ) {
-
-            Flash::set(
-
-                'danger',
-
-                'Rating must be between 1 and 5.'
-            );
-
-            return $response->redirect(
-
-                url(
-                    'dashboard/testimonials/create'
-                )
+                url('dashboard/testimonials/create')
             );
         }
 
@@ -231,7 +193,7 @@ extends BaseController
 
             $_POST['message'],
 
-            $rating,
+            $_POST['rating'],
 
             $_POST['sort_order']
                 ??
@@ -446,82 +408,37 @@ extends BaseController
         }
 
         /**
-         * Validate name
+         * Validate request
          */
-        if (
-            empty($_POST['name'])
-        ) {
+        $validator = Validator::make(
+
+            $_POST,
+
+            [
+
+                'name' => 'required',
+
+                'message' => 'required',
+
+                'rating' => 'required|integer|min:1|max:5',
+
+                'status' => 'required|in:active,inactive'
+
+            ]
+        );
+
+        if ($validator->fails()) {
 
             Flash::set(
 
                 'danger',
 
-                'Client name is required.'
+                'Please correct the errors in the form.'
             );
 
             return $response->redirect(
 
-                url(
-                    'dashboard/testimonials/edit/'
-                    .
-                    $id
-                )
-            );
-        }
-
-        /**
-         * Validate message
-         */
-        if (
-            empty($_POST['message'])
-        ) {
-
-            Flash::set(
-
-                'danger',
-
-                'Testimonial message is required.'
-            );
-
-            return $response->redirect(
-
-                url(
-                    'dashboard/testimonials/edit/'
-                    .
-                    $id
-                )
-            );
-        }
-
-        /**
-         * Validate rating
-         */
-        $rating =
-            (int) (
-                $_POST['rating']
-                ?? 5
-            );
-
-        if (
-            $rating < 1
-            ||
-            $rating > 5
-        ) {
-
-            Flash::set(
-
-                'danger',
-
-                'Rating must be between 1 and 5.'
-            );
-
-            return $response->redirect(
-
-                url(
-                    'dashboard/testimonials/edit/'
-                    .
-                    $id
-                )
+                url('dashboard/testimonials/edit/' . $id)
             );
         }
 
@@ -563,7 +480,7 @@ extends BaseController
 
             $_POST['message'],
 
-            $rating,
+            $_POST['rating'],
 
             $_POST['sort_order']
                 ??

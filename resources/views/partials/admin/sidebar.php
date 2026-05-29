@@ -264,21 +264,6 @@
                     WEBSITE SETTINGS
                 </li>
 
-                <li class="nav-item">
-
-                    <a href="#"
-                       class="nav-link">
-
-                        <i class="nav-icon fas fa-bars"></i>
-
-                        <p>
-                            Menus
-                        </p>
-
-                    </a>
-
-                </li>
-
                 <!-- Sliders -->
                 <li class="nav-item">
 

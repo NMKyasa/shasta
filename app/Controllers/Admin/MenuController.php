@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use App\Models\Menu;
 use App\Core\Database\Connection;
 use App\Core\Services\Flash;
+use App\Core\Validation\Validator;
 
 class MenuController
 extends BaseController
@@ -90,45 +91,58 @@ extends BaseController
         $response
     )
     {
+        
         /**
-         * Validate name
+         * Validate request
+         */
+        $validator =
+            Validator::make(
+
+                $_POST,
+
+                [
+
+                    'name' =>
+                        'required|max:255',
+
+                    'menu_key' =>
+                        'required|in:header,footer,mobile',
+
+                    'description' =>
+                        'nullable|max:1000',
+
+                    'status' =>
+                        'required|in:active,inactive'
+                ]
+            );
+
+        /**
+         * Validation failed
          */
         if (
-            empty($_POST['name'])
-        ) {
-
+            $validator->fails()
+        )
+        {
             Flash::set(
 
                 'danger',
 
-                'Menu name is required.'
+                implode(
+
+                    '<br>',
+
+                    $validator->all()
+                )
             );
 
             return $response->redirect(
 
-                url('dashboard/menus/create')
+                url(
+                    'dashboard/menus/create'
+                )
             );
         }
 
-        /**
-         * Validate menu key
-         */
-        if (
-            empty($_POST['menu_key'])
-        ) {
-
-            Flash::set(
-
-                'danger',
-
-                'Menu key is required.'
-            );
-
-            return $response->redirect(
-
-                url('dashboard/menus/create')
-            );
-        }
 
         /**
          * Database connection
@@ -301,39 +315,47 @@ extends BaseController
         /**
          * Validate name
          */
-        if (
-            empty($_POST['name'])
-        ) {
+        /**
+         * Validate request
+         */
+        $validator =
+            Validator::make(
 
-            Flash::set(
+                $_POST,
 
-                'danger',
+                [
 
-                'Menu name is required.'
+                    'name' =>
+                        'required|max:255',
+
+                    'menu_key' =>
+                        'required|in:header,footer,mobile',
+
+                    'description' =>
+                        'nullable|max:1000',
+
+                    'status' =>
+                        'required|in:active,inactive'
+                ]
             );
-
-            return $response->redirect(
-
-                url(
-                    'dashboard/menus/edit/'
-                    .
-                    $id
-                )
-            );
-        }
 
         /**
-         * Validate menu key
+         * Validation failed
          */
         if (
-            empty($_POST['menu_key'])
-        ) {
-
+            $validator->fails()
+        )
+        {
             Flash::set(
 
                 'danger',
 
-                'Menu key is required.'
+                implode(
+
+                    '<br>',
+
+                    $validator->all()
+                )
             );
 
             return $response->redirect(

@@ -293,7 +293,11 @@ class Router
 
                         'auth'
                             =>
-                            \App\Core\Middleware\AuthMiddleware::class
+                            \App\Core\Middleware\AuthMiddleware::class,
+
+                        'csrf'
+                            =>
+                            \App\Core\Middleware\CsrfMiddleware::class
                     ];
 
                     /**

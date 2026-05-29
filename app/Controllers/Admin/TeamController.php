@@ -8,6 +8,7 @@ use App\Core\Services\Auth;
 use App\Core\Services\UploadService;
 use App\Core\Database\Connection;
 use App\Core\Services\Flash;
+use App\Core\Validation\Validator;
 
 class TeamController
 extends BaseController
@@ -110,68 +111,22 @@ extends BaseController
         $response
     )
     {
-        /**
-         * Validate name
-         */
-        if (
-            empty($_POST['name'])
-        ) {
+        // validate request
+        $validator = Validator::make($_POST, [
+
+            'name' => 'required|max:255',
+
+            'email' => 'nullable|email|max:255',
+
+            'status' => 'required|in:active,inactive'
+        ]);
+        if ($validator->fails()) {
 
             Flash::set(
 
                 'danger',
 
-                'Full name is required.'
-            );
-
-            return $response->redirect(
-
-                url('dashboard/team/create')
-            );
-        }
-
-        /**
-         * Validate image
-         */
-        if (
-            empty($_FILES['image']['name'])
-        ) {
-
-            Flash::set(
-
-                'danger',
-
-                'Profile image is required.'
-            );
-
-            return $response->redirect(
-
-                url('dashboard/team/create')
-            );
-        }
-
-        /**
-         * Validate email
-         */
-        if (
-
-            !empty($_POST['email'])
-
-            &&
-
-            !filter_var(
-
-                $_POST['email'],
-
-                FILTER_VALIDATE_EMAIL
-            )
-        ) {
-
-            Flash::set(
-
-                'danger',
-
-                'Invalid email address.'
+                'Please correct the errors in the form.'
             );
 
             return $response->redirect(
@@ -462,61 +417,27 @@ extends BaseController
             );
         }
 
-        /**
-         * Validate name
-         */
-        if (
-            empty($_POST['name'])
-        ) {
+        // validate request
+        $validator = Validator::make($_POST, [
+
+            'name' => 'required|max:255',
+
+            'email' => 'nullable|email|max:255',
+
+            'status' => 'required|in:active,inactive'
+        ]);
+        if ($validator->fails()) {
 
             Flash::set(
 
                 'danger',
 
-                'Full name is required.'
+                'Please correct the errors in the form.'
             );
 
             return $response->redirect(
 
-                url(
-                    'dashboard/team/edit/'
-                    .
-                    $id
-                )
-            );
-        }
-
-        /**
-         * Validate email
-         */
-        if (
-
-            !empty($_POST['email'])
-
-            &&
-
-            !filter_var(
-
-                $_POST['email'],
-
-                FILTER_VALIDATE_EMAIL
-            )
-        ) {
-
-            Flash::set(
-
-                'danger',
-
-                'Invalid email address.'
-            );
-
-            return $response->redirect(
-
-                url(
-                    'dashboard/team/edit/'
-                    .
-                    $id
-                )
+                url('dashboard/team/edit/' . $id)
             );
         }
 
