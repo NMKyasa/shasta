@@ -1,6 +1,7 @@
 <?php
 
 use App\Core\Security\Csrf;
+use App\Core\Auth\Authorization;
 
 /**
  * Get CSRF token
@@ -61,4 +62,14 @@ function resource_path($path = '')
     return __DIR__
         . '/../resources/'
         . ltrim($path, '/');
+}
+
+// Authorization helper
+function authorize(
+    string $permission
+): void
+{
+    Authorization::authorize(
+        $permission
+    );
 }

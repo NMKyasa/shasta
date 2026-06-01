@@ -11,6 +11,7 @@ use App\Core\Services\Auth;
 use App\Core\Services\UploadService;
 use App\Core\Database\Connection;
 use App\Core\Services\Flash;
+use App\Core\Auth\Authorization;
 
 class ServiceController
 extends BaseController
@@ -23,6 +24,8 @@ extends BaseController
         $response
     )
     {
+        Authorization::authorize('services.view');
+
         /**
          * Database connection
          */
@@ -85,6 +88,8 @@ extends BaseController
         $response
     )
     {
+        Authorization::authorize('services.create');
+
         /**
          * Fetch categories
          */
@@ -119,6 +124,8 @@ extends BaseController
         $response
     )
     {
+        Authorization::authorize('services.store');
+
         /**
          * Validate request
          */
@@ -442,6 +449,7 @@ extends BaseController
         $id
     )
     {
+        Authorization::authorize('services.edit');
         /**
          * Database connection
          */
@@ -558,6 +566,7 @@ extends BaseController
         $id
     )
     {
+        Authorization::authorize('services.update');
         /**
          * Database connection
          */

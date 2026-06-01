@@ -17,6 +17,14 @@ use App\Controllers\Admin\SliderController;
 use App\Controllers\Admin\ImpactController;
 use App\Controllers\Admin\MenuController;
 use App\Controllers\Admin\MenuItemController;
+use App\Controllers\Admin\RoleController;
+use App\Controllers\Admin\PermissionController;
+use App\Models\RolePermission;
+use App\Controllers\Admin\RolePermissionController;
+use App\Controllers\Admin\PermissionSeederController;
+use App\Controllers\Admin\UserController;
+use App\Controllers\Admin\UserPermissionController;
+use App\Models\UserPermission;
 
 
 /**
@@ -725,6 +733,243 @@ $router->middleware('auth')
     ->post('/dashboard/menu-items/update/{id}', [
 
         MenuItemController::class,
+
+        'update'
+    ]);
+
+/**
+ * Roles listing
+ */
+$router->middleware('auth')
+    ->get('/dashboard/roles', [
+
+        RoleController::class,
+
+        'index'
+    ]);
+
+/**
+ * Create role form
+ */
+$router->middleware('auth')
+    ->get('/dashboard/roles/create', [
+
+        RoleController::class,
+
+        'create'
+    ]);
+
+/**
+ * Store role
+ */
+$router->middleware('auth')
+    ->post('/dashboard/roles/store', [
+
+        RoleController::class,
+
+        'store'
+    ]);
+
+/**
+ * Edit role
+ */
+$router->middleware('auth')
+    ->get('/dashboard/roles/edit/{id}', [
+
+        RoleController::class,
+
+        'edit'
+    ]);
+
+/**
+ * Update role
+ */
+$router->middleware('auth')
+    ->post('/dashboard/roles/update/{id}', [
+
+        RoleController::class,
+
+        'update'
+    ]);
+    
+
+/**
+ * Permissions listing
+ */
+$router->middleware('auth')
+    ->get('/dashboard/permissions', [
+
+        PermissionController::class,
+
+        'index'
+    ]);
+
+/**
+ * Create permission form
+ */
+$router->middleware('auth')
+    ->get('/dashboard/permissions/create', [
+
+        PermissionController::class,
+
+        'create'
+    ]);
+
+/**
+ * Store permission
+ */
+$router->middleware('auth')
+    ->post('/dashboard/permissions/store', [
+
+        PermissionController::class,
+
+        'store'
+    ]);
+
+/**
+ * Edit permission
+ */
+$router->middleware('auth')
+    ->get('/dashboard/permissions/edit/{id}', [
+
+        PermissionController::class,
+
+        'edit'
+    ]);
+
+/**
+ * Update permission
+ */
+$router->middleware('auth')
+    ->post('/dashboard/permissions/update/{id}', [
+
+        PermissionController::class,
+
+        'update'
+    ]);
+
+// Role permissions listing
+$router->middleware('auth')
+    ->get('/dashboard/role_permissions', [
+
+        RolePermissionController::class,
+
+        'index'
+    ]);
+
+/** * Edit role permissions
+ */
+$router->middleware('auth')
+    ->get('/dashboard/role_permissions/edit/{roleId}', [
+
+        RolePermissionController::class,
+
+        'edit'
+    ]);
+
+/** * Update role permissions
+ */
+$router->middleware('auth')
+    ->post('/dashboard/role_permissions/update/{roleId}', [
+
+        RolePermissionController::class,
+
+        'update'
+    ]);
+
+/**
+ * Permission Seeder
+ */
+$router->middleware('auth')
+    ->post('/dashboard/permissions/generate', [
+
+        PermissionSeederController::class,
+
+        'seed'
+    ]);
+
+
+// $router->post(
+//     '/dashboard/permissions/generate',
+//     'Admin\PermissionSeederController@seed'
+// );
+
+
+/**
+ * User listing
+ */
+$router->middleware('auth')
+    ->get('/dashboard/users', [
+
+        UserController::class,
+
+        'index'
+    ]);
+
+/** * Create user form
+ */
+$router->middleware('auth')
+    ->get('/dashboard/users/create', [
+
+        UserController::class,
+
+        'create'
+    ]);
+
+/** * Store user */
+$router->middleware('auth')
+    ->post('/dashboard/users/store', [
+
+        UserController::class,
+
+        'store'
+    ]);
+
+/** * Edit user form
+ */
+$router->middleware('auth')
+    ->get('/dashboard/users/edit/{id}', [
+
+        UserController::class,
+
+        'edit'
+    ]);
+
+/** * Update user */
+$router->middleware('auth')
+    ->post('/dashboard/users/update/{id}', [
+
+        UserController::class,
+
+        'update'
+    ]);
+
+
+// User permissions listing
+$router->middleware('auth')
+    ->get('/dashboard/user_permissions', [
+
+        UserPermissionController::class,
+
+        'index'
+    ]);
+
+/** * Edit user permissions
+ */
+$router->middleware('auth')
+    ->get('/dashboard/user_permissions/edit/{userId}', [
+
+        UserPermissionController::class,
+
+        'edit'
+    ]);
+
+/** * Update user permissions
+ */
+$router->middleware('auth')
+    ->post('/dashboard/user_permissions/update/{userId}', [
+
+        UserPermissionController::class,
 
         'update'
     ]);
