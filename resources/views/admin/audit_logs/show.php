@@ -17,7 +17,7 @@
             <div class="col-sm-6 text-right">
 
                 <a
-                    href="<?= url('dashboard/audit-logs') ?>"
+                    href="<?= url('dashboard/audit_logs') ?>"
                     class="btn btn-secondary"
                 >
 

@@ -233,7 +233,7 @@
                                     </button>
 
                                     <a
-                                        href="<?= url('dashboard/audit-logs') ?>"
+                                        href="<?= url('dashboard/audit_logs') ?>"
                                         class="btn btn-secondary"
                                     >
 
@@ -385,7 +385,7 @@
 
                                     <a
                                         href="<?= url(
-                                            'dashboard/audit-logs/show/'
+                                            'dashboard/audit_logs/show/'
                                             .
                                             $log['id']
                                         ) ?>"
