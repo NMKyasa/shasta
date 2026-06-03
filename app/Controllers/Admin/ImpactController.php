@@ -6,6 +6,8 @@ use App\Controllers\BaseController;
 use App\Core\Database\Connection;
 use App\Core\Services\Flash;
 use App\Core\Validation\Validator;
+use App\Core\Auth\Authorization;
+use App\Core\Services\AuditLog;
 
 class ImpactController
 extends BaseController
@@ -18,6 +20,11 @@ extends BaseController
         $response
     )
     {
+        /**
+         * Check authorization
+         */
+        Authorization::authorize('impacts.view');
+
         /**
          * Database connection
          */
@@ -68,6 +75,11 @@ extends BaseController
     )
     {
         /**
+         * Check authorization
+         */
+        Authorization::authorize('impacts.create');
+
+        /**
          * Render page
          */
         $this->view(
@@ -88,14 +100,18 @@ extends BaseController
         $response
     )
     {
+        /**
+         * Check authorization
+         */
+        Authorization::authorize('impacts.create');
 
-            // Impact label
-            $label = 
-            trim(
-                $_POST['label']
-                ??
-                ''
-            );
+        // Impact label
+        $label = 
+        trim(
+            $_POST['label']
+            ??
+            ''
+        );
 
             // Impact value
             $value =
@@ -116,8 +132,6 @@ extends BaseController
                     'label' => 'required|max:255',
 
                     'value' => 'required|numeric',
-
-                    'sort_order' => 'required|integer',
 
                     'status' => 'required|in:active,inactive'
                 ]
@@ -218,6 +232,36 @@ extends BaseController
         ]);
 
         /**
+         * Audit log
+         */
+        AuditLog::log(
+
+            'create',
+
+            'impacts',
+
+            $db->lastInsertId(),
+
+            null,
+
+            [
+
+                'label' =>
+                    $label,
+
+                'value' =>
+                    $value,
+
+                    'sort_order' =>
+                        $_POST['sort_order'] ?? 0,
+
+                'status' =>
+                    $status
+
+            ]
+        );
+
+        /**
          * Success message
          */
         Flash::set(
@@ -245,6 +289,11 @@ extends BaseController
         $id
     )
     {
+        /**
+         * Check authorization
+         */
+        Authorization::authorize('impacts.edit');
+
         /**
          * Database connection
          */
@@ -316,14 +365,18 @@ extends BaseController
         $id
     )
     {
+        /**
+         * Check authorization
+         */
+        Authorization::authorize('impacts.edit');
 
-            // Impact label
-            $label =
-                trim(
-                    $_POST['label']
-                    ??
-                    ''
-                );
+        // Impact label
+        $label =
+            trim(
+                $_POST['label']
+                ??
+                ''
+            );
 
             // Impact value
             $value =
@@ -351,8 +404,6 @@ extends BaseController
                 'label' => 'required|max:255',
 
                 'value' => 'required|numeric',
-
-                'sort_order' => 'required|integer',
 
                 'status' => 'required|in:active,inactive'
             ]
@@ -387,6 +438,21 @@ extends BaseController
          */
         $db =
             Connection::getInstance();
+
+
+            // Fetch existing impact for audit logging
+            $existingQuery = $db->prepare("
+
+                SELECT *
+                FROM impacts
+                WHERE id = ?
+                LIMIT 1
+
+            ");
+
+            $existingQuery->execute([$id]);
+
+            $existingImpact = $existingQuery->fetch();
 
         /**
          * Ensure unique slug
@@ -455,6 +521,61 @@ extends BaseController
         ]);
 
         /**
+         * Audit log
+         */
+        AuditLog::log(
+
+            'update',
+
+            'impacts',
+
+            $id,
+
+            $existingImpact,
+
+            [
+
+                'label' =>
+                    $label,
+
+                'value' =>
+                    $value,
+
+                    'sort_order' =>
+                        $_POST['sort_order'] ?? 0,
+
+                'status' =>
+                    $status
+
+            ]
+
+        );
+
+        // Status change log
+        if ($existingImpact['status'] !== $status) {
+
+            AuditLog::log(
+
+                $status === 'active' ? 'activated' : 'deactivated',
+
+                'impacts',
+
+                $id,
+
+                null,
+
+                [
+
+                    'label' =>
+                        $label
+                ],
+
+                'status_change'
+            );
+        }
+
+    
+        /**
          * Success message
          */
         Flash::set(
@@ -481,6 +602,22 @@ extends BaseController
         $response
     )
     {
+            /**
+            * Check if request is AJAX
+            */
+            if (!$request->isAjax()) {
+    
+                return $response->json([
+    
+                    'error' =>
+                        'Invalid request.'
+                ], 400);
+            }
+
+        /**
+         * Check authorization
+         */
+        Authorization::authorize('impacts.create');
 
         /**
          * Impact label

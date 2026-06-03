@@ -7,6 +7,8 @@ use App\Models\MenuItem;
 use App\Core\Database\Connection;
 use App\Core\Services\Flash;
 use App\Core\Validation\Validator;
+use App\Core\Auth\Authorization;
+use App\Core\Services\AuditLog;
 
 class MenuItemController
 extends BaseController
@@ -19,6 +21,11 @@ extends BaseController
         $response
     )
     {
+            /**
+            * Check authorization
+            */
+        Authorization::authorize('menu_items.view');
+
         /**
          * Database connection
          */
@@ -81,6 +88,11 @@ extends BaseController
         $response
     )
     {
+        /**
+         * Check authorization
+         */
+        Authorization::authorize('menu_items.create');
+       
         /**
          * Database connection
          */
@@ -147,6 +159,11 @@ extends BaseController
         $response
     )
     {
+        /**
+         * Check authorization
+         */
+        Authorization::authorize('menu_items.create');
+
         /**
          * Validate
          */
@@ -238,6 +255,31 @@ extends BaseController
             $_POST['status']
         ]);
 
+        // Audit log
+        AuditLog::log(
+
+            'create',
+
+            'menu_items',
+
+            $db->lastInsertId(),
+
+            null,
+
+            [
+                'menu_id' => $_POST['menu_id'],
+                'parent_id' => $_POST['parent_id'] ?? null,
+                'label' => $_POST['label'],
+                'url' => $_POST['url'],
+                'target' => $_POST['target'],
+                'icon' => $_POST['icon'],
+                'sort_order' => $_POST['sort_order'] ?? 0,
+                'status' => $_POST['status']
+            ]
+
+        );
+
+
         /**
          * Success
          */
@@ -267,6 +309,11 @@ extends BaseController
     )
     {
         /**
+         * Check authorization
+         */
+        Authorization::authorize('menu_items.edit');
+
+        /**
          * Find item
          */
         $menuItem =
@@ -287,6 +334,9 @@ extends BaseController
          */
         $db =
             Connection::getInstance();
+
+            // Fetch existing menu item for audit logging
+        $existingMenuItem = $menuItem->toArray();
 
         /**
          * Menus
@@ -355,11 +405,18 @@ extends BaseController
     )
     {
         /**
+         * Check authorization
+         */
+        Authorization::authorize('menu_items.edit');
+
+        /**
          * Find item
          */
         $menuItem =
             MenuItem::find($id);
 
+        // Fetch existing menu item for audit logging
+        $existingMenuItem = $menuItem ? $menuItem->toArray() : null;
 
             // Validate
         $validator = Validator::make(
@@ -459,6 +516,56 @@ extends BaseController
 
             $id
         ]);
+
+        // Audit log
+        AuditLog::log(
+
+            'update',
+
+            'menu_items',
+
+            $id,
+
+            $existingMenuItem,
+
+            [
+                'menu_id' => $_POST['menu_id'],
+                'parent_id' => $_POST['parent_id'] ?? null,
+                'label' => $_POST['label'],
+                'url' => $_POST['url'],
+                'target' => $_POST['target'],
+                'icon' => $_POST['icon'],
+                'sort_order' => $_POST['sort_order'] ?? 0,
+                'status' => $_POST['status']
+            ]
+
+        );
+
+        // Audit log
+        AuditLog::log(
+
+            'update',
+
+            'menu_items',
+
+            $id,
+
+            $existingMenuItem,
+
+            [
+                'menu_id' => $_POST['menu_id'],
+                'parent_id' => $_POST['parent_id'] ?? null,
+                'label' => $_POST['label'],
+                'url' => $_POST['url'],
+                'target' => $_POST['target'],
+                'icon' => $_POST['icon'],
+                'sort_order' => $_POST['sort_order'] ?? 0,
+                'status' => $_POST['status']
+            ]
+
+        );
+
+
 
         /**
          * Success

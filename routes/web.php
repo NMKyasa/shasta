@@ -25,6 +25,7 @@ use App\Controllers\Admin\PermissionSeederController;
 use App\Controllers\Admin\UserController;
 use App\Controllers\Admin\UserPermissionController;
 use App\Models\UserPermission;
+use App\Controllers\Admin\AuditLogController;
 
 
 /**
@@ -973,3 +974,21 @@ $router->middleware('auth')
 
         'update'
     ]);
+
+    // Audit logs listing
+    $router->middleware('auth')
+        ->get('/dashboard/audit_logs', [
+
+            AuditLogController::class,
+
+            'index'
+        ]);
+
+        // Audit log details
+        $router->middleware('auth')
+        ->get('/dashboard/audit_logs/show/{id}', [
+
+            AuditLogController::class,
+
+            'show'
+        ]);

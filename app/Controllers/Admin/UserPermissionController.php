@@ -7,6 +7,7 @@ use App\Core\Auth\Authorization;
 use App\Core\Database\Connection;
 use App\Core\Services\Auth;
 use App\Core\Services\Flash;
+use App\Core\Services\AuditLog;
 
 class UserPermissionController extends BaseController
 {
@@ -74,7 +75,7 @@ class UserPermissionController extends BaseController
         ) {
 
             $query =
-                $db->query(
+                $db->prepare(
                     "
                     SELECT
 
@@ -96,12 +97,26 @@ class UserPermissionController extends BaseController
 
                         ON up.user_id = u.id
 
+                    WHERE
+
+                        LOWER(r.name)
+                        !=
+                        'super admin'
+
+                    AND
+
+                        u.id != ?
+
                     GROUP BY u.id
 
                     ORDER BY u.first_name ASC,
-                             u.last_name ASC
+                            u.last_name ASC
                     "
                 );
+
+            $query->execute([
+                $currentUser['id']
+            ]);
 
         } else {
 
@@ -110,7 +125,7 @@ class UserPermissionController extends BaseController
              * cannot see Super Admin
              */
             $query =
-                $db->query(
+                $db->prepare(
                     "
                     SELECT
 
@@ -132,16 +147,24 @@ class UserPermissionController extends BaseController
 
                         ON up.user_id = u.id
 
-                    WHERE LOWER(
-                        r.name
-                    ) != 'super admin'
+                    WHERE
+
+                        u.id != ?
+
+                    AND
+
+                        LOWER(r.name) != 'super admin'
 
                     GROUP BY u.id
 
                     ORDER BY u.first_name ASC,
-                             u.last_name ASC
+                            u.last_name ASC
                     "
                 );
+
+            $query->execute([
+                $currentUser['id']
+            ]);
         }
 
         /**
@@ -245,6 +268,46 @@ class UserPermissionController extends BaseController
         $user =
             $query->fetch();
 
+            /**
+             * Current user
+             */
+            $currentUser =
+                Auth::user();
+
+            /**
+             * Prevent users from
+             * editing their own
+             * permissions
+             */
+            if (
+
+                $user
+
+                &&
+
+                $user['id']
+
+                ==
+
+                $currentUser['id']
+
+            ) {
+
+                Flash::set(
+
+                    'danger',
+
+                    'You cannot modify your own permissions.'
+                );
+
+                return $response->redirect(
+
+                    url(
+                        'dashboard/user_permissions'
+                    )
+                );
+            }
+
         /**
          * User not found
          */
@@ -309,6 +372,49 @@ class UserPermissionController extends BaseController
 
         $permissions =
             $query->fetchAll();
+
+            /**
+             * Non-super-admin users
+             * may only manage permissions
+             * they already possess.
+             */
+            if (
+
+                strtolower(
+                    $currentRole['name']
+                )
+
+                !==
+
+                'super admin'
+
+            ) {
+
+                $filteredPermissions =
+                    [];
+
+                foreach (
+                    $permissions
+                    as
+                    $permission
+                ) {
+
+                    if (
+
+                        Authorization::can(
+                            $permission['name']
+                        )
+
+                    ) {
+
+                        $filteredPermissions[] =
+                            $permission;
+                    }
+                }
+
+                $permissions =
+                    $filteredPermissions;
+            }
 
         /**
          * Role permissions
@@ -505,6 +611,66 @@ class UserPermissionController extends BaseController
         $user =
             $query->fetch();
 
+            /**
+         * Current user
+         */
+        $currentUser =
+            Auth::user();
+
+            /**
+             * Current role
+             */
+            $query =
+                $db->prepare(
+                    "
+                    SELECT *
+                    FROM roles
+                    WHERE id = ?
+                    LIMIT 1
+                    "
+                );
+
+            $query->execute([
+                $currentUser['role_id']
+            ]);
+
+            $currentRole =
+                $query->fetch();
+
+        /**
+         * Prevent users from
+         * modifying their own
+         * permissions
+         */
+        if (
+
+            $user
+
+            &&
+
+            $user['id']
+
+            ==
+
+            $currentUser['id']
+
+        ) {
+
+            Flash::set(
+
+                'danger',
+
+                'You cannot modify your own permissions.'
+            );
+
+            return $response->redirect(
+
+                url(
+                    'dashboard/user_permissions'
+                )
+            );
+        }
+
         /**
          * User not found
          */
@@ -581,6 +747,27 @@ class UserPermissionController extends BaseController
                 'permission_id'
             );
 
+            /**
+             * Existing user overrides
+             */
+            $query =
+                $db->prepare(
+                    "
+                    SELECT
+                        permission_id,
+                        allowed
+                    FROM user_permissions
+                    WHERE user_id = ?
+                    "
+                );
+
+            $query->execute([
+                $id
+            ]);
+
+            $oldOverrides =
+                $query->fetchAll();
+
         /**
          * Submitted states
          */
@@ -622,6 +809,61 @@ class UserPermissionController extends BaseController
                 $permissionId => $state
 
             ) {
+                /**
+                 * Get permission
+                 */
+                $query =
+                    $db->prepare(
+                        "
+                        SELECT *
+                        FROM permissions
+                        WHERE id = ?
+                        LIMIT 1
+                        "
+                    );
+
+                $query->execute([
+                    $permissionId
+                ]);
+
+                $permission =
+                    $query->fetch();
+
+                /**
+                 * Invalid permission
+                 */
+                if (
+                    !$permission
+                ) {
+
+                    continue;
+                }
+
+                /**
+                 * Non-super-admin users
+                 * may only assign permissions
+                 * they already possess.
+                 */
+                if (
+
+                    strtolower(
+                        $currentRole['name']
+                    )
+
+                    !==
+
+                    'super admin'
+
+                    &&
+
+                    !Authorization::can(
+                        $permission['name']
+                    )
+
+                ) {
+
+                    continue;
+                }
 
                 /**
                  * Role permission?
@@ -737,6 +979,96 @@ class UserPermissionController extends BaseController
              * Commit transaction
              */
             $db->commit();
+
+            /**
+             * New user overrides
+             */
+            $query =
+            $db->prepare(
+                "
+                SELECT
+
+                    p.name,
+
+                    up.allowed
+
+                FROM user_permissions up
+
+                INNER JOIN permissions p
+
+                    ON p.id = up.permission_id
+
+                WHERE up.user_id = ?
+                "
+            );
+
+            $query->execute([
+                $id
+            ]);
+
+            $newOverrides =
+                $query->fetchAll();
+
+
+                if (
+
+                    json_encode($oldOverrides)
+
+                    !=
+
+                    json_encode($newOverrides)
+
+                ) {
+
+                    AuditLog::log(
+
+                        'permission_override_changed',
+
+                        'user_permissions',
+
+                        $id,
+
+                        $oldOverrides,
+
+                        $newOverrides,
+
+                        'security'
+                    );
+                }
+
+            /**
+             * Audit log
+             */
+            AuditLog::log(
+
+                'permissions_updated',
+
+                'user_permissions',
+
+                $id,
+
+                [
+
+                    'user_id' =>
+                        $id,
+
+                    'overrides' =>
+                        $oldOverrides
+
+                ],
+
+                [
+
+                    'user_id' =>
+                        $id,
+
+                    'overrides' =>
+                        $newOverrides
+
+                ],
+
+                'security'
+            );
 
         } catch (\Exception $e) {
 

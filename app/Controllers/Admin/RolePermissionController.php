@@ -6,6 +6,8 @@ use App\Controllers\BaseController;
 use App\Core\Auth\Authorization;
 use App\Core\Database\Connection;
 use App\Core\Services\Flash;
+use App\Core\Services\Auth;
+use App\Core\Services\AuditLog;
 
 class RolePermissionController extends BaseController
 {
@@ -30,32 +32,106 @@ class RolePermissionController extends BaseController
         $db =
             Connection::getInstance();
 
+            /**
+         * Current user
+         */
+        $currentUser =
+            \App\Core\Services\Auth::user();
+
+        /**
+         * Current role
+         */
+        $query =
+            $db->prepare(
+                "
+                SELECT *
+                FROM roles
+                WHERE id = ?
+                LIMIT 1
+                "
+            );
+
+        $query->execute([
+            $currentUser['role_id']
+        ]);
+
+        $currentRole =
+            $query->fetch();
+
         /**
          * Get roles with permission counts
          */
-        $query =
-            $db->query(
-                "
-                SELECT
+                if (
 
-                    r.*,
+            strtolower(
+                $currentRole['name']
+            )
 
-                    COUNT(rp.id)
-                    AS permissions_count
+            ===
 
-                FROM roles r
+            'super admin'
 
-                LEFT JOIN role_permissions rp
+        ) {
 
-                    ON rp.role_id = r.id
+            $query =
+                $db->query(
+                    "
+                    SELECT
 
-                WHERE r.deleted_at IS NULL
+                        r.*,
 
-                GROUP BY r.id
+                        COUNT(rp.id)
+                        AS permissions_count
 
-                ORDER BY r.name ASC
-                "
-            );
+                    FROM roles r
+
+                    LEFT JOIN role_permissions rp
+
+                        ON rp.role_id = r.id
+
+                    WHERE r.deleted_at IS NULL
+
+                    GROUP BY r.id
+
+                    ORDER BY r.name ASC
+                    "
+                );
+
+        } else {
+
+            $query =
+                $db->prepare(
+                    "
+                    SELECT
+
+                        r.*,
+
+                        COUNT(rp.id)
+                        AS permissions_count
+
+                    FROM roles r
+
+                    LEFT JOIN role_permissions rp
+
+                        ON rp.role_id = r.id
+
+                    WHERE r.deleted_at IS NULL
+
+                    AND LOWER(r.name) != 'super admin'
+
+                    AND r.id != ?
+
+                    GROUP BY r.id
+
+                    ORDER BY r.name ASC
+                    "
+                );
+
+            $query->execute([
+                $currentRole['id']
+            ]);
+
+        }
 
         $roles =
             $query->fetchAll();
@@ -117,6 +193,66 @@ class RolePermissionController extends BaseController
         $role =
             $query->fetch();
 
+            /**
+         * Current user
+         */
+        $currentUser =
+            \App\Core\Services\Auth::user();
+
+        /**
+         * Current role
+         */
+        $query =
+            $db->prepare(
+                "
+                SELECT *
+                FROM roles
+                WHERE id = ?
+                LIMIT 1
+                "
+            );
+
+        $query->execute([
+            $currentUser['role_id']
+        ]);
+
+        $currentRole =
+            $query->fetch();
+
+            /**
+             * Users cannot modify
+             * permissions of their
+             * own role.
+             */
+            if (
+
+                $role
+
+                &&
+
+                $role['id']
+
+                ==
+
+                $currentRole['id']
+
+            ) {
+
+                Flash::set(
+
+                    'danger',
+
+                    'You cannot modify permissions of your own role.'
+                );
+
+                return $response->redirect(
+
+                    url(
+                        'dashboard/role_permissions'
+                    )
+                );
+            }
+
         /**
          * Role not found
          */
@@ -137,26 +273,40 @@ class RolePermissionController extends BaseController
         }
 
         /**
-         * Prevent editing Super Admin
+         * Non-super-admin users
+         * cannot access Super Admin role
          */
         if (
 
             strtolower(
                 $role['name']
             )
+
             ===
+
+            'super admin'
+
+            &&
+
+            strtolower(
+                $currentRole['name']
+            )
+
+            !==
+
             'super admin'
 
         ) {
 
             Flash::set(
 
-                'warning',
+                'danger',
 
-                'Super Admin automatically has all permissions.'
+                'Role not found.'
             );
 
             return $response->redirect(
+
                 url(
                     'dashboard/role_permissions'
                 )
@@ -178,6 +328,49 @@ class RolePermissionController extends BaseController
 
         $permissions =
             $query->fetchAll();
+
+            /**
+             * Non-super-admin users
+             * should only see permissions
+             * they already possess
+             */
+            if (
+
+                strtolower(
+                    $currentRole['name']
+                )
+
+                !==
+
+                'super admin'
+
+            ) {
+
+                $filteredPermissions =
+                    [];
+
+                foreach (
+                    $permissions
+                    as
+                    $permission
+                ) {
+
+                    if (
+
+                        Authorization::can(
+                            $permission['name']
+                        )
+
+                    ) {
+
+                        $filteredPermissions[] =
+                            $permission;
+                    }
+                }
+
+                $permissions =
+                    $filteredPermissions;
+            }
 
         /**
          * Get assigned permissions
@@ -303,32 +496,123 @@ class RolePermissionController extends BaseController
             );
         }
 
+        
+        // Current user and role
+        $currentUser =
+            \App\Core\Services\Auth::user();
+
+        $query =
+            $db->prepare(
+                "
+                SELECT *
+                FROM roles
+                WHERE id = ?
+                LIMIT 1
+                "
+            );
+
+        $query->execute([
+            $currentUser['role_id']
+        ]);
+
+        $currentRole =
+            $query->fetch();
+
+            /**
+         * Users cannot modify
+         * permissions of their
+         * own role.
+         */
+        if (
+
+            $role
+
+            &&
+
+            $role['id']
+
+            ==
+
+            $currentRole['id']
+
+        ) {
+
+            Flash::set(
+
+                'danger',
+
+                'You cannot modify permissions of your own role.'
+            );
+
+            return $response->redirect(
+
+                url(
+                    'dashboard/role_permissions'
+                )
+            );
+        }
+
         /**
-         * Prevent editing Super Admin
+         * Non-super-admin users
          */
         if (
 
             strtolower(
                 $role['name']
             )
+
             ===
+
+            'super admin'
+
+            &&
+
+            strtolower(
+                $currentRole['name']
+            )
+
+            !==
+
             'super admin'
 
         ) {
 
             Flash::set(
 
-                'warning',
+                'danger',
 
-                'Super Admin automatically has all permissions.'
+                'Role not found.'
             );
 
             return $response->redirect(
+
                 url(
                     'dashboard/role_permissions'
                 )
             );
         }
+
+        /**
+         * Existing permissions
+         */
+        $oldPermissionsQuery =
+            $db->prepare(
+                "
+                SELECT permission_id
+                FROM role_permissions
+                WHERE role_id = ?
+                "
+            );
+
+        $oldPermissionsQuery->execute([
+            $id
+        ]);
+
+        $oldPermissions =
+            array_column(
+                $oldPermissionsQuery->fetchAll(),
+                'permission_id'
+            );
 
         /**
          * Begin transaction
@@ -364,12 +648,74 @@ class RolePermissionController extends BaseController
             /**
              * Insert selected permissions
              */
+            /**
+             * Assign permissions
+             */
             foreach (
                 $permissions
                 as
                 $permissionId
             ) {
 
+                /**
+                 * Get permission
+                 */
+                $query =
+                    $db->prepare(
+                        "
+                        SELECT *
+                        FROM permissions
+                        WHERE id = ?
+                        LIMIT 1
+                        "
+                    );
+
+                $query->execute([
+                    $permissionId
+                ]);
+
+                $permission =
+                    $query->fetch();
+
+                /**
+                 * Permission not found
+                 */
+                if (
+                    !$permission
+                ) {
+
+                    continue;
+                }
+
+                /**
+                 * Non-super-admin users
+                 * may only assign permissions
+                 * they already possess
+                 */
+                if (
+
+                    strtolower(
+                        $currentRole['name']
+                    )
+
+                    !==
+
+                    'super admin'
+
+                    &&
+
+                    !Authorization::can(
+                        $permission['name']
+                    )
+
+                ) {
+
+                    continue;
+                }
+
+                /**
+                 * Save permission
+                 */
                 $query =
                     $db->prepare(
                         "
@@ -399,6 +745,40 @@ class RolePermissionController extends BaseController
              * Commit transaction
              */
             $db->commit();
+
+            /**
+             * Audit log
+             */
+            AuditLog::log(
+
+                'permissions_updated',
+
+                'role_permissions',
+
+                $id,
+
+                [
+
+                    'role_name' =>
+                        $role['name'],
+
+                    'permissions' =>
+                        $oldPermissions
+
+                ],
+
+                [
+
+                    'role_name' =>
+                        $role['name'],
+
+                    'permissions' =>
+                        $newPermissions
+
+                ],
+
+                'security'
+            );
 
         } catch (\Exception $e) {
 

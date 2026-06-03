@@ -11,6 +11,7 @@ use App\Core\Services\Auth;
 use App\Core\Services\UploadService;
 use App\Core\Services\Flash;
 use App\Core\Database\Connection;
+use App\Core\Auth\Authorization;
 
 class ProjectController
 extends BaseController
@@ -23,6 +24,11 @@ extends BaseController
         $response
     )
     {
+        /**
+         * Check authorization
+         */
+        Authorization::authorize('projects.view');
+
         /**
          * Database connection
          */
@@ -86,6 +92,11 @@ extends BaseController
     )
     {
         /**
+         * Check authorization
+         */
+        Authorization::authorize('projects.create');
+
+        /**
          * Fetch categories
          */
         $categories =
@@ -119,6 +130,11 @@ extends BaseController
         $response
     )
     {
+        /**
+         * Check authorization
+         */
+        Authorization::authorize('projects.create');
+
         /**
          * Validate request
          */
@@ -274,6 +290,41 @@ extends BaseController
          */
         $projectId =
             $db->lastInsertId();
+
+            /**
+             * Audit log
+             */
+            AuditLog::log(
+
+                'create',
+
+                'projects',
+
+                $projectId,
+
+                null,
+
+                [
+
+                    'title' =>
+                        $_POST['title'],
+
+                    'slug' =>
+                        $slug,
+
+                    'category_id' =>
+                        $_POST['category_id'],
+
+                    'featured' =>
+                        isset($_POST['featured'])
+                            ? 1
+                            : 0,
+
+                    'status' =>
+                        $_POST['status']
+
+                ]
+            );
 
         /**
          * Attach category
@@ -450,6 +501,11 @@ extends BaseController
         $id
     )
     {
+            /**
+            * Check authorization
+            */
+        Authorization::authorize('projects.edit');
+
         /**
          * Database connection
          */
@@ -461,6 +517,13 @@ extends BaseController
          */
         $project =
             Project::find($id);
+
+            /**
+             * Original project
+             * for audit logging
+             */
+            $oldProject =
+                $project;
 
         /**
          * Project not found
@@ -566,6 +629,11 @@ extends BaseController
         $id
     )
     {
+        /**
+         * Check authorization
+         */
+        Authorization::authorize('projects.edit');
+
         /**
          * Database connection
          */
@@ -741,6 +809,149 @@ extends BaseController
 
             $id
         ]);
+
+        /**
+         * Status changed
+         */
+        if (
+
+            $oldProject['status']
+
+            !=
+
+            $_POST['status']
+
+        ) {
+
+            AuditLog::log(
+
+                'status_changed',
+
+                'projects',
+
+                $id,
+
+                [
+
+                    'status' =>
+                        $oldProject['status']
+
+                ],
+
+                [
+
+                    'status' =>
+                        $_POST['status']
+
+                ]
+            );
+        }
+
+        /**
+         * Featured changed
+         */
+        if (
+
+            $oldProject['featured']
+
+            !=
+
+            (
+                isset($_POST['featured'])
+                    ? 1
+                    : 0
+            )
+
+        ) {
+
+            AuditLog::log(
+
+                'featured_changed',
+
+                'projects',
+
+                $id,
+
+                [
+
+                    'featured' =>
+                        $oldProject['featured']
+
+                ],
+
+                [
+
+                    'featured' =>
+                        isset($_POST['featured'])
+                            ? 1
+                            : 0
+
+                ]
+            );
+        }
+
+        /**
+         * Category changed
+         */
+        $categoryCheck =
+            $db->prepare(
+
+                "
+                SELECT category_id
+                FROM categoryables
+                WHERE categoryable_type = ?
+                AND categoryable_id = ?
+                LIMIT 1
+                "
+            );
+
+        $categoryCheck->execute([
+
+            'project',
+
+            $id
+        ]);
+
+        $oldCategory =
+            $categoryCheck->fetch();
+
+        if (
+
+            $oldCategory
+
+            &&
+
+            $oldCategory['category_id']
+
+            !=
+
+            $_POST['category_id']
+
+        ) {
+
+            AuditLog::log(
+
+                'category_changed',
+
+                'projects',
+
+                $id,
+
+                [
+
+                    'category_id' =>
+                        $oldCategory['category_id']
+
+                ],
+
+                [
+
+                    'category_id' =>
+                        $_POST['category_id']
+
+                ]
+            );
+        }
 
         /**
          * Update category
@@ -1138,6 +1349,70 @@ extends BaseController
                 'A project must have at least one image.'
             );
         }
+
+        /**
+         * Audit log
+         */
+        AuditLog::log(
+
+            'update',
+
+            'projects',
+
+            $id,
+
+            [
+
+                'title' =>
+                    $oldProject['title'],
+
+                'slug' =>
+                    $oldProject['slug'],
+
+                'featured' =>
+                    $oldProject['featured'],
+
+                'status' =>
+                    $oldProject['status']
+
+            ],
+
+            [
+
+                'title' =>
+                    $_POST['title'],
+
+                'slug' =>
+                    $slug,
+
+                'featured' =>
+                    isset($_POST['featured'])
+                        ? 1
+                        : 0,
+
+                'status' =>
+                    $_POST['status']
+
+            ]
+        );
+
+        AuditLog::log(
+            'media_added',
+            'projects',
+            $id
+        );
+
+        AuditLog::log(
+            'media_deleted',
+            'projects',
+            $id
+        );
+
+        AuditLog::log(
+            'featured_image_changed',
+            'projects',
+            $id
+        );
 
         Flash::set(
 

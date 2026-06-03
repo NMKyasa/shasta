@@ -7,6 +7,8 @@ use App\Models\Menu;
 use App\Core\Database\Connection;
 use App\Core\Services\Flash;
 use App\Core\Validation\Validator;
+use App\Core\Auth\Authorization;
+use App\Core\Services\AuditLog;
 
 class MenuController
 extends BaseController
@@ -19,6 +21,11 @@ extends BaseController
         $response
     )
     {
+        /**
+         * Check authorization
+         */
+        Authorization::authorize('menus.view');
+
         /**
          * Database connection
          */
@@ -71,6 +78,11 @@ extends BaseController
     )
     {
         /**
+         * Check authorization
+         */
+        Authorization::authorize('menus.create');
+
+        /**
          * Render page
          */
         $this->view(
@@ -91,7 +103,11 @@ extends BaseController
         $response
     )
     {
-        
+        /**
+         * Check authorization
+         */
+        Authorization::authorize('menus.create');
+
         /**
          * Validate request
          */
@@ -237,6 +253,36 @@ extends BaseController
         );
 
         /**
+         * Audit log
+         */
+        AuditLog::log(
+
+            'create',
+
+            'menus',
+
+            $db->lastInsertId(),
+
+            null,
+
+            [
+
+                'name' =>
+                    $_POST['name'],
+
+                'menu_key' =>
+                    $_POST['menu_key'],
+
+                'description' =>
+                    $_POST['description']
+                        ?? null,
+
+                'status' =>
+                    $_POST['status']
+            ]
+        );
+
+        /**
          * Redirect
          */
         return $response->redirect(
@@ -254,6 +300,11 @@ extends BaseController
         $id
     )
     {
+        /**
+         * Check authorization
+         */
+        Authorization::authorize('menus.edit');
+
         /**
          * Find menu
          */
@@ -296,6 +347,11 @@ extends BaseController
         $id
     )
     {
+        /**
+         * Check authorization
+         */
+        Authorization::authorize('menus.edit');
+
         /**
          * Find menu
          */
@@ -373,6 +429,10 @@ extends BaseController
          */
         $db =
             Connection::getInstance();
+
+        // Fetch existing menu for audit logging
+        $existingMenu = Menu::find($id);
+
 
         /**
          * Check duplicate menu key
@@ -453,6 +513,72 @@ extends BaseController
 
             $id
         ]);
+
+        /**
+         * Audit log
+         */
+        AuditLog::log(
+
+            'update',
+
+            'menus',
+
+            $id,
+
+            $existingMenu->toArray(),
+
+            [
+
+                'name' =>
+                    $_POST['name'],
+
+                'menu_key' =>
+                    $_POST['menu_key'],
+
+                'description' =>
+                    $_POST['description']
+                        ?? null,
+
+                'status' =>
+                    $_POST['status']
+            ]
+        );
+
+        // audit log for menu items if menu key is changed
+        if ($existingMenu->menu_key !== $_POST['menu_key']) {
+
+            $menuItemsQuery = $db->prepare("
+
+                SELECT id, label, url, target, icon, sort_order, status
+                FROM menu_items
+                WHERE menu_id = ?
+
+            ");
+
+            $menuItemsQuery->execute([$id]);
+
+            $menuItems = $menuItemsQuery->fetchAll();
+
+            foreach ($menuItems as $item) {
+
+                AuditLog::log(
+
+                    'update',
+
+                    'menu_items',
+
+                    $item['id'],
+
+                    $item,
+
+                    [
+
+                        'menu_key' =>
+                            $_POST['menu_key']
+                    ]
+                );
+            }
+        }
 
         /**
          * Success message

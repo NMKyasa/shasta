@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use App\Models\Inquiry;
 use App\Core\Database\Connection;
 use App\Core\Services\Flash;
+use App\Core\Auth\Authorization;
 
 class InquiryController
 extends BaseController
@@ -18,6 +19,11 @@ extends BaseController
         $response
     )
     {
+        /**
+         * Check authorization
+         */
+        Authorization::authorize('inquiries.view');
+
         /**
          * Database connection
          */
@@ -217,6 +223,11 @@ extends BaseController
         $id
     )
     {
+        /**
+         * Check authorization
+         */
+        Authorization::authorize('inquiries.edit');
+
         /**
          * Status
          */

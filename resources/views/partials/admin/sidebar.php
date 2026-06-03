@@ -1,3 +1,5 @@
+<?php use App\Core\Auth\Authorization; ?>
+
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
 
@@ -98,6 +100,24 @@
                 </li>
 
                 <!-- Content Management -->
+                    <?php
+
+                    $canContentManagement =
+
+                        Authorization::can('services.view')
+                        ||
+
+                        Authorization::can('projects.view')
+                        ||
+
+                        Authorization::can('categories.view')
+                        ||
+
+                        Authorization::can('pricing_items.view');
+
+                    ?>
+
+                    <?php if ($canContentManagement): ?>
                 <li class="nav-item has-treeview">
 
                     <a href="#"
@@ -116,6 +136,7 @@
                     </a>
 
                     <ul class="nav nav-treeview">
+                        <?php if (Authorization::can('services.view')): ?>
 
                         <li class="nav-item">
 
@@ -129,6 +150,9 @@
                             </a>
 
                         </li>
+                        <?php endif; ?>
+
+                        <?php if (Authorization::can('projects.view')): ?>
 
                         <li class="nav-item">
 
@@ -142,7 +166,9 @@
                             </a>
 
                         </li>
+                        <?php endif; ?>
 
+                        <?php if (Authorization::can('categories.view')): ?>
                         <li class="nav-item">
 
                             <a href="<?= url('dashboard/categories') ?>"
@@ -155,7 +181,9 @@
                             </a>
 
                         </li>
+                        <?php endif; ?>
 
+                        <?php if (Authorization::can('pricing_items.view')): ?>
                         <li class="nav-item">
 
                             <a href="<?= url('dashboard/pricing') ?>"
@@ -168,12 +196,25 @@
                             </a>
 
                         </li>
+                        <?php endif; ?>
 
                     </ul>
 
                 </li>
+                <?php endif; ?>
 
                 <!-- WEBSITE CONTENT -->
+                 <?php
+                $canWebsiteContent =
+
+                    Authorization::can('team.view')
+                    ||
+                    Authorization::can('testimonials.view')
+                    ||
+                    Authorization::can('inquiries.view');
+
+                ?>
+                <?php if ($canWebsiteContent): ?>
                 <li class="nav-item has-treeview">
 
                     <a href="#"
@@ -193,6 +234,7 @@
 
                     <ul class="nav nav-treeview">
 
+                    <?php if (Authorization::can('team.view')): ?>
                         <li class="nav-item">
 
                             <a href="<?= url('dashboard/team') ?>"
@@ -205,7 +247,9 @@
                             </a>
 
                         </li>
+                    <?php endif; ?>
 
+                    <?php if (Authorization::can('testimonials.view')): ?>
                         <li class="nav-item">
 
                             <a href="<?= url('dashboard/testimonials') ?>"
@@ -218,7 +262,9 @@
                             </a>
 
                         </li>
+                    <?php endif; ?>
 
+                    <?php if (Authorization::can('inquiries.view')): ?>
                         <li class="nav-item">
 
                             <a href="<?= url('dashboard/inquiries') ?>"
@@ -231,13 +277,31 @@
                             </a>
 
                         </li>
+                    <?php endif; ?>
 
                     </ul>
 
                 </li>
+                <?php endif; ?>
 
                 <!-- WEBSITE CONFIGURATION -->
-                    <li class="nav-item has-treeview">
+                 <?php
+                $canWebsiteConfig =
+                    Authorization::can('sliders.view')
+                    ||
+                    Authorization::can('about.view')
+                    ||
+                    Authorization::can('impact.view')
+                    ||
+                    Authorization::can('menus.view')
+                    ||
+                    Authorization::can('menu-items.view')
+                    ||
+                    Authorization::can('settings.view');
+
+                ?>
+                <?php if ($canWebsiteConfig): ?>
+                <li class="nav-item has-treeview">
 
                         <a href="#"
                         class="nav-link">
@@ -256,7 +320,8 @@
 
                         <ul class="nav nav-treeview">
 
-                            <li class="nav-item">
+                            <?php if (Authorization::can('sliders.view')): ?>
+                                <li class="nav-item">
 
                                 <a href="<?= url('dashboard/sliders') ?>"
                                 class="nav-link">
@@ -268,8 +333,10 @@
                                 </a>
 
                             </li>
+                            <?php endif; ?>
 
-                            <li class="nav-item">
+                            <?php if (Authorization::can('about.view')): ?>
+                                <li class="nav-item">
 
                                 <a href="<?= url('dashboard/settings/about') ?>"
                                 class="nav-link">
@@ -281,8 +348,10 @@
                                 </a>
 
                             </li>
+                            <?php endif; ?>
 
-                            <li class="nav-item">
+                            <?php if (Authorization::can('impact.view')): ?>
+                                <li class="nav-item">
 
                                 <a href="<?= url('dashboard/impact') ?>"
                                 class="nav-link">
@@ -294,8 +363,10 @@
                                 </a>
 
                             </li>
+                            <?php endif; ?>
 
-                            <li class="nav-item">
+                            <?php if (Authorization::can('menus.view')): ?>
+                                <li class="nav-item">
 
                                 <a href="<?= url('dashboard/menus') ?>"
                                 class="nav-link">
@@ -307,7 +378,9 @@
                                 </a>
 
                             </li>
+                            <?php endif; ?>
 
+                            <?php if (Authorization::can('menu-items.view')): ?>
                             <li class="nav-item">
 
                                 <a href="<?= url('dashboard/menu-items') ?>"
@@ -320,7 +393,9 @@
                                 </a>
 
                             </li>
+                            <?php endif; ?>
 
+                            <?php if (Authorization::can('settings.view')): ?>
                             <li class="nav-item">
 
                                 <a href="<?= url('dashboard/settings') ?>"
@@ -333,12 +408,17 @@
                                 </a>
 
                             </li>
+                            <?php endif; ?>
 
                         </ul>
 
                     </li>
+                <?php endif; ?>
 
                 <!-- ACCESS CONTROL -->
+                <?php if (Authorization::can('users.view') || Authorization::can('roles.view') || Authorization::can('permissions.view') || Authorization::can('role_permissions.view') || Authorization::can('user_permissions.view')
+                    || Authorization::can('audit_logs.view')
+                    ): ?>
                     <li class="nav-item has-treeview">
 
                         <a href="#"
@@ -358,6 +438,7 @@
 
                         <ul class="nav nav-treeview">
 
+                        <?php if (Authorization::can('users.view')): ?>
                             <li class="nav-item">
 
                                 <a href="<?= url('dashboard/users') ?>"
@@ -370,7 +451,9 @@
                                 </a>
 
                             </li>
+                            <?php endif; ?>
 
+                            <?php if (Authorization::can('roles.view')): ?>
                             <li class="nav-item">
 
                                 <a href="<?= url('dashboard/roles') ?>"
@@ -383,7 +466,9 @@
                                 </a>
 
                             </li>
+                            <?php endif; ?>
 
+                            <?php if (Authorization::can('permissions.view')): ?>
                             <li class="nav-item">
 
                                 <a href="<?= url('dashboard/permissions') ?>"
@@ -396,7 +481,9 @@
                                 </a>
 
                             </li>
+                            <?php endif; ?>
 
+                            <?php if (Authorization::can('role_permissions.view')): ?>
                             <li class="nav-item">
 
                                 <a href="<?= url('dashboard/role_permissions') ?>"
@@ -409,7 +496,9 @@
                                 </a>
 
                             </li>
+                            <?php endif; ?>
 
+                            <?php if (Authorization::can('user_permissions.view')): ?>
                             <li class="nav-item">
 
                                 <a href="<?= url('dashboard/user_permissions') ?>"
@@ -421,10 +510,27 @@
 
                                 </a>
                             </li>
+                            <?php endif; ?>
+
+                            <?php if (Authorization::can('audit_logs.view')): ?>
+                            <li class="nav-item">
+
+                                <a href="<?= url('dashboard/audit_logs') ?>"
+                                class="nav-link">
+
+                                    <i class="far fa-circle nav-icon"></i>
+
+                                    <p>Audit Logs</p>
+
+                                </a>
+
+                            </li>
+                            <?php endif; ?>
 
                         </ul>
 
                     </li>
+                <?php endif; ?>
 
 
 

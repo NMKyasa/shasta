@@ -9,6 +9,8 @@ use App\Core\Services\UploadService;
 use App\Core\Database\Connection;
 use App\Core\Services\Flash;
 use App\Core\Validation\Validator;
+use App\Core\Auth\Authorization;
+use App\Core\Services\AuditLog;
 
 class TeamController
 extends BaseController
@@ -21,6 +23,11 @@ extends BaseController
         $response
     )
     {
+        /**
+         * Check authorization
+         */
+        Authorization::authorize('team.view');
+
         /**
          * Database connection
          */
@@ -91,6 +98,11 @@ extends BaseController
     )
     {
         /**
+         * Check authorization
+         */
+        Authorization::authorize('team.create');
+
+        /**
          * Render page
          */
         $this->view(
@@ -111,6 +123,11 @@ extends BaseController
         $response
     )
     {
+        /**
+         * Check authorization
+         */
+        Authorization::authorize('team.create');
+
         // validate request
         $validator = Validator::make($_POST, [
 
@@ -227,6 +244,43 @@ extends BaseController
         $teamMemberId =
             $db->lastInsertId();
 
+            /**
+             * Audit log
+             */
+            AuditLog::log(
+
+                'create',
+
+                'team',
+
+                $teamMemberId,
+
+                null,
+
+                [
+
+                    'name' =>
+                        $_POST['name'],
+
+                    'position' =>
+                        $_POST['position']
+                        ?? null,
+
+                    'email' =>
+                        $_POST['email']
+                        ?? null,
+
+                    'featured' =>
+                        isset($_POST['featured'])
+                            ? 1
+                            : 0,
+
+                    'status' =>
+                        $_POST['status']
+
+                ]
+            );
+
         /**
          * Upload profile image
          */
@@ -318,6 +372,11 @@ extends BaseController
     )
     {
         /**
+         * Check authorization
+         */
+        Authorization::authorize('team.edit');
+
+        /**
          * Database connection
          */
         $db =
@@ -395,6 +454,11 @@ extends BaseController
     )
     {
         /**
+         * Check authorization
+         */
+        Authorization::authorize('team.edit');
+
+        /**
          * Database connection
          */
         $db =
@@ -405,6 +469,13 @@ extends BaseController
          */
         $teamMember =
             TeamMember::find($id);
+
+            /**
+             * Original team member
+             * for audit logging
+             */
+            $oldTeamMember =
+                $teamMember;
 
         /**
          * Team member not found
@@ -519,6 +590,86 @@ extends BaseController
         ]);
 
         /**
+         * Status changed
+         */
+        if (
+
+            $oldTeamMember['status']
+
+            !=
+
+            $_POST['status']
+
+        ) {
+
+            AuditLog::log(
+
+                'status_changed',
+
+                'team',
+
+                $id,
+
+                [
+
+                    'status' =>
+                        $oldTeamMember['status']
+
+                ],
+
+                [
+
+                    'status' =>
+                        $_POST['status']
+
+                ]
+            );
+        }
+
+        /**
+         * Featured changed
+         */
+        if (
+
+            $oldTeamMember['featured']
+
+            !=
+
+            (
+                isset($_POST['featured'])
+                    ? 1
+                    : 0
+            )
+
+        ) {
+
+            AuditLog::log(
+
+                'featured_changed',
+
+                'team',
+
+                $id,
+
+                [
+
+                    'featured' =>
+                        $oldTeamMember['featured']
+
+                ],
+
+                [
+
+                    'featured' =>
+                        isset($_POST['featured'])
+                            ? 1
+                            : 0
+
+                ]
+            );
+        }
+
+        /**
          * Replace profile image
          */
         if (
@@ -549,6 +700,10 @@ extends BaseController
 
             $oldMedia =
                 $oldMediaQuery->fetch();
+
+                $oldImagePath =
+                    $oldMedia['file_path']
+                    ?? null;
 
             /**
              * Delete old physical file
@@ -659,7 +814,84 @@ extends BaseController
 
                 'active'
             ]);
+
+            AuditLog::log(
+
+                'profile_image_changed',
+
+                'team',
+
+                $id,
+
+                [
+
+                    'old_image' =>
+                        $oldImagePath
+
+                ],
+
+                [
+
+                    'new_image' =>
+                        $upload['file_path']
+
+                ]
+            );
         }
+
+        /**
+         * Audit log
+         */
+        AuditLog::log(
+
+            'update',
+
+            'team',
+
+            $id,
+
+            [
+
+                'name' =>
+                    $oldTeamMember['name'],
+
+                'position' =>
+                    $oldTeamMember['position'],
+
+                'email' =>
+                    $oldTeamMember['email'],
+
+                'featured' =>
+                    $oldTeamMember['featured'],
+
+                'status' =>
+                    $oldTeamMember['status']
+
+            ],
+
+            [
+
+                'name' =>
+                    $_POST['name'],
+
+                'position' =>
+                    $_POST['position']
+                    ?? null,
+
+                'email' =>
+                    $_POST['email']
+                    ?? null,
+
+                'featured' =>
+                    isset($_POST['featured'])
+                        ? 1
+                        : 0,
+
+                'status' =>
+                    $_POST['status']
+
+            ]
+        );
 
         /**
          * Success message

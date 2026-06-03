@@ -3,6 +3,7 @@
 namespace App\Core\Services;
 
 use App\Core\Database\Connection;
+use App\Core\Services\AuditLog;
 
 class Auth
 {
@@ -41,6 +42,23 @@ class Auth
          */
         if (!$user) {
 
+            AuditLog::log(
+
+                'failed_login',
+
+                'authentication',
+
+                null,
+
+                null,
+
+                [
+                    'email' => $email
+                ],
+
+                'security'
+            );
+
             return false;
         }
 
@@ -53,7 +71,22 @@ class Auth
                 $user['password']
             )
         ) {
+            AuditLog::log(
 
+                'failed_login',
+
+                'authentication',
+
+                $user['id'],
+
+                null,
+
+                [
+                    'email' => $email
+                ],
+
+                'security'
+            );
             return false;
         }
 
@@ -61,6 +94,27 @@ class Auth
          * Store user session
          */
         $_SESSION['user'] = $user;
+
+        /**
+         * Audit log
+         */
+        AuditLog::log(
+
+            'login',
+
+            'authentication',
+
+            $user['id'],
+
+            null,
+
+            [
+                'email' =>
+                    $user['email']
+            ],
+
+            'security'
+        );
 
         return true;
     }
@@ -88,6 +142,21 @@ class Auth
      */
     public static function logout()
     {
+        AuditLog::log(
+
+            'logout',
+
+            'authentication',
+
+            self::id(),
+
+            null,
+
+            null,
+
+            'security'
+        );
+
         unset($_SESSION['user']);
     }
 

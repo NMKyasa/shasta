@@ -8,6 +8,8 @@ use App\Core\Database\Connection;
 use App\Core\Services\Flash;
 use App\Core\Services\Auth;
 use App\Core\Validation\Validator;
+use App\Core\Auth\Authorization;
+use App\Core\Services\AuditLog;
 
 class PricingController
 extends BaseController
@@ -20,6 +22,11 @@ extends BaseController
         $response
     )
     {
+            /**
+            * Check authorization
+            */
+        Authorization::authorize('pricing.view');
+
         /**
          * Database connection
          */
@@ -80,6 +87,11 @@ extends BaseController
     )
     {
         /**
+         * Check authorization
+         */
+        Authorization::authorize('pricing.create');
+
+        /**
          * Database connection
          */
         $db =
@@ -135,6 +147,11 @@ extends BaseController
         $response
     )
     {
+        /**
+         * Check authorization
+         */
+        Authorization::authorize('pricing.create');
+
         /**
          * Service ID
          */
@@ -441,6 +458,47 @@ extends BaseController
         ]);
 
         /**
+         * Audit log
+         */
+        AuditLog::log(
+
+            'create',
+
+            'pricing',
+
+            $db->lastInsertId(),
+
+            null,
+
+            [
+
+                'service_id' =>
+                    $serviceId,
+
+                'title' =>
+                    $title,
+
+                'price' =>
+                    $pricingType === 'negotiable'
+                        ? null
+                        : $price,
+
+                'currency' =>
+                    $currency,
+
+                'pricing_type' =>
+                    $pricingType,
+
+                'featured' =>
+                    $featured,
+
+                'status' =>
+                    $status
+
+            ]
+        );
+
+        /**
          * Success message
          */
         Flash::set(
@@ -469,10 +527,35 @@ extends BaseController
     )
     {
         /**
+         * Check authorization
+         */
+        Authorization::authorize('pricing.edit');
+
+        /**
          * Database connection
          */
         $db =
             Connection::getInstance();
+
+            /**
+         * Existing pricing item
+         */
+        $pricingQuery =
+            $db->prepare(
+                "
+                SELECT *
+                FROM pricing_items
+                WHERE id = ?
+                LIMIT 1
+                "
+            );
+
+        $pricingQuery->execute([
+            $id
+        ]);
+
+        $oldPricing =
+            $pricingQuery->fetch();
 
         /**
          * Fetch pricing item
@@ -567,6 +650,13 @@ extends BaseController
         $id
     )
     {
+        /**
+         * Check authorization
+         */
+        Authorization::authorize('pricing.edit');
+        /**
+         * Database connection
+         */ 
         /**
          * Service ID
          */
@@ -841,6 +931,147 @@ extends BaseController
 
             $id
         ]);
+
+        /**
+         * Status changed
+         */
+        if (
+
+            $oldPricing['status']
+
+            !=
+
+            $status
+
+        ) {
+
+            AuditLog::log(
+
+                'status_changed',
+
+                'pricing',
+
+                $id,
+
+                [
+
+                    'status' =>
+                        $oldPricing['status']
+
+                ],
+
+                [
+
+                    'status' =>
+                        $status
+
+                ],
+
+                'activity'
+            );
+        }
+
+        /**
+         * Featured changed
+         */
+        if (
+
+            $oldPricing['featured']
+
+            !=
+
+            $featured
+
+        ) {
+
+            AuditLog::log(
+
+                'featured_changed',
+
+                'pricing',
+
+                $id,
+
+                [
+
+                    'featured' =>
+                        $oldPricing['featured']
+
+                ],
+
+                [
+
+                    'featured' =>
+                        $featured
+
+                ]
+            );
+        }
+
+        /**
+         * Audit log
+         */
+        AuditLog::log(
+
+            'update',
+
+            'pricing',
+
+            $id,
+
+            [
+
+                'service_id' =>
+                    $oldPricing['service_id'],
+
+                'title' =>
+                    $oldPricing['title'],
+
+                'price' =>
+                    $oldPricing['price'],
+
+                'currency' =>
+                    $oldPricing['currency'],
+
+                'pricing_type' =>
+                    $oldPricing['pricing_type'],
+
+                'featured' =>
+                    $oldPricing['featured'],
+
+                'status' =>
+                    $oldPricing['status']
+
+            ],
+
+            [
+
+                'service_id' =>
+                    $serviceId,
+
+                'title' =>
+                    $title,
+
+                'price' =>
+                    $pricingType === 'negotiable'
+                        ? null
+                        : $price,
+
+                'currency' =>
+                    $currency,
+
+                'pricing_type' =>
+                    $pricingType,
+
+                'featured' =>
+                    $featured,
+
+                'status' =>
+                    $status
+
+            ]
+        );
+
 
         /**
          * Success message

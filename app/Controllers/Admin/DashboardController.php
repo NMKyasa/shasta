@@ -4,6 +4,7 @@ namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
 use App\Core\Database\Connection;
+use App\Core\Auth\Authorization;
 
 class DashboardController
 extends BaseController
@@ -16,6 +17,7 @@ extends BaseController
         $response
     )
     {
+
         /**
          * Database connection
          */
@@ -23,255 +25,179 @@ extends BaseController
             Connection::getInstance();
 
         /**
-         * Services count
+         * Dashboard statistics
          */
-        $services =
-            $db->query("
-
-                SELECT COUNT(*) AS total
-                FROM services
-                WHERE deleted_at IS NULL
-
-            ")->fetch()['total'];
+        $statistics = [];
 
         /**
-         * Projects count
+         * Services
          */
-        $projects =
-            $db->query("
+        if (
+            Authorization::can(
+                'services.view'
+            )
+        ) {
 
-                SELECT COUNT(*) AS total
-                FROM projects
-                WHERE deleted_at IS NULL
-
-            ")->fetch()['total'];
+            $statistics['services'] =
+                $db->query(
+                    "
+                    SELECT COUNT(*) AS total
+                    FROM services
+                    WHERE deleted_at IS NULL
+                    "
+                )->fetch()['total'];
+        }
 
         /**
-         * Team members count
+         * Projects
          */
-        $teamMembers =
-            $db->query("
+        if (
+            Authorization::can(
+                'projects.view'
+            )
+        ) {
 
-                SELECT COUNT(*) AS total
-                FROM team_members
-                WHERE deleted_at IS NULL
-
-            ")->fetch()['total'];
+            $statistics['projects'] =
+                $db->query(
+                    "
+                    SELECT COUNT(*) AS total
+                    FROM projects
+                    WHERE deleted_at IS NULL
+                    "
+                )->fetch()['total'];
+        }
 
         /**
-         * Testimonials count
+         * Team Members
          */
-        $testimonials =
-            $db->query("
+        if (
+            Authorization::can(
+                'team_members.view'
+            )
+        ) {
 
-                SELECT COUNT(*) AS total
-                FROM testimonials
-                WHERE deleted_at IS NULL
-
-            ")->fetch()['total'];
+            $statistics['team_members'] =
+                $db->query(
+                    "
+                    SELECT COUNT(*) AS total
+                    FROM team_members
+                    WHERE deleted_at IS NULL
+                    "
+                )->fetch()['total'];
+        }
 
         /**
-         * Pricing items count
+         * Testimonials
          */
-        $pricingItems =
-            $db->query("
+        if (
+            Authorization::can(
+                'testimonials.view'
+            )
+        ) {
 
-                SELECT COUNT(*) AS total
-                FROM pricing_items
-                WHERE deleted_at IS NULL
-
-            ")->fetch()['total'];
+            $statistics['testimonials'] =
+                $db->query(
+                    "
+                    SELECT COUNT(*) AS total
+                    FROM testimonials
+                    WHERE deleted_at IS NULL
+                    "
+                )->fetch()['total'];
+        }
 
         /**
-         * Categories count
+         * Inquiries
          */
-        $categories =
-            $db->query("
+        if (
+            Authorization::can(
+                'inquiries.view'
+            )
+        ) {
 
-                SELECT COUNT(*) AS total
-                FROM categories
-                WHERE deleted_at IS NULL
-
-            ")->fetch()['total'];
+            $statistics['inquiries'] =
+                $db->query(
+                    "
+                    SELECT COUNT(*) AS total
+                    FROM inquiries
+                    "
+                )->fetch()['total'];
+        }
 
         /**
-         * Active services
+         * Pricing
          */
-        $activeServices =
-            $db->query("
+        if (
+            Authorization::can(
+                'pricing_items.view'
+            )
+        ) {
 
-                SELECT COUNT(*) AS total
-                FROM services
-                WHERE status = 'active'
-                AND deleted_at IS NULL
-
-            ")->fetch()['total'];
+            $statistics['pricing_items'] =
+                $db->query(
+                    "
+                    SELECT COUNT(*) AS total
+                    FROM pricing_items
+                    WHERE deleted_at IS NULL
+                    "
+                )->fetch()['total'];
+        }
 
         /**
-         * Active projects
+         * Categories
          */
-        $activeProjects =
-            $db->query("
+        if (
+            Authorization::can(
+                'categories.view'
+            )
+        ) {
 
-                SELECT COUNT(*) AS total
-                FROM projects
-                WHERE status = 'active'
-                AND deleted_at IS NULL
-
-            ")->fetch()['total'];
+            $statistics['categories'] =
+                $db->query(
+                    "
+                    SELECT COUNT(*) AS total
+                    FROM categories
+                    WHERE deleted_at IS NULL
+                    "
+                )->fetch()['total'];
+        }
 
         /**
-         * Active team members
+         * Users
          */
-        $activeTeamMembers =
-            $db->query("
+        if (
+            Authorization::can(
+                'users.view'
+            )
+        ) {
 
-                SELECT COUNT(*) AS total
-                FROM team_members
-                WHERE status = 'active'
-                AND deleted_at IS NULL
-
-            ")->fetch()['total'];
+            $statistics['users'] =
+                $db->query(
+                    "
+                    SELECT COUNT(*) AS total
+                    FROM users
+                    "
+                )->fetch()['total'];
+        }
 
         /**
-         * Active testimonials
+         * Roles
          */
-        $activeTestimonials =
-            $db->query("
+        if (
+            Authorization::can(
+                'roles.view'
+            )
+        ) {
 
-                SELECT COUNT(*) AS total
-                FROM testimonials
-                WHERE status = 'active'
-                AND deleted_at IS NULL
-
-            ")->fetch()['total'];
-
-        /**
-         * Active pricing
-         */
-        $activePricing =
-            $db->query("
-
-                SELECT COUNT(*) AS total
-                FROM pricing_items
-                WHERE status = 'active'
-                AND deleted_at IS NULL
-
-            ")->fetch()['total'];
-
-        /**
-         * Featured services
-         */
-        $featuredServices =
-            $db->query("
-
-                SELECT COUNT(*) AS total
-                FROM services
-                WHERE featured = 1
-                AND deleted_at IS NULL
-
-            ")->fetch()['total'];
-
-        /**
-         * Featured projects
-         */
-        $featuredProjects =
-            $db->query("
-
-                SELECT COUNT(*) AS total
-                FROM projects
-                WHERE featured = 1
-                AND deleted_at IS NULL
-
-            ")->fetch()['total'];
-
-        /**
-         * Featured team members
-         */
-        $featuredTeamMembers =
-            $db->query("
-
-                SELECT COUNT(*) AS total
-                FROM team_members
-                WHERE featured = 1
-                AND deleted_at IS NULL
-
-            ")->fetch()['total'];
-
-        /**
-         * Featured testimonials
-         */
-        $featuredTestimonials =
-            $db->query("
-
-                SELECT COUNT(*) AS total
-                FROM testimonials
-                WHERE featured = 1
-                AND deleted_at IS NULL
-
-            ")->fetch()['total'];
-
-        /**
-         * Featured pricing
-         */
-        $featuredPricing =
-            $db->query("
-
-                SELECT COUNT(*) AS total
-                FROM pricing_items
-                WHERE featured = 1
-                AND deleted_at IS NULL
-
-            ")->fetch()['total'];
-
-        /**
-         * Statistics array
-         */
-        $statistics = [
-
-            'services' =>
-                $services,
-
-            'projects' =>
-                $projects,
-
-            'team_members' =>
-                $teamMembers,
-
-            'testimonials' =>
-                $testimonials,
-
-            'pricing_items' =>
-                $pricingItems,
-
-            'categories' =>
-                $categories,
-
-            'active_content' =>
-
-                $activeServices
-                +
-                $activeProjects
-                +
-                $activeTeamMembers
-                +
-                $activeTestimonials
-                +
-                $activePricing,
-
-            'featured_content' =>
-
-                $featuredServices
-                +
-                $featuredProjects
-                +
-                $featuredTeamMembers
-                +
-                $featuredTestimonials
-                +
-                $featuredPricing
-        ];
-
+            $statistics['roles'] =
+                $db->query(
+                    "
+                    SELECT COUNT(*) AS total
+                    FROM roles
+                    WHERE deleted_at IS NULL
+                    "
+                )->fetch()['total'];
+        }
+        
         /**
          * Render dashboard
          */

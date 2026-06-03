@@ -8,6 +8,7 @@ use App\Core\Database\Connection;
 use App\Core\Services\Auth;
 use App\Core\Services\Flash;
 use App\Core\Auth\Authorization;
+use App\Core\Services\AuditLog;
 
 class UserController
 extends BaseController
@@ -532,6 +533,38 @@ extends BaseController
         ]);
 
         /**
+         * Audit log
+         */
+        AuditLog::log(
+
+            'create',
+
+            'users',
+
+            $db->lastInsertId(),
+
+            null,
+
+            [
+
+                'role_id' =>
+                    $_POST['role_id'],
+
+                'first_name' =>
+                    $_POST['first_name'],
+
+                'last_name' =>
+                    $_POST['last_name'],
+
+                'email' =>
+                    $_POST['email'],
+
+                'status' =>
+                    $_POST['status']
+            ]
+        );
+
+        /**
          * Success message
          */
         Flash::set(
@@ -856,6 +889,13 @@ extends BaseController
         $user =
             $query->fetch();
 
+            /**
+         * Original values
+         * for audit logging
+         */
+        $oldUser =
+            $user;
+
         /**
          * User not found
          */
@@ -1160,6 +1200,95 @@ extends BaseController
 
             $id
         ]);
+
+        /**
+         * Role changed
+         */
+        if (
+
+            $oldUser['role_id']
+
+            !=
+
+            $_POST['role_id']
+
+        ) {
+
+            AuditLog::log(
+
+                'role_changed',
+
+                'users',
+
+                $id,
+
+                [
+
+                    'role_id' =>
+                        $oldUser['role_id']
+
+                ],
+
+                [
+
+                    'role_id' =>
+                        $_POST['role_id']
+
+                ],
+
+                'security'
+            );
+        }
+
+        /**
+         * Audit log
+         */
+        AuditLog::log(
+
+            'update',
+
+            'users',
+
+            $id,
+
+            [
+
+                'role_id' =>
+                    $oldUser['role_id'],
+
+                'first_name' =>
+                    $oldUser['first_name'],
+
+                'last_name' =>
+                    $oldUser['last_name'],
+
+                'email' =>
+                    $oldUser['email'],
+
+                'status' =>
+                    $oldUser['status']
+
+            ],
+
+            [
+
+                'role_id' =>
+                    $_POST['role_id'],
+
+                'first_name' =>
+                    $_POST['first_name'],
+
+                'last_name' =>
+                    $_POST['last_name'],
+
+                'email' =>
+                    $_POST['email'],
+
+                'status' =>
+                    $_POST['status']
+
+            ]
+        );
 
         /**
          * Success message

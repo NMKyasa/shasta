@@ -6,6 +6,8 @@ use App\Controllers\BaseController;
 use App\Core\Database\Connection;
 use App\Core\Services\Flash;
 use App\Core\Validation\Validator;
+use App\Core\Auth\Authorization;
+use App\Core\Services\AuditLog;
 
 class CategoryController
 extends BaseController
@@ -18,6 +20,11 @@ extends BaseController
         $response
     )
     {
+        /**
+         * Check authorization
+         */
+        Authorization::authorize('categories.view');
+
         /**
          * Database connection
          */
@@ -68,6 +75,11 @@ extends BaseController
     )
     {
         /**
+         * Check authorization
+         */
+        Authorization::authorize('categories.create');
+
+        /**
          * Render page
          */
         $this->view(
@@ -88,6 +100,10 @@ extends BaseController
         $response
     )
     {
+        /**
+         * Check authorization
+         */
+        Authorization::authorize('categories.create');
         /**
          * Category name
          */
@@ -234,6 +250,33 @@ extends BaseController
         ]);
 
         /**
+         * Audit log
+         */
+        AuditLog::log(
+
+            'create',
+
+            'categories',
+
+            $db->lastInsertId(),
+
+            null,
+
+            [
+
+                'name' =>
+                    $name,
+
+                'slug' =>
+                    $slug,
+
+                'status' =>
+                    $status
+
+            ]
+        );
+
+        /**
          * Success message
          */
         Flash::set(
@@ -261,6 +304,11 @@ extends BaseController
         $id
     )
     {
+        /**
+         * Check authorization
+         */
+        Authorization::authorize('categories.edit');
+
         /**
          * Database connection
          */
@@ -332,6 +380,11 @@ extends BaseController
         $id
     )
     {
+        /**
+         * Check authorization
+         */
+        Authorization::authorize('categories.edit');
+
         /**
          * Category name
          */
@@ -418,6 +471,27 @@ extends BaseController
         $db =
             Connection::getInstance();
 
+            /**
+             * Existing category
+             */
+            $categoryQuery =
+                $db->prepare(
+
+                    "
+                    SELECT *
+                    FROM categories
+                    WHERE id = ?
+                    LIMIT 1
+                    "
+                );
+
+            $categoryQuery->execute([
+                $id
+            ]);
+
+            $oldCategory =
+                $categoryQuery->fetch();
+
         /**
          * Ensure unique slug
          */
@@ -483,6 +557,83 @@ extends BaseController
         ]);
 
         /**
+         * Status changed
+         */
+        if (
+
+            $oldCategory['status']
+
+            !=
+
+            $status
+
+        ) {
+
+            AuditLog::log(
+
+                'status_changed',
+
+                'categories',
+
+                $id,
+
+                [
+
+                    'status' =>
+                        $oldCategory['status']
+
+                ],
+
+                [
+
+                    'status' =>
+                        $status
+
+                ],
+
+                'security'
+            );
+        }
+
+        /**
+         * Audit log
+         */
+        AuditLog::log(
+
+            'update',
+
+            'categories',
+
+            $id,
+
+            [
+
+                'name' =>
+                    $oldCategory['name'],
+
+                'slug' =>
+                    $oldCategory['slug'],
+
+                'status' =>
+                    $oldCategory['status']
+
+            ],
+
+            [
+
+                'name' =>
+                    $name,
+
+                'slug' =>
+                    $slug,
+
+                'status' =>
+                    $status
+
+            ]
+        );
+
+        /**
          * Success message
          */
         Flash::set(
@@ -509,6 +660,11 @@ extends BaseController
         $response
     )
     {
+        /**
+         * Check authorization
+         */
+        Authorization::authorize('categories.create');
+
         /**
          * Category name
          */
@@ -612,6 +768,30 @@ extends BaseController
 
             $slug
         ]);
+
+        AuditLog::log(
+
+            'create',
+
+            'categories',
+
+            $db->lastInsertId(),
+
+            null,
+
+            [
+
+                'name' =>
+                    $name,
+
+                'slug' =>
+                    $slug,
+
+                'status' =>
+                    'active'
+
+            ]
+        );
 
         /**
          * Return JSON response

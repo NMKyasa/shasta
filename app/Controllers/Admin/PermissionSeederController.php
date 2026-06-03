@@ -50,6 +50,8 @@ class PermissionSeederController extends BaseController
             'testimonials',
             'team',
             'partners',
+            'pricing_items',
+            'audit_logs',
             'inquiries'
         ];
 

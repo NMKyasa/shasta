@@ -7,6 +7,7 @@ use App\Core\Auth\Authorization;
 use App\Core\Database\Connection;
 use App\Core\Services\Flash;
 use App\Core\Validation\Validator;
+use App\Core\Services\AuditLog;
 
 class PermissionController extends BaseController
 {
@@ -265,6 +266,38 @@ class PermissionController extends BaseController
         ]);
 
         /**
+         * Audit log
+         */
+        AuditLog::log(
+
+            'create',
+
+            'permissions',
+
+            $db->lastInsertId(),
+
+            null,
+
+            [
+
+                'module' =>
+                    $module,
+
+                'action' =>
+                    $action,
+
+                'name' =>
+                    $name,
+
+                'description' =>
+                    $description
+
+            ],
+
+            'security'
+        );
+
+        /**
          * Success message
          */
         Flash::set(
@@ -429,6 +462,26 @@ class PermissionController extends BaseController
         $db =
             Connection::getInstance();
 
+            /**
+             * Existing permission
+             */
+            $permissionQuery =
+                $db->prepare(
+                    "
+                    SELECT *
+                    FROM permissions
+                    WHERE id = ?
+                    LIMIT 1
+                    "
+                );
+
+            $permissionQuery->execute([
+                $id
+            ]);
+
+            $oldPermission =
+                $permissionQuery->fetch();
+
         /**
          * Module
          */
@@ -540,6 +593,94 @@ class PermissionController extends BaseController
 
             $id
         ]);
+
+        /**
+         * Permission changed
+         */
+        if (
+
+            $oldPermission['name']
+
+            !=
+
+            $name
+
+        ) {
+
+            AuditLog::log(
+
+                'permission_changed',
+
+                'permissions',
+
+                $id,
+
+                [
+
+                    'name' =>
+                        $oldPermission['name']
+
+                ],
+
+                [
+
+                    'name' =>
+                        $name
+
+                ],
+
+                'security'
+            );
+        }
+
+        /**
+         * Audit log
+         */
+        AuditLog::log(
+
+            'update',
+
+            'permissions',
+
+            $id,
+
+            [
+
+                'module' =>
+                    $oldPermission['module'],
+
+                'action' =>
+                    $oldPermission['action'],
+
+                'name' =>
+                    $oldPermission['name'],
+
+                'description' =>
+                    $oldPermission['description']
+
+            ],
+
+            [
+
+                'module' =>
+                    $module,
+
+                'action' =>
+                    $action,
+
+                'name' =>
+                    $name,
+
+                'description' =>
+                    trim(
+                        $_POST['description']
+                        ?? ''
+                    )
+
+            ],
+
+            'security'
+        );
 
         /**
          * Success message

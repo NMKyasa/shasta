@@ -12,6 +12,7 @@ use App\Core\Services\UploadService;
 use App\Core\Database\Connection;
 use App\Core\Services\Flash;
 use App\Core\Auth\Authorization;
+use App\Core\Services\AuditLog;
 
 class ServiceController
 extends BaseController
@@ -124,7 +125,7 @@ extends BaseController
         $response
     )
     {
-        Authorization::authorize('services.store');
+        Authorization::authorize('services.create');
 
         /**
          * Validate request
@@ -273,6 +274,41 @@ extends BaseController
          */
         $serviceId =
             $db->lastInsertId();
+
+            /**
+             * Audit log
+             */
+            AuditLog::log(
+
+                'create',
+
+                'services',
+
+                $serviceId,
+
+                null,
+
+                [
+
+                    'title' =>
+                        $_POST['title'],
+
+                    'slug' =>
+                        $slug,
+
+                    'category_id' =>
+                        $_POST['category_id'],
+
+                    'featured' =>
+                        isset($_POST['featured'])
+                            ? 1
+                            : 0,
+
+                    'status' =>
+                        $_POST['status']
+
+                ]
+            );
 
         /**
          * Attach category
@@ -566,7 +602,7 @@ extends BaseController
         $id
     )
     {
-        Authorization::authorize('services.update');
+        Authorization::authorize('services.edit');
         /**
          * Database connection
          */
@@ -578,6 +614,13 @@ extends BaseController
          */
         $service =
             Service::find($id);
+
+            /**
+         * Original service
+         * for audit logging
+         */
+        $oldService =
+            $service;
 
         /**
          * Service not found
@@ -727,6 +770,111 @@ extends BaseController
         ]);
 
         /**
+         * Status changed
+         */
+        if (
+
+            $oldService['status']
+
+            !=
+
+            $_POST['status']
+
+        ) {
+
+            AuditLog::log(
+
+                'status_changed',
+
+                'services',
+
+                $id,
+
+                [
+
+                    'status' =>
+                        $oldService['status']
+
+                ],
+
+                [
+
+                    'status' =>
+                        $_POST['status']
+
+                ]
+            );
+        }
+
+        /**
+         * Featured changed
+         */
+        if (
+
+            $oldService['featured']
+
+            !=
+
+            (
+                isset($_POST['featured'])
+                    ? 1
+                    : 0
+            )
+
+        ) {
+
+            AuditLog::log(
+
+                'featured_changed',
+
+                'services',
+
+                $id,
+
+                [
+
+                    'featured' =>
+                        $oldService['featured']
+
+                ],
+
+                [
+
+                    'featured' =>
+                        isset($_POST['featured'])
+                            ? 1
+                            : 0
+
+                ]
+            );
+        }
+
+        /**
+         * Existing category
+         */
+        $categoryQuery =
+            $db->prepare(
+
+                "
+                SELECT category_id
+                FROM categoryables
+                WHERE categoryable_type = ?
+                AND categoryable_id = ?
+                LIMIT 1
+                "
+            );
+
+        $categoryQuery->execute([
+
+            'service',
+
+            $id
+        ]);
+
+        $oldCategory =
+            $categoryQuery->fetch();
+
+        /**
          * Update category
          */
         $deleteCategory =
@@ -778,6 +926,47 @@ extends BaseController
 
             $id
         ]);
+
+        /**
+         * Category changed
+         */
+        if (
+
+            $oldCategory
+
+            &&
+
+            $oldCategory['category_id']
+
+            !=
+
+            $_POST['category_id']
+
+        ) {
+
+            AuditLog::log(
+
+                'category_changed',
+
+                'services',
+
+                $id,
+
+                [
+
+                    'category_id' =>
+                        $oldCategory['category_id']
+
+                ],
+
+                [
+
+                    'category_id' =>
+                        $_POST['category_id']
+
+                ]
+            );
+        }
 
         /**
          * Delete selected images
@@ -1122,6 +1311,52 @@ extends BaseController
                 'A service must have at least one image.'
             );
         }
+
+        /**
+         * Audit log
+         */
+        AuditLog::log(
+
+            'update',
+
+            'services',
+
+            $id,
+
+            [
+
+                'title' =>
+                    $oldService['title'],
+
+                'slug' =>
+                    $oldService['slug'],
+
+                'featured' =>
+                    $oldService['featured'],
+
+                'status' =>
+                    $oldService['status']
+
+            ],
+
+            [
+
+                'title' =>
+                    $_POST['title'],
+
+                'slug' =>
+                    $slug,
+
+                'featured' =>
+                    isset($_POST['featured'])
+                        ? 1
+                        : 0,
+
+                'status' =>
+                    $_POST['status']
+
+            ]
+        );
 
         Flash::set(
 

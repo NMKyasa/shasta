@@ -51,8 +51,6 @@
 
                             <th>Name</th>
 
-                            <th>Parent Role</th>
-
                             <th>System</th>
 
                             <th>Status</th>
@@ -77,15 +75,6 @@
 
                                     <?= htmlspecialchars(
                                         $role['name']
-                                    ) ?>
-
-                                </td>
-
-                                <td>
-
-                                    <?= htmlspecialchars(
-                                        $role['parent_role']
-                                        ?? '—'
                                     ) ?>
 
                                 </td>

@@ -8,6 +8,8 @@ use App\Core\Services\UploadService;
 use App\Core\Database\Connection;
 use App\Core\Services\Flash;
 use App\Core\Validation\Validator;
+use App\Core\Auth\Authorization;
+use App\Core\Services\AuditLog;
 
 class TestimonialController
 extends BaseController
@@ -20,6 +22,11 @@ extends BaseController
         $response
     )
     {
+        /**
+         * Check authorization
+         */
+        Authorization::authorize('testimonials.view');
+
         /**
          * Database connection
          */
@@ -89,6 +96,11 @@ extends BaseController
     )
     {
         /**
+         * Check authorization
+         */
+        Authorization::authorize('testimonials.create');
+
+        /**
          * Render page
          */
         $this->view(
@@ -109,6 +121,11 @@ extends BaseController
         $response
     )
     {
+        /**
+         * Check authorization
+         */
+        Authorization::authorize('testimonials.create');
+
         /**
          * Validate request
          */
@@ -212,6 +229,46 @@ extends BaseController
         $testimonialId =
             $db->lastInsertId();
 
+            /**
+             * Audit log
+             */
+            AuditLog::log(
+
+                'create',
+
+                'testimonials',
+
+                $testimonialId,
+
+                null,
+
+                [
+
+                    'name' =>
+                        $_POST['name'],
+
+                    'company' =>
+                        $_POST['company']
+                        ?? null,
+
+                    'position' =>
+                        $_POST['position']
+                        ?? null,
+
+                    'rating' =>
+                        $_POST['rating'],
+
+                    'featured' =>
+                        isset($_POST['featured'])
+                            ? 1
+                            : 0,
+
+                    'status' =>
+                        $_POST['status']
+
+                ]
+            );
+
         /**
          * Upload image
          */
@@ -277,6 +334,27 @@ extends BaseController
 
                 'active'
             ]);
+
+            AuditLog::log(
+
+                'image_added',
+
+                'testimonials',
+
+                $testimonialId,
+
+                null,
+
+                [
+
+                    'file_name' =>
+                        $upload['file_name'],
+
+                    'file_path' =>
+                        $upload['file_path']
+
+                ]
+            );
         }
 
         /**
@@ -307,6 +385,11 @@ extends BaseController
         $id
     )
     {
+        /**
+         * Check authorization
+         */
+        Authorization::authorize('testimonials.edit');
+
         /**
          * Database connection
          */
@@ -385,6 +468,11 @@ extends BaseController
     )
     {
         /**
+         * Check authorization
+         */
+        Authorization::authorize('testimonials.edit');
+
+        /**
          * Database connection
          */
         $db =
@@ -396,6 +484,13 @@ extends BaseController
         $testimonial =
             Testimonial::find($id);
 
+            /**
+             * Original testimonial
+             * for audit logging
+             */
+            $oldTestimonial =
+                $testimonial;
+
         /**
          * Testimonial not found
          */
@@ -406,6 +501,11 @@ extends BaseController
                 'Testimonial not found.'
             );
         }
+
+        /**
+         * Check authorization
+         */
+        Authorization::authorize('testimonials.edit');
 
         /**
          * Validate request
@@ -496,6 +596,123 @@ extends BaseController
         ]);
 
         /**
+         * Status changed
+         */
+        if (
+
+            $oldTestimonial['status']
+
+            !=
+
+            $_POST['status']
+
+        ) {
+
+            AuditLog::log(
+
+                'status_changed',
+
+                'testimonials',
+
+                $id,
+
+                [
+
+                    'status' =>
+                        $oldTestimonial['status']
+
+                ],
+
+                [
+
+                    'status' =>
+                        $_POST['status']
+
+                ]
+            );
+        }
+
+        /**
+         * Featured changed
+         */
+        if (
+
+            $oldTestimonial['featured']
+
+            !=
+
+            (
+                isset($_POST['featured'])
+                    ? 1
+                    : 0
+            )
+
+        ) {
+
+            AuditLog::log(
+
+                'featured_changed',
+
+                'testimonials',
+
+                $id,
+
+                [
+
+                    'featured' =>
+                        $oldTestimonial['featured']
+
+                ],
+
+                [
+
+                    'featured' =>
+                        isset($_POST['featured'])
+                            ? 1
+                            : 0
+
+                ]
+            );
+        }
+
+        /**
+         * Rating changed
+         */
+        if (
+
+            $oldTestimonial['rating']
+
+            !=
+
+            $_POST['rating']
+
+        ) {
+
+            AuditLog::log(
+
+                'rating_changed',
+
+                'testimonials',
+
+                $id,
+
+                [
+
+                    'rating' =>
+                        $oldTestimonial['rating']
+
+                ],
+
+                [
+
+                    'rating' =>
+                        $_POST['rating']
+
+                ]
+            );
+        }
+
+        /**
          * Replace image
          */
         if (
@@ -526,6 +743,10 @@ extends BaseController
 
             $oldMedia =
                 $oldMediaQuery->fetch();
+
+                $oldImagePath =
+                    $oldMedia['file_path']
+                    ?? null;
 
             /**
              * Delete old file
@@ -636,7 +857,90 @@ extends BaseController
 
                 'active'
             ]);
+
+            AuditLog::log(
+
+                'image_changed',
+
+                'testimonials',
+
+                $id,
+
+                [
+
+                    'old_image' =>
+                        $oldImagePath
+
+                ],
+
+                [
+
+                    'new_image' =>
+                        $upload['file_path']
+
+                ]
+            );
         }
+
+        /**
+         * Audit log
+         */
+        AuditLog::log(
+
+            'update',
+
+            'testimonials',
+
+            $id,
+
+            [
+
+                'name' =>
+                    $oldTestimonial['name'],
+
+                'company' =>
+                    $oldTestimonial['company'],
+
+                'position' =>
+                    $oldTestimonial['position'],
+
+                'rating' =>
+                    $oldTestimonial['rating'],
+
+                'featured' =>
+                    $oldTestimonial['featured'],
+
+                'status' =>
+                    $oldTestimonial['status']
+
+            ],
+
+            [
+
+                'name' =>
+                    $_POST['name'],
+
+                'company' =>
+                    $_POST['company']
+                    ?? null,
+
+                'position' =>
+                    $_POST['position']
+                    ?? null,
+
+                'rating' =>
+                    $_POST['rating'],
+
+                'featured' =>
+                    isset($_POST['featured'])
+                        ? 1
+                        : 0,
+
+                'status' =>
+                    $_POST['status']
+
+            ]
+        );
 
         /**
          * Success message

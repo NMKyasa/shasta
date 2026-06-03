@@ -7,6 +7,8 @@ use App\Models\Setting;
 use App\Core\Database\Connection;
 use App\Core\Services\Flash;
 use App\Core\Services\UploadService;
+use App\Core\Auth\Authorization;
+use App\Core\Services\AuditLog;
 
 class SettingController
 extends BaseController
@@ -19,6 +21,11 @@ extends BaseController
         $response
     )
     {
+        /**
+         * Check authorization
+         */
+        Authorization::authorize('settings.view');
+
         /**
          * Database connection
          */
@@ -88,10 +95,43 @@ extends BaseController
     )
     {
         /**
+         * Check authorization
+         */
+        Authorization::authorize('settings.edit');
+
+        /**
          * Database connection
          */
         $db =
             Connection::getInstance();
+
+            /**
+             * Existing settings
+             */
+            $existingSettings =
+                [];
+
+            $query =
+                $db->query(
+                    "
+                    SELECT
+                        setting_key,
+                        setting_value
+                    FROM settings
+                    "
+                );
+
+            foreach (
+                $query->fetchAll()
+                as
+                $setting
+            ) {
+
+                $existingSettings[
+                    $setting['setting_key']
+                ] =
+                    $setting['setting_value'];
+            }
 
         /**
          * Remove submit button
@@ -290,6 +330,36 @@ extends BaseController
                     'settings'
                 );
 
+                AuditLog::log(
+
+                'branding_image_updated',
+
+                'settings',
+
+                null,
+
+                [
+
+                    'field' =>
+                        $field,
+
+                    'old_value' =>
+                        $existingSetting['setting_value']
+                        ?? null
+
+                ],
+
+                [
+
+                    'field' =>
+                        $field,
+
+                    'new_value' =>
+                        $upload['file_path']
+
+                ]
+            );
+
             /**
              * Existing image
              */
@@ -398,6 +468,22 @@ extends BaseController
                 ]);
             }
         }
+
+        /**
+         * Audit log
+         */
+        AuditLog::log(
+
+            'settings_updated',
+
+            'settings',
+
+            null,
+
+            $existingSettings,
+
+            $_POST
+        );
 
         /**
          * Success message
@@ -526,6 +612,37 @@ extends BaseController
          */
         $db =
             Connection::getInstance();
+
+            /**
+             * Existing about settings
+             */
+            $oldAboutSettings =
+                [];
+
+            $query =
+                $db->prepare(
+                    "
+                    SELECT *
+                    FROM settings
+                    WHERE setting_group = ?
+                    "
+                );
+
+            $query->execute([
+                'about'
+            ]);
+
+            foreach (
+                $query->fetchAll()
+                as
+                $setting
+            ) {
+
+                $oldAboutSettings[
+                    $setting['setting_key']
+                ] =
+                    $setting['setting_value'];
+            }
 
         /**
          * Allowed fields
@@ -803,7 +920,47 @@ extends BaseController
 
                 'active'
             ]);
+
+            AuditLog::log(
+
+                'about_image_updated',
+
+                'settings',
+
+                null,
+
+                [
+
+                    'old_image' =>
+                        $existingImage['file_path']
+                        ?? null
+
+                ],
+
+                [
+
+                    'new_image' =>
+                        $upload['file_path']
+
+                ]
+            );
         }
+
+        /**
+         * Audit log
+         */
+        AuditLog::log(
+
+            'about_settings_updated',
+
+            'settings',
+
+            null,
+
+            $oldAboutSettings,
+
+            $_POST
+        );
 
         /**
          * Success message

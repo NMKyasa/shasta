@@ -4,6 +4,8 @@ namespace App\Core\Auth;
 
 use App\Core\Database\Connection;
 use App\Core\Services\Auth;
+use App\Core\Services\Flash;
+use App\Core\Services\AuditLog;
 
 class Authorization
 {
@@ -173,13 +175,55 @@ class Authorization
             )
         ) {
 
-            http_response_code(
-                403
+        /**
+         * Audit log
+         */
+        AuditLog::log(
+
+            'access_denied',
+
+            'authorization',
+
+            Auth::id(),
+
+            null,
+
+            [
+
+                'permission' =>
+                    $permission,
+
+                'url' =>
+                    $_SERVER['REQUEST_URI']
+                    ?? null
+
+            ],
+
+            'security'
+        );
+
+            Flash::set(
+
+                'danger',
+
+                'Unfortunately, you cannot perform this action at this time. Access denied.'
             );
 
-            die(
-                'Access denied.'
+            /**
+             * Go back to previous page
+             */
+            $redirect =
+                $_SERVER['HTTP_REFERER']
+                ??
+                url('dashboard');
+
+            header(
+                'Location: '
+                .
+                $redirect
             );
+
+            exit;
         }
     }
 }

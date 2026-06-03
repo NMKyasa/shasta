@@ -10,6 +10,8 @@ use App\Core\Services\Flash;
 use App\Core\Services\UploadService;
 use App\Core\Database\Connection;
 use App\Core\Validation\Validator;
+use App\Core\Auth\Authorization;
+use App\Core\Services\AuditLog;
 
 class SliderController
 extends BaseController
@@ -22,6 +24,11 @@ extends BaseController
         $response
     )
     {
+        /**
+         * Check authorization
+         */
+        Authorization::authorize('sliders.view');
+
         /**
          * Database connection
          */
@@ -85,6 +92,11 @@ extends BaseController
     )
     {
         /**
+         * Check authorization
+         */
+        Authorization::authorize('sliders.create');
+
+        /**
          * Render page
          */
         $this->view(
@@ -105,6 +117,11 @@ extends BaseController
         $response
     )
     {
+        /**
+         * Check authorization
+         */
+        Authorization::authorize('sliders.create');
+
         /**
          * Validate request
          */
@@ -200,6 +217,47 @@ extends BaseController
          */
         $sliderId =
             $db->lastInsertId();
+
+            /**
+             * Audit log
+             */
+            AuditLog::log(
+
+                'create',
+
+                'sliders',
+
+                $sliderId,
+
+                null,
+
+                [
+
+                    'title' =>
+                        $_POST['title'],
+
+                    'subtitle' =>
+                        $_POST['subtitle']
+                        ?? null,
+
+                    'button_text' =>
+                        $_POST['button_text']
+                        ?? null,
+
+                    'button_url' =>
+                        $_POST['button_url']
+                        ?? null,
+
+                    'featured' =>
+                        isset($_POST['featured'])
+                            ? 1
+                            : 0,
+
+                    'status' =>
+                        $_POST['status']
+
+                ]
+            );
 
         /**
          * Uploaded images
@@ -340,6 +398,12 @@ extends BaseController
         $id
     )
     {
+
+        /**
+         * Check authorization
+         */
+        Authorization::authorize('sliders.edit');
+
         /**
          * Database connection
          */
@@ -351,6 +415,13 @@ extends BaseController
          */
         $slider =
             Slider::find($id);
+
+            /**
+             * Original slider
+             * for audit logging
+             */
+            $oldSlider =
+                $slider;
 
         /**
          * Slider not found
@@ -415,6 +486,11 @@ extends BaseController
         $id
     )
     {
+        /**
+         * Check authorization
+         */
+        Authorization::authorize('sliders.edit');
+
         /**
          * Database connection
          */
@@ -517,6 +593,86 @@ extends BaseController
 
             $id
         ]);
+
+        /**
+         * Status changed
+         */
+        if (
+
+            $oldSlider['status']
+
+            !=
+
+            $_POST['status']
+
+        ) {
+
+            AuditLog::log(
+
+                'status_changed',
+
+                'sliders',
+
+                $id,
+
+                [
+
+                    'status' =>
+                        $oldSlider['status']
+
+                ],
+
+                [
+
+                    'status' =>
+                        $_POST['status']
+
+                ]
+            );
+        }
+
+        /**
+         * Featured changed
+         */
+        if (
+
+            $oldSlider['featured']
+
+            !=
+
+            (
+                isset($_POST['featured'])
+                    ? 1
+                    : 0
+            )
+
+        ) {
+
+            AuditLog::log(
+
+                'featured_changed',
+
+                'sliders',
+
+                $id,
+
+                [
+
+                    'featured' =>
+                        $oldSlider['featured']
+
+                ],
+
+                [
+
+                    'featured' =>
+                        isset($_POST['featured'])
+                            ? 1
+                            : 0
+
+                ]
+            );
+        }
 
         /**
          * Delete selected images
@@ -861,6 +1017,53 @@ extends BaseController
                 'A slider must have at least one image.'
             );
         }
+
+        /**
+         * Audit log
+         */
+        AuditLog::log(
+
+            'update',
+
+            'sliders',
+
+            $id,
+
+            [
+
+                'title' =>
+                    $oldSlider['title'],
+
+                'subtitle' =>
+                    $oldSlider['subtitle'],
+
+                'featured' =>
+                    $oldSlider['featured'],
+
+                'status' =>
+                    $oldSlider['status']
+
+            ],
+
+            [
+
+                'title' =>
+                    $_POST['title'],
+
+                'subtitle' =>
+                    $_POST['subtitle']
+                    ?? null,
+
+                'featured' =>
+                    isset($_POST['featured'])
+                        ? 1
+                        : 0,
+
+                'status' =>
+                    $_POST['status']
+
+            ]
+        );
 
         /**
          * Success message
