@@ -1,6 +1,6 @@
 <?php
 
-use App\Controllers\HomeController;
+use App\Controllers\Frontend\HomeController;
 use App\Controllers\AuthController;
 use App\Controllers\Admin\DashboardController;
 use App\Controllers\Admin\ServiceController;
@@ -26,6 +26,11 @@ use App\Controllers\Admin\UserController;
 use App\Controllers\Admin\UserPermissionController;
 use App\Models\UserPermission;
 use App\Controllers\Admin\AuditLogController;
+use App\Controllers\Frontend\ServiceController as FrontendServiceController;
+use App\Controllers\Frontend\ProjectController as FrontendProjectController;
+use App\Controllers\Frontend\AboutController;
+use App\Controllers\Frontend\TeamController as FrontendTeamController;
+use App\Controllers\Frontend\TestimonialController as FrontendTestimonialController;
 
 
 /**
@@ -991,4 +996,68 @@ $router->middleware('auth')
             AuditLogController::class,
 
             'show'
+        ]);
+
+        // Services listing for frontend
+        $router->get('/services', [
+
+            FrontendServiceController::class,
+
+            'index'
+        ]);
+
+            // Service details
+        $router->get('/services/{slug}', [
+
+            FrontendServiceController::class,
+
+            'show'
+        ]);
+
+        // home page
+        $router->get('/home', [
+
+            HomeController::class,
+
+            'index'
+        ]);
+
+        // projects listing for frontend
+        $router->get('/projects', [
+
+            App\Controllers\Frontend\ProjectController::class,
+
+            'index'
+        ]);
+
+        // project details
+        $router->get('/projects/{slug}', [
+
+            App\Controllers\Frontend\ProjectController::class,
+
+            'show'
+        ]);
+
+        // about page
+        $router->get('/about', [
+
+            App\Controllers\Frontend\AboutController::class,
+
+            'index'
+        ]);
+
+        // team listing for frontend
+        $router->get('/team', [
+
+            FrontendTeamController::class,
+
+            'index'
+        ]);
+
+        // testimonials listing for frontend
+        $router->get('/testimonials', [
+
+            FrontendTestimonialController::class,
+
+            'index'
         ]);
