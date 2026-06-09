@@ -4,40 +4,138 @@
             <div class="row g-0 mx-lg-0">
                 <div class="col-lg-6 ps-lg-0" style="min-height: 400px;">
                     <div class="position-relative h-100">
-                        <img class="position-absolute img-fluid w-100 h-100" src="img/quote.jpg" style="object-fit: cover;" alt="">
+                        <img class="position-absolute img-fluid w-100 h-100" src="assets/frontend/img/quote.jpg" style="object-fit: cover;" alt="">
                     </div>
                 </div>
                 <div class="col-lg-6 quote-text py-5 wow fadeIn" data-wow-delay="0.5s">
                     <div class="p-lg-5 pe-lg-0">
                         <div class="bg-primary mb-3" style="width: 60px; height: 2px;"></div>
                         <h1 class="display-5 mb-5">Free Quote</h1>
-                        <p class="mb-4 pb-2">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo erat amet</p>
-                        <form>
-                            <div class="row g-3">
-                                <div class="col-12 col-sm-6">
-                                    <input type="text" class="form-control border-0" placeholder="Your Name" style="height: 55px;">
-                                </div>
-                                <div class="col-12 col-sm-6">
-                                    <input type="email" class="form-control border-0" placeholder="Your Email" style="height: 55px;">
-                                </div>
-                                <div class="col-12 col-sm-6">
-                                    <input type="text" class="form-control border-0" placeholder="Your Mobile" style="height: 55px;">
-                                </div>
-                                <div class="col-12 col-sm-6">
-                                    <select class="form-select border-0" style="height: 55px;">
-                                        <option selected>Select A Service</option>
-                                        <option value="1">Service 1</option>
-                                        <option value="2">Service 2</option>
-                                        <option value="3">Service 3</option>
-                                    </select>
-                                </div>
-                                <div class="col-12">
-                                    <textarea class="form-control border-0" placeholder="Special Note"></textarea>
-                                </div>
-                                <div class="col-12">
-                                    <button class="btn btn-primary w-100 py-3" type="submit">Get A Free Quote</button>
-                                </div>
+                        <p class="mb-4 pb-2">
+                        Tell us about your security requirements and our team will prepare a tailored solution for your home, business, institution, or project. 
+                        Submit your request and we will get back to you with a professional quotation.
+                        </p>
+
+                        <?php if (!empty($_SESSION['success'])): ?>
+
+                            <div class="alert alert-success">
+
+                                <?= $_SESSION['success'] ?>
+
                             </div>
+
+                            <?php unset($_SESSION['success']); ?>
+
+                        <?php endif; ?>
+
+                        <form
+                            method="POST"
+                            action="<?= url('quote') ?>"
+                        >
+
+                            <input
+                                type="hidden"
+                                name="_token"
+                                value="<?= csrf_token() ?>"
+                            >
+
+                            <div class="row g-3">
+
+                                <div class="col-12 col-sm-6">
+
+                                    <input
+                                        type="text"
+                                        name="name"
+                                        class="form-control border-0"
+                                        placeholder="Your Name"
+                                        required
+                                        style="height:55px;"
+                                    >
+
+                                </div>
+
+                                <div class="col-12 col-sm-6">
+
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        class="form-control border-0"
+                                        placeholder="Your Email"
+                                        required
+                                        style="height:55px;"
+                                    >
+
+                                </div>
+
+                                <div class="col-12 col-sm-6">
+
+                                    <input
+                                        type="number"
+                                        name="phone"
+                                        class="form-control border-0"
+                                        placeholder="Your Mobile"
+                                        style="height:55px;"
+                                    >
+
+                                </div>
+
+                                <div class="col-12 col-sm-6">
+
+                                    <select
+                                        name="service_id"
+                                        class="form-select border-0"
+                                        required
+                                        style="height:55px;"
+                                    >
+
+                                        <option value="">
+                                            Select A Service
+                                        </option>
+
+                                        <?php foreach ($services as $service): ?>
+
+                                            <option
+                                                value="<?= $service['id'] ?>"
+                                            >
+
+                                                <?= htmlspecialchars(
+                                                    $service['title']
+                                                ) ?>
+
+                                            </option>
+
+                                        <?php endforeach; ?>
+
+                                    </select>
+
+                                </div>
+
+                                <div class="col-12">
+
+                                    <textarea
+                                        name="message"
+                                        class="form-control border-0"
+                                        placeholder="Describe your requirements"
+                                        rows="5"
+                                    ></textarea>
+
+                                </div>
+
+                                <div class="col-12">
+
+                                    <button
+                                        class="btn btn-primary w-100 py-3"
+                                        type="submit"
+                                    >
+
+                                        Request Free Quote
+
+                                    </button>
+
+                                </div>
+
+                            </div>
+
                         </form>
                     </div>
                 </div>

@@ -67,6 +67,7 @@ class AboutController extends BaseController
             return $this->view(
                 'frontend.about.index',
                 [
+                    'pageHeaderTitle' => 'About Us',
                     'aboutImage' => $aboutImage,
                     'settings' => $settings
                 ],

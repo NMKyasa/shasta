@@ -73,3 +73,15 @@ function authorize(
         $permission
     );
 }
+
+/**
+ * Environment helper
+ */
+function env(
+    string $key,
+    $default = null
+)
+{
+    return $_ENV[$key]
+        ?? $default;
+}

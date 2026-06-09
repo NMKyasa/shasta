@@ -52,7 +52,8 @@ class ProjectController extends BaseController
         return $this->view(
             'frontend.projects.index',
             [
-                'projects' => $projects
+                'projects' => $projects,
+                'pageHeaderTitle' => 'Our Projects'
             ],
             'layouts.frontend'
         );
@@ -120,7 +121,8 @@ class ProjectController extends BaseController
         return $this->view(
             'frontend.projects.show',
             [
-                'project' => $project
+                'project' => $project,
+                'pageHeaderTitle' => $project['title']
             ],
             'layouts.frontend'
         );

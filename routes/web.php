@@ -31,7 +31,10 @@ use App\Controllers\Frontend\ProjectController as FrontendProjectController;
 use App\Controllers\Frontend\AboutController;
 use App\Controllers\Frontend\TeamController as FrontendTeamController;
 use App\Controllers\Frontend\TestimonialController as FrontendTestimonialController;
-
+use App\Controllers\TestController;
+use App\Controllers\Frontend\ContactController;
+use App\Controllers\Frontend\QuoteController;
+use App\Controllers\Frontend\PricingController as FrontendPricingController;
 
 /**
  * Admin dashboard
@@ -1061,3 +1064,46 @@ $router->middleware('auth')
 
             'index'
         ]);
+
+        // Testing email
+        $router->get(
+            '/test-email',
+            [TestController::class, 'send']
+        );
+
+        // Frontend Contact listing
+        $router->get(
+            '/contact',
+            [ContactController::class, 'index']
+        );
+
+        // Frontend Contact store
+        $router->post(
+            '/contact',
+            [ContactController::class, 'store']
+        );
+
+        // Quotes listing
+        $router->get(
+            '/quote',
+            [QuoteController::class, 'index']
+        );
+
+        // Quotes store
+        $router->post(
+            '/quote',
+            [QuoteController::class, 'store']
+        );
+
+        // pricing listing frontend
+        $router->get(
+
+            '/pricing',
+
+            [
+
+                App\Controllers\Frontend\PricingController::class,
+
+                'index'
+            ]
+        );

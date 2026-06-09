@@ -93,14 +93,15 @@
                 <a href="<?= url('about') ?>" class="nav-item nav-link active">About</a>
                 <a href="<?= url('services') ?>" class="nav-item nav-link">Service</a>
                 <a href="<?= url('projects') ?>" class="nav-item nav-link">Project</a>
+                <a href="<?= url('pricing') ?>" class="nav-item nav-link">
+                    Pricing
+                </a>
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                     <div class="dropdown-menu rounded-0 rounded-bottom m-0">
-                        <a href="<?= url('features') ?>" class="dropdown-item">Feature</a>
                         <a href="<?= url('quote') ?>" class="dropdown-item">Free Quote</a>
                         <a href="<?= url('team') ?>" class="dropdown-item">Our Team</a>
                         <a href="<?= url('testimonials') ?>" class="dropdown-item">Testimonial</a>
-                        <a href="<?= url('404') ?>" class="dropdown-item">404 Page</a>
                     </div>
                 </div>
                 <a href="<?= url('contact') ?>" class="nav-item nav-link">Contact</a>

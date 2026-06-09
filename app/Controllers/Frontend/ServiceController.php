@@ -54,9 +54,8 @@ class ServiceController extends BaseController
             'frontend.services.index',
 
             [
-
-                'services' => $services
-
+                'services' => $services,
+                'pageHeaderTitle' => 'Services'
             ],
 
             'layouts.frontend'
@@ -127,9 +126,8 @@ class ServiceController extends BaseController
             'frontend.services.show',
 
             [
-
-                'service' => $service
-
+                'service' => $service, 
+                'pageHeaderTitle' => $service['title']
             ],
 
             'layouts.frontend'

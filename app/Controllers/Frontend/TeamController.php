@@ -50,6 +50,7 @@ class TeamController extends BaseController
         return $this->view(
             'frontend.team.index',
             [
+                'pageHeaderTitle' => 'Our Team',
                 'teamMembers' => $teamMembers
             ],
             'layouts.frontend'

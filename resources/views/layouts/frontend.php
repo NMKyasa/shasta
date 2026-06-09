@@ -45,6 +45,13 @@
 <!-- Header -->
 <?php include __DIR__ . '/../partials/frontend/header.php'; ?>
 
+<!-- Header Start -->
+<?php if (!empty($pageHeaderTitle)): ?>
+
+    <?php include __DIR__ . '/../partials/frontend/header_start.php'; ?>
+
+<?php endif; ?>
+
 <!-- Dynamic Page Content -->
 <?= $content ?>
 

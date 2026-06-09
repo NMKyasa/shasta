@@ -53,6 +53,7 @@ class TestimonialController extends BaseController
         return $this->view(
             'frontend.testimonials.index',
             [
+                'pageHeaderTitle' => 'Testimonials',
                 'testimonials' => $testimonials
             ],
             'layouts.frontend'
