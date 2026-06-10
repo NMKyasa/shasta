@@ -58,6 +58,19 @@ class HomeController extends BaseController
                 "
             )->fetchAll();
 
+
+            // IMPACTS
+            $impacts =
+                $db->query(
+                    "
+                    SELECT *
+                    FROM impacts
+                    WHERE status = 'active'
+                    AND deleted_at IS NULL
+                    ORDER BY sort_order ASC
+                    "
+                )->fetchAll();
+
         /**
          * Services
          */
@@ -93,6 +106,20 @@ class HomeController extends BaseController
             )->fetchAll();
 
             /**
+             * Project Categories
+             */
+            $categories =
+                $db->query(
+                    "
+                    SELECT *
+                    FROM categories
+                    WHERE status = 'active'
+                    AND deleted_at IS NULL
+                    ORDER BY name ASC
+                    "
+                )->fetchAll();
+
+            /**
              * Projects
              */
             $projects =
@@ -102,9 +129,23 @@ class HomeController extends BaseController
 
                         p.*,
 
+                        c.name AS category_name,
+
+                        c.slug AS category_slug,
+
                         m.file_path
 
                     FROM projects p
+
+                    LEFT JOIN categoryables ca
+
+                        ON ca.categoryable_id = p.id
+
+                        AND ca.categoryable_type = 'project'
+
+                    LEFT JOIN categories c
+
+                        ON c.id = ca.category_id
 
                     LEFT JOIN media m
 
@@ -127,33 +168,6 @@ class HomeController extends BaseController
                     LIMIT 6
                     "
                 )->fetchAll();
-
-                /**
-                 * Settings
-                 */
-                $settings = [];
-
-                $query =
-                    $db->query(
-                        "
-                        SELECT
-                            setting_key,
-                            setting_value
-                        FROM settings
-                        "
-                    );
-
-                foreach (
-                    $query->fetchAll()
-                    as
-                    $setting
-                ) {
-
-                    $settings[
-                        $setting['setting_key']
-                    ] =
-                        $setting['setting_value'];
-                }
 
                 // Team members
                 $teamMembers =
@@ -234,11 +248,13 @@ class HomeController extends BaseController
 
                 'sliders'  => $sliders,
 
+                'impacts' => $impacts,
+
                 'services' => $services,
 
-                'projects' => $projects,
+                'categories' => $categories,
 
-                'settings' => $settings,
+                'projects' => $projects,
 
                 'teamMembers' => $teamMembers,
 

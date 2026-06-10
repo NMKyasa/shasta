@@ -74,7 +74,25 @@
 
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0 px-4 px-lg-5">
-        <h2 class="m-0 text-primary">
+        <?php if (!empty($settings['logo'])): ?>
+
+            <img
+                src="<?= asset($settings['logo']) ?>"
+                alt="<?= htmlspecialchars($settings['site_name']) ?>"
+                style="max-height:60px;"
+            >
+
+        <?php else: ?>
+
+            <h2 class="m-0 text-primary">
+
+                <?= htmlspecialchars(
+                    $settings['site_name']
+                ) ?>
+
+            </h2>
+
+        <?php endif; ?>
 
             <?= !empty($settings['site_name'])
                 ? htmlspecialchars(

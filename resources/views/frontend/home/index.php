@@ -86,53 +86,72 @@
     <!-- Carousel End -->
 
 
-    <!-- Facts Start -->
+    <!-- Impact Start -->
     <div class="container-xxl py-5">
+
         <div class="container">
-            <div class="row g-4">
-                <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay="0.1s">
-                    <div class="h-100 bg-dark p-4 p-xl-5">
-                        <div class="d-flex align-items-center justify-content-between mb-4">
-                            <div class="btn-square rounded-circle" style="width: 64px; height: 64px; background: #000000;">
-                                <img class="img-fluid" src="assets/frontend/img/icon/icon-3.png" alt="KYASA">
-                            </div>
-                            <h1 class="display-1 mb-0" style="color: #000000;">01</h1>
-                        </div>
-                        <h5 class="text-white">Home Security</h5>
-                        <hr class="w-25">
-                        <span>Vero elitr justo clita lorem ipsum dolor at sed stet sit diam rebum ipsum et diam justo clita et</span>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay="0.3s">
-                    <div class="h-100 bg-dark p-4 p-xl-5">
-                        <div class="d-flex align-items-center justify-content-between mb-4">
-                            <div class="btn-square rounded-circle" style="width: 64px; height: 64px; background: #000000;">
-                                <img class="img-fluid" src="assets/frontend/img/icon/icon-4.png" alt="Icon">
-                            </div>
-                            <h1 class="display-1 mb-0" style="color: #000000;">02</h1>
-                        </div>
-                        <h5 class="text-white">Access Control</h5>
-                        <hr class="w-25">
-                        <span>Vero elitr justo clita lorem ipsum dolor at sed stet sit diam rebum ipsum et diam justo clita et</span>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay="0.5s">
-                    <div class="h-100 bg-dark p-4 p-xl-5">
-                        <div class="d-flex align-items-center justify-content-between mb-4">
-                            <div class="btn-square rounded-circle" style="width: 64px; height: 64px; background: #000000;">
-                                <img class="img-fluid" src="assets/frontend/img/icon/icon-2.png" alt="Icon">
-                            </div>
-                            <h1 class="display-1 mb-0" style="color: #000000;">03</h1>
-                        </div>
-                        <h5 class="text-white">24/7 Support</h5>
-                        <hr class="w-25">
-                        <span>Vero elitr justo clita lorem ipsum dolor at sed stet sit diam rebum ipsum et diam justo clita et</span>
-                    </div>
-                </div>
+
+            <div
+                class="text-center wow fadeInUp"
+                data-wow-delay="0.1s"
+            >
+
+                <div
+                    class="bg-primary mb-3 mx-auto"
+                    style="width:60px;height:2px;"
+                ></div>
+
+                <h1 class="display-5 mb-5">
+
+                    Our Impact
+
+                </h1>
+
             </div>
+
+            <div class="row g-4">
+
+                <?php foreach ($impacts as $index => $impact): ?>
+
+                    <div
+                        class="col-md-6 col-lg-3 wow fadeInUp"
+                        data-wow-delay="<?= ($index + 1) * 0.2 ?>s"
+                    >
+
+                        <div
+                            class="h-100 bg-dark text-center p-4 p-xl-5"
+                        >
+
+                            <h1
+                                class="display-3 text-primary mb-3"
+                            >
+
+                                <?= htmlspecialchars(
+                                    $impact['value']
+                                ) ?>
+
+                            </h1>
+
+                            <h5 class="text-white">
+
+                                <?= htmlspecialchars(
+                                    $impact['label']
+                                ) ?>
+
+                            </h5>
+
+                        </div>
+
+                    </div>
+
+                <?php endforeach; ?>
+
+            </div>
+
         </div>
+
     </div>
-    <!-- Facts Start -->
+    <!-- Impact End -->
 
 
     <!-- About Start -->
@@ -231,7 +250,7 @@
                                         <img class="img-fluid" src="assets/frontend/img/icon/icon-5.png" alt="Icon">
                                     </div>
                                     <div class="ms-4">
-                                        <h2 class="mb-1" data-toggle="counter-up">1234</h2>
+                                        <h2 class="mb-1" data-toggle="counter-up">10</h2>
                                         <p class="fw-medium text-primary mb-0">Projects Done</p>
                                     </div>
                                 </div>
@@ -240,16 +259,12 @@
 
                         <!-- Call to Action -->
                         <a
-                            href="<?= htmlspecialchars(
-                                $settings['about_button_url']
-                                ?? '#'
-                            ) ?>"
+                            href="<?= url('about') ?>"
                             class="btn btn-primary rounded-pill py-3 px-5"
                         >
-                            <?= htmlspecialchars(
-                                $settings['about_button_text']
-                                ?? 'Learn More'
-                            ) ?>
+                            Learn More About SHASTA
+                        </a>
+                            
                         </a>
                 </div>
             </div>
@@ -323,11 +338,10 @@
 
                             <a
                                 class="btn"
-                                href="#"
+                                href="<?= url('services/' . $service['slug']) ?>"
                             >
-                                <i
-                                    class="fa fa-arrow-right text-white me-3"
-                                ></i>
+
+                                <i class="fa fa-arrow-right text-white me-3"></i>
 
                                 Read More
 
@@ -358,7 +372,7 @@
                             <div class="col-6">
                                 <div class="d-flex align-items-center">
                                     <div class="btn-square bg-white rounded-circle" style="width: 64px; height: 64px;">
-                                        <img class="img-fluid" src="img/icon/icon-7.png" alt="Icon">
+                                        <img class="img-fluid" src="assets/frontend/img/icon/icon-7.png" alt="Icon">
                                     </div>
                                     <div class="ms-4">
                                         <p class="text-primary mb-2">Trusted</p>
@@ -413,7 +427,7 @@
     <!-- Feature End -->
 
 
-    <!-- Projects Start -->
+<!-- Projects Start -->
     <div class="container-xxl py-5">
         <div class="container">
             <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
@@ -423,77 +437,137 @@
             <div class="row mt-n2 wow fadeInUp" data-wow-delay="0.3s">
                 <div class="col-12 text-center">
                     <ul class="list-inline mb-5" id="portfolio-flters">
-                        <li class="mx-2 active" data-filter="*">All</li>
-                        <li class="mx-2" data-filter=".first">Complete Projects</li>
-                        <li class="mx-2" data-filter=".second">Ongoing Projects</li>
+
+                        <li
+                            class="mx-2 active"
+                            data-filter="*"
+                        >
+                            All
+                        </li>
+
+                        <?php foreach ($categories as $category): ?>
+
+                            <li
+                                class="mx-2"
+                                data-filter=".<?= htmlspecialchars(
+                                    $category['slug']
+                                ) ?>"
+                            >
+
+                                <?= htmlspecialchars(
+                                    $category['name']
+                                ) ?>
+
+                            </li>
+
+                        <?php endforeach; ?>
+
                     </ul>
                 </div>
             </div>
             <div class="row g-4 portfolio-container">
 
-                <?php foreach (
-                    $projects
-                    as
-                    $project
-                ): ?>
+                <?php foreach ($projects as $project): ?>
 
                     <div
-                        class="col-lg-4 col-md-6 portfolio-item wow fadeInUp"
+                        class="col-lg-4 col-md-6 portfolio-item <?= htmlspecialchars(
+                            $project['category_slug'] ?? ''
+                        ) ?> wow fadeInUp"
                         data-wow-delay="0.1s"
                     >
 
                         <div class="portfolio-inner">
 
-                            <?php if (
-                                !empty(
-                                    $project['file_path']
-                                )
-                            ): ?>
+                            <?php if (!empty($project['file_path'])): ?>
 
-                                <img
-                                    class="img-fluid w-100"
-                                    src="<?= url(
-                                        $project['file_path']
-                                    ) ?>"
-                                    alt="<?= htmlspecialchars(
-                                        $project['title']
+                                <a
+                                    href="<?= url(
+                                        'projects/' .
+                                        $project['slug']
                                     ) ?>"
                                 >
+                                    <img
+                                        class="img-fluid w-100"
+                                        src="<?= url(
+                                            $project['file_path']
+                                        ) ?>"
+                                        alt="<?= htmlspecialchars(
+                                            $project['title']
+                                        ) ?>"
+                                    >
+                                </a>
 
                             <?php endif; ?>
 
                             <div class="text-center p-4">
 
-                                <h5 class="lh-base mb-0">
+                                <p class="text-primary mb-2">
 
                                     <?= htmlspecialchars(
-                                        $project['title']
-                                    ) ?>
-
-                                </h5>
-
-                            </div>
-
-                            <div
-                                class="portfolio-text text-center bg-white p-4"
-                            >
-
-                                <h5 class="lh-base mb-3">
-
-                                    <?= htmlspecialchars(
-                                        $project['title']
-                                    ) ?>
-
-                                </h5>
-
-                                <p>
-
-                                    <?= htmlspecialchars(
-                                        $project['summary']
-                                        ?? ''
+                                        $project['category_name']
+                                        ?? 'Project'
                                     ) ?>
 
                                 </p>
+
+                                <h5 class="lh-base mb-0">
+
+                                <a
+                                    href="<?= url(
+                                        'projects/' .
+                                        $project['slug']
+                                    ) ?>"
+                                >
+
+                                    <?= htmlspecialchars(
+                                        $project['title']
+                                    ) ?>
+
+                                </a>
+
+                            </h5>
+
+                            </div>
+
+                            <div class="portfolio-text text-center bg-white p-4">
+
+                                <p class="text-primary mb-2">
+
+                                    <?= htmlspecialchars(
+                                        $project['category_name']
+                                        ?? 'Project'
+                                    ) ?>
+
+                                </p>
+
+                                <h5 class="lh-base mb-3">
+
+                                    <?= htmlspecialchars($project['title']) ?>
+
+                                </h5>
+
+                                <div class="d-flex justify-content-center">
+
+                                    <?php if (!empty($project['file_path'])): ?>
+
+                                        <a
+                                            class="btn btn-square btn-primary rounded-circle mx-1"
+                                            href="<?= url($project['file_path']) ?>"
+                                            data-lightbox="portfolio"
+                                        >
+                                            <i class="fa fa-eye"></i>
+                                        </a>
+
+                                    <?php endif; ?>
+
+                                    <a
+                                        class="btn btn-square btn-primary rounded-circle mx-1"
+                                        href="<?= url('projects/' . $project['slug']) ?>"
+                                    >
+                                        <i class="fa fa-link"></i>
+                                    </a>
+
+                                </div>
 
                             </div>
 
@@ -509,8 +583,8 @@
     <!-- Projects End -->
 
 
-    <!-- Quote Start -->
-    <div class="container-fluid bg-light overflow-hidden my-5 px-lg-0">
+<!-- Quote Start -->
+    <div class="container-fluid bg-light overflow-hidden px-lg-0">
         <div class="container quote px-lg-0">
             <div class="row g-0 mx-lg-0">
                 <div class="col-lg-6 ps-lg-0" style="min-height: 400px;">
@@ -522,33 +596,131 @@
                     <div class="p-lg-5 pe-lg-0">
                         <div class="bg-primary mb-3" style="width: 60px; height: 2px;"></div>
                         <h1 class="display-5 mb-5">Free Quote</h1>
-                        <p class="mb-4 pb-2">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo erat amet</p>
-                        <form>
-                            <div class="row g-3">
-                                <div class="col-12 col-sm-6">
-                                    <input type="text" class="form-control border-0" placeholder="Your Name" style="height: 55px;">
-                                </div>
-                                <div class="col-12 col-sm-6">
-                                    <input type="email" class="form-control border-0" placeholder="Your Email" style="height: 55px;">
-                                </div>
-                                <div class="col-12 col-sm-6">
-                                    <input type="text" class="form-control border-0" placeholder="Your Mobile" style="height: 55px;">
-                                </div>
-                                <div class="col-12 col-sm-6">
-                                    <select class="form-select border-0" style="height: 55px;">
-                                        <option selected>Select A Service</option>
-                                        <option value="1">Service 1</option>
-                                        <option value="2">Service 2</option>
-                                        <option value="3">Service 3</option>
-                                    </select>
-                                </div>
-                                <div class="col-12">
-                                    <textarea class="form-control border-0" placeholder="Special Note"></textarea>
-                                </div>
-                                <div class="col-12">
-                                    <button class="btn btn-primary w-100 py-3" type="submit">Get A Free Quote</button>
-                                </div>
+                        <p class="mb-4 pb-2">
+                        Tell us about your security requirements and our team will prepare a tailored solution for your home, business, institution, or project. 
+                        Submit your request and we will get back to you with a professional quotation.
+                        </p>
+
+                        <?php if (!empty($_SESSION['success'])): ?>
+
+                            <div class="alert alert-success">
+
+                                <?= $_SESSION['success'] ?>
+
                             </div>
+
+                            <?php unset($_SESSION['success']); ?>
+
+                        <?php endif; ?>
+
+                        <form
+                            method="POST"
+                            action="<?= url('quote') ?>"
+                        >
+
+                            <input
+                                type="hidden"
+                                name="_token"
+                                value="<?= csrf_token() ?>"
+                            >
+
+                            <div class="row g-3">
+
+                                <div class="col-12 col-sm-6">
+
+                                    <input
+                                        type="text"
+                                        name="name"
+                                        class="form-control border-0"
+                                        placeholder="Your Name"
+                                        required
+                                        style="height:55px;"
+                                    >
+
+                                </div>
+
+                                <div class="col-12 col-sm-6">
+
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        class="form-control border-0"
+                                        placeholder="Your Email"
+                                        required
+                                        style="height:55px;"
+                                    >
+
+                                </div>
+
+                                <div class="col-12 col-sm-6">
+
+                                    <input
+                                        type="number"
+                                        name="phone"
+                                        class="form-control border-0"
+                                        placeholder="Your Mobile"
+                                        style="height:55px;"
+                                    >
+
+                                </div>
+
+                                <div class="col-12 col-sm-6">
+
+                                    <select
+                                        name="service_id"
+                                        class="form-select border-0"
+                                        required
+                                        style="height:55px;"
+                                    >
+
+                                        <option value="">
+                                            Select A Service
+                                        </option>
+
+                                        <?php foreach ($services as $service): ?>
+
+                                            <option
+                                                value="<?= $service['id'] ?>"
+                                            >
+
+                                                <?= htmlspecialchars(
+                                                    $service['title']
+                                                ) ?>
+
+                                            </option>
+
+                                        <?php endforeach; ?>
+
+                                    </select>
+
+                                </div>
+
+                                <div class="col-12">
+
+                                    <textarea
+                                        name="message"
+                                        class="form-control border-0"
+                                        placeholder="Describe your requirements"
+                                        rows="5"
+                                    ></textarea>
+
+                                </div>
+
+                                <div class="col-12">
+
+                                    <button
+                                        class="btn btn-primary w-100 py-3"
+                                        type="submit"
+                                    >
+
+                                        Request Free Quote
+
+                                    </button>
+
+                                </div>
+
+                            </div>
+
                         </form>
                     </div>
                 </div>

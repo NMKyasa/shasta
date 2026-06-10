@@ -41,13 +41,16 @@
 
                             <a
                                 class="btn"
-                                href="<?= url('services/' . $service['slug']) ?>"
+                                href="<?= url(
+                                    'services/' .
+                                    $service['slug']
+                                ) ?>"
                             >
-
-                                <i class="fa fa-arrow-right text-white me-3"></i>
+                                <i
+                                    class="fa fa-arrow-right text-white me-3"
+                                ></i>
 
                                 Read More
-
                             </a>
 
                         </div>

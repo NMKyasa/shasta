@@ -1,68 +1,314 @@
-  <!-- Footer Start -->
+    <!-- Footer Start -->
     <div class="container-fluid bg-dark text-secondary footer mt-5 py-5 wow fadeIn" data-wow-delay="0.1s">
+
         <div class="container py-5">
+
             <div class="row g-5">
+
+                <!-- Contact Information -->
                 <div class="col-lg-3 col-md-6">
-                    <h5 class="text-light mb-4">Address</h5>
-                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>123 Street, New York, USA</p>
-                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
-                    <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@example.com</p>
+
+                    <h5 class="text-light mb-4">
+
+                        Contact Information
+
+                    </h5>
+
+                    <p class="mb-2">
+
+                        <i class="fa fa-map-marker-alt me-3"></i>
+
+                        <?= htmlspecialchars(
+                            $settings['office_address']
+                            ?? ''
+                        ) ?>
+
+                    </p>
+
+                    <p class="mb-2">
+
+                        <i class="fa fa-phone-alt me-3"></i>
+
+                        <?= htmlspecialchars(
+                            $settings['phone_number']
+                            ?? ''
+                        ) ?>
+
+                    </p>
+
+                    <p class="mb-2">
+
+                        <i class="fa fa-envelope me-3"></i>
+
+                        <?= htmlspecialchars(
+                            $settings['company_email']
+                            ?? ''
+                        ) ?>
+
+                    </p>
+
                     <div class="d-flex pt-2">
-                        <a class="btn btn-square btn-outline-secondary rounded-circle me-2" href=""><i class="fab fa-twitter"></i></a>
-                        <a class="btn btn-square btn-outline-secondary rounded-circle me-2" href=""><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-square btn-outline-secondary rounded-circle me-2" href=""><i class="fab fa-youtube"></i></a>
-                        <a class="btn btn-square btn-outline-secondary rounded-circle me-2" href=""><i class="fab fa-linkedin-in"></i></a>
+
+                        <?php if (!empty($settings['twitter_url'])): ?>
+
+                            <a
+                                class="btn btn-square btn-outline-secondary rounded-circle me-2"
+                                href="<?= htmlspecialchars($settings['twitter_url']) ?>"
+                                target="_blank"
+                            >
+                                <i class="fab fa-twitter"></i>
+                            </a>
+
+                        <?php endif; ?>
+
+                        <?php if (!empty($settings['facebook_url'])): ?>
+
+                            <a
+                                class="btn btn-square btn-outline-secondary rounded-circle me-2"
+                                href="<?= htmlspecialchars($settings['facebook_url']) ?>"
+                                target="_blank"
+                            >
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+
+                        <?php endif; ?>
+
+                        <?php if (!empty($settings['youtube_url'])): ?>
+
+                            <a
+                                class="btn btn-square btn-outline-secondary rounded-circle me-2"
+                                href="<?= htmlspecialchars($settings['youtube_url']) ?>"
+                                target="_blank"
+                            >
+                                <i class="fab fa-youtube"></i>
+                            </a>
+
+                        <?php endif; ?>
+
+                        <?php if (!empty($settings['linkedin_url'])): ?>
+
+                            <a
+                                class="btn btn-square btn-outline-secondary rounded-circle me-2"
+                                href="<?= htmlspecialchars($settings['linkedin_url']) ?>"
+                                target="_blank"
+                            >
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+
+                        <?php endif; ?>
+
+                        <?php if (!empty($settings['instagram_url'])): ?>
+
+                            <a
+                                class="btn btn-square btn-outline-secondary rounded-circle me-2"
+                                href="<?= htmlspecialchars($settings['instagram_url']) ?>"
+                                target="_blank"
+                            >
+                                <i class="fab fa-instagram"></i>
+                            </a>
+
+                        <?php endif; ?>
+
                     </div>
+
                 </div>
+
+                <!-- Services -->
                 <div class="col-lg-3 col-md-6">
-                    <h5 class="text-light mb-4">Services</h5>
-                    <a class="btn btn-link" href="">Business Security</a>
-                    <a class="btn btn-link" href="">Fire Detection</a>
-                    <a class="btn btn-link" href="">Alarm Systems</a>
-                    <a class="btn btn-link" href="">CCTV & Video</a>
-                    <a class="btn btn-link" href="">Smart Home</a>
+
+                    <h5 class="text-light mb-4">
+
+                        Services
+
+                    </h5>
+
+                    <?php
+
+                    $db =
+                        \App\Core\Database\Connection::getInstance();
+
+                    $footerServices =
+                        $db->query(
+                            "
+                            SELECT
+                                title,
+                                slug
+                            FROM services
+                            WHERE status = 'active'
+                            AND deleted_at IS NULL
+                            ORDER BY title ASC
+                            LIMIT 5
+                            "
+                        )->fetchAll();
+
+                    ?>
+
+                    <?php foreach ($footerServices as $service): ?>
+
+                        <a
+                            class="btn btn-link"
+                            href="<?= url(
+                                'services/' .
+                                $service['slug']
+                            ) ?>"
+                        >
+
+                            <?= htmlspecialchars(
+                                $service['title']
+                            ) ?>
+
+                        </a>
+
+                    <?php endforeach; ?>
+
                 </div>
+
+                <!-- Quick Links -->
                 <div class="col-lg-3 col-md-6">
-                    <h5 class="text-light mb-4">Quick Links</h5>
-                    <a class="btn btn-link" href="">About Us</a>
-                    <a class="btn btn-link" href="">Contact Us</a>
-                    <a class="btn btn-link" href="">Our Services</a>
-                    <a class="btn btn-link" href="">Terms & Condition</a>
-                    <a class="btn btn-link" href="">Support</a>
+
+                    <h5 class="text-light mb-4">
+
+                        Quick Links
+
+                    </h5>
+
+                    <a
+                        class="btn btn-link"
+                        href="<?= url('about') ?>"
+                    >
+                        About Us
+                    </a>
+
+                    <a
+                        class="btn btn-link"
+                        href="<?= url('services') ?>"
+                    >
+                        Services
+                    </a>
+
+                    <a
+                        class="btn btn-link"
+                        href="<?= url('projects') ?>"
+                    >
+                        Projects
+                    </a>
+
+                    <a
+                        class="btn btn-link"
+                        href="<?= url('quote') ?>"
+                    >
+                        Request Quote
+                    </a>
+
+                    <a
+                        class="btn btn-link"
+                        href="<?= url('contact') ?>"
+                    >
+                        Contact Us
+                    </a>
+
                 </div>
+
+                <!-- Company -->
                 <div class="col-lg-3 col-md-6">
-                    <h5 class="text-light mb-4">Newsletter</h5>
-                    <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
-                    <div class="position-relative w-100">
-                        <input class="form-control bg-transparent border-secondary w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
-                        <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
-                    </div>
+
+                    <h5 class="text-light mb-4">
+
+                        <?= htmlspecialchars(
+                            $settings['site_name']
+                            ?? 'Company'
+                        ) ?>
+
+                    </h5>
+
+                    <p>
+
+                        <?= htmlspecialchars(
+                            $settings['site_tagline']
+                            ?? ''
+                        ) ?>
+
+                    </p>
+
+                    <p class="mb-0">
+
+                        Working Hours:
+
+                        <br>
+
+                        <?= htmlspecialchars(
+                            $settings['working_hours']
+                            ?? ''
+                        ) ?>
+
+                    </p>
+
                 </div>
+
             </div>
+
         </div>
+
     </div>
     <!-- Footer End -->
 
 
     <!-- Copyright Start -->
-    <div class="container-fluid py-4" style="background: #000000;">
+    <div
+        class="container-fluid py-4"
+        style="background:#000000;"
+    >
+
         <div class="container">
+
             <div class="row">
+
                 <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                    &copy; <a class="border-bottom" href="#">Your Site Name</a>, All Right Reserved.
+
+                    &copy;
+
+                    <?= date('Y') ?>
+
+                    <a
+                        class="border-bottom"
+                        href="<?= url('home') ?>"
+                    >
+
+                        <?= htmlspecialchars(
+                            $settings['site_name']
+                            ?? 'Company'
+                        ) ?>
+
+                    </a>
+
+                    . All Rights Reserved.
+
                 </div>
+
                 <div class="col-md-6 text-center text-md-end">
-                    <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-                    Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a><br>Distributed By <a class="border-bottom" href="https://themewagon.com/" >Themewagon</a>
+
+                    <?= htmlspecialchars(
+                        $settings['footer_text']
+                        ?? ''
+                    ) ?>
+
                 </div>
+
             </div>
+
         </div>
+
     </div>
     <!-- Copyright End -->
 
 
     <!-- Back to Top -->
-    <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
+    <a
+        href="#"
+        class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"
+    >
+        <i class="bi bi-arrow-up"></i>
+    </a>
 
 
     <!-- JavaScript Libraries -->

@@ -39,6 +39,18 @@ class AboutController extends BaseController
                     $setting['setting_value'];
             }
 
+            // IMPACT 
+            $impacts =
+                $db->query(
+                    "
+                    SELECT *
+                    FROM impacts
+                    WHERE status = 'active'
+                    AND deleted_at IS NULL
+                    ORDER BY sort_order ASC
+                    "
+                )->fetchAll();
+
         /**
          * About image
          */
@@ -69,6 +81,7 @@ class AboutController extends BaseController
                 [
                     'pageHeaderTitle' => 'About Us',
                     'aboutImage' => $aboutImage,
+                    'impacts' => $impacts,
                     'settings' => $settings
                 ],
                 'layouts.frontend'

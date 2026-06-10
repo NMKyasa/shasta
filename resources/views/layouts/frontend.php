@@ -12,7 +12,13 @@
 <meta name="description" content="<?= $description ?? '' ?>">
 
 <!-- Favicon -->
-<link href="/shasta/public/assets/frontend/img/favicon.ico" rel="icon">
+<link
+    rel="icon"
+    href="<?= !empty($settings['favicon'])
+        ? asset($settings['favicon'])
+        : '/shasta/public/assets/frontend/img/favicon.ico'
+    ?>"
+>
 
 <!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">

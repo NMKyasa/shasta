@@ -18,6 +18,23 @@ class ProjectController extends BaseController
         $db =
             Connection::getInstance();
 
+        /**
+         * Categories
+         */
+        $categories =
+            $db->query(
+                "
+                SELECT *
+                FROM categories
+                WHERE status = 'active'
+                AND deleted_at IS NULL
+                ORDER BY name ASC
+                "
+            )->fetchAll();
+
+        /**
+         * Projects
+         */
         $projects =
             $db->query(
                 "
@@ -25,9 +42,23 @@ class ProjectController extends BaseController
 
                     p.*,
 
+                    c.name AS category_name,
+
+                    c.slug AS category_slug,
+
                     m.file_path
 
                 FROM projects p
+
+                LEFT JOIN categoryables ca
+
+                    ON ca.categoryable_id = p.id
+
+                    AND ca.categoryable_type = 'project'
+
+                LEFT JOIN categories c
+
+                    ON c.id = ca.category_id
 
                 LEFT JOIN media m
 
@@ -50,11 +81,19 @@ class ProjectController extends BaseController
             )->fetchAll();
 
         return $this->view(
+
             'frontend.projects.index',
+
             [
+
                 'projects' => $projects,
+
+                'categories' => $categories,
+
                 'pageHeaderTitle' => 'Our Projects'
+
             ],
+
             'layouts.frontend'
         );
     }
@@ -78,9 +117,23 @@ class ProjectController extends BaseController
 
                     p.*,
 
+                    c.name AS category_name,
+
+                    c.slug AS category_slug,
+
                     m.file_path
 
                 FROM projects p
+
+                LEFT JOIN categoryables ca
+
+                    ON ca.categoryable_id = p.id
+
+                    AND ca.categoryable_type = 'project'
+
+                LEFT JOIN categories c
+
+                    ON c.id = ca.category_id
 
                 LEFT JOIN media m
 
@@ -119,11 +172,17 @@ class ProjectController extends BaseController
         }
 
         return $this->view(
+
             'frontend.projects.show',
+
             [
+
                 'project' => $project,
+
                 'pageHeaderTitle' => $project['title']
+
             ],
+
             'layouts.frontend'
         );
     }

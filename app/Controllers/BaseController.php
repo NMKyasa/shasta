@@ -2,11 +2,50 @@
 
 namespace App\Controllers;
 
+use App\Core\Database\Connection;
+
 /**
  * Base Controller
  */
 class BaseController
 {
+
+    /**
+     * Load application settings
+     */
+    protected function getSettings(): array
+    {
+        $db =
+            Connection::getInstance();
+
+        $settings = [];
+
+        $query =
+            $db->query(
+                "
+                SELECT
+                    setting_key,
+                    setting_value
+                FROM settings
+                WHERE autoload = 1
+                "
+            );
+
+        foreach (
+            $query->fetchAll()
+            as
+            $setting
+        ) {
+
+            $settings[
+                $setting['setting_key']
+            ] =
+                $setting['setting_value'];
+        }
+
+        return $settings;
+    }
+
     /**
      * Render view
      */
@@ -16,6 +55,17 @@ class BaseController
         $layout = null
     )
     {
+        /**
+         * Inject global settings
+         */
+        if (
+            !isset($data['settings'])
+        ) {
+
+            $data['settings'] =
+                $this->getSettings();
+        }
+
         /**
          * Extract variables
          */

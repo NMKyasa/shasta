@@ -8,9 +8,31 @@
             <div class="row mt-n2 wow fadeInUp" data-wow-delay="0.3s">
                 <div class="col-12 text-center">
                     <ul class="list-inline mb-5" id="portfolio-flters">
-                        <li class="mx-2 active" data-filter="*">All</li>
-                        <li class="mx-2" data-filter=".first">Complete Projects</li>
-                        <li class="mx-2" data-filter=".second">Ongoing Projects</li>
+
+                        <li
+                            class="mx-2 active"
+                            data-filter="*"
+                        >
+                            All
+                        </li>
+
+                        <?php foreach ($categories as $category): ?>
+
+                            <li
+                                class="mx-2"
+                                data-filter=".<?= htmlspecialchars(
+                                    $category['slug']
+                                ) ?>"
+                            >
+
+                                <?= htmlspecialchars(
+                                    $category['name']
+                                ) ?>
+
+                            </li>
+
+                        <?php endforeach; ?>
+
                     </ul>
                 </div>
             </div>
@@ -19,7 +41,9 @@
                 <?php foreach ($projects as $project): ?>
 
                     <div
-                        class="col-lg-4 col-md-6 portfolio-item wow fadeInUp"
+                        class="col-lg-4 col-md-6 portfolio-item <?= htmlspecialchars(
+                            $project['category_slug'] ?? ''
+                        ) ?> wow fadeInUp"
                         data-wow-delay="0.1s"
                     >
 
@@ -27,11 +51,22 @@
 
                             <?php if (!empty($project['file_path'])): ?>
 
-                                <img
-                                    class="img-fluid w-100"
-                                    src="<?= url($project['file_path']) ?>"
-                                    alt="<?= htmlspecialchars($project['title']) ?>"
+                                <a
+                                    href="<?= url(
+                                        'projects/' .
+                                        $project['slug']
+                                    ) ?>"
                                 >
+                                    <img
+                                        class="img-fluid w-100"
+                                        src="<?= url(
+                                            $project['file_path']
+                                        ) ?>"
+                                        alt="<?= htmlspecialchars(
+                                            $project['title']
+                                        ) ?>"
+                                    >
+                                </a>
 
                             <?php endif; ?>
 
@@ -39,15 +74,29 @@
 
                                 <p class="text-primary mb-2">
 
-                                    Project
+                                    <?= htmlspecialchars(
+                                        $project['category_name']
+                                        ?? 'Project'
+                                    ) ?>
 
                                 </p>
 
                                 <h5 class="lh-base mb-0">
 
-                                    <?= htmlspecialchars($project['title']) ?>
+                                <a
+                                    href="<?= url(
+                                        'projects/' .
+                                        $project['slug']
+                                    ) ?>"
+                                >
 
-                                </h5>
+                                    <?= htmlspecialchars(
+                                        $project['title']
+                                    ) ?>
+
+                                </a>
+
+                            </h5>
 
                             </div>
 
@@ -55,7 +104,10 @@
 
                                 <p class="text-primary mb-2">
 
-                                    Project
+                                    <?= htmlspecialchars(
+                                        $project['category_name']
+                                        ?? 'Project'
+                                    ) ?>
 
                                 </p>
 

@@ -109,7 +109,7 @@
                     </div>
 
                     <!-- IMPACT -->
-                    <!-- <div class="form-group">
+                    <div class="form-group">
 
                         <label>
                             Impact
@@ -121,7 +121,7 @@
                             rows="4"
                         ><?= htmlspecialchars($settings['about_impact'] ?? '') ?></textarea>
 
-                    </div> -->
+                    </div>
 
                     <!-- EXPERIENCE -->
                     <div class="form-group">
