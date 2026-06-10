@@ -29,7 +29,7 @@ class TeamController extends BaseController
 
                 LEFT JOIN media m
 
-                    ON m.mediable_type = 'team_member'
+                    ON m.mediable_type = 'team'
 
                     AND m.mediable_id = tm.id
 

@@ -27,6 +27,29 @@ class UploadService
         1048576;
 
     /**
+     * Convert text into URL-friendly slug
+     */
+    protected static function slugify(
+        string $text
+    ): string
+    {
+        $text =
+            strtolower($text);
+
+        $text =
+            preg_replace(
+                '/[^a-z0-9]+/',
+                '-',
+                $text
+            );
+
+        return trim(
+            $text,
+            '-'
+        );
+    }
+
+    /**
      * Upload image
      */
     public static function uploadImage(
@@ -64,14 +87,10 @@ class UploadService
          * Validate mime type
          */
         if (
-
             !in_array(
-
                 $file['type'],
-
                 self::$allowedMimeTypes
             )
-
         ) {
 
             throw new \Exception(
@@ -94,24 +113,53 @@ class UploadService
         }
 
         /**
-         * Generate random filename
+         * File extension
          */
         $extension =
-            pathinfo(
-
-                $file['name'],
-
-                PATHINFO_EXTENSION
+            strtolower(
+                pathinfo(
+                    $file['name'],
+                    PATHINFO_EXTENSION
+                )
             );
 
+        /**
+         * Original filename
+         */
+        $baseName =
+            pathinfo(
+                $file['name'],
+                PATHINFO_FILENAME
+            );
+
+        /**
+         * SEO-friendly filename
+         */
+        $baseName =
+            self::slugify(
+                $baseName
+            );
+
+        /**
+         * Fallback if filename becomes empty
+         */
+        if (
+            empty($baseName)
+        ) {
+
+            $baseName =
+                'image';
+        }
+
+        /**
+         * Final filename
+         */
         $fileName =
+            $baseName
+            .
+            '-'
+            .
             time()
-            .
-            '_'
-            .
-            bin2hex(
-                random_bytes(5)
-            )
             .
             '.'
             .
@@ -131,42 +179,38 @@ class UploadService
             .
             $fileName;
 
-            
-            /**
-             * Upload directory
-             */
-            $uploadDirectory =
-                dirname($destination);
+        /**
+         * Upload directory
+         */
+        $uploadDirectory =
+            dirname(
+                $destination
+            );
 
-            /**
-             * Auto-create directory
-             */
-            if (
-                !is_dir($uploadDirectory)
-            ) {
+        /**
+         * Auto-create directory
+         */
+        if (
+            !is_dir(
+                $uploadDirectory
+            )
+        ) {
 
-                mkdir(
-
-                    $uploadDirectory,
-
-                    0777,
-
-                    true
-                );
-            }
+            mkdir(
+                $uploadDirectory,
+                0777,
+                true
+            );
+        }
 
         /**
          * Move uploaded file
          */
         if (
-
             !move_uploaded_file(
-
                 $file['tmp_name'],
-
                 $destination
             )
-
         ) {
 
             throw new \Exception(

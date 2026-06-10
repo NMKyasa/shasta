@@ -104,7 +104,7 @@
 
                             <div class="text-center p-4">
 
-                                <h5 class="mb-0">
+                                <h5 class="mb-1">
 
                                     <?= htmlspecialchars(
                                         $member['name']
@@ -112,7 +112,7 @@
 
                                 </h5>
 
-                                <span class="text-primary">
+                                <span class="text-primary d-block mb-2">
 
                                     <?= htmlspecialchars(
                                         $member['position']
@@ -120,6 +120,23 @@
                                     ) ?>
 
                                 </span>
+
+                                <?php if (!empty($member['bio'])): ?>
+
+                                    <p class="small text-muted mb-0">
+
+                                        <?= htmlspecialchars(
+                                            mb_strimwidth(
+                                                strip_tags($member['bio']),
+                                                0,
+                                                120,
+                                                '...'
+                                            )
+                                        ) ?>
+
+                                    </p>
+
+                                <?php endif; ?>
 
                             </div>
 

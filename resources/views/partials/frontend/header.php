@@ -72,27 +72,32 @@
     <!-- Topbar End -->
 
 
-    <!-- Navbar Start -->
-    <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0 px-4 px-lg-5">
+   <!-- Navbar Start -->
+<!-- Navbar Start -->
+<nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0 px-4 px-lg-5">
+
+    <a
+        href="<?= url('home') ?>"
+        class="navbar-brand d-flex align-items-center"
+    >
+
         <?php if (!empty($settings['logo'])): ?>
 
             <img
                 src="<?= asset($settings['logo']) ?>"
-                alt="<?= htmlspecialchars($settings['site_name']) ?>"
+                alt="<?= htmlspecialchars(
+                    $settings['site_name']
+                ) ?>"
                 style="max-height:60px;"
+                class="me-2"
             >
 
-        <?php else: ?>
-
-            <h2 class="m-0 text-primary">
-
-                <?= htmlspecialchars(
-                    $settings['site_name']
-                ) ?>
-
-            </h2>
-
         <?php endif; ?>
+
+        <span
+            class="fw-bold text-primary"
+            style="font-size:1.4rem;"
+        >
 
             <?= !empty($settings['site_name'])
                 ? htmlspecialchars(
@@ -101,35 +106,121 @@
                 : 'SHASTA'
             ?>
 
-        </h2>
-        <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <div class="navbar-nav ms-auto py-4 py-lg-0">
-                <a href="<?= url('home') ?>" class="nav-item nav-link active">Home</a>
-                <a href="<?= url('about') ?>" class="nav-item nav-link active">About</a>
-                <a href="<?= url('services') ?>" class="nav-item nav-link">Service</a>
-                <a href="<?= url('projects') ?>" class="nav-item nav-link">Project</a>
-                <a href="<?= url('pricing') ?>" class="nav-item nav-link">
-                    Pricing
+        </span>
+
+    </a>
+
+    <button
+        type="button"
+        class="navbar-toggler"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarCollapse"
+    >
+
+        <span class="navbar-toggler-icon"></span>
+
+    </button>
+
+    <div
+        class="collapse navbar-collapse"
+        id="navbarCollapse"
+    >
+
+        <div class="navbar-nav ms-auto py-4 py-lg-0">
+
+            <a
+                href="<?= url('home') ?>"
+                class="nav-item nav-link"
+            >
+                Home
+            </a>
+
+            <a
+                href="<?= url('about') ?>"
+                class="nav-item nav-link"
+            >
+                About Us
+            </a>
+
+            <a
+                href="<?= url('services') ?>"
+                class="nav-item nav-link"
+            >
+                Services
+            </a>
+
+            <a
+                href="<?= url('projects') ?>"
+                class="nav-item nav-link"
+            >
+                Projects
+            </a>
+
+            <a
+                href="<?= url('pricing') ?>"
+                class="nav-item nav-link"
+            >
+                Pricing
+            </a>
+
+            <div class="nav-item dropdown">
+
+                <a
+                    href="#"
+                    class="nav-link dropdown-toggle"
+                    data-bs-toggle="dropdown"
+                >
+
+                    Company
+
                 </a>
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                    <div class="dropdown-menu rounded-0 rounded-bottom m-0">
-                        <a href="<?= url('quote') ?>" class="dropdown-item">Free Quote</a>
-                        <a href="<?= url('team') ?>" class="dropdown-item">Our Team</a>
-                        <a href="<?= url('testimonials') ?>" class="dropdown-item">Testimonial</a>
-                    </div>
+
+                <div
+                    class="dropdown-menu rounded-0 rounded-bottom m-0"
+                >
+
+                    <a
+                        href="<?= url('team') ?>"
+                        class="dropdown-item"
+                    >
+
+                        Our Team
+
+                    </a>
+
+                    <a
+                        href="<?= url('testimonials') ?>"
+                        class="dropdown-item"
+                    >
+
+                        Testimonials
+
+                    </a>
+
                 </div>
-                <a href="<?= url('contact') ?>" class="nav-item nav-link">Contact</a>
+
             </div>
-            <div class="h-100 d-lg-inline-flex align-items-center d-none">
-                <a class="btn btn-square rounded-circle bg-light text-primary me-2" href="<?= $settings['facebook_url'] ?? '#' ?>"><i class="fab fa-facebook-f"></i></a>
-                <a class="btn btn-square rounded-circle bg-light text-primary me-2" href="<?= $settings['twitter_url'] ?? '#' ?>"><i class="fab fa-twitter"></i></a>
-                <a class="btn btn-square rounded-circle bg-light text-primary me-2" href="<?= $settings['linkedin_url'] ?? '#' ?>"><i class="fab fa-linkedin-in"></i></a>
-                <a class="btn btn-square rounded-circle bg-light text-primary me-0" href="<?= $settings['instagram_url'] ?? '#' ?>"><i class="fab fa-instagram"></i></a>
-            </div>
+
+            <a
+                href="<?= url('contact') ?>"
+                class="nav-item nav-link"
+            >
+                Contact Us
+            </a>
+
         </div>
-    </nav>
-    <!-- Navbar End -->
+
+        <!-- CTA Button -->
+        <a
+            href="<?= url('quote') ?>"
+            class="btn btn-primary py-2 px-4 ms-lg-3"
+        >
+
+            Get Free Quote
+
+        </a>
+
+    </div>
+
+</nav>
+<!-- Navbar End -->
