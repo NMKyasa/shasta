@@ -71,6 +71,19 @@
     </div>
     <!-- Topbar End -->
 
+<!-- Current page active -->
+    <?php
+
+    $currentUri =
+        trim(
+            parse_url(
+                $_SERVER['REQUEST_URI'],
+                PHP_URL_PATH
+            ),
+            '/'
+        );
+
+    ?>
 
    <!-- Navbar Start -->
 <!-- Navbar Start -->
@@ -130,35 +143,35 @@
 
             <a
                 href="<?= url('home') ?>"
-                class="nav-item nav-link"
+                class="nav-item nav-link <?= $currentUri === 'home' || $currentUri === '' ? 'active' : '' ?>"
             >
                 Home
             </a>
 
             <a
                 href="<?= url('about') ?>"
-                class="nav-item nav-link"
+                class="nav-item nav-link <?= str_contains($currentUri, 'about') ? 'active' : '' ?>"
             >
                 About Us
             </a>
 
             <a
                 href="<?= url('services') ?>"
-                class="nav-item nav-link"
+                class="nav-item nav-link <?= str_contains($currentUri, 'services') ? 'active' : '' ?>"
             >
                 Services
             </a>
 
             <a
                 href="<?= url('projects') ?>"
-                class="nav-item nav-link"
+                class="nav-item nav-link <?= str_contains($currentUri, 'projects') ? 'active' : '' ?>"
             >
                 Projects
             </a>
 
             <a
                 href="<?= url('pricing') ?>"
-                class="nav-item nav-link"
+                class="nav-item nav-link <?= str_contains($currentUri, 'pricing') ? 'active' : '' ?>"
             >
                 Pricing
             </a>
@@ -167,7 +180,11 @@
 
                 <a
                     href="#"
-                    class="nav-link dropdown-toggle"
+                    class="nav-link dropdown-toggle <?= (
+                        str_contains($currentUri, 'team')
+                        ||
+                        str_contains($currentUri, 'testimonials')
+                    ) ? 'active' : '' ?>"
                     data-bs-toggle="dropdown"
                 >
 
@@ -203,7 +220,7 @@
 
             <a
                 href="<?= url('contact') ?>"
-                class="nav-item nav-link"
+                class="nav-item nav-link <?= str_contains($currentUri, 'contact') ? 'active' : '' ?>"
             >
                 Contact Us
             </a>

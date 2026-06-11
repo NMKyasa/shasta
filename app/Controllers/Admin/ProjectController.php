@@ -149,12 +149,26 @@ extends BaseController
 
                 'category_id' => 'required|exists:categories,id',
 
-                'images' => 'required|array|min:1',
-
                  'status' => 'required|in:active,inactive'
             ]
 
         );
+
+        if (
+            empty($_FILES['images'])
+            ||
+            empty($_FILES['images']['name'][0])
+        ) {
+
+            Flash::set(
+                'danger',
+                'At least one image is required.'
+            );
+
+            return $response->redirect(
+                url('dashboard/projects/create')
+            );
+        }
 
         if ($validator->fails()) {
 

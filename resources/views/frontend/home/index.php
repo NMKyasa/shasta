@@ -1,4 +1,4 @@
-<!-- Carousel Start -->
+    <!-- Carousel Start -->
     <div class="container-fluid p-0 pb-5">
         <div class="owl-carousel header-carousel position-relative">
 
@@ -165,7 +165,7 @@
                             class="position-absolute img-fluid w-100 h-100"
                             src="/shasta/public/<?= htmlspecialchars(
                                 $aboutImage['file_path']
-                                ?? 'assets/frontend/img/about.jpg'
+                                ?? 'assets/frontend/img/shasta-business-premises-protection.png'
                             ) ?>"
                             style="object-fit: cover;"
                             alt="<?= htmlspecialchars(
@@ -370,7 +370,9 @@
                     <div class="p-lg-5 ps-lg-0">
                         <div class="bg-primary mb-3" style="width: 60px; height: 2px;"></div>
                         <h1 class="display-5 mb-5">Why Choose Us</h1>
-                        <p class="mb-4 pb-2">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo erat amet</p>
+                        <p class="mb-4 pb-2">Shasta Security is a licensed Ugandan security company trusted by hospitals, retail chains, and corporate offices. 
+                                            We deliver reliable protection through certified guards, advanced surveillance systems, and 24/7 customer support. 
+                                            Our commitment to quality, innovation, and professionalism ensures clients enjoy peace of mind and measurable safety improvements.</p>
                         <div class="row g-4">
                             <div class="col-6">
                                 <div class="d-flex align-items-center">
@@ -421,7 +423,7 @@
                 </div>
                 <div class="col-lg-6 pe-lg-0" style="min-height: 400px;">
                     <div class="position-relative h-100">
-                        <img class="position-absolute img-fluid w-100 h-100" src="assets/frontend/img/feature.jpg" style="object-fit: cover;" alt="">
+                        <img class="position-absolute img-fluid w-100 h-100" src="assets/frontend/img/shasta-home-protection-services.png" style="object-fit: cover;" alt="">
                     </div>
                 </div>
             </div>
