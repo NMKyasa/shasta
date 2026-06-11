@@ -1,10 +1,10 @@
 /********** Template CSS **********/
 :root {
-    --primary: #65B530;
-    --secondary: #9B9B9B;
-    --light: #F5F5F5;
-    --dark: #161616;
-}
+    --primary: #E07820;
+    --secondary: #1A1A1A;
+    --light: #F0EDE4;
+    --dark: #1A1A1A;
+} 
 
 .fw-medium {
     font-weight: 500 !important;
@@ -154,7 +154,7 @@
     left: 0;
     display: flex;
     align-items: center;
-    background: rgba(22, 22, 22, .7);
+    background: rgba(26, 26, 26, .7);
 }
 
 @media (max-width: 768px) {
@@ -254,7 +254,7 @@
 }
 
 .page-header {
-    background: linear-gradient(rgba(22, 22, 22, .7), rgba(22, 22, 22, .7)), url(../img/carousel-1.jpg) center center no-repeat;
+    background: linear-gradient(rgba(26, 26, 26, .7), rgba(26, 26, 26, .7)), url(../img/carousel-1.jpg) center center no-repeat;
     background-size: cover;
 }
 
@@ -429,7 +429,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(22, 22, 22, .7);
+    background: rgba(26, 26, 26, .7);
     opacity: 0;
     transition: .5s;
 }
@@ -545,7 +545,7 @@
     margin-bottom: 5px;
     padding: 0;
     text-align: left;
-    color: var(--secondary);
+    color: var(--light);
     font-weight: normal;
     text-transform: capitalize;
     transition: .3s;

@@ -1,66 +1,153 @@
-    <!-- Service Start -->
-    <div class="container-xxl py-5">
-        <div class="container">
-            <div class="text-center">
-                <div class="bg-primary mb-3 mx-auto" style="width: 60px; height: 2px;"></div>
-                <h1 class="display-5 mb-5">Our Services</h1>
-            </div>
-            <div class="row g-0 service-row">
+<!-- Services Start -->
+<div class="container-xxl py-5">
 
-                <?php foreach ($services as $service): ?>
+    <div class="container">
 
-                    <div class="col-md-6 col-lg-3 wow fadeIn">
+        <!-- Section Header -->
+        <div class="text-center wow fadeInUp">
 
-                        <div class="service-item border h-100 p-5">
+            <div
+                class="bg-primary mb-3 mx-auto"
+                style="width:60px;height:2px;"
+            ></div>
 
-                            <?php if (!empty($service['file_path'])): ?>
+            <h1 class="display-5 mb-5">
 
-                                <div class="mb-4">
+                Our Services
 
-                                    <img
-                                        class="img-fluid"
-                                        src="<?= url($service['file_path']) ?>"
-                                        alt="<?= htmlspecialchars($service['title']) ?>"
-                                    >
+            </h1>
 
-                                </div>
+        </div>
 
-                            <?php endif; ?>
+        <!-- Services Grid -->
+        <div class="row g-4">
 
-                            <h4 class="mb-3">
+            <?php foreach ($services as $service): ?>
 
-                                <?= htmlspecialchars($service['title']) ?>
+                <div
+                    class="col-lg-4 col-md-6 wow fadeInUp"
+                >
 
-                            </h4>
+                    <div
+                        class="service-item border rounded overflow-hidden h-100 shadow-sm"
+                    >
 
-                            <p class="mb-4">
-
-                                <?= htmlspecialchars($service['summary'] ?? '') ?>
-
-                            </p>
+                        <!-- Service Image -->
+                        <?php if (
+                            !empty(
+                                $service['file_path']
+                            )
+                        ): ?>
 
                             <a
-                                class="btn"
                                 href="<?= url(
-                                    'services/' .
+                                    'services/'
+                                    .
                                     $service['slug']
                                 ) ?>"
                             >
-                                <i
-                                    class="fa fa-arrow-right text-white me-3"
-                                ></i>
 
-                                Read More
+                                <img
+                                    src="<?= url(
+                                        $service['file_path']
+                                    ) ?>"
+                                    class="img-fluid w-100"
+                                    alt="<?= htmlspecialchars(
+                                        $service['title']
+                                    ) ?>"
+                                    style="
+                                        height:250px;
+                                        object-fit:cover;
+                                    "
+                                >
+
+                            </a>
+
+                        <?php endif; ?>
+
+                        <!-- Service Content -->
+                        <div class="p-4">
+
+                            <h4 class="mb-3">
+
+                                <a
+                                    href="<?= url(
+                                        'services/'
+                                        .
+                                        $service['slug']
+                                    ) ?>"
+                                    class="text-dark text-decoration-none"
+                                >
+
+                                    <?= htmlspecialchars(
+                                        $service['title']
+                                    ) ?>
+
+                                </a>
+
+                            </h4>
+
+                            <?php if (
+                                !empty(
+                                    $service['summary']
+                                )
+                            ): ?>
+
+                                <p class="mb-4">
+
+                                    <?= htmlspecialchars(
+                                        mb_strimwidth(
+                                            $service['summary'],
+                                            0,
+                                            180,
+                                            '...'
+                                        )
+                                    ) ?>
+
+                                </p>
+
+                            <?php endif; ?>
+
+                            <a
+                                href="<?= url(
+                                    'services/'
+                                    .
+                                    $service['slug']
+                                ) ?>"
+                                class="btn btn-primary"
+                            >
+
+                                Learn More
+
                             </a>
 
                         </div>
 
                     </div>
 
-                <?php endforeach; ?>
+                </div>
 
-            </div>
+            <?php endforeach; ?>
+
         </div>
+
+        <!-- CTA -->
+        <div
+            class="text-center mt-5"
+        >
+
+            <a
+                href="<?= url('quote') ?>"
+                class="btn btn-primary btn-lg px-5"
+            >
+
+                Request a Free Quote
+
+            </a>
+
+        </div>
+
     </div>
-    <!-- Service End -->
-     
+
+</div>
+<!-- Services End -->

@@ -110,6 +110,9 @@ class ProjectController extends BaseController
         $db =
             Connection::getInstance();
 
+        /**
+         * Project
+         */
         $query =
             $db->prepare(
                 "
@@ -121,7 +124,7 @@ class ProjectController extends BaseController
 
                     c.slug AS category_slug,
 
-                    m.file_path
+                    m.file_path AS featured_image
 
                 FROM projects p
 
@@ -171,6 +174,29 @@ class ProjectController extends BaseController
             );
         }
 
+        /**
+         * Gallery Images
+         */
+        $galleryQuery =
+            $db->prepare(
+                "
+                SELECT *
+                FROM media
+                WHERE mediable_type = 'project'
+                AND mediable_id = ?
+                AND status = 'active'
+                AND deleted_at IS NULL
+                ORDER BY sort_order ASC
+                "
+            );
+
+        $galleryQuery->execute([
+            $project['id']
+        ]);
+
+        $gallery =
+            $galleryQuery->fetchAll();
+
         return $this->view(
 
             'frontend.projects.show',
@@ -179,7 +205,23 @@ class ProjectController extends BaseController
 
                 'project' => $project,
 
-                'pageHeaderTitle' => $project['title']
+                'gallery' => $gallery,
+
+                'pageHeaderTitle' =>
+                    $project['title'],
+
+                /**
+                 * SEO
+                 */
+                'title' =>
+                    $project['meta_title']
+                    ?: $project['title'],
+
+                'description' =>
+                    $project['meta_description'],
+
+                'keywords' =>
+                    $project['meta_keywords']
 
             ],
 

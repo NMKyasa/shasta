@@ -12,6 +12,7 @@ use App\Core\Services\UploadService;
 use App\Core\Services\Flash;
 use App\Core\Database\Connection;
 use App\Core\Auth\Authorization;
+use App\Core\Services\AuditLog;
 
 class ProjectController
 extends BaseController
@@ -645,6 +646,13 @@ extends BaseController
          */
         $project =
             Project::find($id);
+
+            /**
+         * Original project
+         * for audit logging
+         */
+        $oldProject =
+            $project;
 
         /**
          * Project not found

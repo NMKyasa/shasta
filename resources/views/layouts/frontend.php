@@ -4,12 +4,36 @@
 
 <head>
     <meta charset="utf-8">
-    <title><?= $title ?? 'Shasta Company Limited' ?></title>
+     <title>
+        <?= htmlspecialchars(
+            $title
+            ??
+            ($settings['meta_title']
+            ?? 'Shasta Company Limited')
+        ) ?>
+    </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- SEO -->
-<meta name="keywords" content="<?= $keywords ?? '' ?>">
-<meta name="description" content="<?= $description ?? '' ?>">
+<meta
+    name="description"
+    content="<?= htmlspecialchars(
+        $description
+        ??
+        ($settings['meta_description']
+        ?? '')
+    ) ?>"
+>
+
+<meta
+    name="keywords"
+    content="<?= htmlspecialchars(
+        $keywords
+        ??
+        ($settings['meta_keywords']
+        ?? '')
+    ) ?>"
+>
 
 <!-- Favicon -->
 <link
@@ -43,6 +67,9 @@
 
 <!-- Main CSS -->
 <link href="/shasta/public/assets/frontend/css/style.css" rel="stylesheet">
+
+<!-- Style new CSS -->
+<link href="/shasta/public/assets/frontend/css/style_new.css" rel="stylesheet">
 
 </head>
 

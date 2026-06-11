@@ -162,8 +162,8 @@
                                         <img class="img-fluid" src="assets/frontend/img/icon/icon-5.png" alt="Icon">
                                     </div>
                                     <div class="ms-4">
-                                        <h2 class="mb-1" data-toggle="counter-up">1234</h2>
-                                        <p class="fw-medium text-primary mb-0">Projects Done</p>
+                                        <h2 class="mb-1" data-toggle="counter-up">100</h2>
+                                        <p class="fw-medium text-primary mb-0">Clients Reached</p>
                                     </div>
                                 </div>
                             </div>

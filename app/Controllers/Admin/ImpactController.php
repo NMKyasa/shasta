@@ -131,7 +131,7 @@ extends BaseController
 
                     'label' => 'required|max:255',
 
-                    'value' => 'required|numeric',
+                    'value' => 'required|max:255',
 
                     'status' => 'required|in:active,inactive'
                 ]
@@ -403,7 +403,7 @@ extends BaseController
 
                 'label' => 'required|max:255',
 
-                'value' => 'required|numeric',
+                'value' => 'required|max:255',
 
                 'status' => 'required|in:active,inactive'
             ]

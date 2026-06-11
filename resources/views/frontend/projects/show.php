@@ -1,8 +1,10 @@
 <div class="container py-5">
 
-    <div class="text-center mb-5">
+<div class="row">
 
-        <h1>
+    <div class="col-lg-8">
+
+        <h1 class="mb-4">
 
             <?= htmlspecialchars(
                 $project['title']
@@ -10,132 +12,187 @@
 
         </h1>
 
+        <?php if (!empty($project['featured_image'])): ?>
+
+            <img
+                src="<?= url(
+                    $project['featured_image']
+                ) ?>"
+                class="img-fluid rounded mb-4"
+                alt="<?= htmlspecialchars(
+                    $project['title']
+                ) ?>"
+            >
+
+        <?php endif; ?>
+
+        <?php if (!empty($project['summary'])): ?>
+
+            <div class="mb-5">
+
+                <h3>
+                    Project Summary
+                </h3>
+
+                <p>
+
+                    <?= nl2br(
+                        htmlspecialchars(
+                            $project['summary']
+                        )
+                    ) ?>
+
+                </p>
+
+            </div>
+
+        <?php endif; ?>
+
+        <?php if (!empty($project['scope'])): ?>
+
+            <div class="mb-5">
+
+                <h3>
+                    Scope of Work
+                </h3>
+
+                <?= $project['scope'] ?>
+
+            </div>
+
+        <?php endif; ?>
+
+        <?php if (!empty($project['impact'])): ?>
+
+            <div class="mb-5">
+
+                <h3>
+                    Project Impact
+                </h3>
+
+                <?= $project['impact'] ?>
+
+            </div>
+
+        <?php endif; ?>
+
+        <?php if (!empty($project['body'])): ?>
+
+            <div class="mb-5">
+
+                <h3>
+                    Project Details
+                </h3>
+
+                <?= $project['body'] ?>
+
+            </div>
+
+        <?php endif; ?>
+
     </div>
 
-    <?php if (
-        !empty(
-            $project['file_path']
-        )
-    ): ?>
+    <div class="col-lg-4">
 
-        <img
-            src="<?= url(
-                $project['file_path']
-            ) ?>"
-            class="img-fluid w-100 mb-5"
-            alt="<?= htmlspecialchars(
-                $project['title']
-            ) ?>"
-        >
+        <div class="bg-light p-4 rounded">
 
-    <?php endif; ?>
+            <h4 class="mb-4">
+                Project Information
+            </h4>
 
-    <?php if (
-        !empty(
-            $project['summary']
-        )
-    ): ?>
+            <?php if (!empty($project['category_name'])): ?>
 
-        <div class="mb-4">
+                <p>
 
-            <h3>Project Summary</h3>
+                    <strong>
+                        Category:
+                    </strong>
 
-            <p>
+                    <?= htmlspecialchars(
+                        $project['category_name']
+                    ) ?>
 
-                <?= nl2br(
-                    htmlspecialchars(
-                        $project['summary']
-                    )
-                ) ?>
+                </p>
 
-            </p>
+            <?php endif; ?>
 
-        </div>
+            <?php if (!empty($project['client_name'])): ?>
 
-    <?php endif; ?>
+                <p>
 
-    <?php if (
-        !empty(
-            $project['client_name']
-        )
-    ): ?>
+                    <strong>
+                        Client:
+                    </strong>
 
-        <div class="mb-3">
+                    <?= htmlspecialchars(
+                        $project['client_name']
+                    ) ?>
 
-            <strong>Client:</strong>
+                </p>
 
-            <?= htmlspecialchars(
-                $project['client_name']
-            ) ?>
+            <?php endif; ?>
 
-        </div>
+            <?php if (!empty($project['completion_date'])): ?>
 
-    <?php endif; ?>
+                <p>
 
-    <?php if (
-        !empty(
-            $project['completion_date']
-        )
-    ): ?>
+                    <strong>
+                        Completion:
+                    </strong>
 
-        <div class="mb-4">
+                    <?= htmlspecialchars(
+                        $project['completion_date']
+                    ) ?>
 
-            <strong>Completion Date:</strong>
+                </p>
 
-            <?= htmlspecialchars(
-                $project['completion_date']
-            ) ?>
+            <?php endif; ?>
 
         </div>
 
-    <?php endif; ?>
+    </div>
 
-    <?php if (
-        !empty(
-            $project['scope']
-        )
-    ): ?>
+</div>
 
-        <div class="mb-5">
+<?php if (!empty($gallery)): ?>
 
-            <h3>Project Scope</h3>
+    <div class="mt-5">
 
-            <?= $project['scope'] ?>
+        <h3 class="mb-4">
+            Project Gallery
+        </h3>
 
-        </div>
+        <div class="row">
 
-    <?php endif; ?>
+            <?php foreach ($gallery as $image): ?>
 
-    <?php if (
-        !empty(
-            $project['impact']
-        )
-    ): ?>
+                <div class="col-md-4 mb-4">
 
-        <div class="mb-5">
+                    <a
+                        href="<?= url(
+                            $image['file_path']
+                        ) ?>"
+                        data-lightbox="project-gallery"
+                    >
 
-            <h3>Project Impact</h3>
+                        <img
+                            src="<?= url(
+                                $image['file_path']
+                            ) ?>"
+                            class="img-fluid rounded"
+                            alt=""
+                        >
 
-            <?= $project['impact'] ?>
+                    </a>
 
-        </div>
+                </div>
 
-    <?php endif; ?>
-
-    <?php if (
-        !empty(
-            $project['body']
-        )
-    ): ?>
-
-        <div>
-
-            <h3>Project Details</h3>
-
-            <?= $project['body'] ?>
+            <?php endforeach; ?>
 
         </div>
 
-    <?php endif; ?>
+    </div>
+
+<?php endif; ?>
 
 </div>

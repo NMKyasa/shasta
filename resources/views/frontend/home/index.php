@@ -153,14 +153,13 @@
     </div>
     <!-- Impact End -->
 
-
     <!-- About Start -->
     <div class="container-fluid bg-light overflow-hidden my-5 px-lg-0">
         <div class="container about px-lg-0">
             <div class="row g-0 mx-lg-0">
                 <div class="col-lg-6 ps-lg-0" style="min-height: 400px;">
                     <div class="position-relative h-100">
-
+                        
                         <!-- About Image -->
                         <img
                             class="position-absolute img-fluid w-100 h-100"
@@ -250,8 +249,8 @@
                                         <img class="img-fluid" src="assets/frontend/img/icon/icon-5.png" alt="Icon">
                                     </div>
                                     <div class="ms-4">
-                                        <h2 class="mb-1" data-toggle="counter-up">10</h2>
-                                        <p class="fw-medium text-primary mb-0">Projects Done</p>
+                                        <h2 class="mb-1" data-toggle="counter-up">100</h2>
+                                        <p class="fw-medium text-primary mb-0">Clients Reached</p>
                                     </div>
                                 </div>
                             </div>
@@ -259,12 +258,16 @@
 
                         <!-- Call to Action -->
                         <a
-                            href="<?= url('about') ?>"
+                            href="<?= htmlspecialchars(
+                                $settings['about_button_url']
+                                ?? '#'
+                            ) ?>"
                             class="btn btn-primary rounded-pill py-3 px-5"
                         >
-                            Learn More About SHASTA
-                        </a>
-                            
+                            <?= htmlspecialchars(
+                                $settings['about_button_text']
+                                ?? 'Learn More'
+                            ) ?>
                         </a>
                 </div>
             </div>

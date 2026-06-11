@@ -137,8 +137,6 @@ extends BaseController
 
                 'category_id' => 'required|exists:categories,id',
 
-                'images' => 'required|array|min:1',
-
                 'status' => 'required|in:active,inactive'
             ]
         );
