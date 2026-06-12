@@ -158,6 +158,54 @@ class ServiceController extends BaseController
         $images =
             $mediaQuery->fetchAll();
 
+            /**
+         * Fetch related services (excluding current one)
+         */
+        $relatedQuery =
+            $db->prepare(
+                "
+                SELECT
+
+                    s.*,
+
+                    m.file_path
+
+                FROM services s
+
+                LEFT JOIN media m
+
+                    ON m.mediable_type = 'service'
+
+                    AND m.mediable_id = s.id
+
+                    AND m.is_featured = 1
+
+                    AND m.status = 'active'
+
+                    AND m.deleted_at IS NULL
+
+                WHERE s.status = 'active'
+
+                AND s.deleted_at IS NULL
+
+                AND s.id != ?
+
+                ORDER BY RAND()
+
+                LIMIT 4
+                "
+            );
+
+        $relatedQuery->execute([
+            $service['id']
+        ]);
+
+        /**
+         * Related services
+         */
+        $relatedServices =
+            $relatedQuery->fetchAll();
+
         /**
          * Render page
          */
@@ -178,6 +226,10 @@ class ServiceController extends BaseController
                  */
                 'images' =>
                     $images,
+
+                // Related Services
+                'relatedServices' =>
+                    $relatedServices,
 
                 /**
                  * Page Header

@@ -1,5 +1,22 @@
 <?php use App\Core\Auth\Authorization; ?>
 
+<!--  ACTIVE Highlight for pages -->
+<?php
+
+$currentUrl =
+    $_SERVER['REQUEST_URI'];
+
+function isActive($path)
+{
+    return strpos(
+        $_SERVER['REQUEST_URI'],
+        $path
+    ) !== false
+        ? 'active'
+        : '';
+}
+?>
+
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
 
@@ -8,7 +25,7 @@
        class="brand-link">
 
         <img
-            src="<?= asset('assets/admin/dist/img/AdminLTELogo.png') ?>"
+            src="<?= asset('assets/admin/dist/img/shasta-logo2.jpeg') ?>"
             alt="SHASTA Logo"
             class="brand-image img-circle elevation-3"
             style="opacity: .8"
@@ -29,7 +46,7 @@
             <div class="image">
 
                 <img
-                    src="<?= asset('assets/admin/dist/img/user2-160x160.jpg') ?>"
+                    src="<?= asset('assets/admin/dist/img/shasta-logo.jpeg') ?>"
                     class="img-circle elevation-2"
                     alt="User Image"
                 >
@@ -87,7 +104,7 @@
                 <li class="nav-item">
 
                     <a href="<?= url('dashboard') ?>"
-                       class="nav-link">
+                        class="nav-link <?= $currentUrl == '/dashboard' ? 'active' : '' ?>">
 
                         <i class="nav-icon fas fa-tachometer-alt"></i>
 
@@ -118,10 +135,26 @@
                     ?>
 
                     <?php if ($canContentManagement): ?>
-                <li class="nav-item has-treeview">
+                <li class="nav-item has-treeview <?= (
+                    isActive('/dashboard/services')
+                    ||
+                    isActive('/dashboard/projects')
+                    ||
+                    isActive('/dashboard/categories')
+                    ||
+                    isActive('/dashboard/pricing')
+                ) ? 'menu-open' : '' ?>">
 
                     <a href="#"
-                    class="nav-link">
+                        class="nav-link <?= (
+                            isActive('/dashboard/services')
+                            ||
+                            isActive('/dashboard/projects')
+                            ||
+                            isActive('/dashboard/categories')
+                            ||
+                            isActive('/dashboard/pricing')
+                        ) ? 'active' : '' ?>">
 
                         <i class="nav-icon fas fa-folder"></i>
 
@@ -141,7 +174,7 @@
                         <li class="nav-item">
 
                             <a href="<?= url('dashboard/services') ?>"
-                            class="nav-link">
+                                class="nav-link <?= isActive('/dashboard/services') ?>">
 
                                 <i class="far fa-circle nav-icon"></i>
 
@@ -157,7 +190,7 @@
                         <li class="nav-item">
 
                             <a href="<?= url('dashboard/projects') ?>"
-                            class="nav-link">
+                                class="nav-link <?= isActive('/dashboard/projects') ?>">
 
                                 <i class="far fa-circle nav-icon"></i>
 
@@ -172,7 +205,7 @@
                         <li class="nav-item">
 
                             <a href="<?= url('dashboard/categories') ?>"
-                            class="nav-link">
+                                class="nav-link <?= isActive('/dashboard/categories') ?>">
 
                                 <i class="far fa-circle nav-icon"></i>
 
@@ -187,7 +220,7 @@
                         <li class="nav-item">
 
                             <a href="<?= url('dashboard/pricing') ?>"
-                            class="nav-link">
+                                class="nav-link <?= isActive('/dashboard/pricing') ?>">
 
                                 <i class="far fa-circle nav-icon"></i>
 
@@ -215,10 +248,22 @@
 
                 ?>
                 <?php if ($canWebsiteContent): ?>
-                <li class="nav-item has-treeview">
+                <li class="nav-item has-treeview <?= (
+                    isActive('/dashboard/team')
+                    ||
+                    isActive('/dashboard/testimonials')
+                    ||
+                    isActive('/dashboard/inquiries')
+                ) ? 'menu-open' : '' ?>">
 
                     <a href="#"
-                    class="nav-link">
+                                        class="nav-link <?= (
+                        isActive('/dashboard/team')
+                        ||
+                        isActive('/dashboard/testimonials')
+                        ||
+                        isActive('/dashboard/inquiries')
+                    ) ? 'active' : '' ?>">
 
                         <i class="nav-icon fas fa-globe"></i>
 
@@ -238,7 +283,7 @@
                         <li class="nav-item">
 
                             <a href="<?= url('dashboard/team') ?>"
-                            class="nav-link">
+                                class="nav-link <?= isActive('/dashboard/team') ?>">
 
                                 <i class="far fa-circle nav-icon"></i>
 
@@ -253,7 +298,7 @@
                         <li class="nav-item">
 
                             <a href="<?= url('dashboard/testimonials') ?>"
-                            class="nav-link">
+                                class="nav-link <?= isActive('/dashboard/testimonials') ?>">
 
                                 <i class="far fa-circle nav-icon"></i>
 
@@ -268,7 +313,7 @@
                         <li class="nav-item">
 
                             <a href="<?= url('dashboard/inquiries') ?>"
-                            class="nav-link">
+                                class="nav-link <?= isActive('/dashboard/inquiries') ?>">
 
                                 <i class="far fa-circle nav-icon"></i>
 
@@ -301,10 +346,34 @@
 
                 ?>
                 <?php if ($canWebsiteConfig): ?>
-                <li class="nav-item has-treeview">
+                <li class="nav-item has-treeview <?= (
+                    isActive('/dashboard/sliders')
+                    ||
+                    isActive('/dashboard/settings/about')
+                    ||
+                    isActive('/dashboard/impact')
+                    ||
+                    isActive('/dashboard/menus')
+                    ||
+                    isActive('/dashboard/menu-items')
+                    ||
+                    isActive('/dashboard/settings')
+                ) ? 'menu-open' : '' ?>">
 
                         <a href="#"
-                        class="nav-link">
+                        class="nav-link <?= (
+                            isActive('/dashboard/sliders')
+                            ||
+                            isActive('/dashboard/settings/about')
+                            ||
+                            isActive('/dashboard/impact')
+                            ||
+                            isActive('/dashboard/menus')
+                            ||
+                            isActive('/dashboard/menu-items')
+                            ||
+                            isActive('/dashboard/settings')
+                        ) ? 'active' : '' ?>">
 
                             <i class="nav-icon fas fa-cogs"></i>
 
@@ -324,7 +393,7 @@
                                 <li class="nav-item">
 
                                 <a href="<?= url('dashboard/sliders') ?>"
-                                class="nav-link">
+                                    class="nav-link <?= isActive('/dashboard/sliders') ?>">
 
                                     <i class="far fa-circle nav-icon"></i>
 
@@ -339,7 +408,7 @@
                                 <li class="nav-item">
 
                                 <a href="<?= url('dashboard/settings/about') ?>"
-                                class="nav-link">
+                                    class="nav-link <?= isActive('/dashboard/settings/about') ?>">
 
                                     <i class="far fa-circle nav-icon"></i>
 
@@ -354,7 +423,7 @@
                                 <li class="nav-item">
 
                                 <a href="<?= url('dashboard/impact') ?>"
-                                class="nav-link">
+                                class="nav-link <?= isActive('/dashboard/impact') ?>">
 
                                     <i class="far fa-circle nav-icon"></i>
 
@@ -369,7 +438,7 @@
                                 <li class="nav-item">
 
                                 <a href="<?= url('dashboard/menus') ?>"
-                                class="nav-link">
+                                    class="nav-link <?= isActive('/dashboard/menus') ?>">
 
                                     <i class="far fa-circle nav-icon"></i>
 
@@ -384,7 +453,7 @@
                             <li class="nav-item">
 
                                 <a href="<?= url('dashboard/menu-items') ?>"
-                                class="nav-link">
+                                    class="nav-link <?= isActive('/dashboard/menu-items') ?>">
 
                                     <i class="far fa-circle nav-icon"></i>
 
@@ -399,7 +468,7 @@
                             <li class="nav-item">
 
                                 <a href="<?= url('dashboard/settings') ?>"
-                                class="nav-link">
+                                    class="nav-link <?= isActive('/dashboard/settings') ?>">
 
                                     <i class="far fa-circle nav-icon"></i>
 
@@ -419,10 +488,34 @@
                 <?php if (Authorization::can('users.view') || Authorization::can('roles.view') || Authorization::can('permissions.view') || Authorization::can('role_permissions.view') || Authorization::can('user_permissions.view')
                     || Authorization::can('audit_logs.view')
                     ): ?>
-                    <li class="nav-item has-treeview">
+                    <li class="nav-item has-treeview <?= (
+                        isActive('/dashboard/users')
+                        ||
+                        isActive('/dashboard/roles')
+                        ||
+                        isActive('/dashboard/permissions')
+                        ||
+                        isActive('/dashboard/role_permissions')
+                        ||
+                        isActive('/dashboard/user_permissions')
+                        ||
+                        isActive('/dashboard/audit_logs')
+                    ) ? 'menu-open' : '' ?>">
 
                         <a href="#"
-                        class="nav-link">
+                        class="nav-link <?= (
+                            isActive('/dashboard/users')
+                            ||
+                            isActive('/dashboard/roles')
+                            ||
+                            isActive('/dashboard/permissions')
+                            ||
+                            isActive('/dashboard/role_permissions')
+                            ||
+                            isActive('/dashboard/user_permissions')
+                            ||
+                            isActive('/dashboard/audit_logs')
+                        ) ? 'active' : '' ?>">
 
                             <i class="nav-icon fas fa-user-shield"></i>
 
@@ -442,7 +535,7 @@
                             <li class="nav-item">
 
                                 <a href="<?= url('dashboard/users') ?>"
-                                class="nav-link">
+                                    class="nav-link <?= isActive('/dashboard/users') ?>">
 
                                     <i class="far fa-circle nav-icon"></i>
 
@@ -457,7 +550,7 @@
                             <li class="nav-item">
 
                                 <a href="<?= url('dashboard/roles') ?>"
-                                class="nav-link">
+                                    class="nav-link <?= isActive('/dashboard/roles') ?>">
 
                                     <i class="far fa-circle nav-icon"></i>
 
@@ -472,7 +565,7 @@
                             <li class="nav-item">
 
                                 <a href="<?= url('dashboard/permissions') ?>"
-                                class="nav-link">
+                                    class="nav-link <?= isActive('/dashboard/permissions') ?>">
 
                                     <i class="far fa-circle nav-icon"></i>
 
@@ -487,7 +580,7 @@
                             <li class="nav-item">
 
                                 <a href="<?= url('dashboard/role_permissions') ?>"
-                                class="nav-link">
+                                    class="nav-link <?= isActive('/dashboard/role_permissions') ?>">
 
                                     <i class="far fa-circle nav-icon"></i>
 
@@ -502,7 +595,7 @@
                             <li class="nav-item">
 
                                 <a href="<?= url('dashboard/user_permissions') ?>"
-                                class="nav-link">
+                                    class="nav-link <?= isActive('/dashboard/user_permissions') ?>">
 
                                     <i class="far fa-circle nav-icon"></i>
 
@@ -516,7 +609,7 @@
                             <li class="nav-item">
 
                                 <a href="<?= url('dashboard/audit_logs') ?>"
-                                class="nav-link">
+                                    class="nav-link <?= isActive('/dashboard/audit_logs') ?>">
 
                                     <i class="far fa-circle nav-icon"></i>
 

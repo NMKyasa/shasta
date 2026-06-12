@@ -87,7 +87,7 @@
 
 
     <!-- Impact Start -->
-    <div class="container-xxl py-5">
+    <div class="container-xxl py-5 impact-section">
 
         <div class="container">
 
@@ -153,122 +153,90 @@
     </div>
     <!-- Impact End -->
 
-    <!-- About Start -->
-    <div class="container-fluid bg-light overflow-hidden my-5 px-lg-0">
+        <!-- About Start -->
+    <div class="container-fluid about-section my-5 px-lg-0">
         <div class="container about px-lg-0">
-            <div class="row g-0 mx-lg-0">
-                <div class="col-lg-6 ps-lg-0" style="min-height: 400px;">
-                    <div class="position-relative h-100">
-                        
-                        <!-- About Image -->
+            <div class="row g-0 mx-lg-0 ab-grid-row">
+                <div class="col-lg-6 ps-lg-0 ab-img-col">
+                    <div class="position-relative h-100 ab-img-wrap">
                         <img
-                            class="position-absolute img-fluid w-100 h-100"
-                            src="/shasta/public/<?= htmlspecialchars(
-                                $aboutImage['file_path']
-                                ?? 'assets/frontend/img/shasta-business-premises-protection.png'
-                            ) ?>"
+                            class="position-absolute img-fluid w-100 h-100 ab-main-img"
+                            src="/shasta/public/<?= htmlspecialchars($aboutImage['file_path'] ?? 'assets/frontend/img/shasta-home-protection-services.png') ?>"
                             style="object-fit: cover;"
-                            alt="<?= htmlspecialchars(
-                                $settings['about_title']
-                                ?? 'About Us'
-                            ) ?>"
+                            alt="<?= htmlspecialchars($settings['about_title'] ?? 'About Us') ?>"
                         >
+                        <div class="ab-img-frame"></div>
+                        <div class="ab-img-badge">
+                            <div class="ab-img-badge-icon"><i class="fa fa-shield-alt"></i></div>
+                            <div class="ab-img-badge-text">
+                                <strong><?= (int)($settings['about_experience_years'] ?? 0) ?>+ Years</strong>
+                                Trusted Security Partner
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- About Text -->
                 <div class="col-lg-6 about-text py-5 wow fadeIn" data-wow-delay="0.5s">
                     <div class="p-lg-5 pe-lg-0">
-                        <div class="bg-primary mb-3" style="width: 60px; height: 2px;"></div>
-                        <h1 class="display-5 mb-4">
-                            <?= htmlspecialchars(
-                                $settings['about_title']
-                                ?? 'About Us'
-                            ) ?>
+                        <div class="ab-tag">
+                            <span></span>
+                            <em>About Us</em>
+                        </div>
+                        <h1 class="display-5 mb-4 ab-title">
+                            <?= htmlspecialchars($settings['about_title'] ?? 'About Us') ?>
                         </h1>
-                        <p class="mb-4 pb-2">
-                            <?= nl2br(
-                                htmlspecialchars(
-                                    $settings['about_content']
-                                    ?? ''
-                                )
-                            ) ?>
+                        <p class="mb-4 pb-2 ab-text">
+                            <?= nl2br(htmlspecialchars($settings['about_content'] ?? '')) ?>
                         </p>
 
-                        <!-- Mission and Vision -->
-                        <div class="row g-4 mb-4 pb-3">
+                        <div class="row g-4 mb-4 pb-3 ab-mv-row">
                             <div class="col-sm-6 wow fadeIn" data-wow-delay="0.1s">
-                                <h5 class="mb-3">Our Mission</h5>
-                                <span>
-                                    <?= nl2br(
-                                        htmlspecialchars(
-                                            $settings['about_mission']
-                                            ?? ''
-                                        )
-                                    ) ?>
-                                </span>
+                                <div class="ab-mv-card">
+                                    <h5 class="mb-3">Our Mission</h5>
+                                    <span><?= nl2br(htmlspecialchars($settings['about_mission'] ?? '')) ?></span>
+                                </div>
                             </div>
                             <div class="col-sm-6 wow fadeIn" data-wow-delay="0.3s">
-                                <h5 class="mb-3">Our Vision</h5>
-                                <span>
-                                    <?= nl2br(
-                                        htmlspecialchars(
-                                            $settings['about_vision']
-                                            ?? ''
-                                        )
-                                    ) ?>
-                                </span>
+                                <div class="ab-mv-card">
+                                    <h5 class="mb-3">Our Vision</h5>
+                                    <span><?= nl2br(htmlspecialchars($settings['about_vision'] ?? '')) ?></span>
+                                </div>
                             </div>
+                        </div>
 
-                        <!-- Experience Stats -->
-                        <div class="row g-4 mb-4 pb-3">
+                        <div class="row g-4 mb-4 pb-3 ab-stats-row">
                             <div class="col-sm-6 wow fadeIn" data-wow-delay="0.1s">
-                                <div class="d-flex align-items-center">
-                                    <div class="btn-square bg-white rounded-circle" style="width: 64px; height: 64px;">
-                                        <img class="img-fluid" src="assets/frontend/img/icon/icon-1.png" alt="Icon">
+                                <div class="d-flex align-items-center ab-stat">
+                                    <div class="ab-stat-icon">
+                                        <i class="fa fa-medal"></i>
                                     </div>
                                     <div class="ms-4">
-                                        <h2
-                                            class="mb-1"
-                                            data-toggle="counter-up"
-                                        >
-                                            <?= (int)(
-                                                $settings['about_experience_years']
-                                                ?? 0
-                                            ) ?>
-                                        </h2>
+                                        <h2 class="mb-1"><?= (int)($settings['about_experience_years'] ?? 0) ?>+</h2>
                                         <p class="fw-medium text-primary mb-0">Years Experience</p>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Projects Done -->
                             <div class="col-sm-6 wow fadeIn" data-wow-delay="0.3s">
-                                <div class="d-flex align-items-center">
-                                    <div class="btn-square bg-white rounded-circle" style="width: 64px; height: 64px;">
-                                        <img class="img-fluid" src="assets/frontend/img/icon/icon-5.png" alt="Icon">
+                                <div class="d-flex align-items-center ab-stat">
+                                    <div class="ab-stat-icon">
+                                        <i class="fa fa-users"></i>
                                     </div>
                                     <div class="ms-4">
-                                        <h2 class="mb-1" data-toggle="counter-up">100</h2>
+                                        <h2 class="mb-1">100+</h2>
                                         <p class="fw-medium text-primary mb-0">Clients Reached</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Call to Action -->
                         <a
-                            href="<?= htmlspecialchars(
-                                $settings['about_button_url']
-                                ?? '#'
-                            ) ?>"
-                            class="btn btn-primary rounded-pill py-3 px-5"
+                            href="<?= htmlspecialchars($settings['about_button_url'] ?? '#') ?>"
+                            class="btn btn-primary rounded-pill py-3 px-5 ab-cta"
                         >
-                            <?= htmlspecialchars(
-                                $settings['about_button_text']
-                                ?? 'Learn More'
-                            ) ?>
+                            <?= htmlspecialchars($settings['about_button_text'] ?? 'Learn More') ?>
                         </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -276,298 +244,235 @@
     <!-- About End -->
 
 
-    <!-- Service Start -->
-    <div class="container-xxl py-5">
+    <!-- Services Start -->
+    <div class="container-xxl py-5 services-section">
         <div class="container">
-            <div class="text-center">
-                <div class="bg-primary mb-3 mx-auto" style="width: 60px; height: 2px;"></div>
-                <h1 class="display-5 mb-5">Our Services</h1>
+
+            <div class="text-center wow fadeInUp sv-head">
+                <div class="sv-tag">
+                    <span></span><em>Our Services</em><span></span>
+                </div>
+                <h1 class="display-5 mb-0 sv-title">Comprehensive Security Solutions</h1>
             </div>
-            <div class="row g-0 service-row">
 
-                <?php foreach (
-                    $services
-                    as
-                    $service
-                ): ?>
+            <div class="owl-carousel services-carousel">
+                <?php foreach ($services as $service): ?>
+                    <div class="sv-card">
+                        <?php if (!empty($service['file_path'])): ?>
+                            <a href="<?= url('services/' . $service['slug']) ?>" class="sv-card-img">
+                                <img
+                                    src="<?= url($service['file_path']) ?>"
+                                    alt="<?= htmlspecialchars($service['title']) ?>"
+                                >
+                            </a>
+                        <?php endif; ?>
 
-                    <div
-                        class="col-md-6 col-lg-3 wow fadeIn"
-                        data-wow-delay="0.1s"
-                    >
-
-                        <div
-                            class="service-item border h-100 p-5"
-                        >
-
-                            <?php if (
-                                !empty(
-                                    $service['file_path']
-                                )
-                            ): ?>
-
-                                <div class="mb-4">
-
-                                    <img
-                                        src="<?= url(
-                                            $service['file_path']
-                                        ) ?>"
-                                        alt="<?= htmlspecialchars(
-                                            $service['title']
-                                        ) ?>"
-                                        class="img-fluid"
-                                    >
-
-                                </div>
-
-                            <?php endif; ?>
-
-                            <h4 class="mb-3">
-
-                                <?= htmlspecialchars(
-                                    $service['title']
-                                ) ?>
-
+                        <div class="sv-card-body">
+                            <h4>
+                                <a href="<?= url('services/' . $service['slug']) ?>">
+                                    <?= htmlspecialchars($service['title']) ?>
+                                </a>
                             </h4>
 
-                            <p class="mb-4">
+                            <?php if (!empty($service['summary'])): ?>
+                                <p><?= htmlspecialchars(mb_strimwidth($service['summary'], 0, 180, '...')) ?></p>
+                            <?php endif; ?>
 
-                                <?= htmlspecialchars(
-                                    $service['summary']
-                                    ?? ''
-                                ) ?>
-
-                            </p>
-
-                            <a
-                                class="btn"
-                                href="<?= url('services/' . $service['slug']) ?>"
-                            >
-
-                                <i class="fa fa-arrow-right text-white me-3"></i>
-
-                                Read More
-
+                            <a href="<?= url('services/' . $service['slug']) ?>" class="sv-card-link">
+                                Learn More <i class="fa fa-arrow-right"></i>
                             </a>
-
                         </div>
-
                     </div>
-
                 <?php endforeach; ?>
-
             </div>
+
+            <div class="text-center mt-5 sv-cta-wrap">
+                <a href="<?= url('quote') ?>" class="btn sv-cta-btn">
+                    Request a Free Quote
+                </a>
+            </div>
+
         </div>
     </div>
-    <!-- Service End -->
-
+    <!-- Services End -->
 
     <!-- Feature Start -->
-    <div class="container-fluid bg-light overflow-hidden my-5 px-lg-0">
+    <div class="container-fluid feature-section my-5 px-lg-0">
         <div class="container feature px-lg-0">
-            <div class="row g-0 mx-lg-0">
+            <div class="row g-0 mx-lg-0 ft-row">
+
                 <div class="col-lg-6 feature-text py-5 wow fadeIn" data-wow-delay="0.5s">
                     <div class="p-lg-5 ps-lg-0">
-                        <div class="bg-primary mb-3" style="width: 60px; height: 2px;"></div>
-                        <h1 class="display-5 mb-5">Why Choose Us</h1>
-                        <p class="mb-4 pb-2">Shasta Security is a licensed Ugandan security company trusted by hospitals, retail chains, and corporate offices. 
-                                            We deliver reliable protection through certified guards, advanced surveillance systems, and 24/7 customer support. 
-                                            Our commitment to quality, innovation, and professionalism ensures clients enjoy peace of mind and measurable safety improvements.</p>
-                        <div class="row g-4">
+                        <div class="ft-tag">
+                            <span></span><em>Why Choose Us</em>
+                        </div>
+                        <h1 class="display-5 mb-4 ft-title">Security Built on Trust &amp; Excellence</h1>
+                        <p class="mb-4 pb-2 ft-text">
+                            Shasta Security is a licensed Ugandan security company trusted by hospitals, retail chains, and corporate offices.
+                            We deliver reliable protection through certified guards, advanced surveillance systems, and 24/7 customer support.
+                            Our commitment to quality, innovation, and professionalism ensures clients enjoy peace of mind and measurable safety improvements.
+                        </p>
+
+                        <div class="row g-3 ft-grid2">
                             <div class="col-6">
-                                <div class="d-flex align-items-center">
-                                    <div class="btn-square bg-white rounded-circle" style="width: 64px; height: 64px;">
-                                        <img class="img-fluid" src="assets/frontend/img/icon/icon-7.png" alt="Icon">
-                                    </div>
-                                    <div class="ms-4">
-                                        <p class="text-primary mb-2">Trusted</p>
-                                        <h5 class="mb-0">Security</h5>
+                                <div class="ft-item">
+                                    <div class="ft-icon"><i class="fa fa-shield-alt"></i></div>
+                                    <div>
+                                        <div class="ft-item-label">Trusted</div>
+                                        <div class="ft-item-title">Security</div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-6">
-                                <div class="d-flex align-items-center">
-                                    <div class="btn-square bg-white rounded-circle" style="width: 64px; height: 64px;">
-                                        <img class="img-fluid" src="assets/frontend/img/icon/icon-10.png" alt="Icon">
-                                    </div>
-                                    <div class="ms-4">
-                                        <p class="text-primary mb-2">Quality</p>
-                                        <h5 class="mb-0">Services</h5>
+                                <div class="ft-item">
+                                    <div class="ft-icon"><i class="fa fa-award"></i></div>
+                                    <div>
+                                        <div class="ft-item-label">Quality</div>
+                                        <div class="ft-item-title">Services</div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-6">
-                                <div class="d-flex align-items-center">
-                                    <div class="btn-square bg-white rounded-circle" style="width: 64px; height: 64px;">
-                                        <img class="img-fluid" src="assets/frontend/img/icon/icon-3.png" alt="Icon">
-                                    </div>
-                                    <div class="ms-4">
-                                        <p class="text-primary mb-2">Smart</p>
-                                        <h5 class="mb-0">Systems</h5>
+                                <div class="ft-item">
+                                    <div class="ft-icon"><i class="fa fa-video"></i></div>
+                                    <div>
+                                        <div class="ft-item-label">Smart</div>
+                                        <div class="ft-item-title">Systems</div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-6">
-                                <div class="d-flex align-items-center">
-                                    <div class="btn-square bg-white rounded-circle" style="width: 64px; height: 64px;">
-                                        <img class="img-fluid" src="assets/frontend/img/icon/icon-2.png" alt="Icon">
-                                    </div>
-                                    <div class="ms-4">
-                                        <p class="text-primary mb-2">24/7 Hours</p>
-                                        <h5 class="mb-0">Support</h5>
+                                <div class="ft-item">
+                                    <div class="ft-icon"><i class="fa fa-headset"></i></div>
+                                    <div>
+                                        <div class="ft-item-label">24/7 Hours</div>
+                                        <div class="ft-item-title">Support</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6 pe-lg-0" style="min-height: 400px;">
-                    <div class="position-relative h-100">
-                        <img class="position-absolute img-fluid w-100 h-100" src="assets/frontend/img/shasta-home-protection-services.png" style="object-fit: cover;" alt="">
+
+                <div class="col-lg-6 pe-lg-0 ft-img-col">
+                    <div class="position-relative h-100 ft-img-wrap">
+                        <img
+                            class="position-absolute img-fluid w-100 h-100"
+                            src="<?= asset('assets/frontend/img/shasta-home-protection-services.png') ?>"
+                            style="object-fit: cover;"
+                            alt="Shasta Home Protection Services"
+                        >
+                        <div class="ft-img-frame"></div>
+                        <div class="ft-img-badge">
+                            <i class="fa fa-check-circle"></i>
+                            <div class="ft-img-badge-text"><strong>Licensed</strong>&amp; Certified</div>
+                        </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
     <!-- Feature End -->
 
 
-<!-- Projects Start -->
+    <!-- Projects Start -->
     <div class="container-xxl py-5">
         <div class="container">
+
             <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                <div class="bg-primary mb-3 mx-auto" style="width: 60px; height: 2px;"></div>
+                <span class="projects-section-label">Portfolio</span>
                 <h1 class="display-5 mb-5">Our Projects</h1>
             </div>
-            <div class="row mt-n2 wow fadeInUp" data-wow-delay="0.3s">
-                <div class="col-12 text-center">
-                    <ul class="list-inline mb-5" id="portfolio-flters">
 
-                        <li
-                            class="mx-2 active"
-                            data-filter="*"
-                        >
+            <div class="row mt-n2 wow fadeInUp" data-wow-delay="0.2s">
+                <div class="col-12 text-center">
+                    <ul class="list-inline mb-0" id="portfolio-flters">
+
+                        <li class="mx-1 active" data-filter="*">
                             All
                         </li>
 
                         <?php foreach ($categories as $category): ?>
-
                             <li
-                                class="mx-2"
-                                data-filter=".<?= htmlspecialchars(
-                                    $category['slug']
-                                ) ?>"
+                                class="mx-1"
+                                data-filter="<?= htmlspecialchars($category['slug']) ?>"
                             >
-
-                                <?= htmlspecialchars(
-                                    $category['name']
-                                ) ?>
-
+                                <?= htmlspecialchars($category['name']) ?>
                             </li>
-
                         <?php endforeach; ?>
 
                     </ul>
                 </div>
             </div>
-            <div class="row g-4 portfolio-container">
+
+            <div class="row g-4 portfolio-container mt-2">
 
                 <?php foreach ($projects as $project): ?>
 
                     <div
-                        class="col-lg-4 col-md-6 portfolio-item <?= htmlspecialchars(
-                            $project['category_slug'] ?? ''
-                        ) ?> wow fadeInUp"
+                        class="col-lg-4 col-md-6 portfolio-item <?= htmlspecialchars($project['category_slug'] ?? '') ?> wow fadeInUp"
                         data-wow-delay="0.1s"
                     >
-
-                        <div class="portfolio-inner">
+                        <div class="portfolio-inner position-relative">
 
                             <?php if (!empty($project['file_path'])): ?>
-
-                                <a
-                                    href="<?= url(
-                                        'projects/' .
-                                        $project['slug']
-                                    ) ?>"
-                                >
+                                <a href="<?= url('projects/' . $project['slug']) ?>">
                                     <img
                                         class="img-fluid w-100"
-                                        src="<?= url(
-                                            $project['file_path']
-                                        ) ?>"
-                                        alt="<?= htmlspecialchars(
-                                            $project['title']
-                                        ) ?>"
+                                        src="<?= url($project['file_path']) ?>"
+                                        alt="<?= htmlspecialchars($project['title']) ?>"
+                                        loading="lazy"
                                     >
                                 </a>
-
                             <?php endif; ?>
 
+                            <a
+                                href="<?= url('projects/' . $project['slug']) ?>"
+                                class="stretched-link project-card-link"
+                                aria-label="<?= htmlspecialchars($project['title']) ?>"
+                            ></a>
+
+                            <!-- Always-visible card footer -->
                             <div class="text-center p-4">
-
                                 <p class="text-primary mb-2">
-
-                                    <?= htmlspecialchars(
-                                        $project['category_name']
-                                        ?? 'Project'
-                                    ) ?>
-
+                                    <?= htmlspecialchars($project['category_name'] ?? 'Project') ?>
                                 </p>
-
                                 <h5 class="lh-base mb-0">
-
-                                <a
-                                    href="<?= url(
-                                        'projects/' .
-                                        $project['slug']
-                                    ) ?>"
-                                >
-
-                                    <?= htmlspecialchars(
-                                        $project['title']
-                                    ) ?>
-
-                                </a>
-
-                            </h5>
-
+                                    <a href="<?= url('projects/' . $project['slug']) ?>">
+                                        <?= htmlspecialchars($project['title']) ?>
+                                    </a>
+                                </h5>
                             </div>
 
-                            <div class="portfolio-text text-center bg-white p-4">
+                            <!-- Hover overlay -->
+                            <div class="portfolio-text">
 
                                 <p class="text-primary mb-2">
-
-                                    <?= htmlspecialchars(
-                                        $project['category_name']
-                                        ?? 'Project'
-                                    ) ?>
-
+                                    <?= htmlspecialchars($project['category_name'] ?? 'Project') ?>
                                 </p>
 
                                 <h5 class="lh-base mb-3">
-
                                     <?= htmlspecialchars($project['title']) ?>
-
                                 </h5>
 
-                                <div class="d-flex justify-content-center">
+                                <div class="d-flex">
 
                                     <?php if (!empty($project['file_path'])): ?>
-
                                         <a
                                             class="btn btn-square btn-primary rounded-circle mx-1"
                                             href="<?= url($project['file_path']) ?>"
                                             data-lightbox="portfolio"
+                                            title="Quick view"
                                         >
                                             <i class="fa fa-eye"></i>
                                         </a>
-
                                     <?php endif; ?>
 
                                     <a
                                         class="btn btn-square btn-primary rounded-circle mx-1"
                                         href="<?= url('projects/' . $project['slug']) ?>"
+                                        title="View project"
                                     >
                                         <i class="fa fa-link"></i>
                                     </a>
@@ -577,7 +482,6 @@
                             </div>
 
                         </div>
-
                     </div>
 
                 <?php endforeach; ?>
@@ -588,140 +492,96 @@
     <!-- Projects End -->
 
 
-<!-- Quote Start -->
-    <div class="container-fluid bg-light overflow-hidden px-lg-0">
+
+    <!-- Quote Start -->
+    <div class="container-fluid quote-section overflow-hidden px-lg-0">
         <div class="container quote px-lg-0">
-            <div class="row g-0 mx-lg-0">
-                <div class="col-lg-6 ps-lg-0" style="min-height: 400px;">
-                    <div class="position-relative h-100">
-                        <img class="position-absolute img-fluid w-100 h-100" src="assets/frontend/img/quote.jpg" style="object-fit: cover;" alt="">
+            <div class="row g-0 mx-lg-0 qt-row">
+
+                <div class="col-lg-6 ps-lg-0 qt-img-col">
+                    <div class="position-relative h-100 qt-img-wrap">
+                        <img
+                            class="position-absolute img-fluid w-100 h-100"
+                            src="<?= asset('assets/frontend/img/shasta-warehouse-protection-services.png') ?>"
+                            style="object-fit: cover;"
+                            alt="Request a Quote"
+                        >
+                        <div class="qt-img-overlay"></div>
+                        <div class="qt-img-frame"></div>
+
+                        <div class="qt-badges">
+                            <div class="qt-badge"><i class="fa fa-bolt"></i> Fast Response</div>
+                            <div class="qt-badge"><i class="fa fa-tag"></i> No Obligation</div>
+                        </div>
+
+                        <div class="qt-img-text">
+                            <h3>Tailored to Your Needs</h3>
+                            <p>Whether for a home, business, institution, or special event — get a quote built around your specific requirements.</p>
+                        </div>
                     </div>
                 </div>
+
                 <div class="col-lg-6 quote-text py-5 wow fadeIn" data-wow-delay="0.5s">
                     <div class="p-lg-5 pe-lg-0">
-                        <div class="bg-primary mb-3" style="width: 60px; height: 2px;"></div>
-                        <h1 class="display-5 mb-5">Free Quote</h1>
-                        <p class="mb-4 pb-2">
-                        Tell us about your security requirements and our team will prepare a tailored solution for your home, business, institution, or project. 
-                        Submit your request and we will get back to you with a professional quotation.
+                        <div class="qt-tag">
+                            <span></span><em>Get Started</em>
+                        </div>
+                        <h1 class="display-5 mb-4 qt-title">Request Your Free Quote</h1>
+                        <p class="mb-4 pb-2 qt-text">
+                            Tell us about your security requirements and our team will prepare a tailored solution for your home, business, institution, or project.
+                            Submit your request and we will get back to you with a professional quotation.
                         </p>
 
                         <?php if (!empty($_SESSION['success'])): ?>
-
-                            <div class="alert alert-success">
-
+                            <div class="qt-success">
+                                <i class="fa fa-check-circle"></i>
                                 <?= $_SESSION['success'] ?>
-
                             </div>
-
                             <?php unset($_SESSION['success']); ?>
-
                         <?php endif; ?>
 
-                        <form
-                            method="POST"
-                            action="<?= url('quote') ?>"
-                        >
+                        <form method="POST" action="<?= url('quote') ?>" class="qt-form">
 
-                            <input
-                                type="hidden"
-                                name="_token"
-                                value="<?= csrf_token() ?>"
-                            >
+                            <input type="hidden" name="_token" value="<?= csrf_token() ?>">
 
                             <div class="row g-3">
 
-                                <div class="col-12 col-sm-6">
-
-                                    <input
-                                        type="text"
-                                        name="name"
-                                        class="form-control border-0"
-                                        placeholder="Your Name"
-                                        required
-                                        style="height:55px;"
-                                    >
-
+                                <div class="col-12 col-sm-6 qt-field">
+                                    <label>Your Name</label>
+                                    <input type="text" name="name" placeholder="John Doe" required>
                                 </div>
 
-                                <div class="col-12 col-sm-6">
-
-                                    <input
-                                        type="email"
-                                        name="email"
-                                        class="form-control border-0"
-                                        placeholder="Your Email"
-                                        required
-                                        style="height:55px;"
-                                    >
-
+                                <div class="col-12 col-sm-6 qt-field">
+                                    <label>Your Email</label>
+                                    <input type="email" name="email" placeholder="john@example.com" required>
                                 </div>
 
-                                <div class="col-12 col-sm-6">
-
-                                    <input
-                                        type="number"
-                                        name="phone"
-                                        class="form-control border-0"
-                                        placeholder="Your Mobile"
-                                        style="height:55px;"
-                                    >
-
+                                <div class="col-12 col-sm-6 qt-field">
+                                    <label>Your Mobile</label>
+                                    <input type="number" name="phone" placeholder="07XX XXX XXX">
                                 </div>
 
-                                <div class="col-12 col-sm-6">
-
-                                    <select
-                                        name="service_id"
-                                        class="form-select border-0"
-                                        required
-                                        style="height:55px;"
-                                    >
-
-                                        <option value="">
-                                            Select A Service
-                                        </option>
-
+                                <div class="col-12 col-sm-6 qt-field">
+                                    <label>Service Needed</label>
+                                    <select name="service_id" required>
+                                        <option value="">Select A Service</option>
                                         <?php foreach ($services as $service): ?>
-
-                                            <option
-                                                value="<?= $service['id'] ?>"
-                                            >
-
-                                                <?= htmlspecialchars(
-                                                    $service['title']
-                                                ) ?>
-
+                                            <option value="<?= $service['id'] ?>">
+                                                <?= htmlspecialchars($service['title']) ?>
                                             </option>
-
                                         <?php endforeach; ?>
-
                                     </select>
+                                </div>
 
+                                <div class="col-12 qt-field">
+                                    <label>Your Requirements</label>
+                                    <textarea name="message" placeholder="Describe your requirements..." rows="5"></textarea>
                                 </div>
 
                                 <div class="col-12">
-
-                                    <textarea
-                                        name="message"
-                                        class="form-control border-0"
-                                        placeholder="Describe your requirements"
-                                        rows="5"
-                                    ></textarea>
-
-                                </div>
-
-                                <div class="col-12">
-
-                                    <button
-                                        class="btn btn-primary w-100 py-3"
-                                        type="submit"
-                                    >
-
-                                        Request Free Quote
-
+                                    <button class="qt-submit" type="submit">
+                                        Request Free Quote <i class="fa fa-arrow-right"></i>
                                     </button>
-
                                 </div>
 
                             </div>
@@ -729,6 +589,7 @@
                         </form>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>

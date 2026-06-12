@@ -47,16 +47,15 @@
 // IMPACT
 $(document).ready(function () {
 
-    // Find the impact section heading container
-    var $impSection = $('.container-xxl.py-5').filter(function () {
-        return $(this).find('.col-lg-3 .bg-dark').length > 0;
-    });
+    var $impSection = $('.impact-section');
 
-    if (!$impSection.length) return;
+    if (!$impSection.length) {
+        console.warn('Impact section not found');
+        return;
+    }
 
-    // Collect all impact items from PHP-rendered cards
     var items = [];
-    $impSection.find('.col-lg-3').each(function () {
+    $impSection.find('.row.g-4 .col-lg-3').each(function () {
         var value = $(this).find('h1.display-3').text().trim();
         var label = $(this).find('h5.text-white').text().trim();
         if (value && label) {
@@ -64,9 +63,11 @@ $(document).ready(function () {
         }
     });
 
-    if (!items.length) return;
+    if (!items.length) {
+        console.warn('No impact items found to build ticker');
+        return;
+    }
 
-    // Build ticker HTML
     function buildCards(list) {
         return list.map(function (item) {
             return '<div class="imp-ticker-card">' +
@@ -77,13 +78,113 @@ $(document).ready(function () {
         }).join('');
     }
 
-    // Duplicate for seamless infinite loop
     var cardHTML = buildCards(items) + buildCards(items);
 
     var tickerHTML = '<div class="imp-ticker-wrap">' +
         '<div class="imp-ticker-track">' + cardHTML + '</div>' +
         '</div>';
 
-    // Inject after the heading, before the grid
-    $impSection.find('.row.g-4').before(tickerHTML);
+    $impSection.find('.row.g-4').first().before(tickerHTML);
 });
+
+// SERVICES SLIDER JS
+$(document).ready(function () {
+
+    $('.services-carousel').owlCarousel({
+        loop: true,
+        margin: 22,
+        nav: true,
+        dots: true,
+        autoplay: true,
+        autoplayTimeout: 5000,
+        autoplayHoverPause: true,
+        smartSpeed: 600,
+        navText: [
+            '<span>&#8592;</span>',
+            '<span>&#8594;</span>'
+        ],
+        responsive: {
+            0: { items: 1 },
+            600: { items: 2 },
+            992: { items: 3 }
+        }
+    });
+
+});
+
+$(document).ready(function () {
+
+    $('.services-carousel').owlCarousel({
+        loop: true,
+        margin: 22,
+        nav: true,
+        dots: true,
+        autoplay: true,
+        autoplayTimeout: 5000,
+        autoplayHoverPause: true,
+        smartSpeed: 600,
+        navText: [
+            '<span>&#8592;</span>',
+            '<span>&#8594;</span>'
+        ],
+        responsive: {
+            0: { items: 1 },
+            600: { items: 2 },
+            992: { items: 3 }
+        }
+    });
+
+});
+
+/**
+ * projects-index.js
+ * Isotope portfolio filtering with animated pill-tab switcher.
+ * Requires: Isotope (already loaded via your theme or CDN)
+ */
+(function () {
+    'use strict';
+
+    document.addEventListener('DOMContentLoaded', function () {
+
+        var $grid = document.querySelector('.portfolio-container');
+        if (!$grid) return;
+
+        // --- Isotope init (wait for images) ---
+        var iso;
+
+        function initIsotope() {
+            if (typeof Isotope === 'undefined') return;
+
+            iso = new Isotope($grid, {
+                itemSelector: '.portfolio-item',
+                layoutMode: 'fitRows',
+                transitionDuration: '0.45s'
+            });
+        }
+
+        // imagesLoaded for proper layout after images resolve
+        if (typeof imagesLoaded !== 'undefined') {
+            imagesLoaded($grid, initIsotope);
+        } else {
+            initIsotope();
+        }
+
+        // --- Filter buttons ---
+        var filters = document.querySelectorAll('#portfolio-flters li');
+
+        filters.forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                // Update active state
+                filters.forEach(function (f) { f.classList.remove('active'); });
+                this.classList.add('active');
+
+                // Apply filter
+                if (iso) {
+                    var filterValue = this.dataset.filter;
+                    iso.arrange({ filter: filterValue === '*' ? '*' : '.' + this.dataset.filter });
+                }
+            });
+        });
+
+    });
+})();

@@ -39,6 +39,10 @@
     <link rel="stylesheet"
           href="<?= asset('assets/admin/dist/css/adminlte.min.css') ?>">
 
+    <!-- Custom CSS -->
+    <link rel="stylesheet"
+          href="<?= asset('assets/admin/dist/css/style.css') ?>">
+
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -119,6 +123,9 @@ $(document).ready(function () {
 
 <!-- AdminLTE -->
 <script src="<?= asset('assets/admin/dist/js/adminlte.min.js') ?>"></script>
+
+<!-- Custom JS -->
+<script src="<?= asset('assets/admin/dist/js/script.js') ?>"></script>
 
 </body>
 

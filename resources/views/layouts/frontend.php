@@ -113,5 +113,8 @@
 <!-- Main Javascript -->
 <script src="/shasta/public/assets/frontend/js/main.js"></script>
 
+<!-- Custom JS -->
+<script src="/shasta/public/assets/frontend/js/script.js"></script>
+
 </body>
 </html>
