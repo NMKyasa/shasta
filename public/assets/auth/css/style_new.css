@@ -1,0 +1,383 @@
+/*  ====================== AUTH LOGIN CSS CODE ============ */
+/* ============================================
+   SHASTA ADMIN LOGIN — Modern
+   ============================================ */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+}
+
+.lg {
+    background: #F0EDE4;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.lg {
+    min-height: 100vh;
+}
+
+.lg-card {
+    width: 100%;
+    max-width: 980px;
+    background: #ffffff;
+    border-radius: 20px;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+    min-height: 580px;
+}
+
+@media (max-width: 800px) {
+    .lg-card {
+        grid-template-columns: 1fr;
+        min-height: auto;
+    }
+}
+
+/* ===== LEFT SIDE PANEL ===== */
+.lg-side {
+    background: #1A1A1A;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 48px;
+    overflow: hidden;
+}
+
+.lg-side::before {
+    content: '';
+    position: absolute;
+    top: -80px;
+    right: -80px;
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+    background: rgba(224, 120, 32, 0.12);
+}
+
+.lg-side::after {
+    content: '';
+    position: absolute;
+    bottom: -100px;
+    left: -60px;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: rgba(224, 120, 32, 0.06);
+}
+
+@media (max-width: 800px) {
+    .lg-side {
+        padding: 36px;
+        min-height: 220px;
+    }
+}
+
+/* Logo */
+.lg-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+    z-index: 2;
+}
+
+.lg-logo-box {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: #E07820;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: #ffffff;
+    font-weight: 800;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.lg-logo-text {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -0.02em;
+}
+
+.lg-logo-text span {
+    color: #E07820;
+}
+
+/* Side content */
+.lg-side-content {
+    position: relative;
+    z-index: 2;
+}
+
+.lg-side-content h2 {
+    font-size: 1.9rem;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -0.03em;
+    line-height: 1.25;
+    margin-bottom: 14px;
+}
+
+.lg-side-content p {
+    font-size: 13.5px;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.7;
+    max-width: 320px;
+    margin: 0;
+}
+
+@media (max-width: 800px) {
+    .lg-side-content h2 {
+        font-size: 1.5rem;
+    }
+}
+
+.lg-side-foot {
+    position: relative;
+    z-index: 2;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.35);
+}
+
+@media (max-width: 800px) {
+    .lg-side-foot {
+        display: none;
+    }
+}
+
+/* ===== RIGHT SIDE FORM ===== */
+.lg-form {
+    padding: 56px 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+@media (max-width: 800px) {
+    .lg-form {
+        padding: 36px 28px;
+    }
+}
+
+/* Tag badge */
+.lg-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(224, 120, 32, 0.1);
+    border: 1px solid rgba(224, 120, 32, 0.25);
+    border-radius: 100px;
+    padding: 5px 14px;
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #E07820;
+    margin-bottom: 18px;
+    width: fit-content;
+}
+
+.lg-form h1 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #1A1A1A;
+    letter-spacing: -0.03em;
+    margin: 0 0 8px;
+}
+
+.lg-form > p {
+    font-size: 13.5px;
+    color: #6b6b6b;
+    margin: 0 0 32px;
+}
+
+/* ===== ALERT ===== */
+.lg-alert {
+    background: rgba(220, 53, 69, 0.08);
+    border: 1px solid rgba(220, 53, 69, 0.25);
+    color: #c0392b;
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 13px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* ===== FIELDS ===== */
+.lg-field {
+    margin-bottom: 18px;
+}
+
+.lg-field label {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #1A1A1A;
+    margin-bottom: 8px;
+}
+
+.lg-input-wrap {
+    position: relative;
+}
+
+.lg-input-wrap > i {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+    font-size: 14px;
+    pointer-events: none;
+}
+
+.lg-field input {
+    width: 100%;
+    background: #F0EDE4;
+    border: 1.5px solid transparent;
+    border-radius: 10px;
+    padding: 14px 16px 14px 44px;
+    font-size: 14px;
+    font-family: inherit;
+    color: #1A1A1A;
+    transition: border-color 0.15s ease, background 0.15s ease;
+    outline: none;
+}
+
+.lg-field input::placeholder {
+    color: #999;
+}
+
+.lg-field input:focus {
+    border-color: #E07820;
+    background: #ffffff;
+}
+
+/* Password toggle */
+.lg-toggle-pw {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+    font-size: 14px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 4px;
+    transition: color 0.15s;
+}
+
+.lg-toggle-pw:hover {
+    color: #E07820;
+}
+
+/* ===== REMEMBER / FORGOT ROW ===== */
+.lg-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.lg-remember {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #6b6b6b;
+    cursor: pointer;
+}
+
+.lg-remember input {
+    width: 16px;
+    height: 16px;
+    accent-color: #E07820;
+    cursor: pointer;
+}
+
+.lg-forgot {
+    font-size: 13px;
+    font-weight: 600;
+    color: #E07820;
+    text-decoration: none;
+    transition: color 0.15s;
+}
+
+.lg-forgot:hover {
+    color: #c96a18;
+}
+
+/* ===== SUBMIT BUTTON ===== */
+.lg-submit {
+    background: #E07820;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 16px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 8px 22px rgba(224, 120, 32, 0.35);
+    transition: background 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+    width: 100%;
+}
+
+.lg-submit:hover {
+    background: #c96a18;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(224, 120, 32, 0.45);
+}
+
+.lg-submit i {
+    font-size: 13px;
+}
+
+/* ===== BACK TO WEBSITE ===== */
+.lg-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #6b6b6b;
+    text-decoration: none;
+    margin-top: 24px;
+    transition: color 0.15s, gap 0.15s;
+}
+
+.lg-back:hover {
+    color: #E07820;
+    gap: 11px;
+}

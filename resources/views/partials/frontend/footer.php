@@ -294,6 +294,16 @@
 
                 </div>
 
+                <div class="col-md-6 text-center text-md-end">
+
+                    <?= htmlspecialchars($settings['footer_text'] ?? '') ?>
+
+                    <a href="<?= url('login') ?>" class="footer-admin-link" title="Admin Login">
+                        <i class="fa fa-lock"></i>
+                    </a>
+
+                </div>
+
             </div>
 
         </div>

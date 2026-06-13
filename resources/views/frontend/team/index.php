@@ -123,17 +123,9 @@
 
                                 <?php if (!empty($member['bio'])): ?>
 
-                                    <p class="small text-muted mb-0">
-
-                                        <?= htmlspecialchars(
-                                            mb_strimwidth(
-                                                strip_tags($member['bio']),
-                                                0,
-                                                120,
-                                                '...'
-                                            )
-                                        ) ?>
-
+                                    <p class="small text-muted mb-0"
+                                        data-full-bio="<?= htmlspecialchars(strip_tags($member['bio'])) ?>">
+                                        <?= htmlspecialchars(mb_strimwidth(strip_tags($member['bio']), 0, 120, '...')) ?>
                                     </p>
 
                                 <?php endif; ?>

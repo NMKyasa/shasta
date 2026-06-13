@@ -44,27 +44,18 @@
                     <div class="btn-sm-square rounded-circle bg-primary me-2">
                         <small class="fa fa-phone-alt text-white"></small>
                     </div>
-                    <small>
-
-                        <?= htmlspecialchars(
-                            $settings['phone_number']
-                            ?? ''
-                        ) ?>
-
-                    </small>
+                    <small><?= htmlspecialchars($settings['phone_number'] ?? '') ?></small>
                 </div>
-                <div class="h-100 d-inline-flex align-items-center py-3">
+                <div class="h-100 d-inline-flex align-items-center py-3 me-4">
                     <div class="btn-sm-square rounded-circle bg-primary me-2">
                         <small class="far fa-clock text-white"></small>
                     </div>
-                    <small>
-
-                        <?= htmlspecialchars(
-                            $settings['working_hours']
-                            ?? ''
-                        ) ?>
-
-                    </small>
+                    <small><?= htmlspecialchars($settings['working_hours'] ?? '') ?></small>
+                </div>
+                <div class="h-100 d-inline-flex align-items-center py-3">
+                    <a href="<?= url('login') ?>" class="topbar-admin-link" title="Admin Login">
+                        <i class="fa fa-user-circle"></i>
+                    </a>
                 </div>
             </div>
         </div>

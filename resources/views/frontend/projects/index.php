@@ -36,34 +36,31 @@
                     class="col-lg-4 col-md-6 portfolio-item <?= htmlspecialchars($project['category_slug'] ?? '') ?> wow fadeInUp"
                     data-wow-delay="0.1s"
                 >
-                    <div class="portfolio-inner position-relative">
+                    <!-- Entire card is one link for full clickability -->
+                    <a
+                        href="<?= url('projects/' . $project['slug']) ?>"
+                        class="portfolio-inner"
+                        aria-label="View <?= htmlspecialchars($project['title']) ?>"
+                    >
 
                         <?php if (!empty($project['file_path'])): ?>
-                            <a href="<?= url('projects/' . $project['slug']) ?>">
+                            <div class="portfolio-img-wrap">
                                 <img
                                     class="img-fluid w-100"
                                     src="<?= url($project['file_path']) ?>"
                                     alt="<?= htmlspecialchars($project['title']) ?>"
                                     loading="lazy"
                                 >
-                            </a>
+                            </div>
                         <?php endif; ?>
 
-                        <a
-                            href="<?= url('projects/' . $project['slug']) ?>"
-                            class="stretched-link project-card-link"
-                            aria-label="<?= htmlspecialchars($project['title']) ?>"
-                        ></a>
-
                         <!-- Always-visible card footer -->
-                        <div class="text-center p-4">
-                            <p class="text-primary mb-2">
+                        <div class="portfolio-card-body">
+                            <p class="portfolio-cat">
                                 <?= htmlspecialchars($project['category_name'] ?? 'Project') ?>
                             </p>
-                            <h5 class="lh-base mb-0">
-                                <a href="<?= url('projects/' . $project['slug']) ?>">
-                                    <?= htmlspecialchars($project['title']) ?>
-                                </a>
+                            <h5 class="portfolio-title">
+                                <?= htmlspecialchars($project['title']) ?>
                             </h5>
                         </div>
 
@@ -81,29 +78,31 @@
                             <div class="d-flex">
 
                                 <?php if (!empty($project['file_path'])): ?>
-                                    <a
-                                        class="btn btn-square btn-primary rounded-circle mx-1"
-                                        href="<?= url($project['file_path']) ?>"
+                                    <!-- Stop propagation so lightbox doesn't also navigate to project -->
+                                    <span
+                                        class="btn btn-square btn-primary rounded-circle mx-1 portfolio-lightbox-btn"
+                                        data-lightbox-src="<?= url($project['file_path']) ?>"
                                         data-lightbox="portfolio"
                                         title="Quick view"
+                                        role="button"
                                     >
                                         <i class="fa fa-eye"></i>
-                                    </a>
+                                    </span>
                                 <?php endif; ?>
 
-                                <a
+                                <span
                                     class="btn btn-square btn-primary rounded-circle mx-1"
-                                    href="<?= url('projects/' . $project['slug']) ?>"
                                     title="View project"
+                                    role="button"
                                 >
                                     <i class="fa fa-link"></i>
-                                </a>
+                                </span>
 
                             </div>
 
                         </div>
 
-                    </div>
+                    </a>
                 </div>
 
             <?php endforeach; ?>
