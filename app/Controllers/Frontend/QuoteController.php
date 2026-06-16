@@ -66,7 +66,9 @@ class QuoteController extends BaseController
             trim($_POST['phone'] ?? '');
 
         $serviceId =
-            $_POST['service_id'] ?? null;
+            !empty($_POST['service_id'])
+                ? (int) $_POST['service_id']
+                : null;
 
         $message =
             trim($_POST['message'] ?? '');
@@ -75,10 +77,8 @@ class QuoteController extends BaseController
             empty($name)
             ||
             empty($email)
-            ||
-            empty($serviceId)
         ) {
-            die('Required fields missing.');
+            die('Name and email are required.');
         }
 
         $db =
@@ -120,27 +120,59 @@ class QuoteController extends BaseController
             $serviceId
         ]);
 
-        $serviceQuery =
-            $db->prepare(
-                "
-                SELECT title
-                FROM services
-                WHERE id = ?
-                LIMIT 1
-                "
-            );
+        $serviceName = 'Not specified';
 
-        $serviceQuery->execute([
-            $serviceId
-        ]);
+        if (!empty($serviceId)) {
 
-        $service =
-            $serviceQuery->fetch();
+            $serviceQuery =
+                $db->prepare(
+                    "
+                    SELECT title
+                    FROM services
+                    WHERE id = ?
+                    LIMIT 1
+                    "
+                );
 
-        $serviceName =
-            $service['title']
-            ??
-            'Unknown Service';
+            $serviceName = 'Not specified';
+
+if ($serviceId !== null) {
+
+    $serviceQuery =
+        $db->prepare(
+            "
+            SELECT title
+            FROM services
+            WHERE id = ?
+            LIMIT 1
+            "
+        );
+
+    $serviceQuery->execute([
+                    $serviceId
+                ]);
+
+                $service =
+                    $serviceQuery->fetch();
+
+                if ($service) {
+
+                    $serviceName =
+                        $service['title'];
+
+                }
+            }
+
+            $service =
+                $serviceQuery->fetch();
+
+            if ($service) {
+
+                $serviceName =
+                    $service['title'];
+
+            }
+        }
 
         $mail =
             new MailService();

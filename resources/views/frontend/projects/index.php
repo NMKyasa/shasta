@@ -33,8 +33,7 @@
             <?php foreach ($projects as $project): ?>
 
                 <div
-                    class="col-lg-4 col-md-6 portfolio-item <?= htmlspecialchars($project['category_slug'] ?? '') ?> wow fadeInUp"
-                    data-wow-delay="0.1s"
+                    class="col-lg-4 col-md-6 portfolio-item <?= htmlspecialchars($project['category_slug'] ?? '') ?>"
                 >
                     <!-- Entire card is one link for full clickability -->
                     <a

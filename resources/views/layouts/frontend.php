@@ -110,6 +110,8 @@
 
 <script src="/shasta/public/assets/frontend/lib/lightbox/js/lightbox.min.js"></script>
 
+<script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
+
 <!-- Main Javascript -->
 <script src="/shasta/public/assets/frontend/js/main.js"></script>
 

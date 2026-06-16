@@ -76,6 +76,9 @@
 
                         <label>
                             Parent Role
+                            <small class="text-muted">
+                                (Optional)
+                            </small>
                         </label>
 
                         <select

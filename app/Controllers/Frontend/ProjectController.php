@@ -19,18 +19,38 @@ class ProjectController extends BaseController
             Connection::getInstance();
 
         /**
-         * Categories
-         */
-        $categories =
-            $db->query(
-                "
-                SELECT *
-                FROM categories
-                WHERE status = 'active'
-                AND deleted_at IS NULL
-                ORDER BY name ASC
-                "
-            )->fetchAll();
+     * Categories that actually have projects
+     */
+    $categories =
+        $db->query(
+            "
+            SELECT DISTINCT
+
+                c.*
+
+            FROM categories c
+
+            INNER JOIN categoryables ca
+
+                ON ca.category_id = c.id
+
+                AND ca.categoryable_type = 'project'
+
+            INNER JOIN projects p
+
+                ON p.id = ca.categoryable_id
+
+                AND p.status = 'active'
+
+                AND p.deleted_at IS NULL
+
+            WHERE c.status = 'active'
+
+            AND c.deleted_at IS NULL
+
+            ORDER BY c.name ASC
+            "
+        )->fetchAll();
 
         /**
          * Projects

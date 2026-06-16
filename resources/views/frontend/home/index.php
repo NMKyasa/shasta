@@ -546,29 +546,45 @@
                             <div class="row g-3">
 
                                 <div class="col-12 col-sm-6 qt-field">
-                                    <label>Your Name</label>
-                                    <input type="text" name="name" placeholder="John Doe" required>
+                                    <label>
+                                        Your Name
+                                        <span class="qt-required">*</span>
+                                    </label>
+                                    <input type="text" name="name" placeholder="Braham Grant" required>
                                 </div>
 
                                 <div class="col-12 col-sm-6 qt-field">
-                                    <label>Your Email</label>
-                                    <input type="email" name="email" placeholder="john@example.com" required>
+                                    <label>
+                                        Your Email
+                                        <span class="qt-required">*</span>
+                                    </label>
+                                    <input type="email" name="email" placeholder="brahamgrant@example.com" required>
                                 </div>
 
                                 <div class="col-12 col-sm-6 qt-field">
-                                    <label>Your Mobile</label>
+                                    <label>Your Mobile <small>(Optional)</small></label>
                                     <input type="number" name="phone" placeholder="07XX XXX XXX">
                                 </div>
 
+                                <!-- Services Dropdown -->
                                 <div class="col-12 col-sm-6 qt-field">
-                                    <label>Service Needed</label>
-                                    <select name="service_id" required>
-                                        <option value="">Select A Service</option>
+                                    <label>Service Needed <small>(Optional)</small></label>
+
+                                    <select name="service_id" class="qt-select">
+                                        <option value="">
+                                            I am not sure yet
+                                        </option>
+
                                         <?php foreach ($services as $service): ?>
+
                                             <option value="<?= $service['id'] ?>">
+
                                                 <?= htmlspecialchars($service['title']) ?>
+
                                             </option>
+
                                         <?php endforeach; ?>
+
                                     </select>
                                 </div>
 

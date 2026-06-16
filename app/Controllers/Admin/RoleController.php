@@ -232,7 +232,8 @@ class RoleController extends BaseController
             'admin.roles.create',
 
             [
-                'roles' => $roles
+                'roles' => $roles,
+                'currentRole' => $currentRole
             ],
 
             'layouts.admin'
@@ -424,6 +425,62 @@ class RoleController extends BaseController
             :
             null;
 
+            /**
+         * Prevent non-super-admins
+         * from assigning Super Admin
+         */
+        if (
+
+            strtolower(
+                $currentRole['name']
+            ) !== 'super admin'
+
+            &&
+
+            !empty($parentRoleId)
+
+        ) {
+
+            $query =
+                $db->prepare(
+                    "
+                    SELECT name
+                    FROM roles
+                    WHERE id = ?
+                    LIMIT 1
+                    "
+                );
+
+            $query->execute([
+                $parentRoleId
+            ]);
+
+            $parentRole =
+                $query->fetch();
+
+            if (
+
+                $parentRole
+
+                &&
+
+                strtolower(
+                    $parentRole['name']
+                ) === 'super admin'
+
+            ) {
+
+                Flash::set(
+                    'danger',
+                    'You cannot assign Super Admin as a parent role.'
+                );
+
+                return $response->redirect(
+                    url('dashboard/roles/create')
+                );
+            }
+        }
+
         /**
          * Description
          */
@@ -557,28 +614,6 @@ class RoleController extends BaseController
         $db =
             Connection::getInstance();
 
-        /**
-         * Find role
-         */
-        $query =
-            $db->prepare(
-                "
-                SELECT *
-                FROM roles
-                WHERE id = ?
-                AND deleted_at IS NULL
-                AND LOWER(name) != 'super admin'
-                LIMIT 1
-                "
-            );
-
-        $query->execute([
-            $id
-        ]);
-
-        $role =
-            $query->fetch();
-
             /**
              * Current user
              */
@@ -603,6 +638,27 @@ class RoleController extends BaseController
             ]);
 
             $currentRole =
+                $query->fetch();
+
+            /**
+             * Find role being edited
+             */
+            $query =
+                $db->prepare(
+                    "
+                    SELECT *
+                    FROM roles
+                    WHERE id = ?
+                    AND deleted_at IS NULL
+                    LIMIT 1
+                    "
+                );
+
+            $query->execute([
+                $id
+            ]);
+
+            $role =
                 $query->fetch();
 
         /**
@@ -671,16 +727,37 @@ class RoleController extends BaseController
         /**
          * Parent roles
          */
-        $query =
-            $db->prepare(
-                "
-                SELECT *
-                FROM roles
-                WHERE id != ?
-                AND deleted_at IS NULL
-                ORDER BY name ASC
-                "
-            );
+        if (
+            strtolower(
+                $currentRole['name']
+            ) === 'super admin'
+        ) {
+
+            $query =
+                $db->prepare(
+                    "
+                    SELECT *
+                    FROM roles
+                    WHERE id != ?
+                    AND deleted_at IS NULL
+                    ORDER BY name ASC
+                    "
+                );
+
+        } else {
+
+            $query =
+                $db->prepare(
+                    "
+                    SELECT *
+                    FROM roles
+                    WHERE id != ?
+                    AND deleted_at IS NULL
+                    AND LOWER(name) != 'super admin'
+                    ORDER BY name ASC
+                    "
+                );
+        }
 
         $query->execute([
             $id
@@ -700,7 +777,9 @@ class RoleController extends BaseController
 
                 'role' => $role,
 
-                'roles' => $roles
+                'roles' => $roles, 
+
+                'currentRole' => $currentRole
             ],
 
             'layouts.admin'
@@ -796,6 +875,76 @@ class RoleController extends BaseController
 
             $oldRole =
                 $existingRoleQuery->fetch();
+
+
+            // New Parent ROle ID
+            $newParentRoleId =
+                !empty(
+                    $_POST['parent_role_id']
+                )
+                ?
+                $_POST['parent_role_id']
+                :
+                null;
+
+                /**
+             * Prevent non-super-admins
+             * from assigning Super Admin
+             */
+            if (
+
+                strtolower(
+                    $currentRole['name']
+                ) !== 'super admin'
+
+                &&
+
+                !empty($newParentRoleId)
+
+            ) {
+
+                $query =
+                    $db->prepare(
+                        "
+                        SELECT name
+                        FROM roles
+                        WHERE id = ?
+                        LIMIT 1
+                        "
+                    );
+
+                $query->execute([
+                    $newParentRoleId
+                ]);
+
+                $parentRole =
+                    $query->fetch();
+
+                if (
+
+                    $parentRole
+
+                    &&
+
+                    strtolower(
+                        $parentRole['name']
+                    ) === 'super admin'
+
+                ) {
+
+                    Flash::set(
+                        'danger',
+                        'You cannot assign Super Admin as a parent role.'
+                    );
+
+                    return $response->redirect(
+                        url(
+                            'dashboard/roles/edit/' .
+                            $id
+                        )
+                    );
+                }
+            }
 
             /**
              * Current user
@@ -901,9 +1050,8 @@ class RoleController extends BaseController
             }
 
         // Prevent duplicate role names
-        if (
-            $query->fetch()
-        ) {
+        if ($role)
+        {
 
             Flash::set(
 
@@ -949,9 +1097,7 @@ class RoleController extends BaseController
 
         $query->execute([
 
-            !empty($_POST['parent_role_id'])
-                ? $_POST['parent_role_id']
-                : null,
+            $newParentRoleId,
 
             $name,
 
