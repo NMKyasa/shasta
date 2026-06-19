@@ -3,7 +3,7 @@
    ============================================ */
 
 .about-section {
-    background: #ffffff !important;
+    background: $white !important;
     padding: 80px 0 !important;
     margin: 0 !important;
 }
@@ -15,6 +15,7 @@
 }
 
 /* ========== IMAGE COLUMN ========== */
+
 .ab-img-col {
     min-height: 540px;
 }
@@ -35,33 +36,41 @@
 }
 
 /* Decorative inner frame */
+
 .ab-img-frame {
     position: absolute;
     top: 20px;
     right: 20px;
     bottom: 20px;
     left: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.25);
+    border: 1px solid $white-25;
     border-radius: 10px;
     pointer-events: none;
     z-index: 2;
 }
 
 /* Floating badge over image */
+
 .ab-img-badge {
     position: absolute;
     bottom: 24px;
     left: 24px;
     z-index: 3;
-    background: rgba(26, 26, 26, 0.85);
+
+    background: $secondary-85;
+
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
+
     border-radius: 12px;
     padding: 16px 22px;
+
     display: flex;
     align-items: center;
     gap: 14px;
-    border: 1px solid rgba(224, 120, 32, 0.3);
+
+    border: 1px solid $primary-30;
+
     max-width: 260px;
 }
 
@@ -69,34 +78,41 @@
     width: 42px;
     height: 42px;
     min-width: 42px;
+
     border-radius: 10px;
-    background: #E07820;
+
+    background: $primary;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     font-size: 18px;
-    color: #ffffff;
+
+    color: $white;
 }
 
 .ab-img-badge-text {
     font-size: 13px;
-    color: rgba(255, 255, 255, 0.85);
+    color: $white-85;
     line-height: 1.4;
 }
 
 .ab-img-badge-text strong {
     display: block;
     font-size: 15px;
-    color: #ffffff;
+    color: $white;
     font-weight: 700;
 }
 
 /* ========== TEXT COLUMN ========== */
+
 .about-text {
     background: transparent !important;
 }
 
 /* Tag / eyebrow */
+
 .ab-tag {
     display: flex;
     align-items: center;
@@ -108,7 +124,7 @@
     display: block;
     width: 32px;
     height: 2px;
-    background: #E07820;
+    background: $primary;
     border-radius: 2px;
 }
 
@@ -118,19 +134,21 @@
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: #E07820;
+    color: $primary;
 }
 
 /* Title */
+
 .ab-title {
     font-size: clamp(1.8rem, 4vw, 2.6rem) !important;
     font-weight: 800 !important;
-    color: #1A1A1A !important;
+    color: $secondary !important;
     letter-spacing: -0.03em !important;
     line-height: 1.2 !important;
 }
 
 /* Body text */
+
 .ab-text {
     font-size: 14.5px !important;
     color: #5a5a5a !important;
@@ -138,22 +156,23 @@
 }
 
 /* ========== MISSION / VISION CARDS ========== */
+
 .ab-mv-row {
     margin-top: 8px;
 }
 
 .ab-mv-card {
-    background: #F0EDE4;
+    background: $light;
     border-radius: 12px;
     padding: 22px;
-    border-left: 3px solid #E07820;
+    border-left: 3px solid $primary;
     height: 100%;
 }
 
 .ab-mv-card h5 {
     font-size: 14px !important;
     font-weight: 700 !important;
-    color: #1A1A1A !important;
+    color: $secondary !important;
     margin-bottom: 8px !important;
     letter-spacing: -0.01em;
 }
@@ -165,6 +184,7 @@
 }
 
 /* ========== STATS ROW ========== */
+
 .ab-stat {
     gap: 0;
 }
@@ -173,8 +193,11 @@
     width: 56px;
     height: 56px;
     min-width: 56px;
+
     border-radius: 14px;
-    background: #1A1A1A;
+
+    background: $secondary;
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -182,13 +205,13 @@
 
 .ab-stat-icon i {
     font-size: 22px;
-    color: #E07820;
+    color: $primary;
 }
 
 .ab-stat h2 {
     font-size: 1.9rem !important;
     font-weight: 800 !important;
-    color: #1A1A1A !important;
+    color: $secondary !important;
     letter-spacing: -0.03em !important;
     line-height: 1 !important;
     margin-bottom: 4px !important;
@@ -197,38 +220,53 @@
 .ab-stat p.text-primary {
     font-size: 12.5px !important;
     font-weight: 600 !important;
-    color: #E07820 !important;
+    color: $primary !important;
     text-transform: uppercase !important;
     letter-spacing: 0.04em !important;
     margin-bottom: 0 !important;
 }
 
 /* ========== CTA BUTTON ========== */
+
 .ab-cta {
-    background: #E07820 !important;
+    background: $primary !important;
     border: none !important;
-    color: #ffffff !important;
+
+    color: $white !important;
+
     font-size: 14px !important;
     font-weight: 600 !important;
+
     border-radius: 8px !important;
-    box-shadow: 0 8px 22px rgba(224, 120, 32, 0.35) !important;
-    transition: background 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease !important;
+
+    box-shadow: 0 8px 22px $primary-35 !important;
+
+    transition:
+        background 0.15s ease,
+        transform 0.1s ease,
+        box-shadow 0.15s ease !important;
 }
 
 .ab-cta:hover {
-    background: #c96a18 !important;
+    background: $primary-hover !important;
+
     transform: translateY(-2px) !important;
-    box-shadow: 0 12px 28px rgba(224, 120, 32, 0.45) !important;
-    color: #ffffff !important;
+
+    box-shadow: 0 12px 28px $primary-45 !important;
+
+    color: $white !important;
 }
 
-/* Remove Bootstrap rounded-pill — use modern 8px radius */
+/* Remove Bootstrap rounded-pill */
+
 .ab-cta.rounded-pill {
     border-radius: 8px !important;
 }
 
 /* ========== MOBILE ========== */
+
 @media (max-width: 767px) {
+
     .about-section {
         padding: 52px 0 !important;
     }

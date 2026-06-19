@@ -3,7 +3,7 @@
    ============================================ */
 
 .feature-section {
-    background: #ffffff !important;
+    background: $white !important;
     padding: 0 !important;
 }
 
@@ -35,7 +35,7 @@
     display: block;
     width: 32px;
     height: 2px;
-    background: #E07820;
+    background: $primary;
     border-radius: 2px;
 }
 
@@ -45,14 +45,14 @@
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: #E07820;
+    color: $primary;
 }
 
 /* Title */
 .ft-title {
     font-size: clamp(1.8rem, 4vw, 2.6rem) !important;
     font-weight: 800 !important;
-    color: #1A1A1A !important;
+    color: $heading-color !important;
     letter-spacing: -0.03em !important;
     line-height: 1.2 !important;
 }
@@ -60,7 +60,7 @@
 /* Body text */
 .ft-text {
     font-size: 14.5px !important;
-    color: #5a5a5a !important;
+    color: $text-color !important;
     line-height: 1.8 !important;
 }
 
@@ -73,7 +73,7 @@
     display: flex;
     align-items: center;
     gap: 16px;
-    background: #F0EDE4;
+    background: $light;
     border-radius: 12px;
     padding: 18px;
     height: 100%;
@@ -90,7 +90,7 @@
     height: 52px;
     min-width: 52px;
     border-radius: 12px;
-    background: #1A1A1A;
+    background: $secondary;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -98,7 +98,7 @@
 
 .ft-icon i {
     font-size: 20px;
-    color: #E07820;
+    color: $primary;
 }
 
 .ft-item-label {
@@ -106,14 +106,14 @@
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: #E07820;
+    color: $primary;
     margin-bottom: 4px;
 }
 
 .ft-item-title {
     font-size: 15px;
     font-weight: 700;
-    color: #1A1A1A;
+    color: $heading-color;
     letter-spacing: -0.01em;
 }
 
@@ -144,7 +144,7 @@
     right: 20px;
     bottom: 20px;
     left: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.25);
+    border: 1px solid $white-25;
     border-radius: 10px;
     pointer-events: none;
     z-index: 2;
@@ -156,30 +156,30 @@
     top: 24px;
     left: 24px;
     z-index: 3;
-    background: rgba(224, 120, 32, 0.95);
+    background: rgba($primary, 0.95);
     border-radius: 12px;
     padding: 14px 20px;
     display: flex;
     align-items: center;
     gap: 12px;
-    box-shadow: 0 8px 24px rgba(224, 120, 32, 0.4);
+    box-shadow: 0 8px 24px rgba($primary, 0.4);
 }
 
 .ft-img-badge i {
     font-size: 22px;
-    color: #ffffff;
+    color: $white;
 }
 
 .ft-img-badge-text {
     font-size: 12.5px;
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba($white, 0.9);
     line-height: 1.4;
 }
 
 .ft-img-badge-text strong {
     display: block;
     font-size: 14px;
-    color: #ffffff;
+    color: $white;
     font-weight: 800;
 }
 
@@ -238,4 +238,3 @@
         font-size: 12.5px;
     }
 }
-

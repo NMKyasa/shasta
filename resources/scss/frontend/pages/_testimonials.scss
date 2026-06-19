@@ -3,11 +3,11 @@
 .container-xxl:has(.testimonial-carousel) {
     padding-top: 72px !important;
     padding-bottom: 72px !important;
-    background: #ffffff !important;
+    background: $white !important;
 }
 
 .container-xxl:has(.testimonial-carousel) .bg-primary {
-    background: #E07820 !important;
+    background: $primary !important;
     width: 48px !important;
     height: 2px !important;
     margin-bottom: 20px !important;
@@ -16,7 +16,7 @@
 .container-xxl:has(.testimonial-carousel) .display-5 {
     font-size: 2rem !important;
     font-weight: 500 !important;
-    color: #1A1A1A !important;
+    color: $heading-color !important;
     letter-spacing: -0.5px !important;
     margin-bottom: 48px !important;
 }
@@ -65,9 +65,9 @@
     width: 80px !important;
     height: 80px !important;
     opacity: 1 !important;
-    border-color: #E07820 !important;
+    border-color: $primary !important;
     filter: grayscale(0%) !important;
-    box-shadow: 0 0 0 4px rgba(224,120,32,0.15) !important;
+    box-shadow: 0 0 0 4px $primary-15 !important;
 }
 
 /* ===== Quote icon below active photo ===== */
@@ -86,12 +86,12 @@
 
 /* ===== Single card ===== */
 .testimonial-item {
-    background: #ffffff !important;
+    background: $white !important;
     border: 1px solid #ECEAE4 !important;
     border-radius: 20px !important;
     padding: 40px 48px !important;
     text-align: center !important;
-    box-shadow: 0 2px 24px rgba(0,0,0,0.06) !important;
+    box-shadow: 0 2px 24px rgba($black, 0.06) !important;
     margin: 24px 8px 8px !important;
     position: relative !important;
 }
@@ -103,7 +103,7 @@
 
 .testimonial-item .fa-star {
     font-size: 15px !important;
-    color: #E07820 !important;
+    color: $primary !important;
     margin: 0 2px !important;
 }
 
@@ -118,7 +118,7 @@
     content: '\201C' !important;
     font-size: 80px !important;
     line-height: 0.6 !important;
-    color: #F0EDE4 !important;
+    color: $light !important;
     font-family: Georgia, serif !important;
     display: block !important;
     text-align: center !important;
@@ -130,7 +130,7 @@
 .testimonial-item p.fs-5 {
     font-size: 16px !important;
     line-height: 1.8 !important;
-    color: #555555 !important;
+    color: $text-color !important;
     margin: 0 auto 28px !important;
     max-width: 640px !important;
     font-style: italic !important;
@@ -141,7 +141,7 @@
 /* ===== Divider ===== */
 .testimonial-item hr {
     border: none !important;
-    border-top: 1px solid #F0EDE4 !important;
+    border-top: 1px solid $light !important;
     margin: 0 auto 20px !important;
     width: 60px !important;
     opacity: 1 !important;
@@ -151,7 +151,7 @@
 .testimonial-item h4 {
     font-size: 16px !important;
     font-weight: 600 !important;
-    color: #1A1A1A !important;
+    color: $heading-color !important;
     margin: 0 0 6px 0 !important;
     letter-spacing: -0.2px !important;
 }
@@ -162,7 +162,7 @@
     font-weight: 500 !important;
     letter-spacing: 0.8px !important;
     text-transform: uppercase !important;
-    color: #E07820 !important;
+    color: $primary !important;
     display: block !important;
 }
 

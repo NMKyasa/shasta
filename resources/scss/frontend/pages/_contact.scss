@@ -3,7 +3,7 @@
    ============================================ */
 
 .contact-section {
-    background: #ffffff !important;
+    background: $white !important;
     padding: 0 !important;
 }
 
@@ -19,11 +19,13 @@
 }
 
 /* ===== LEFT COLUMN ===== */
+
 .contact-text {
     background: transparent !important;
 }
 
 /* Tag / eyebrow */
+
 .ct-tag {
     display: flex;
     align-items: center;
@@ -35,7 +37,7 @@
     display: block;
     width: 32px;
     height: 2px;
-    background: #E07820;
+    background: $primary;
     border-radius: 2px;
 }
 
@@ -45,26 +47,29 @@
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: #E07820;
+    color: $primary;
 }
 
 /* Title */
+
 .ct-title {
     font-size: clamp(1.8rem, 4vw, 2.6rem) !important;
     font-weight: 800 !important;
-    color: #1A1A1A !important;
+    color: $secondary !important;
     letter-spacing: -0.03em !important;
     line-height: 1.2 !important;
 }
 
 /* Body text */
+
 .ct-text {
     font-size: 14.5px !important;
-    color: #5a5a5a !important;
+    color: $text-color !important;
     line-height: 1.8 !important;
 }
 
 /* ===== CONTACT INFO LIST ===== */
+
 .ct-info-list {
     display: flex;
     flex-direction: column;
@@ -75,15 +80,16 @@
     display: flex;
     align-items: flex-start;
     gap: 16px;
-    background: #F0EDE4;
+    background: $light;
     border-radius: 12px;
     padding: 18px;
-    transition: transform 0.2s ease, background 0.2s ease;
+    transition: transform 0.2s ease,
+                background 0.2s ease;
 }
 
 .ct-info-item:hover {
     transform: translateY(-3px);
-    background: #ece6d9;
+    background: darken($light, 4%);
 }
 
 .ct-info-icon {
@@ -91,7 +97,7 @@
     height: 48px;
     min-width: 48px;
     border-radius: 12px;
-    background: #1A1A1A;
+    background: $secondary;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -99,7 +105,7 @@
 
 .ct-info-icon i {
     font-size: 18px;
-    color: #E07820;
+    color: $primary;
 }
 
 .ct-info-label {
@@ -107,52 +113,54 @@
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: #E07820;
+    color: $primary;
     margin-bottom: 4px;
 }
 
 .ct-info-value {
     font-size: 14px;
     font-weight: 600;
-    color: #1A1A1A;
+    color: $secondary;
     line-height: 1.5;
     word-break: break-word;
 }
 
 /* ===== FORM PANEL ===== */
+
 .ct-form-col {
     background: transparent !important;
 }
 
 .ct-form-wrap {
-    background: #F0EDE4;
-    border-radius: 16px;
+    background: $light;
+    border-radius: $radius-lg;
     padding: 40px;
     height: 100%;
 }
 
 /* ===== FORM FIELDS ===== */
+
 .ct-field label {
     display: block;
     font-size: 12px;
     font-weight: 700;
     letter-spacing: 0.04em;
     text-transform: uppercase;
-    color: #1A1A1A;
+    color: $secondary;
     margin-bottom: 8px;
 }
 
 .ct-field input,
 .ct-field textarea {
     width: 100% !important;
-    background: #ffffff !important;
-    border: 1.5px solid #e5ddd0 !important;
-    border-radius: 10px !important;
+    background: $white !important;
+    border: 1.5px solid darken($light, 6%) !important;
+    border-radius: $radius-md !important;
     padding: 14px 16px !important;
     font-size: 14px !important;
     font-family: inherit !important;
-    color: #1A1A1A !important;
-    transition: border-color 0.15s ease !important;
+    color: $secondary !important;
+    transition: border-color $transition-fast !important;
     outline: none !important;
     height: auto !important;
     box-shadow: none !important;
@@ -160,12 +168,12 @@
 
 .ct-field input::placeholder,
 .ct-field textarea::placeholder {
-    color: #999;
+    color: lighten($text-color, 25%);
 }
 
 .ct-field input:focus,
 .ct-field textarea:focus {
-    border-color: #E07820 !important;
+    border-color: $primary !important;
 }
 
 .ct-field textarea {
@@ -173,20 +181,23 @@
     min-height: 120px;
 }
 
-/* Remove Bootstrap form-floating label overlap (no longer used) */
+/* Remove Bootstrap form-floating label overlap */
+
 .ct-form .form-floating > label {
     display: none;
 }
 
 /* ===== SUCCESS ALERT ===== */
+
 .ct-success {
-    background: rgba(40, 167, 69, 0.1);
-    border: 1px solid rgba(40, 167, 69, 0.3);
-    color: #1e7e34;
-    border-radius: 10px;
+    background: rgba($success, 0.10);
+    border: 1px solid rgba($success, 0.30);
+    color: darken($success, 12%);
+    border-radius: $radius-md;
     padding: 14px 18px;
     font-size: 13.5px;
     margin-bottom: 20px;
+
     display: flex;
     align-items: center;
     gap: 10px;
@@ -198,28 +209,41 @@
 }
 
 /* ===== SUBMIT BUTTON ===== */
+
 .ct-submit {
     width: 100%;
-    background: #E07820 !important;
-    color: #ffffff !important;
+
+    background: $primary !important;
+    color: $white !important;
+
     font-size: 15px !important;
     font-weight: 700 !important;
+
     padding: 16px !important;
-    border-radius: 10px !important;
+
+    border-radius: $radius-md !important;
     border: none !important;
+
     cursor: pointer;
+
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
-    box-shadow: 0 8px 22px rgba(224, 120, 32, 0.35) !important;
-    transition: background 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease !important;
+
+    box-shadow: 0 8px 22px $primary-35 !important;
+
+    transition:
+        background $transition-fast,
+        transform 0.1s ease,
+        box-shadow $transition-fast !important;
 }
 
 .ct-submit:hover {
-    background: #c96a18 !important;
+    background: $primary-hover !important;
     transform: translateY(-2px);
-    box-shadow: 0 12px 28px rgba(224, 120, 32, 0.45) !important;
+
+    box-shadow: 0 12px 28px $primary-45 !important;
 }
 
 .ct-submit i {
@@ -227,7 +251,9 @@
 }
 
 /* ===== MOBILE ===== */
+
 @media (max-width: 767px) {
+
     .contact-section .container.contact {
         padding-top: 52px;
         padding-bottom: 52px;

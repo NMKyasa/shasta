@@ -3,7 +3,7 @@
    ============================================ */
 /* ========== SECTION WRAPPER ========== */
 .impact-section {
-    background: #F0EDE4;
+    background: $light;
     padding-top: 80px !important;
     padding-bottom: 80px !important;
 }
@@ -37,7 +37,7 @@
     display: block;
     width: 36px;
     height: 2px;
-    background: #E07820;
+    background: $primary;
     border-radius: 2px;
     flex-shrink: 0;
 }
@@ -45,7 +45,7 @@
 .impact-section .text-center.wow h1.display-5 {
     font-size: clamp(1.8rem, 4vw, 2.6rem) !important;
     font-weight: 800 !important;
-    color: #1A1A1A !important;
+    color: $heading-color !important;
     letter-spacing: -0.03em !important;
     margin-bottom: 0 !important;
 }
@@ -76,12 +76,12 @@
 
 .imp-ticker-wrap::before {
     left: 0;
-    background: linear-gradient(to right, #F0EDE4 0%, transparent 100%);
+    background: linear-gradient(to right, $light 0%, transparent 100%);
 }
 
 .imp-ticker-wrap::after {
     right: 0;
-    background: linear-gradient(to left, #F0EDE4 0%, transparent 100%);
+    background: linear-gradient(to left, $light 0%, transparent 100%);
 }
 
 /* ========== SCROLLING TRACK ========== */
@@ -104,14 +104,14 @@
 
 /* ========== INDIVIDUAL CARD ========== */
 .imp-ticker-card {
-    background: #1A1A1A;
+    background: $secondary;
     border-radius: 12px;
     padding: 30px 32px 26px;
     min-width: 190px;
     text-align: center;
     position: relative;
     overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid $white-05;
     flex-shrink: 0;
     cursor: default;
     transition: transform 0.2s ease, background 0.2s ease;
@@ -125,7 +125,7 @@
     left: 0;
     right: 0;
     height: 3px;
-    background: #E07820;
+    background: $primary;
     border-radius: 12px 12px 0 0;
 }
 
@@ -138,7 +138,7 @@
     width: 80px;
     height: 80px;
     border-radius: 50%;
-    background: rgba(224, 120, 32, 0.06);
+    background: rgba($primary, 0.06);
     pointer-events: none;
 }
 
@@ -151,7 +151,7 @@
 .imp-ticker-value {
     font-size: 2.6rem;
     font-weight: 800;
-    color: #E07820;
+    color: $primary;
     letter-spacing: -0.04em;
     line-height: 1;
     margin-bottom: 10px;
@@ -161,7 +161,7 @@
 .imp-ticker-divider {
     width: 24px;
     height: 2px;
-    background: rgba(224, 120, 32, 0.35);
+    background: $primary-35;
     border-radius: 2px;
     margin: 0 auto 10px;
 }
@@ -170,7 +170,7 @@
 .imp-ticker-label {
     font-size: 13px;
     font-weight: 500;
-    color: rgba(255, 255, 255, 0.68);
+    color: rgba($white, 0.68);
     line-height: 1.45;
     white-space: nowrap;
 }

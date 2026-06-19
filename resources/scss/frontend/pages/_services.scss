@@ -14,7 +14,7 @@
     display: block;
     width: 32px;
     height: 2px;
-    background: #E07820;
+    background: $primary;
     border-radius: 2px;
 }
 
@@ -25,22 +25,23 @@
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: #E07820;
+    color: $primary;
 }
 
 .sd-tag {
     display: inline-flex;
-    background: rgba(224, 120, 32, 0.1);
-    border: 1px solid rgba(224, 120, 32, 0.25);
-    border-radius: 100px;
+    background: $primary-10;
+    border: 1px solid $primary-25;
+    border-radius: $radius-pill;
     padding: 5px 14px;
     font-size: 11.5px;
     margin-bottom: 16px;
 }
 
 /* ===== SERVICES INDEX ===== */
+
 .services-section {
-    background: #F0EDE4;
+    background: $light;
 }
 
 .sv-head {
@@ -55,16 +56,17 @@
 .sv-title {
     font-size: clamp(1.7rem, 4vw, 2.4rem) !important;
     font-weight: 800 !important;
-    color: #1A1A1A !important;
+    color: $heading-color !important;
     letter-spacing: -0.03em !important;
 }
 
 /* ===== SERVICE CARD ===== */
+
 .sv-card {
-    background: #ffffff;
+    background: $white;
     border-radius: 14px;
     overflow: hidden;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    box-shadow: 0 4px 16px rgba($black, 0.04);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     display: flex;
     flex-direction: column;
@@ -72,7 +74,7 @@
 
 .sv-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 14px 32px rgba($black, 0.1);
 }
 
 .sv-card-img {
@@ -97,7 +99,11 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba(26, 26, 26, 0.45), transparent 55%);
+    background: linear-gradient(
+        to top,
+        rgba($secondary, 0.45),
+        transparent 55%
+    );
     pointer-events: none;
 }
 
@@ -116,13 +122,13 @@
 }
 
 .sv-card-body h4 a {
-    color: #1A1A1A;
+    color: $heading-color;
     text-decoration: none;
     transition: color 0.15s;
 }
 
 .sv-card-body h4 a:hover {
-    color: #E07820;
+    color: $primary;
 }
 
 .sv-card-body p {
@@ -139,14 +145,14 @@
     gap: 7px;
     font-size: 13.5px;
     font-weight: 600;
-    color: #E07820;
+    color: $primary;
     text-decoration: none;
     transition: gap 0.15s;
 }
 
 .sv-card-link:hover {
     gap: 11px;
-    color: #c96a18;
+    color: $primary-hover;
 }
 
 .sv-card-link i {
@@ -154,33 +160,40 @@
 }
 
 /* ===== INDEX CTA ===== */
+
 .sv-cta-wrap {
     margin-top: 56px !important;
 }
 
 .sv-cta-btn {
-    background: #E07820 !important;
-    color: #ffffff !important;
+    background: $primary !important;
+    color: $white !important;
     font-size: 15px !important;
     font-weight: 600 !important;
     padding: 14px 42px !important;
-    border-radius: 8px !important;
+    border-radius: $radius-md !important;
     border: none !important;
     text-decoration: none !important;
-    box-shadow: 0 8px 22px rgba(224, 120, 32, 0.35) !important;
+    box-shadow: 0 8px 22px $primary-35 !important;
     transition: background 0.15s, transform 0.1s, box-shadow 0.15s !important;
 }
 
 .sv-cta-btn:hover {
-    background: #c96a18 !important;
+    background: $primary-hover !important;
     transform: translateY(-2px) !important;
-    box-shadow: 0 12px 28px rgba(224, 120, 32, 0.45) !important;
-    color: #ffffff !important;
+    box-shadow: 0 12px 28px $primary-45 !important;
+    color: $white !important;
 }
 
 @media (max-width: 767px) {
-    .services-section { padding-top: 52px !important; padding-bottom: 52px !important; }
-    .sv-grid-row { row-gap: 20px !important; }
+    .services-section {
+        padding-top: 52px !important;
+        padding-bottom: 52px !important;
+    }
+
+    .sv-grid-row {
+        row-gap: 20px !important;
+    }
 }
 
 
@@ -193,30 +206,31 @@
 }
 
 /* Back button */
+
 .sd-back {
     display: inline-flex;
     align-items: center;
     gap: 8px;
     font-size: 13.5px;
     font-weight: 600;
-    color: #1A1A1A;
+    color: $heading-color;
     text-decoration: none;
     padding: 10px 20px;
-    border: 1px solid rgba(26, 26, 26, 0.12);
-    border-radius: 8px;
+    border: 1px solid rgba($secondary, 0.12);
+    border-radius: $radius-md;
     margin-bottom: 32px;
-    transition: all 0.15s ease;
+    transition: all $transition-fast;
 }
 
 .sd-back:hover {
-    background: #F0EDE4;
-    border-color: #E07820;
-    color: #E07820;
+    background: $light;
+    border-color: $primary;
+    color: $primary;
 }
 
 .sd-back i {
     font-size: 12px;
-    transition: transform 0.15s;
+    transition: transform $transition-fast;
 }
 
 .sd-back:hover i {
@@ -224,6 +238,7 @@
 }
 
 /* Title block */
+
 .sd-head {
     max-width: 760px;
 }
@@ -231,7 +246,7 @@
 .sd-title {
     font-size: clamp(1.8rem, 4vw, 2.6rem) !important;
     font-weight: 800 !important;
-    color: #1A1A1A !important;
+    color: $heading-color !important;
     letter-spacing: -0.03em !important;
 }
 
@@ -242,14 +257,15 @@
 }
 
 /* Featured image */
+
 .sd-img {
-    border-radius: 16px;
+    border-radius: $radius-lg;
     overflow: hidden;
     max-height: 420px;
 }
 
 .sd-img img {
-    border-radius: 16px;
+    border-radius: $radius-lg;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -257,6 +273,7 @@
 }
 
 /* Body content typography */
+
 .sd-content {
     font-size: 15px;
     color: #444;
@@ -266,7 +283,7 @@
 .sd-content h2,
 .sd-content h3 {
     font-weight: 800;
-    color: #1A1A1A;
+    color: $heading-color;
     letter-spacing: -0.02em;
     margin-top: 28px;
     margin-bottom: 14px;
@@ -281,14 +298,15 @@
 }
 
 .sd-content ul li::marker {
-    color: #E07820;
+    color: $primary;
 }
 
 /* Gallery */
+
 .sd-gallery-head h3 {
     font-size: clamp(1.4rem, 3vw, 1.9rem);
     font-weight: 800;
-    color: #1A1A1A;
+    color: $heading-color;
     letter-spacing: -0.02em;
 }
 
@@ -296,13 +314,13 @@
     display: block;
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 2px 12px rgba($black, 0.06);
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .sd-gallery-item:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 12px 28px rgba($black, 0.12);
 }
 
 .sd-gallery-item img {
@@ -313,9 +331,10 @@
 }
 
 /* CTA box */
+
 .sd-cta {
-    background: #1A1A1A;
-    border-radius: 16px;
+    background: $secondary;
+    border-radius: $radius-lg;
     padding: 48px;
     text-align: center;
     position: relative;
@@ -330,14 +349,14 @@
     width: 200px;
     height: 200px;
     border-radius: 50%;
-    background: rgba(224, 120, 32, 0.08);
+    background: $primary-soft;
     pointer-events: none;
 }
 
 .sd-cta h3 {
     font-size: 1.6rem;
     font-weight: 800;
-    color: #ffffff;
+    color: $white;
     margin-bottom: 10px;
     letter-spacing: -0.02em;
     position: relative;
@@ -345,7 +364,7 @@
 
 .sd-cta p {
     font-size: 14px;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba($white, 0.6);
     margin-bottom: 26px;
     position: relative;
     max-width: 480px;
@@ -354,12 +373,12 @@
 }
 
 .sd-cta-btn {
-    background: #E07820;
-    color: #ffffff;
+    background: $primary;
+    color: $white;
     font-size: 14px;
     font-weight: 600;
     padding: 13px 34px;
-    border-radius: 8px;
+    border-radius: $radius-md;
     text-decoration: none;
     position: relative;
     display: inline-flex;
@@ -369,15 +388,16 @@
 }
 
 .sd-cta-btn:hover {
-    background: #c96a18;
+    background: $primary-hover;
     transform: translateY(-2px);
-    color: #ffffff;
+    color: $white;
 }
 
 /* ===== RELATED SERVICES ===== */
+
 .rel-section {
-    background: #F0EDE4;
-    border-radius: 16px;
+    background: $light;
+    border-radius: $radius-lg;
     padding: 44px 36px;
     margin-top: 56px;
     margin-bottom: 20px;
@@ -395,7 +415,7 @@
 .rel-head h3 {
     font-size: clamp(1.3rem, 3vw, 1.7rem);
     font-weight: 800;
-    color: #1A1A1A;
+    color: $heading-color;
     letter-spacing: -0.02em;
     margin: 0;
 }
@@ -403,7 +423,7 @@
 .rel-head a {
     font-size: 13.5px;
     font-weight: 600;
-    color: #E07820;
+    color: $primary;
     text-decoration: none;
     display: flex;
     align-items: center;
@@ -413,7 +433,7 @@
 
 .rel-head a:hover {
     gap: 11px;
-    color: #c96a18;
+    color: $primary-hover;
 }
 
 .rel-head a i {
@@ -427,26 +447,30 @@
 }
 
 @media (max-width: 900px) {
-    .rel-grid { grid-template-columns: repeat(2, 1fr); }
+    .rel-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 @media (max-width: 480px) {
-    .rel-grid { grid-template-columns: 1fr; }
+    .rel-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 .rel-card {
-    background: #ffffff;
+    background: $white;
     border-radius: 12px;
     overflow: hidden;
     text-decoration: none;
     display: block;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+    box-shadow: 0 2px 10px rgba($black, 0.03);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .rel-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 12px 28px rgba($black, 0.08);
 }
 
 .rel-card-img {
@@ -472,19 +496,20 @@
 .rel-card-body h5 {
     font-size: 14px;
     font-weight: 700;
-    color: #1A1A1A;
+    color: $heading-color;
     margin-bottom: 6px;
     line-height: 1.4;
 }
 
 .rel-card-body span {
     font-size: 12px;
-    color: #E07820;
+    color: $primary;
     font-weight: 600;
     display: flex;
     align-items: center;
     gap: 5px;
 }
+
 
 /* ============================================
    SERVICES CAROUSEL
@@ -495,6 +520,7 @@
 }
 
 /* Card sizing inside Owl items */
+
 .services-carousel .sv-card {
     margin: 6px 0 40px;
     height: calc(100% - 40px);
@@ -505,7 +531,9 @@
     padding: 4px 0;
 }
 
+
 /* ===== NAV ARROWS ===== */
+
 .services-carousel .owl-nav {
     display: flex;
     justify-content: center;
@@ -517,22 +545,22 @@
 .services-carousel .owl-nav button.owl-next {
     width: 46px;
     height: 46px;
-    border-radius: 8px;
-    background: #ffffff !important;
-    border: 1px solid rgba(26, 26, 26, 0.1) !important;
-    color: #1A1A1A !important;
+    border-radius: $radius-md;
+    background: $white !important;
+    border: 1px solid rgba($secondary, 0.1) !important;
+    color: $secondary !important;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 18px;
-    transition: all 0.15s ease;
+    transition: all $transition-fast;
 }
 
 .services-carousel .owl-nav button.owl-prev:hover,
 .services-carousel .owl-nav button.owl-next:hover {
-    background: #E07820 !important;
-    border-color: #E07820 !important;
-    color: #ffffff !important;
+    background: $primary !important;
+    border-color: $primary !important;
+    color: $white !important;
 }
 
 .services-carousel .owl-nav button span {
@@ -541,7 +569,9 @@
     margin-top: -2px;
 }
 
+
 /* ===== DOTS ===== */
+
 .services-carousel .owl-dots {
     display: flex;
     justify-content: center;
@@ -554,30 +584,33 @@
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: rgba(26, 26, 26, 0.15);
+    background: rgba($secondary, 0.15);
     display: block;
     margin: 0;
     transition: all 0.25s ease;
 }
 
 .services-carousel .owl-dots .owl-dot.active span {
-    background: #E07820;
+    background: $primary;
     width: 26px;
     border-radius: 4px;
 }
 
 .services-carousel .owl-dots .owl-dot:hover span {
-    background: rgba(224, 120, 32, 0.5);
+    background: rgba($primary, 0.5);
 }
 
 /* ===== MOBILE ===== */
+
 @media (max-width: 767px) {
     .services-carousel .owl-nav {
         display: none;
     }
 }
 
+
 /* Fallback: show cards as a grid before Owl initializes */
+
 .services-carousel:not(.owl-loaded) {
     display: flex !important;
     flex-wrap: wrap;
@@ -614,12 +647,13 @@
     inset: 0;
     background: linear-gradient(
         135deg,
-        rgba(26, 26, 26, 0.88) 0%,
-        rgba(26, 26, 26, 0.55) 50%,
-        rgba(224, 120, 32, 0.18) 100%
+        rgba($secondary, 0.88) 0%,
+        rgba($secondary, 0.55) 50%,
+        rgba($primary, 0.18) 100%
     );
 }
 
+/* Hero content */
 .sh-hero-content {
     position: relative;
     z-index: 2;
@@ -632,15 +666,15 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: rgba(224, 120, 32, 0.15);
-    border: 1px solid rgba(224, 120, 32, 0.4);
-    border-radius: 100px;
+    background: $primary-15;
+    border: 1px solid $primary-40;
+    border-radius: $radius-pill;
     padding: 6px 16px;
     font-size: 11.5px;
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: #E07820;
+    color: $primary;
     margin-bottom: 20px;
 }
 
@@ -648,7 +682,7 @@
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: #E07820;
+    background: $primary;
     flex-shrink: 0;
 }
 
@@ -656,7 +690,7 @@
 .sh-title {
     font-size: clamp(2rem, 4.5vw, 3rem);
     font-weight: 800;
-    color: #ffffff;
+    color: $white;
     letter-spacing: -0.03em;
     line-height: 1.15;
     margin-bottom: 16px;
@@ -665,12 +699,14 @@
 /* Lead text */
 .sh-lead {
     font-size: 1.05rem;
-    color: rgba(255, 255, 255, 0.78);
+    color: rgba($white, 0.78);
     line-height: 1.75;
     max-width: 560px;
 }
 
+
 /* ===== CONTENT TYPOGRAPHY ===== */
+
 .sh-content {
     font-size: 15.5px;
     color: #4a4a4a;
@@ -680,7 +716,7 @@
 .sh-content h2,
 .sh-content h3 {
     font-weight: 800;
-    color: #1A1A1A;
+    color: $heading-color;
     letter-spacing: -0.02em;
     margin: 32px 0 14px;
 }
@@ -714,20 +750,23 @@
     font-family: 'Font Awesome 5 Free';
     font-weight: 900;
     font-size: 11px;
-    color: #ffffff;
-    background: #E07820;
+    color: $white;
+    background: $primary;
     width: 22px;
     height: 22px;
     min-width: 22px;
-    border-radius: 6px;
+    border-radius: $radius-sm;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-top: 2px;
 }
 
+
 /* ===== MOBILE ===== */
+
 @media (max-width: 767px) {
+
     .sh-hero {
         min-height: 320px;
         border-radius: 14px;
@@ -747,6 +786,7 @@
 }
 
 @media (max-width: 767px) {
+
     .sd-section {
         padding-top: 36px !important;
     }

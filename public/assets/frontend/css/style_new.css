@@ -1,4 +1,49 @@
 @charset "UTF-8";
+/* =====================================================
+   SHASTA THEME VARIABLES
+   ===================================================== */
+/* -----------------------------------------------------
+   Brand Colors
+   These define the identity of the website.
+   ----------------------------------------------------- */
+/* -----------------------------------------------------
+   Neutral Colors
+   ----------------------------------------------------- */
+/* -----------------------------------------------------
+   Semantic Colors
+   These should NOT follow the brand theme.
+   ----------------------------------------------------- */
+/* -----------------------------------------------------
+   Derived Brand Colors
+   Automatically generated from primary.
+   ----------------------------------------------------- */
+/* -----------------------------------------------------
+   Border Colors
+   ----------------------------------------------------- */
+/* -----------------------------------------------------
+   Background Colors
+   ----------------------------------------------------- */
+/* -----------------------------------------------------
+   Shadows
+   ----------------------------------------------------- */
+/* -----------------------------------------------------
+   Border Radius
+   ----------------------------------------------------- */
+/* -----------------------------------------------------
+   Transitions
+   ----------------------------------------------------- */
+/* -----------------------------------------------------
+   Typography
+   ----------------------------------------------------- */
+/* -----------------------------------------------------
+   Z-Index Scale
+   ----------------------------------------------------- */
+/* Footer colors */
+/* Primary transparencies */
+/* Light transparencies */
+/* White transparencies */
+/* Transparencies */
+/* Layout */
 /* ============================================
    SHASTA — HEADER + FOOTER (Conflict-Free)
    ============================================ */
@@ -44,9 +89,8 @@
 }
 
 /* ========== NAVBAR ========== */
-/* Replace the sticky rule */
 nav.navbar.navbar-expand-lg {
-  background: #ffffff !important;
+  background: #FFFFFF !important;
   padding: 0 2.5rem !important;
   height: 70px !important;
   border-bottom: none !important;
@@ -125,14 +169,14 @@ nav.navbar .navbar-nav a.nav-item.nav-link:hover {
 nav.navbar .navbar-nav .nav-link.active,
 nav.navbar .navbar-nav .dropdown-toggle.active {
   background: #E07820 !important;
-  color: #ffffff !important;
+  color: #FFFFFF !important;
   font-weight: 600 !important;
 }
 
 nav.navbar .navbar-nav .nav-link.active:hover,
 nav.navbar .navbar-nav .dropdown-toggle.active:hover {
-  background: #c96a18 !important;
-  color: #ffffff !important;
+  background: rgb(188.9354330709, 100.8220472441, 26.2645669291) !important;
+  color: #FFFFFF !important;
 }
 
 /* ========== DROPDOWN ========== */
@@ -159,7 +203,7 @@ nav.navbar .dropdown-menu.rounded-0.rounded-bottom {
   padding: 6px !important;
   margin-top: 6px !important;
   box-shadow: 0 10px 28px rgba(0, 0, 0, 0.09) !important;
-  background: #fff !important;
+  background: #FFFFFF !important;
   min-width: 175px;
 }
 
@@ -185,7 +229,7 @@ nav.navbar a.btn.btn-primary {
   font-size: 14px !important;
   font-weight: 600 !important;
   padding: 10px 24px !important;
-  color: #fff !important;
+  color: #FFFFFF !important;
   letter-spacing: 0.01em;
   transition: background 0.15s ease, transform 0.1s ease !important;
   white-space: nowrap;
@@ -194,7 +238,7 @@ nav.navbar a.btn.btn-primary {
 }
 
 nav.navbar a.btn.btn-primary:hover {
-  background: #c96a18 !important;
+  background: rgb(188.9354330709, 100.8220472441, 26.2645669291) !important;
   transform: translateY(-1px);
 }
 
@@ -215,6 +259,7 @@ nav.navbar .navbar-toggler:focus {
 }
 
 nav.navbar .navbar-toggler-icon {
+  /* Leave SVG untouched */
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%231A1A1A' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2.5' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
 }
 
@@ -228,7 +273,7 @@ nav.navbar .navbar-toggler-icon {
     padding: 14px 1.25rem !important;
   }
   nav.navbar .navbar-collapse {
-    background: #fff;
+    background: #FFFFFF;
     border-top: 1px solid rgba(26, 26, 26, 0.08);
     margin-top: 12px;
     padding: 10px 0;
@@ -252,7 +297,7 @@ nav.navbar .navbar-toggler-icon {
     position: static !important;
     box-shadow: none !important;
     border: none !important;
-    background: #F8F5EE !important;
+    background: rgb(243.6428571429, 241.3714285714, 234.5571428571) !important;
     border-radius: 7px !important;
     margin: 4px 0 4px 14px !important;
     padding: 4px !important;
@@ -266,11 +311,9 @@ nav.navbar .navbar-toggler-icon {
   nav.navbar.navbar-expand-lg {
     position: fixed !important;
   }
-  /* Approximate collapsed navbar height on mobile */
   body {
     padding-top: 64px !important;
   }
-  /* When mobile menu is open, allow it to extend below */
   nav.navbar .navbar-collapse.show {
     max-height: calc(100vh - 64px);
     overflow-y: auto;
@@ -300,7 +343,7 @@ nav.navbar .navbar-toggler-icon {
 
 .topbar-admin-link:hover {
   background: #E07820;
-  color: #ffffff;
+  color: #FFFFFF;
 }
 
 /* ============================================
@@ -308,7 +351,7 @@ nav.navbar .navbar-toggler-icon {
    ============================================ */
 /* ========== MAIN FOOTER WRAPPER ========== */
 .container-fluid.bg-dark.footer {
-  background: #111111 !important;
+  background: #1A1A1A !important;
   border-top: 3px solid #E07820 !important;
   padding-top: 60px !important;
   padding-bottom: 0 !important;
@@ -373,7 +416,7 @@ nav.navbar .navbar-toggler-icon {
   width: 36px !important;
   height: 36px !important;
   border-radius: 8px !important;
-  border: 1px solid rgba(240, 237, 228, 0.14) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
   background: transparent !important;
   color: rgba(240, 237, 228, 0.5) !important;
   display: inline-flex !important;
@@ -387,7 +430,7 @@ nav.navbar .navbar-toggler-icon {
 .container-fluid.bg-dark.footer .btn.btn-square.btn-outline-secondary.rounded-circle:hover {
   background: #E07820 !important;
   border-color: #E07820 !important;
-  color: #ffffff !important;
+  color: #FFFFFF !important;
 }
 
 /* ========== FOOTER LINKS ========== */
@@ -492,7 +535,7 @@ nav.navbar .navbar-toggler-icon {
 }
 
 .back-to-top:hover {
-  background: #c96a18 !important;
+  background: rgb(188.9354330709, 100.8220472441, 26.2645669291) !important;
   transform: translateY(-2px) !important;
 }
 
@@ -536,7 +579,7 @@ nav.navbar .navbar-toggler-icon {
 
 .footer-admin-link:hover {
   background: #E07820;
-  color: #ffffff;
+  color: #FFFFFF;
 }
 
 /* Pages */
@@ -544,7 +587,7 @@ nav.navbar .navbar-toggler-icon {
 .container-xxl.py-5 {
   padding-top: 72px !important;
   padding-bottom: 72px !important;
-  background: #ffffff;
+  background: #FFFFFF;
 }
 
 /* Header */
@@ -569,7 +612,7 @@ nav.navbar .navbar-toggler-icon {
   border: 1px solid #E8E4DC;
   border-radius: 16px;
   overflow: hidden;
-  background: #ffffff;
+  background: #FFFFFF;
   transition: border-color 0.2s ease, transform 0.2s ease;
 }
 
@@ -619,7 +662,7 @@ nav.navbar .navbar-toggler-icon {
   height: 36px !important;
   min-width: unset;
   border-radius: 50% !important;
-  background: #ffffff !important;
+  background: #FFFFFF !important;
   border: none !important;
   color: #1A1A1A !important;
   font-size: 13px;
@@ -638,7 +681,7 @@ nav.navbar .navbar-toggler-icon {
 
 .team-social .btn.btn-square.btn-dark.rounded-circle:hover {
   background: #E07820 !important;
-  color: #ffffff !important;
+  color: #FFFFFF !important;
 }
 
 /* Info block */
@@ -756,7 +799,7 @@ nav.navbar .navbar-toggler-icon {
 
 /* ===== Modal card ===== */
 .team-modal {
-  background: #ffffff;
+  background: #FFFFFF;
   border-radius: 20px;
   max-width: 520px;
   width: 100%;
@@ -848,7 +891,7 @@ nav.navbar .navbar-toggler-icon {
 
 .team-modal-close:hover {
   background: #E07820;
-  color: #ffffff;
+  color: #FFFFFF;
 }
 
 .team-modal-inner {
@@ -878,14 +921,14 @@ nav.navbar .navbar-toggler-icon {
 
 .team-modal-social a:hover {
   background: #E07820;
-  color: #ffffff;
+  color: #FFFFFF;
 }
 
 /* ===== TESTIMONIALS — Single Card Centered Style ===== */
 .container-xxl:has(.testimonial-carousel) {
   padding-top: 72px !important;
   padding-bottom: 72px !important;
-  background: #ffffff !important;
+  background: #FFFFFF !important;
 }
 
 .container-xxl:has(.testimonial-carousel) .bg-primary {
@@ -968,7 +1011,7 @@ nav.navbar .navbar-toggler-icon {
 
 /* ===== Single card ===== */
 .testimonial-item {
-  background: #ffffff !important;
+  background: #FFFFFF !important;
   border: 1px solid #ECEAE4 !important;
   border-radius: 20px !important;
   padding: 40px 48px !important;
@@ -1057,7 +1100,7 @@ nav.navbar .navbar-toggler-icon {
    SHASTA CONTACT SECTION — Modern
    ============================================ */
 .contact-section {
-  background: #ffffff !important;
+  background: #FFFFFF !important;
   padding: 0 !important;
 }
 
@@ -1113,7 +1156,7 @@ nav.navbar .navbar-toggler-icon {
 /* Body text */
 .ct-text {
   font-size: 14.5px !important;
-  color: #5a5a5a !important;
+  color: #555555 !important;
   line-height: 1.8 !important;
 }
 
@@ -1136,7 +1179,7 @@ nav.navbar .navbar-toggler-icon {
 
 .ct-info-item:hover {
   transform: translateY(-3px);
-  background: #ece6d9;
+  background: rgb(232.7142857143, 228.2571428571, 214.8857142857);
 }
 
 .ct-info-icon {
@@ -1198,8 +1241,8 @@ nav.navbar .navbar-toggler-icon {
 .ct-field input,
 .ct-field textarea {
   width: 100% !important;
-  background: #ffffff !important;
-  border: 1.5px solid #e5ddd0 !important;
+  background: #FFFFFF !important;
+  border: 1.5px solid rgb(229.0714285714, 223.8857142857, 208.3285714286) !important;
   border-radius: 10px !important;
   padding: 14px 16px !important;
   font-size: 14px !important;
@@ -1213,7 +1256,7 @@ nav.navbar .navbar-toggler-icon {
 
 .ct-field input::placeholder,
 .ct-field textarea::placeholder {
-  color: #999;
+  color: rgb(148.75, 148.75, 148.75);
 }
 
 .ct-field input:focus,
@@ -1226,7 +1269,7 @@ nav.navbar .navbar-toggler-icon {
   min-height: 120px;
 }
 
-/* Remove Bootstrap form-floating label overlap (no longer used) */
+/* Remove Bootstrap form-floating label overlap */
 .ct-form .form-floating > label {
   display: none;
 }
@@ -1235,7 +1278,7 @@ nav.navbar .navbar-toggler-icon {
 .ct-success {
   background: rgba(40, 167, 69, 0.1);
   border: 1px solid rgba(40, 167, 69, 0.3);
-  color: #1e7e34;
+  color: rgb(28.1739130435, 117.6260869565, 48.6);
   border-radius: 10px;
   padding: 14px 18px;
   font-size: 13.5px;
@@ -1254,7 +1297,7 @@ nav.navbar .navbar-toggler-icon {
 .ct-submit {
   width: 100%;
   background: #E07820 !important;
-  color: #ffffff !important;
+  color: #FFFFFF !important;
   font-size: 15px !important;
   font-weight: 700 !important;
   padding: 16px !important;
@@ -1270,7 +1313,7 @@ nav.navbar .navbar-toggler-icon {
 }
 
 .ct-submit:hover {
-  background: #c96a18 !important;
+  background: rgb(188.9354330709, 100.8220472441, 26.2645669291) !important;
   transform: translateY(-2px);
   box-shadow: 0 12px 28px rgba(224, 120, 32, 0.45) !important;
 }
@@ -1304,14 +1347,17 @@ nav.navbar .navbar-toggler-icon {
     font-size: 15px;
   }
 }
+/* ============================================
+   SHASTA PRICING SECTION
+   ============================================ */
 /* ===== Pricing Section ===== */
 .container-xxl.py-5 {
   padding-top: 72px !important;
   padding-bottom: 72px !important;
-  background: #ffffff;
+  background: #FFFFFF;
 }
 
-/* Header */
+/* ===== Header ===== */
 .text-center .bg-primary {
   background: #E07820 !important;
   width: 48px !important;
@@ -1328,14 +1374,14 @@ nav.navbar .navbar-toggler-icon {
   margin-bottom: 48px !important;
 }
 
-/* Grid gap */
+/* ===== Grid gap ===== */
 .row.g-4 {
   gap: 20px 0;
 }
 
-/* Card base */
+/* ===== Card base ===== */
 .card.h-100.border-0.shadow-sm {
-  border: 1px solid #E8E4DC !important;
+  border: 1px solid rgb(234.5357142857, 230.4428571429, 218.1642857143) !important;
   border-radius: 16px !important;
   box-shadow: none !important;
   transition: border-color 0.2s ease, transform 0.2s ease;
@@ -1343,19 +1389,19 @@ nav.navbar .navbar-toggler-icon {
 }
 
 .card.h-100.border-0.shadow-sm:hover {
-  border-color: #C8C0B0 !important;
+  border-color: rgb(218.1428571429, 210.7714285714, 188.6571428571) !important;
   transform: translateY(-3px);
 }
 
-/* Featured card */
+/* ===== Featured card ===== */
 .card.h-100.border-0.shadow-sm:has(.badge.bg-primary) {
   border: 2px solid #E07820 !important;
 }
 
-/* "Most Popular" badge */
+/* ===== Most Popular badge ===== */
 .badge.bg-primary {
   background: #E07820 !important;
-  color: #ffffff !important;
+  color: #FFFFFF !important;
   font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.6px;
@@ -1367,12 +1413,12 @@ nav.navbar .navbar-toggler-icon {
   text-align: center;
 }
 
-/* Card body */
+/* ===== Card body ===== */
 .card-body {
   padding: 24px !important;
 }
 
-/* Service label (small.text-primary) */
+/* ===== Service label ===== */
 .card-body small.text-primary {
   font-size: 11px;
   font-weight: 500;
@@ -1383,7 +1429,7 @@ nav.navbar .navbar-toggler-icon {
   margin-bottom: 8px;
 }
 
-/* Plan title */
+/* ===== Plan title ===== */
 .card-body h3 {
   font-size: 20px;
   font-weight: 500;
@@ -1392,7 +1438,7 @@ nav.navbar .navbar-toggler-icon {
   margin-bottom: 6px;
 }
 
-/* Subtitle */
+/* ===== Subtitle ===== */
 .card-body .text-muted {
   font-size: 13px;
   color: #888888 !important;
@@ -1400,14 +1446,14 @@ nav.navbar .navbar-toggler-icon {
   margin-bottom: 16px;
 }
 
-/* Divider */
+/* ===== Divider ===== */
 .card-body hr {
   border: none;
   border-top: 1px solid #F0EDE4;
   margin: 16px 0;
 }
 
-/* Price */
+/* ===== Price ===== */
 .card-body h2.text-primary {
   font-size: 30px;
   font-weight: 500;
@@ -1416,53 +1462,53 @@ nav.navbar .navbar-toggler-icon {
   margin: 0 0 4px;
 }
 
-/* Pricing period */
+/* ===== Pricing period ===== */
 .card-body p {
   font-size: 13px;
-  color: #aaaaaa;
+  color: rgb(169.15, 169.15, 169.15);
   margin: 0;
 }
 
-/* Description text */
+/* ===== Description text ===== */
 .card-body p:last-child {
   font-size: 13px;
-  color: #666666;
+  color: rgb(102.85, 102.85, 102.85);
   line-height: 1.7;
 }
 
-/* Card footer */
+/* ===== Card footer ===== */
 .card-footer.bg-white.border-0 {
   padding: 0 24px 24px !important;
-  background: #ffffff !important;
+  background: #FFFFFF !important;
   border: none !important;
 }
 
-/* CTA button */
+/* ===== CTA button ===== */
 .card-footer .btn.btn-primary.w-100 {
   display: block;
   width: 100%;
   padding: 11px 0;
-  border-radius: 8px;
+  border-radius: 6px;
   font-size: 14px;
   font-weight: 500;
   text-align: center;
   text-decoration: none;
   background: #F0EDE4 !important;
   color: #1A1A1A !important;
-  border: 1px solid #DDD9D0 !important;
+  border: 1px solid rgb(225.4285714286, 219.5142857143, 201.7714285714) !important;
   transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
 }
 
 .card-footer .btn.btn-primary.w-100:hover {
   background: #E07820 !important;
-  color: #ffffff !important;
+  color: #FFFFFF !important;
   border-color: #E07820 !important;
 }
 
-/* Featured card button — always filled */
+/* ===== Featured card button ===== */
 .card:has(.badge.bg-primary) .card-footer .btn.btn-primary.w-100 {
   background: #E07820 !important;
-  color: #ffffff !important;
+  color: #FFFFFF !important;
   border-color: #E07820 !important;
 }
 
@@ -1470,7 +1516,7 @@ nav.navbar .navbar-toggler-icon {
    SHASTA QUOTE SECTION — Modern
    ============================================ */
 .quote-section {
-  background: #ffffff !important;
+  background: #FFFFFF !important;
   padding: 0 !important;
 }
 
@@ -1545,11 +1591,11 @@ nav.navbar .navbar-toggler-icon {
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 100px;
+  border-radius: 9999px;
   padding: 6px 14px;
   font-size: 11.5px;
   font-weight: 600;
-  color: #ffffff;
+  color: #FFFFFF;
 }
 
 .qt-badge i {
@@ -1569,7 +1615,7 @@ nav.navbar .navbar-toggler-icon {
 .qt-img-text h3 {
   font-size: 1.4rem;
   font-weight: 800;
-  color: #ffffff;
+  color: #FFFFFF;
   letter-spacing: -0.02em;
   margin-bottom: 8px;
 }
@@ -1623,7 +1669,7 @@ nav.navbar .navbar-toggler-icon {
 /* Body text */
 .qt-text {
   font-size: 14.5px !important;
-  color: #5a5a5a !important;
+  color: rgb(90.1, 90.1, 90.1) !important;
   line-height: 1.8 !important;
 }
 
@@ -1631,7 +1677,7 @@ nav.navbar .navbar-toggler-icon {
 .qt-success {
   background: rgba(40, 167, 69, 0.1);
   border: 1px solid rgba(40, 167, 69, 0.3);
-  color: #1e7e34;
+  color: rgb(28.1739130435, 117.6260869565, 48.6);
   border-radius: 10px;
   padding: 14px 18px;
   font-size: 13.5px;
@@ -1676,14 +1722,14 @@ nav.navbar .navbar-toggler-icon {
 
 .qt-field input::placeholder,
 .qt-field textarea::placeholder {
-  color: #999;
+  color: rgb(153.85, 153.85, 153.85);
 }
 
 .qt-field input:focus,
 .qt-field select:focus,
 .qt-field textarea:focus {
   border-color: #E07820 !important;
-  background: #ffffff !important;
+  background: #FFFFFF !important;
 }
 
 .qt-field textarea {
@@ -1706,7 +1752,7 @@ nav.navbar .navbar-toggler-icon {
 .qt-submit {
   width: 100%;
   background: #E07820 !important;
-  color: #ffffff !important;
+  color: #FFFFFF !important;
   font-size: 15px !important;
   font-weight: 700 !important;
   padding: 16px !important;
@@ -1722,7 +1768,7 @@ nav.navbar .navbar-toggler-icon {
 }
 
 .qt-submit:hover {
-  background: #c96a18 !important;
+  background: rgb(188.9354330709, 100.8220472441, 26.2645669291) !important;
   transform: translateY(-2px);
   box-shadow: 0 12px 28px rgba(224, 120, 32, 0.45) !important;
 }
@@ -1758,7 +1804,7 @@ nav.navbar .navbar-toggler-icon {
    SHASTA ABOUT SECTION — Modern Override
    ============================================ */
 .about-section {
-  background: #ffffff !important;
+  background: #FFFFFF !important;
   padding: 80px 0 !important;
   margin: 0 !important;
 }
@@ -1828,7 +1874,7 @@ nav.navbar .navbar-toggler-icon {
   align-items: center;
   justify-content: center;
   font-size: 18px;
-  color: #ffffff;
+  color: #FFFFFF;
 }
 
 .ab-img-badge-text {
@@ -1840,7 +1886,7 @@ nav.navbar .navbar-toggler-icon {
 .ab-img-badge-text strong {
   display: block;
   font-size: 15px;
-  color: #ffffff;
+  color: #FFFFFF;
   font-weight: 700;
 }
 
@@ -1960,7 +2006,7 @@ nav.navbar .navbar-toggler-icon {
 .ab-cta {
   background: #E07820 !important;
   border: none !important;
-  color: #ffffff !important;
+  color: #FFFFFF !important;
   font-size: 14px !important;
   font-weight: 600 !important;
   border-radius: 8px !important;
@@ -1969,13 +2015,13 @@ nav.navbar .navbar-toggler-icon {
 }
 
 .ab-cta:hover {
-  background: #c96a18 !important;
+  background: rgb(188.9354330709, 100.8220472441, 26.2645669291) !important;
   transform: translateY(-2px) !important;
   box-shadow: 0 12px 28px rgba(224, 120, 32, 0.45) !important;
-  color: #ffffff !important;
+  color: #FFFFFF !important;
 }
 
-/* Remove Bootstrap rounded-pill — use modern 8px radius */
+/* Remove Bootstrap rounded-pill */
 .ab-cta.rounded-pill {
   border-radius: 8px !important;
 }
@@ -2044,7 +2090,7 @@ nav.navbar .navbar-toggler-icon {
   display: inline-flex;
   background: rgba(224, 120, 32, 0.1);
   border: 1px solid rgba(224, 120, 32, 0.25);
-  border-radius: 100px;
+  border-radius: 9999px;
   padding: 5px 14px;
   font-size: 11.5px;
   margin-bottom: 16px;
@@ -2073,7 +2119,7 @@ nav.navbar .navbar-toggler-icon {
 
 /* ===== SERVICE CARD ===== */
 .sv-card {
-  background: #ffffff;
+  background: #FFFFFF;
   border-radius: 14px;
   overflow: hidden;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
@@ -2158,7 +2204,7 @@ nav.navbar .navbar-toggler-icon {
 
 .sv-card-link:hover {
   gap: 11px;
-  color: #c96a18;
+  color: rgb(188.9354330709, 100.8220472441, 26.2645669291);
 }
 
 .sv-card-link i {
@@ -2172,11 +2218,11 @@ nav.navbar .navbar-toggler-icon {
 
 .sv-cta-btn {
   background: #E07820 !important;
-  color: #ffffff !important;
+  color: #FFFFFF !important;
   font-size: 15px !important;
   font-weight: 600 !important;
   padding: 14px 42px !important;
-  border-radius: 8px !important;
+  border-radius: 10px !important;
   border: none !important;
   text-decoration: none !important;
   box-shadow: 0 8px 22px rgba(224, 120, 32, 0.35) !important;
@@ -2184,10 +2230,10 @@ nav.navbar .navbar-toggler-icon {
 }
 
 .sv-cta-btn:hover {
-  background: #c96a18 !important;
+  background: rgb(188.9354330709, 100.8220472441, 26.2645669291) !important;
   transform: translateY(-2px) !important;
   box-shadow: 0 12px 28px rgba(224, 120, 32, 0.45) !important;
-  color: #ffffff !important;
+  color: #FFFFFF !important;
 }
 
 @media (max-width: 767px) {
@@ -2217,7 +2263,7 @@ nav.navbar .navbar-toggler-icon {
   text-decoration: none;
   padding: 10px 20px;
   border: 1px solid rgba(26, 26, 26, 0.12);
-  border-radius: 8px;
+  border-radius: 10px;
   margin-bottom: 32px;
   transition: all 0.15s ease;
 }
@@ -2230,7 +2276,7 @@ nav.navbar .navbar-toggler-icon {
 
 .sd-back i {
   font-size: 12px;
-  transition: transform 0.15s;
+  transition: transform 0.15s ease;
 }
 
 .sd-back:hover i {
@@ -2351,7 +2397,7 @@ nav.navbar .navbar-toggler-icon {
 .sd-cta h3 {
   font-size: 1.6rem;
   font-weight: 800;
-  color: #ffffff;
+  color: #FFFFFF;
   margin-bottom: 10px;
   letter-spacing: -0.02em;
   position: relative;
@@ -2369,11 +2415,11 @@ nav.navbar .navbar-toggler-icon {
 
 .sd-cta-btn {
   background: #E07820;
-  color: #ffffff;
+  color: #FFFFFF;
   font-size: 14px;
   font-weight: 600;
   padding: 13px 34px;
-  border-radius: 8px;
+  border-radius: 10px;
   text-decoration: none;
   position: relative;
   display: inline-flex;
@@ -2383,9 +2429,9 @@ nav.navbar .navbar-toggler-icon {
 }
 
 .sd-cta-btn:hover {
-  background: #c96a18;
+  background: rgb(188.9354330709, 100.8220472441, 26.2645669291);
   transform: translateY(-2px);
-  color: #ffffff;
+  color: #FFFFFF;
 }
 
 /* ===== RELATED SERVICES ===== */
@@ -2427,7 +2473,7 @@ nav.navbar .navbar-toggler-icon {
 
 .rel-head a:hover {
   gap: 11px;
-  color: #c96a18;
+  color: rgb(188.9354330709, 100.8220472441, 26.2645669291);
 }
 
 .rel-head a i {
@@ -2451,7 +2497,7 @@ nav.navbar .navbar-toggler-icon {
   }
 }
 .rel-card {
-  background: #ffffff;
+  background: #FFFFFF;
   border-radius: 12px;
   overflow: hidden;
   text-decoration: none;
@@ -2532,8 +2578,8 @@ nav.navbar .navbar-toggler-icon {
 .services-carousel .owl-nav button.owl-next {
   width: 46px;
   height: 46px;
-  border-radius: 8px;
-  background: #ffffff !important;
+  border-radius: 10px;
+  background: #FFFFFF !important;
   border: 1px solid rgba(26, 26, 26, 0.1) !important;
   color: #1A1A1A !important;
   display: flex;
@@ -2547,7 +2593,7 @@ nav.navbar .navbar-toggler-icon {
 .services-carousel .owl-nav button.owl-next:hover {
   background: #E07820 !important;
   border-color: #E07820 !important;
-  color: #ffffff !important;
+  color: #FFFFFF !important;
 }
 
 .services-carousel .owl-nav button span {
@@ -2628,6 +2674,7 @@ nav.navbar .navbar-toggler-icon {
   background: linear-gradient(135deg, rgba(26, 26, 26, 0.88) 0%, rgba(26, 26, 26, 0.55) 50%, rgba(224, 120, 32, 0.18) 100%);
 }
 
+/* Hero content */
 .sh-hero-content {
   position: relative;
   z-index: 2;
@@ -2642,7 +2689,7 @@ nav.navbar .navbar-toggler-icon {
   gap: 8px;
   background: rgba(224, 120, 32, 0.15);
   border: 1px solid rgba(224, 120, 32, 0.4);
-  border-radius: 100px;
+  border-radius: 9999px;
   padding: 6px 16px;
   font-size: 11.5px;
   font-weight: 700;
@@ -2664,7 +2711,7 @@ nav.navbar .navbar-toggler-icon {
 .sh-title {
   font-size: clamp(2rem, 4.5vw, 3rem);
   font-weight: 800;
-  color: #ffffff;
+  color: #FFFFFF;
   letter-spacing: -0.03em;
   line-height: 1.15;
   margin-bottom: 16px;
@@ -2722,7 +2769,7 @@ nav.navbar .navbar-toggler-icon {
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
   font-size: 11px;
-  color: #ffffff;
+  color: #FFFFFF;
   background: #E07820;
   width: 22px;
   height: 22px;
@@ -2789,7 +2836,7 @@ nav.navbar .navbar-toggler-icon {
   font-weight: 600;
   letter-spacing: 0.07em;
   text-transform: uppercase;
-  color: #6b7280;
+  color: rgb(110.5, 110.5, 110.5);
   padding: 0.5rem 1.25rem;
   border-radius: 2rem;
   border: 1.5px solid transparent;
@@ -2798,14 +2845,14 @@ nav.navbar .navbar-toggler-icon {
 }
 
 #portfolio-flters li:hover {
-  color: var(--primary);
-  border-color: var(--primary);
+  color: #E07820;
+  border-color: #E07820;
 }
 
 #portfolio-flters li.active {
-  color: #fff;
-  background: var(--primary);
-  border-color: var(--primary);
+  color: #FFFFFF;
+  background: #E07820;
+  border-color: #E07820;
 }
 
 /* --- Section Header --- */
@@ -2814,7 +2861,7 @@ nav.navbar .navbar-toggler-icon {
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--primary);
+  color: #E07820;
   display: block;
   margin-bottom: 0.75rem;
 }
@@ -2829,16 +2876,15 @@ nav.navbar .navbar-toggler-icon {
   overflow: hidden;
 }
 
-/* The entire card is now an <a> tag */
 .portfolio-inner {
   position: relative;
-  display: block; /* <a> needs block to fill the column */
+  display: block;
   border-radius: 12px;
   overflow: hidden;
-  background: #fff;
+  background: #FFFFFF;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.07), 0 4px 20px rgba(0, 0, 0, 0.05);
   transition: box-shadow 0.3s ease, transform 0.3s ease;
-  text-decoration: none; /* kill underline on the anchor */
+  text-decoration: none;
   color: inherit;
   cursor: pointer;
 }
@@ -2855,7 +2901,7 @@ nav.navbar .navbar-toggler-icon {
   display: block;
   overflow: hidden;
   aspect-ratio: 16/10;
-  background: #f3f4f6;
+  background: rgb(245.4642857143, 243.5571428571, 237.8357142857);
 }
 
 .portfolio-img-wrap img {
@@ -2870,7 +2916,7 @@ nav.navbar .navbar-toggler-icon {
   transform: scale(1.06);
 }
 
-/* Card body (always visible) */
+/* Card body */
 .portfolio-card-body {
   padding: 1.25rem 1.5rem 1rem;
 }
@@ -2880,19 +2926,19 @@ nav.navbar .navbar-toggler-icon {
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--primary);
+  color: #E07820;
   margin-bottom: 0.35rem;
 }
 
 .portfolio-card-body .portfolio-title {
   font-size: 1rem;
   font-weight: 700;
-  color: #111827;
+  color: #1A1A1A;
   line-height: 1.4;
   margin: 0;
 }
 
-/* Hover overlay — clip-path wipe from bottom */
+/* Hover overlay */
 .portfolio-text {
   position: absolute !important;
   inset: 0;
@@ -2923,7 +2969,7 @@ nav.navbar .navbar-toggler-icon {
 .portfolio-text h5 {
   font-size: 1.05rem;
   font-weight: 700;
-  color: #fff !important;
+  color: #FFFFFF !important;
   margin-bottom: 1rem !important;
   line-height: 1.35;
 }
@@ -2942,15 +2988,15 @@ nav.navbar .navbar-toggler-icon {
   justify-content: center;
   background: rgba(255, 255, 255, 0.15) !important;
   border: 1.5px solid rgba(255, 255, 255, 0.4) !important;
-  color: #fff !important;
+  color: #FFFFFF !important;
   font-size: 0.85rem;
   transition: background 0.2s, border-color 0.2s, transform 0.15s;
   backdrop-filter: blur(4px);
 }
 
 .portfolio-text .btn-square:hover {
-  background: var(--primary) !important;
-  border-color: var(--primary) !important;
+  background: #E07820 !important;
+  border-color: #E07820 !important;
   transform: scale(1.08);
 }
 
@@ -2961,13 +3007,12 @@ nav.navbar .navbar-toggler-icon {
 }
 
 /* ===========================
-   PROJECT DETAIL PAGE (show.php)
+   PROJECT DETAIL PAGE
    =========================== */
 .project-detail-wrap {
   padding: 3rem 0 5rem;
 }
 
-/* Back button */
 .btn-back-projects {
   display: inline-flex;
   align-items: center;
@@ -2976,7 +3021,7 @@ nav.navbar .navbar-toggler-icon {
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #6b7280;
+  color: rgb(110.5, 110.5, 110.5);
   text-decoration: none;
   margin-bottom: 2.25rem;
   transition: color 0.2s;
@@ -2991,14 +3036,13 @@ nav.navbar .navbar-toggler-icon {
 }
 
 .btn-back-projects:hover {
-  color: var(--primary);
+  color: #E07820;
 }
 
 .btn-back-projects:hover i {
   transform: translateX(-3px);
 }
 
-/* Hero image */
 .project-hero-img {
   width: 100%;
   aspect-ratio: 16/7;
@@ -3008,24 +3052,24 @@ nav.navbar .navbar-toggler-icon {
   margin-bottom: 2.5rem;
 }
 
-/* Section headers in detail */
 .project-detail-wrap h1 {
   font-size: clamp(1.6rem, 4vw, 2.4rem);
   font-weight: 800;
-  color: #111827;
+  color: #1A1A1A;
   line-height: 1.2;
   margin-bottom: 1.75rem;
 }
 
-.project-detail-wrap h3 {
+.project-detail-wrap h3,
+.project-gallery-section h3 {
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--primary);
+  color: #E07820;
   margin-bottom: 0.9rem;
   padding-bottom: 0.6rem;
-  border-bottom: 2px solid var(--primary);
+  border-bottom: 2px solid #E07820;
   display: inline-block;
 }
 
@@ -3033,13 +3077,13 @@ nav.navbar .navbar-toggler-icon {
 .project-detail-wrap .mb-5 > div {
   font-size: 1rem;
   line-height: 1.8;
-  color: #374151;
+  color: rgb(59.5, 59.5, 59.5);
 }
 
-/* Sidebar info card */
+/* Sidebar */
 .project-info-card {
-  background: #fff;
-  border: 1.5px solid #e5e7eb;
+  background: #FFFFFF;
+  border: 1.5px solid rgba(0, 0, 0, 0.1);
   border-radius: 14px;
   padding: 1.75rem;
   position: sticky;
@@ -3051,7 +3095,7 @@ nav.navbar .navbar-toggler-icon {
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #9ca3af;
+  color: rgba(26, 26, 26, 0.45);
   margin-bottom: 1.5rem;
 }
 
@@ -3059,14 +3103,14 @@ nav.navbar .navbar-toggler-icon {
   display: flex;
   flex-direction: column;
   gap: 0;
-  border-top: 1px solid #f3f4f6;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .project-info-item {
   display: flex;
   flex-direction: column;
   padding: 0.9rem 0;
-  border-bottom: 1px solid #f3f4f6;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .project-info-item .info-label {
@@ -3074,29 +3118,17 @@ nav.navbar .navbar-toggler-icon {
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #9ca3af;
+  color: rgba(26, 26, 26, 0.45);
   margin-bottom: 0.2rem;
 }
 
 .project-info-item .info-value {
   font-size: 0.95rem;
   font-weight: 600;
-  color: #111827;
+  color: #1A1A1A;
 }
 
 /* Gallery */
-.project-gallery-section h3 {
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--primary);
-  margin-bottom: 1.25rem;
-  padding-bottom: 0.6rem;
-  border-bottom: 2px solid var(--primary);
-  display: inline-block;
-}
-
 .gallery-img-wrap {
   border-radius: 10px;
   overflow: hidden;
@@ -3116,14 +3148,14 @@ nav.navbar .navbar-toggler-icon {
 }
 
 /* ===========================
-   PREV / NEXT PROJECT NAVIGATOR
+   PREV / NEXT NAVIGATOR
    =========================== */
 .project-nav-dock {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
   margin-top: 3.5rem;
-  border-top: 1px solid #e5e7eb;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
   padding-top: 2.5rem;
 }
 
@@ -3132,16 +3164,16 @@ nav.navbar .navbar-toggler-icon {
   align-items: center;
   gap: 1rem;
   padding: 1.1rem 1.25rem;
-  border: 1.5px solid #e5e7eb;
+  border: 1.5px solid rgba(0, 0, 0, 0.1);
   border-radius: 12px;
   text-decoration: none;
-  background: #fff;
+  background: #FFFFFF;
   transition: border-color 0.22s, box-shadow 0.22s, transform 0.2s;
   overflow: hidden;
 }
 
 .project-nav-link:hover {
-  border-color: var(--primary);
+  border-color: #E07820;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
   transform: translateY(-2px);
   text-decoration: none;
@@ -3152,25 +3184,24 @@ nav.navbar .navbar-toggler-icon {
   text-align: right;
 }
 
-.project-nav-thumb {
-  width: 54px;
-  height: 54px;
-  border-radius: 8px;
-  object-fit: cover;
-  flex-shrink: 0;
-  background: #f3f4f6;
-}
-
+.project-nav-thumb,
 .project-nav-thumb-placeholder {
   width: 54px;
   height: 54px;
   border-radius: 8px;
   flex-shrink: 0;
-  background: #f3f4f6;
+  background: rgb(245.4642857143, 243.5571428571, 237.8357142857);
+}
+
+.project-nav-thumb {
+  object-fit: cover;
+}
+
+.project-nav-thumb-placeholder {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #d1d5db;
+  color: rgba(26, 26, 26, 0.2);
   font-size: 1.2rem;
 }
 
@@ -3184,7 +3215,7 @@ nav.navbar .navbar-toggler-icon {
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #9ca3af;
+  color: rgba(26, 26, 26, 0.45);
   display: flex;
   align-items: center;
   gap: 0.3rem;
@@ -3202,7 +3233,7 @@ nav.navbar .navbar-toggler-icon {
 .project-nav-title {
   font-size: 0.9rem;
   font-weight: 700;
-  color: #111827;
+  color: #1A1A1A;
   line-height: 1.3;
   white-space: nowrap;
   overflow: hidden;
@@ -3211,11 +3242,12 @@ nav.navbar .navbar-toggler-icon {
 
 .project-nav-cat {
   font-size: 0.72rem;
-  color: var(--primary);
+  color: #E07820;
   font-weight: 600;
   margin-top: 0.15rem;
 }
 
+/* Mobile */
 @media (max-width: 576px) {
   .project-nav-dock {
     grid-template-columns: 1fr;
@@ -3228,292 +3260,6 @@ nav.navbar .navbar-toggler-icon {
     justify-content: flex-start;
   }
 }
-/* ===========================
-   PROJECT DETAIL PAGE (show.php)
-   =========================== */
-.project-detail-wrap {
-  padding: 3rem 0 5rem;
-}
-
-/* Back button */
-.btn-back-projects {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #6b7280;
-  text-decoration: none;
-  margin-bottom: 2.25rem;
-  transition: color 0.2s;
-  padding: 0;
-  background: none;
-  border: none;
-}
-
-.btn-back-projects i {
-  font-size: 1rem;
-  transition: transform 0.2s;
-}
-
-.btn-back-projects:hover {
-  color: var(--primary);
-}
-
-.btn-back-projects:hover i {
-  transform: translateX(-3px);
-}
-
-/* Hero image */
-.project-hero-img {
-  width: 100%;
-  aspect-ratio: 16/7;
-  object-fit: cover;
-  border-radius: 14px;
-  display: block;
-  margin-bottom: 2.5rem;
-}
-
-/* Section headers in detail */
-.project-detail-wrap h1 {
-  font-size: clamp(1.6rem, 4vw, 2.4rem);
-  font-weight: 800;
-  color: #111827;
-  line-height: 1.2;
-  margin-bottom: 1.75rem;
-}
-
-.project-detail-wrap h3 {
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--primary);
-  margin-bottom: 0.9rem;
-  padding-bottom: 0.6rem;
-  border-bottom: 2px solid var(--primary);
-  display: inline-block;
-}
-
-.project-detail-wrap .mb-5 > p,
-.project-detail-wrap .mb-5 > div {
-  font-size: 1rem;
-  line-height: 1.8;
-  color: #374151;
-}
-
-/* Sidebar info card */
-.project-info-card {
-  background: #fff;
-  border: 1.5px solid #e5e7eb;
-  border-radius: 14px;
-  padding: 1.75rem;
-  position: sticky;
-  top: 100px;
-}
-
-.project-info-card h4 {
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: #9ca3af;
-  margin-bottom: 1.5rem;
-}
-
-.project-info-row {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  border-top: 1px solid #f3f4f6;
-}
-
-.project-info-item {
-  display: flex;
-  flex-direction: column;
-  padding: 0.9rem 0;
-  border-bottom: 1px solid #f3f4f6;
-}
-
-.project-info-item .info-label {
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #9ca3af;
-  margin-bottom: 0.2rem;
-}
-
-.project-info-item .info-value {
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: #111827;
-}
-
-/* Gallery */
-.project-gallery-section h3 {
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--primary);
-  margin-bottom: 1.25rem;
-  padding-bottom: 0.6rem;
-  border-bottom: 2px solid var(--primary);
-  display: inline-block;
-}
-
-.gallery-img-wrap {
-  border-radius: 10px;
-  overflow: hidden;
-  aspect-ratio: 4/3;
-}
-
-.gallery-img-wrap img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.4s ease;
-}
-
-.gallery-img-wrap:hover img {
-  transform: scale(1.05);
-}
-
-/* ===========================
-   PREV / NEXT PROJECT NAVIGATOR
-   =========================== */
-.project-nav-dock {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-  margin-top: 3.5rem;
-  border-top: 1px solid #e5e7eb;
-  padding-top: 2.5rem;
-}
-
-.project-nav-link {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 1.1rem 1.25rem;
-  border: 1.5px solid #e5e7eb;
-  border-radius: 12px;
-  text-decoration: none;
-  background: #fff;
-  transition: border-color 0.22s, box-shadow 0.22s, transform 0.2s;
-  overflow: hidden;
-}
-
-.project-nav-link:hover {
-  border-color: var(--primary);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
-  transform: translateY(-2px);
-  text-decoration: none;
-}
-
-.project-nav-link.nav-next {
-  flex-direction: row-reverse;
-  text-align: right;
-}
-
-.project-nav-thumb {
-  width: 54px;
-  height: 54px;
-  border-radius: 8px;
-  object-fit: cover;
-  flex-shrink: 0;
-  background: #f3f4f6;
-}
-
-.project-nav-thumb-placeholder {
-  width: 54px;
-  height: 54px;
-  border-radius: 8px;
-  flex-shrink: 0;
-  background: #f3f4f6;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #d1d5db;
-  font-size: 1.2rem;
-}
-
-.project-nav-meta {
-  min-width: 0;
-  flex: 1;
-}
-
-.project-nav-direction {
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: #9ca3af;
-  display: flex;
-  align-items: center;
-  gap: 0.3rem;
-  margin-bottom: 0.2rem;
-}
-
-.project-nav-direction i {
-  font-size: 0.85rem;
-}
-
-.nav-next .project-nav-direction {
-  justify-content: flex-end;
-}
-
-.project-nav-title {
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: #111827;
-  line-height: 1.3;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.project-nav-cat {
-  font-size: 0.72rem;
-  color: var(--primary);
-  font-weight: 600;
-  margin-top: 0.15rem;
-}
-
-@media (max-width: 576px) {
-  .project-nav-dock {
-    grid-template-columns: 1fr;
-  }
-  .project-nav-link.nav-next {
-    flex-direction: row;
-    text-align: left;
-  }
-  .nav-next .project-nav-direction {
-    justify-content: flex-start;
-  }
-}
-.portfolio-inner {
-  position: relative;
-  overflow: hidden;
-  cursor: pointer;
-}
-
-.project-card-link {
-  z-index: 1;
-}
-
-.portfolio-text .btn,
-.portfolio-inner img,
-.portfolio-text,
-.portfolio-inner .text-center {
-  position: relative;
-  z-index: 2;
-}
-
 /* Sections */
 /* ============================================
    SHASTA SLIDER — Modern Override
@@ -3617,7 +3363,7 @@ nav.navbar .navbar-toggler-icon {
 .header-carousel h1.display-3 {
   font-size: clamp(2rem, 5vw, 3.4rem) !important;
   font-weight: 800 !important;
-  color: #ffffff !important;
+  color: #FFFFFF !important;
   line-height: 1.15 !important;
   letter-spacing: -0.03em !important;
   margin-bottom: 20px !important;
@@ -3644,7 +3390,7 @@ nav.navbar .navbar-toggler-icon {
   font-size: 15px !important;
   font-weight: 600 !important;
   padding: 14px 36px !important;
-  color: #ffffff !important;
+  color: #FFFFFF !important;
   letter-spacing: 0.01em !important;
   text-decoration: none !important;
   display: inline-flex !important;
@@ -3656,7 +3402,7 @@ nav.navbar .navbar-toggler-icon {
 }
 
 .header-carousel a.btn.btn-primary:hover {
-  background: #c96a18 !important;
+  background: rgb(188.9354330709, 100.8220472441, 26.2645669291) !important;
   transform: translateY(-2px) !important;
   box-shadow: 0 10px 28px rgba(224, 120, 32, 0.5) !important;
 }
@@ -3684,7 +3430,7 @@ nav.navbar .navbar-toggler-icon {
   background: rgba(255, 255, 255, 0.08) !important;
   border: 1px solid rgba(255, 255, 255, 0.18) !important;
   border-radius: 8px !important;
-  color: #ffffff !important;
+  color: #FFFFFF !important;
   font-size: 18px !important;
   display: flex !important;
   align-items: center !important;
@@ -3699,7 +3445,7 @@ nav.navbar .navbar-toggler-icon {
 .header-carousel .owl-nav button.owl-next:hover {
   background: #E07820 !important;
   border-color: #E07820 !important;
-  color: #ffffff !important;
+  color: #FFFFFF !important;
 }
 
 .header-carousel .owl-nav button.owl-prev span,
@@ -3982,7 +3728,7 @@ nav.navbar .navbar-toggler-icon {
    SHASTA FEATURE / WHY CHOOSE US — Modern
    ============================================ */
 .feature-section {
-  background: #ffffff !important;
+  background: #FFFFFF !important;
   padding: 0 !important;
 }
 
@@ -4038,7 +3784,7 @@ nav.navbar .navbar-toggler-icon {
 /* Body text */
 .ft-text {
   font-size: 14.5px !important;
-  color: #5a5a5a !important;
+  color: #555555 !important;
   line-height: 1.8 !important;
 }
 
@@ -4144,7 +3890,7 @@ nav.navbar .navbar-toggler-icon {
 
 .ft-img-badge i {
   font-size: 22px;
-  color: #ffffff;
+  color: #FFFFFF;
 }
 
 .ft-img-badge-text {
@@ -4156,7 +3902,7 @@ nav.navbar .navbar-toggler-icon {
 .ft-img-badge-text strong {
   display: block;
   font-size: 14px;
-  color: #ffffff;
+  color: #FFFFFF;
   font-weight: 800;
 }
 

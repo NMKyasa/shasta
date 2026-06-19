@@ -1,11 +1,12 @@
 /* ============================================
    SHASTA — HEADER + FOOTER (Conflict-Free)
    ============================================ */
+
 /* ========== TOPBAR (scoped — NOT footer) ========== */
 .container-fluid.bg-dark:not(.footer) {
-  background: #1A1A1A !important;
+  background: $secondary !important;
   padding: 0 2.5rem !important;
-  border-bottom: 2px solid rgba(224, 120, 32, 0.35) !important;
+  border-bottom: 2px solid $primary-35 !important;
 }
 
 .container-fluid.bg-dark:not(.footer) .row {
@@ -20,14 +21,14 @@
 
 .container-fluid.bg-dark:not(.footer) small {
   font-size: 12.5px;
-  color: rgba(240, 237, 228, 0.82);
+  color: rgba($light, 0.82);
   letter-spacing: 0.01em;
   font-weight: 400;
 }
 
 .container-fluid.bg-dark:not(.footer) .btn-sm-square.rounded-circle.bg-primary {
-  background: rgba(224, 120, 32, 0.15) !important;
-  border: 1px solid rgba(224, 120, 32, 0.4) !important;
+  background: $primary-15 !important;
+  border: 1px solid $primary-40 !important;
   border-radius: 50% !important;
   width: 24px !important;
   height: 24px !important;
@@ -39,22 +40,23 @@
 
 .container-fluid.bg-dark:not(.footer) .btn-sm-square.rounded-circle.bg-primary small {
   font-size: 10px !important;
-  color: #E07820 !important;
+  color: $primary !important;
 }
 
 /* ========== NAVBAR ========== */
-/* Replace the sticky rule */
 nav.navbar.navbar-expand-lg {
-  background: #ffffff !important;
+  background: $white !important;
   padding: 0 2.5rem !important;
   height: 70px !important;
   border-bottom: none !important;
-  box-shadow: 0 2px 0 0 rgba(224, 120, 32, 0.25), 0 1px 12px rgba(0, 0, 0, 0.06) !important;
+  box-shadow:
+    0 2px 0 0 $primary-25,
+    0 1px 12px rgba($black, 0.06) !important;
   position: fixed !important;
   top: 0 !important;
   left: 0 !important;
   width: 100% !important;
-  z-index: 1030 !important;
+  z-index: $z-fixed !important;
 }
 
 /* Push content down so navbar doesn't overlap it */
@@ -69,7 +71,12 @@ nav.navbar.navbar-expand-lg::after {
   left: 0;
   width: 100%;
   height: 3px;
-  background: linear-gradient(90deg, #E07820 0%, rgba(224, 120, 32, 0.2) 55%, transparent 100%);
+  background: linear-gradient(
+    90deg,
+    #{$primary} 0%,
+    #{$primary-20} 55%,
+    transparent 100%
+  );
   pointer-events: none;
 }
 
@@ -91,7 +98,7 @@ nav.navbar .navbar-brand img {
 nav.navbar .navbar-brand .fw-bold.text-primary {
   font-size: 1.25rem !important;
   font-weight: 800 !important;
-  color: #1A1A1A !important;
+  color: $secondary !important;
   letter-spacing: -0.03em;
   line-height: 1;
 }
@@ -106,7 +113,7 @@ nav.navbar .navbar-nav .nav-item.nav-link,
 nav.navbar .navbar-nav a.nav-item.nav-link {
   font-size: 14px !important;
   font-weight: 500 !important;
-  color: #1A1A1A !important;
+  color: $secondary !important;
   padding: 7px 5px !important;
   border-radius: 7px !important;
   transition: background 0.15s ease, color 0.15s ease !important;
@@ -117,28 +124,28 @@ nav.navbar .navbar-nav a.nav-item.nav-link {
 
 nav.navbar .navbar-nav .nav-item.nav-link:hover,
 nav.navbar .navbar-nav a.nav-item.nav-link:hover {
-  background: #F0EDE4 !important;
-  color: #E07820 !important;
+  background: $light !important;
+  color: $primary !important;
 }
 
 nav.navbar .navbar-nav .nav-link.active,
 nav.navbar .navbar-nav .dropdown-toggle.active {
-  background: #E07820 !important;
-  color: #ffffff !important;
+  background: $primary !important;
+  color: $white !important;
   font-weight: 600 !important;
 }
 
 nav.navbar .navbar-nav .nav-link.active:hover,
 nav.navbar .navbar-nav .dropdown-toggle.active:hover {
-  background: #c96a18 !important;
-  color: #ffffff !important;
+  background: $primary-hover !important;
+  color: $white !important;
 }
 
 /* ========== DROPDOWN ========== */
 nav.navbar .nav-item.dropdown > a.nav-link {
   font-size: 14px !important;
   font-weight: 500 !important;
-  color: #1A1A1A !important;
+  color: $secondary !important;
   padding: 7px 5px !important;
   border-radius: 7px !important;
   transition: background 0.15s, color 0.15s !important;
@@ -148,43 +155,43 @@ nav.navbar .nav-item.dropdown > a.nav-link {
 }
 
 nav.navbar .nav-item.dropdown > a.nav-link:hover {
-  background: #F0EDE4 !important;
-  color: #E07820 !important;
+  background: $light !important;
+  color: $primary !important;
 }
 
 nav.navbar .dropdown-menu.rounded-0.rounded-bottom {
-  border: 1px solid rgba(26, 26, 26, 0.1) !important;
-  border-radius: 10px !important;
+  border: 1px solid rgba($secondary, 0.1) !important;
+  border-radius: $radius-md !important;
   padding: 6px !important;
   margin-top: 6px !important;
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.09) !important;
-  background: #fff !important;
+  box-shadow: 0 10px 28px rgba($black, 0.09) !important;
+  background: $white !important;
   min-width: 175px;
 }
 
 nav.navbar .dropdown-menu .dropdown-item {
   font-size: 13.5px !important;
   font-weight: 500 !important;
-  color: #1A1A1A !important;
+  color: $secondary !important;
   padding: 9px 14px !important;
-  border-radius: 6px !important;
+  border-radius: $radius-sm !important;
   transition: background 0.15s, color 0.15s !important;
 }
 
 nav.navbar .dropdown-menu .dropdown-item:hover {
-  background: #F0EDE4 !important;
-  color: #E07820 !important;
+  background: $light !important;
+  color: $primary !important;
 }
 
 /* ========== CTA BUTTON ========== */
 nav.navbar a.btn.btn-primary {
-  background: #E07820 !important;
+  background: $primary !important;
   border: none !important;
   border-radius: 8px !important;
   font-size: 14px !important;
   font-weight: 600 !important;
   padding: 10px 24px !important;
-  color: #fff !important;
+  color: $white !important;
   letter-spacing: 0.01em;
   transition: background 0.15s ease, transform 0.1s ease !important;
   white-space: nowrap;
@@ -193,7 +200,7 @@ nav.navbar a.btn.btn-primary {
 }
 
 nav.navbar a.btn.btn-primary:hover {
-  background: #c96a18 !important;
+  background: $primary-hover !important;
   transform: translateY(-1px);
 }
 
@@ -203,17 +210,18 @@ nav.navbar a.btn.btn-primary:active {
 
 /* ========== HAMBURGER ========== */
 nav.navbar .navbar-toggler {
-  border: 1.5px solid rgba(26, 26, 26, 0.2) !important;
+  border: 1.5px solid rgba($secondary, 0.2) !important;
   border-radius: 7px !important;
   padding: 6px 9px !important;
   background: transparent !important;
 }
 
 nav.navbar .navbar-toggler:focus {
-  box-shadow: 0 0 0 3px rgba(224, 120, 32, 0.2) !important;
+  box-shadow: 0 0 0 3px $primary-20 !important;
 }
 
 nav.navbar .navbar-toggler-icon {
+  /* Leave SVG untouched */
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%231A1A1A' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2.5' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
 }
 
@@ -222,84 +230,92 @@ nav.navbar .navbar-toggler-icon {
   .container-fluid.bg-dark:not(.footer) .row.gx-4.d-none.d-lg-flex {
     display: none !important;
   }
+
   nav.navbar.navbar-expand-lg {
     height: auto !important;
     padding: 14px 1.25rem !important;
   }
+
   nav.navbar .navbar-collapse {
-    background: #fff;
-    border-top: 1px solid rgba(26, 26, 26, 0.08);
+    background: $white;
+    border-top: 1px solid rgba($secondary, 0.08);
     margin-top: 12px;
     padding: 10px 0;
-    border-radius: 0 0 10px 10px;
+    border-radius: 0 0 $radius-md $radius-md;
   }
+
   nav.navbar .navbar-nav {
     gap: 2px;
     padding: 0 4px;
   }
+
   nav.navbar .navbar-nav .nav-item.nav-link,
   nav.navbar .navbar-nav a.nav-item.nav-link {
     padding: 11px 14px !important;
     border-radius: 7px !important;
     width: 100%;
   }
+
   nav.navbar .nav-item.dropdown > a.nav-link {
     padding: 11px 14px !important;
     width: 100%;
   }
+
   nav.navbar .dropdown-menu.rounded-0.rounded-bottom {
     position: static !important;
     box-shadow: none !important;
     border: none !important;
-    background: #F8F5EE !important;
+    background: lighten($light, 2%) !important;
     border-radius: 7px !important;
     margin: 4px 0 4px 14px !important;
     padding: 4px !important;
   }
+
   nav.navbar a.btn.btn-primary {
     margin: 10px 4px 4px 4px !important;
     width: calc(100% - 8px) !important;
     display: block !important;
     text-align: center !important;
   }
+
   nav.navbar.navbar-expand-lg {
     position: fixed !important;
   }
-  /* Approximate collapsed navbar height on mobile */
+
   body {
     padding-top: 64px !important;
   }
-  /* When mobile menu is open, allow it to extend below */
+
   nav.navbar .navbar-collapse.show {
     max-height: calc(100vh - 64px);
     overflow-y: auto;
   }
 }
+
 @media (max-width: 576px) {
   .container-fluid.bg-dark:not(.footer) {
     display: none !important;
   }
 }
 
-
 /* ===== TOPBAR ADMIN LOGIN ICON ===== */
 .topbar-admin-link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background: rgba(224, 120, 32, 0.12);
-    border: 1px solid rgba(224, 120, 32, 0.3);
-    color: #E07820;
-    font-size: 13px;
-    text-decoration: none;
-    transition: all 0.15s ease;
-    margin-left: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba($primary, 0.12);
+  border: 1px solid rgba($primary, 0.3);
+  color: $primary;
+  font-size: 13px;
+  text-decoration: none;
+  transition: all 0.15s ease;
+  margin-left: 14px;
 }
 
 .topbar-admin-link:hover {
-    background: #E07820;
-    color: #ffffff;
+  background: $primary;
+  color: $white;
 }

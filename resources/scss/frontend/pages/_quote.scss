@@ -3,7 +3,7 @@
    ============================================ */
 
 .quote-section {
-    background: #ffffff !important;
+    background: $white !important;
     padding: 0 !important;
 }
 
@@ -19,6 +19,7 @@
 }
 
 /* ===== IMAGE PANEL ===== */
+
 .qt-img-col {
     min-height: 600px;
 }
@@ -30,43 +31,56 @@
 }
 
 .qt-img-wrap {
-    border-radius: 16px;
+    border-radius: $radius-lg;
     overflow: hidden;
 }
 
 .qt-img-wrap img {
-    border-radius: 16px;
+    border-radius: $radius-lg;
 }
 
 /* Bottom gradient for text legibility */
+
 .qt-img-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, transparent 50%, rgba(26, 26, 26, 0.78) 100%);
+
+    background: linear-gradient(
+        180deg,
+        transparent 50%,
+        rgba($secondary, 0.78) 100%
+    );
+
     z-index: 1;
     pointer-events: none;
-    border-radius: 16px;
+    border-radius: $radius-lg;
 }
 
 /* Decorative inner frame */
+
 .qt-img-frame {
     position: absolute;
     top: 20px;
     right: 20px;
     bottom: 20px;
     left: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    border-radius: 10px;
+
+    border: 1px solid $white-25;
+    border-radius: $radius-md;
+
     pointer-events: none;
     z-index: 2;
 }
 
 /* Top-left badges */
+
 .qt-badges {
     position: absolute;
     top: 24px;
     left: 24px;
+
     z-index: 3;
+
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
@@ -76,101 +90,139 @@
     display: flex;
     align-items: center;
     gap: 6px;
-    background: rgba(255, 255, 255, 0.12);
+
+    background: rgba($white, 0.12);
+
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 100px;
+
+    border: 1px solid rgba($white, 0.20);
+
+    border-radius: $radius-pill;
+
     padding: 6px 14px;
+
     font-size: 11.5px;
     font-weight: 600;
-    color: #ffffff;
+
+    color: $white;
 }
 
 .qt-badge i {
-    color: #E07820;
+    color: $primary;
     font-size: 11px;
 }
 
 /* Bottom text overlay */
+
 .qt-img-text {
     position: absolute;
     bottom: 28px;
     left: 28px;
     right: 28px;
+
     z-index: 3;
 }
 
 .qt-img-text h3 {
     font-size: 1.4rem;
     font-weight: 800;
-    color: #ffffff;
+
+    color: $white;
+
     letter-spacing: -0.02em;
+
     margin-bottom: 8px;
 }
 
 .qt-img-text p {
     font-size: 13px;
-    color: rgba(255, 255, 255, 0.75);
+
+    color: rgba($white, 0.75);
+
     line-height: 1.6;
+
     margin: 0;
 }
 
 /* ===== TEXT COLUMN ===== */
+
 .quote-text {
     background: transparent !important;
 }
 
 /* Tag / eyebrow */
+
 .qt-tag {
     display: flex;
     align-items: center;
     gap: 10px;
+
     margin-bottom: 18px;
 }
 
 .qt-tag span {
     display: block;
+
     width: 32px;
     height: 2px;
-    background: #E07820;
+
+    background: $primary;
+
     border-radius: 2px;
 }
 
 .qt-tag em {
     font-style: normal;
+
     font-size: 12px;
     font-weight: 700;
+
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: #E07820;
+
+    color: $primary;
 }
 
 /* Title */
+
 .qt-title {
     font-size: clamp(1.8rem, 4vw, 2.6rem) !important;
     font-weight: 800 !important;
-    color: #1A1A1A !important;
+
+    color: $secondary !important;
+
     letter-spacing: -0.03em !important;
     line-height: 1.2 !important;
 }
 
 /* Body text */
+
 .qt-text {
     font-size: 14.5px !important;
-    color: #5a5a5a !important;
+
+    color: lighten($text-color, 2%) !important;
+
     line-height: 1.8 !important;
 }
 
 /* ===== SUCCESS ALERT ===== */
+
 .qt-success {
-    background: rgba(40, 167, 69, 0.1);
-    border: 1px solid rgba(40, 167, 69, 0.3);
-    color: #1e7e34;
-    border-radius: 10px;
+    background: rgba($success, 0.10);
+
+    border: 1px solid rgba($success, 0.30);
+
+    color: darken($success, 12%);
+
+    border-radius: $radius-md;
+
     padding: 14px 18px;
+
     font-size: 13.5px;
+
     margin-bottom: 20px;
+
     display: flex;
     align-items: center;
     gap: 10px;
@@ -182,13 +234,18 @@
 }
 
 /* ===== FORM FIELDS ===== */
+
 .qt-field label {
     display: block;
+
     font-size: 12px;
     font-weight: 700;
+
     letter-spacing: 0.04em;
     text-transform: uppercase;
-    color: #1A1A1A;
+
+    color: $secondary;
+
     margin-bottom: 8px;
 }
 
@@ -196,29 +253,42 @@
 .qt-field select,
 .qt-field textarea {
     width: 100% !important;
-    background: #F0EDE4 !important;
+
+    background: $light !important;
+
     border: 1.5px solid transparent !important;
-    border-radius: 10px !important;
+
+    border-radius: $radius-md !important;
+
     padding: 14px 16px !important;
+
     font-size: 14px !important;
+
     font-family: inherit !important;
-    color: #1A1A1A !important;
-    transition: border-color 0.15s ease, background 0.15s ease !important;
+
+    color: $secondary !important;
+
+    transition:
+        border-color $transition-fast,
+        background $transition-fast !important;
+
     outline: none !important;
+
     height: auto !important;
+
     box-shadow: none !important;
 }
 
 .qt-field input::placeholder,
 .qt-field textarea::placeholder {
-    color: #999;
+    color: lighten($text-color, 27%);
 }
 
 .qt-field input:focus,
 .qt-field select:focus,
 .qt-field textarea:focus {
-    border-color: #E07820 !important;
-    background: #ffffff !important;
+    border-color: $primary !important;
+    background: $white !important;
 }
 
 .qt-field textarea {
@@ -227,39 +297,60 @@
 }
 
 /* Custom select arrow */
+
 .qt-field select {
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
+
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3e%3cpath fill='%23E07820' d='M1 1l5 5 5-5'/%3e%3c/svg%3e") !important;
+
     background-repeat: no-repeat;
+
     background-position: right 16px center;
+
     padding-right: 40px !important;
 }
 
 /* ===== SUBMIT BUTTON ===== */
+
 .qt-submit {
     width: 100%;
-    background: #E07820 !important;
-    color: #ffffff !important;
+
+    background: $primary !important;
+
+    color: $white !important;
+
     font-size: 15px !important;
     font-weight: 700 !important;
+
     padding: 16px !important;
-    border-radius: 10px !important;
+
+    border-radius: $radius-md !important;
+
     border: none !important;
+
     cursor: pointer;
+
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
-    box-shadow: 0 8px 22px rgba(224, 120, 32, 0.35) !important;
-    transition: background 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease !important;
+
+    box-shadow: 0 8px 22px $primary-35 !important;
+
+    transition:
+        background $transition-fast,
+        transform 0.1s ease,
+        box-shadow $transition-fast !important;
 }
 
 .qt-submit:hover {
-    background: #c96a18 !important;
+    background: $primary-hover !important;
+
     transform: translateY(-2px);
-    box-shadow: 0 12px 28px rgba(224, 120, 32, 0.45) !important;
+
+    box-shadow: 0 12px 28px $primary-45 !important;
 }
 
 .qt-submit i {
@@ -267,7 +358,9 @@
 }
 
 /* ===== MOBILE ===== */
+
 @media (max-width: 767px) {
+
     .quote-section .container.quote {
         padding-top: 52px;
         padding-bottom: 52px;
