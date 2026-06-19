@@ -1,0 +1,341 @@
+/* ===== Team Section ===== */
+.container-xxl.py-5 {
+    padding-top: 72px !important;
+    padding-bottom: 72px !important;
+    background: #ffffff;
+}
+
+/* Header */
+.text-center .bg-primary {
+    background: #E07820 !important;
+    width: 48px !important;
+    height: 2px !important;
+    margin-bottom: 20px !important;
+    border-radius: 0;
+}
+
+.text-center .display-5 {
+    font-size: 2rem;
+    font-weight: 500;
+    color: #1A1A1A;
+    letter-spacing: -0.5px;
+    margin-bottom: 48px !important;
+}
+
+/* Card */
+.team-item {
+    border: 1px solid #E8E4DC;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #ffffff;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.team-item:hover {
+    border-color: #E07820;
+    transform: translateY(-3px);
+}
+
+/* Image wrapper */
+.team-item .overflow-hidden.position-relative {
+    aspect-ratio: 1 / 1;
+    background: #F0EDE4;
+}
+
+.team-item .overflow-hidden.position-relative img.img-fluid {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.team-item:hover .overflow-hidden.position-relative img.img-fluid {
+    transform: scale(1.04);
+}
+
+/* Social overlay — hidden by default, revealed on hover */
+.team-social {
+    position: absolute;
+    inset: 0;
+    background: rgba(26, 26, 26, 0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+
+.team-item:hover .team-social {
+    opacity: 1;
+}
+
+/* Social icon buttons */
+.team-social .btn.btn-square.btn-dark.rounded-circle {
+    width: 36px !important;
+    height: 36px !important;
+    min-width: unset;
+    border-radius: 50% !important;
+    background: #ffffff !important;
+    border: none !important;
+    color: #1A1A1A !important;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 !important;
+    transform: translateY(6px);
+    transition: background 0.15s ease, color 0.15s ease, transform 0.25s ease;
+    text-decoration: none;
+}
+
+.team-item:hover .team-social .btn.btn-square.btn-dark.rounded-circle {
+    transform: translateY(0);
+}
+
+.team-social .btn.btn-square.btn-dark.rounded-circle:hover {
+    background: #E07820 !important;
+    color: #ffffff !important;
+}
+
+/* Info block */
+.team-item .text-center.p-4 {
+    padding: 18px 16px 20px !important;
+    text-align: center;
+}
+
+/* Name */
+.team-item h5.mb-1 {
+    font-size: 15px;
+    font-weight: 500;
+    color: #1A1A1A;
+    margin: 0 0 4px !important;
+}
+
+/* Position */
+.team-item span.text-primary {
+    display: block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: #E07820 !important;
+    margin-bottom: 10px !important;
+}
+
+/* Bio */
+.team-item p.small.text-muted {
+    font-size: 12px;
+    color: #888888 !important;
+    line-height: 1.65;
+    margin: 0;
+}
+
+/* ===== Team — equal height cards ===== */
+
+/* Force all cards to the same total height */
+.team-item {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Image always takes up the same square */
+.team-item .overflow-hidden.position-relative {
+    aspect-ratio: 1 / 1;
+    flex-shrink: 0;
+}
+
+/* Info block stretches to fill remaining height */
+.team-item .text-center.p-4 {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+/* Bio pushed to bottom so names/positions stay top-aligned */
+.team-item p.small.text-muted {
+    margin-top: auto !important;
+    padding-top: 8px;
+}
+
+/* ===== Team — Read More Button ===== */
+.team-readmore {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 5px !important;
+    margin-top: 10px !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    color: #E07820 !important;
+    background: none !important;
+    border: none !important;
+    padding: 0 !important;
+    cursor: pointer !important;
+    letter-spacing: 0.3px !important;
+    transition: gap 0.2s ease !important;
+    text-decoration: none !important;
+}
+
+.team-readmore:hover {
+    gap: 8px !important;
+}
+
+.team-readmore svg {
+    transition: transform 0.2s ease !important;
+}
+
+.team-readmore:hover svg {
+    transform: translateX(2px) !important;
+}
+
+/* ===== Modal overlay ===== */
+.team-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(26, 26, 26, 0.55);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+}
+
+.team-modal-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* ===== Modal card ===== */
+.team-modal {
+    background: #ffffff;
+    border-radius: 20px;
+    max-width: 520px;
+    width: 100%;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.12);
+    transform: translateY(20px) scale(0.98);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
+    overflow: hidden;
+}
+
+.team-modal-overlay.active .team-modal {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+}
+
+/* ===== Modal photo strip ===== */
+.team-modal-photo {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+}
+
+.team-modal-photo-placeholder {
+    width: 100%;
+    height: 220px;
+    background: #F0EDE4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #C8C0B0;
+}
+
+/* ===== Modal body ===== */
+.team-modal-body {
+    padding: 28px 32px 32px;
+}
+
+.team-modal-name {
+    font-size: 20px;
+    font-weight: 600;
+    color: #1A1A1A;
+    margin: 0 0 4px;
+}
+
+.team-modal-position {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: #E07820;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.team-modal-divider {
+    border: none;
+    border-top: 1px solid #F0EDE4;
+    margin: 0 0 20px;
+}
+
+.team-modal-bio {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #555555;
+    margin: 0;
+}
+
+/* ===== Modal close button ===== */
+.team-modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.9);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #1A1A1A;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    transition: background 0.15s ease, color 0.15s ease;
+    z-index: 10;
+}
+
+.team-modal-close:hover {
+    background: #E07820;
+    color: #ffffff;
+}
+
+.team-modal-inner {
+    position: relative;
+}
+
+/* ===== Modal social links ===== */
+.team-modal-social {
+    display: flex;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.team-modal-social a {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #F0EDE4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #1A1A1A;
+    font-size: 13px;
+    text-decoration: none;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+.team-modal-social a:hover {
+    background: #E07820;
+    color: #ffffff;
+}

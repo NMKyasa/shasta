@@ -1,0 +1,241 @@
+/* ============================================
+   SHASTA FEATURE / WHY CHOOSE US — Modern
+   ============================================ */
+
+.feature-section {
+    background: #ffffff !important;
+    padding: 0 !important;
+}
+
+.feature-section .container.feature {
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+
+@media (max-width: 991px) {
+    .feature-section .ft-row {
+        gap: 40px;
+    }
+}
+
+/* ===== TEXT COLUMN ===== */
+.feature-text {
+    background: transparent !important;
+}
+
+/* Tag / eyebrow */
+.ft-tag {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+.ft-tag span {
+    display: block;
+    width: 32px;
+    height: 2px;
+    background: #E07820;
+    border-radius: 2px;
+}
+
+.ft-tag em {
+    font-style: normal;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #E07820;
+}
+
+/* Title */
+.ft-title {
+    font-size: clamp(1.8rem, 4vw, 2.6rem) !important;
+    font-weight: 800 !important;
+    color: #1A1A1A !important;
+    letter-spacing: -0.03em !important;
+    line-height: 1.2 !important;
+}
+
+/* Body text */
+.ft-text {
+    font-size: 14.5px !important;
+    color: #5a5a5a !important;
+    line-height: 1.8 !important;
+}
+
+/* ===== FEATURE ITEM CARDS ===== */
+.ft-grid2 {
+    margin-top: 8px;
+}
+
+.ft-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: #F0EDE4;
+    border-radius: 12px;
+    padding: 18px;
+    height: 100%;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.ft-item:hover {
+    transform: translateY(-3px);
+    background: #ece6d9;
+}
+
+.ft-icon {
+    width: 52px;
+    height: 52px;
+    min-width: 52px;
+    border-radius: 12px;
+    background: #1A1A1A;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ft-icon i {
+    font-size: 20px;
+    color: #E07820;
+}
+
+.ft-item-label {
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #E07820;
+    margin-bottom: 4px;
+}
+
+.ft-item-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #1A1A1A;
+    letter-spacing: -0.01em;
+}
+
+/* ===== IMAGE COLUMN ===== */
+.ft-img-col {
+    min-height: 540px;
+}
+
+@media (max-width: 991px) {
+    .ft-img-col {
+        min-height: 400px;
+    }
+}
+
+.ft-img-wrap {
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.ft-img-wrap img {
+    border-radius: 16px;
+}
+
+/* Decorative inner frame */
+.ft-img-frame {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    bottom: 20px;
+    left: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 10px;
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Floating badge top-left */
+.ft-img-badge {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    z-index: 3;
+    background: rgba(224, 120, 32, 0.95);
+    border-radius: 12px;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 8px 24px rgba(224, 120, 32, 0.4);
+}
+
+.ft-img-badge i {
+    font-size: 22px;
+    color: #ffffff;
+}
+
+.ft-img-badge-text {
+    font-size: 12.5px;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.4;
+}
+
+.ft-img-badge-text strong {
+    display: block;
+    font-size: 14px;
+    color: #ffffff;
+    font-weight: 800;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 767px) {
+    .feature-section .container.feature {
+        padding-top: 52px;
+        padding-bottom: 52px;
+    }
+
+    .feature-text .p-lg-5 {
+        padding: 32px 1.25rem !important;
+    }
+
+    .ft-grid2 {
+        margin-top: 4px;
+    }
+
+    .ft-item {
+        padding: 14px;
+        gap: 12px;
+    }
+
+    .ft-icon {
+        width: 44px;
+        height: 44px;
+        min-width: 44px;
+    }
+
+    .ft-icon i {
+        font-size: 16px;
+    }
+
+    .ft-item-title {
+        font-size: 13.5px;
+    }
+
+    .ft-item-label {
+        font-size: 10.5px;
+    }
+
+    .ft-img-badge {
+        padding: 10px 14px;
+        gap: 8px;
+    }
+
+    .ft-img-badge i {
+        font-size: 16px;
+    }
+
+    .ft-img-badge-text {
+        font-size: 11px;
+    }
+
+    .ft-img-badge-text strong {
+        font-size: 12.5px;
+    }
+}
+

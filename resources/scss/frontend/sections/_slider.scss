@@ -1,0 +1,274 @@
+/* ============================================
+   SHASTA SLIDER — Modern Override
+   Targets existing Owl Carousel classes
+   ============================================ */
+
+/* ========== OUTER WRAPPER ========== */
+.container-fluid.p-0.pb-5 {
+    padding-bottom: 0 !important;
+}
+
+/* ========== CAROUSEL WRAPPER ========== */
+.header-carousel {
+    position: relative;
+}
+
+/* ========== EACH SLIDE ========== */
+.header-carousel .owl-carousel-item {
+    position: relative;
+    overflow: hidden;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+}
+
+@media (max-width: 767px) {
+    .header-carousel .owl-carousel-item {
+        min-height: 480px;
+    }
+}
+
+@media (max-width: 480px) {
+    .header-carousel .owl-carousel-item {
+        min-height: 400px;
+    }
+}
+
+/* ========== SLIDE IMAGE ========== */
+.header-carousel .owl-carousel-item img.img-fluid {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    opacity: 0.45 !important;
+    z-index: 0 !important;
+}
+
+/* ========== DARK + ORANGE OVERLAY ========== */
+.header-carousel .owl-carousel-item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(26, 26, 26, 0.88) 0%,
+        rgba(26, 26, 26, 0.55) 55%,
+        rgba(224, 120, 32, 0.2) 100%
+    );
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Orange bottom progress line (animates per slide) */
+.header-carousel .owl-carousel-item::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 0%;
+    background: #E07820;
+    z-index: 10;
+    transition: width 0s;
+}
+
+.header-carousel .owl-item.active .owl-carousel-item::after {
+    width: 100%;
+    transition: width 5s linear;
+}
+
+/* ========== CONTENT OVERLAY ========== */
+.header-carousel .carousel-inner {
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 2 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: transparent !important;
+    padding: 0 !important;
+}
+
+.header-carousel .carousel-inner .container {
+    width: 100%;
+}
+
+.header-carousel .carousel-inner .row {
+    margin: 0;
+}
+
+/* ========== TEXT CONTENT ========== */
+.header-carousel .col-lg-8.text-center {
+    padding: 2rem 1rem;
+}
+
+/* Slide title */
+.header-carousel h1.display-3 {
+    font-size: clamp(2rem, 5vw, 3.4rem) !important;
+    font-weight: 800 !important;
+    color: #ffffff !important;
+    line-height: 1.15 !important;
+    letter-spacing: -0.03em !important;
+    margin-bottom: 20px !important;
+    text-shadow: 0 2px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* Subtitle */
+.header-carousel p.fs-5.text-white {
+    font-size: 1.05rem !important;
+    color: rgba(255, 255, 255, 0.75) !important;
+    line-height: 1.75 !important;
+    margin-bottom: 36px !important;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* ========== CTA BUTTON ========== */
+.header-carousel a.btn.btn-primary {
+    background: #E07820 !important;
+    border: none !important;
+    border-radius: 8px !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    padding: 14px 36px !important;
+    color: #ffffff !important;
+    letter-spacing: 0.01em !important;
+    text-decoration: none !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    box-shadow: 0 6px 20px rgba(224, 120, 32, 0.4) !important;
+    transition: background 0.15s, transform 0.1s, box-shadow 0.15s !important;
+    border-radius: 8px !important;
+}
+
+.header-carousel a.btn.btn-primary:hover {
+    background: #c96a18 !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 10px 28px rgba(224, 120, 32, 0.5) !important;
+}
+
+/* Remove Bootstrap's rounded-pill override */
+.header-carousel a.btn.btn-primary.rounded-pill {
+    border-radius: 8px !important;
+}
+
+/* ========== OWL NAV ARROWS ========== */
+.header-carousel .owl-nav {
+    position: absolute !important;
+    bottom: 32px !important;
+    right: 40px !important;
+    display: flex !important;
+    gap: 8px !important;
+    margin: 0 !important;
+    z-index: 5;
+}
+
+.header-carousel .owl-nav button.owl-prev,
+.header-carousel .owl-nav button.owl-next {
+    width: 42px !important;
+    height: 42px !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    border-radius: 8px !important;
+    color: #ffffff !important;
+    font-size: 18px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: background 0.15s, border-color 0.15s !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1 !important;
+}
+
+.header-carousel .owl-nav button.owl-prev:hover,
+.header-carousel .owl-nav button.owl-next:hover {
+    background: #E07820 !important;
+    border-color: #E07820 !important;
+    color: #ffffff !important;
+}
+
+.header-carousel .owl-nav button.owl-prev span,
+.header-carousel .owl-nav button.owl-next span {
+    font-size: 22px !important;
+    line-height: 1 !important;
+    color: inherit !important;
+    margin-top: -2px;
+    display: block;
+}
+
+/* ========== OWL DOTS ========== */
+.header-carousel .owl-dots {
+    position: absolute !important;
+    bottom: 42px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    margin: 0 !important;
+    z-index: 5;
+}
+
+.header-carousel .owl-dots .owl-dot {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.header-carousel .owl-dots .owl-dot span {
+    width: 8px !important;
+    height: 8px !important;
+    border-radius: 50% !important;
+    background: rgba(255, 255, 255, 0.3) !important;
+    display: block !important;
+    margin: 0 !important;
+    transition: all 0.25s ease !important;
+    border: none !important;
+}
+
+.header-carousel .owl-dots .owl-dot.active span {
+    background: #E07820 !important;
+    width: 26px !important;
+    border-radius: 4px !important;
+}
+
+.header-carousel .owl-dots .owl-dot:hover span {
+    background: rgba(224, 120, 32, 0.6) !important;
+}
+
+/* ========== SLIDE COUNTER (top-right) ========== */
+.header-carousel::after {
+    content: '';
+    /* counter handled via JS below */
+}
+
+/* ========== MOBILE ========== */
+@media (max-width: 767px) {
+    .header-carousel .owl-nav {
+        right: 50% !important;
+        transform: translateX(50%) !important;
+        bottom: 20px !important;
+    }
+
+    .header-carousel .owl-dots {
+        display: none !important;
+    }
+
+    .header-carousel h1.display-3 {
+        font-size: 1.8rem !important;
+    }
+
+    .header-carousel p.fs-5.text-white {
+        font-size: 0.95rem !important;
+    }
+
+    .header-carousel a.btn.btn-primary {
+        padding: 12px 24px !important;
+        font-size: 14px !important;
+    }
+}

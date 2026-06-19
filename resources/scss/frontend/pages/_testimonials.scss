@@ -1,0 +1,172 @@
+/* ===== TESTIMONIALS — Single Card Centered Style ===== */
+
+.container-xxl:has(.testimonial-carousel) {
+    padding-top: 72px !important;
+    padding-bottom: 72px !important;
+    background: #ffffff !important;
+}
+
+.container-xxl:has(.testimonial-carousel) .bg-primary {
+    background: #E07820 !important;
+    width: 48px !important;
+    height: 2px !important;
+    margin-bottom: 20px !important;
+}
+
+.container-xxl:has(.testimonial-carousel) .display-5 {
+    font-size: 2rem !important;
+    font-weight: 500 !important;
+    color: #1A1A1A !important;
+    letter-spacing: -0.5px !important;
+    margin-bottom: 48px !important;
+}
+
+/* ===== Photo dots — keep template layout, restyle ===== */
+.testimonial-carousel.owl-carousel .owl-dots {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 14px !important;
+    margin-bottom: 0 !important;
+    margin-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.testimonial-carousel.owl-carousel .owl-dot {
+    background: none !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: auto !important;
+    height: auto !important;
+    outline: none !important;
+    transition: transform 0.3s ease !important;
+}
+
+.testimonial-carousel.owl-carousel .owl-dot span {
+    display: none !important;
+}
+
+/* Inactive photos — small and faded */
+.testimonial-carousel.owl-carousel .owl-dot img {
+    width: 52px !important;
+    height: 52px !important;
+    border-radius: 50% !important;
+    object-fit: cover !important;
+    display: block !important;
+    opacity: 0.35 !important;
+    border: 2px solid transparent !important;
+    filter: grayscale(30%) !important;
+    transition: all 0.35s ease !important;
+}
+
+/* Active photo — large and vivid */
+.testimonial-carousel.owl-carousel .owl-dot.active img {
+    width: 80px !important;
+    height: 80px !important;
+    opacity: 1 !important;
+    border-color: #E07820 !important;
+    filter: grayscale(0%) !important;
+    box-shadow: 0 0 0 4px rgba(224,120,32,0.15) !important;
+}
+
+/* ===== Quote icon below active photo ===== */
+.testimonial-carousel.owl-carousel .owl-dot.active::after {
+    content: '' !important;
+    display: block !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
+/* ===== Stage overflow ===== */
+.testimonial-carousel.owl-carousel .owl-stage-outer {
+    overflow: hidden !important;
+    padding: 0 !important;
+}
+
+/* ===== Single card ===== */
+.testimonial-item {
+    background: #ffffff !important;
+    border: 1px solid #ECEAE4 !important;
+    border-radius: 20px !important;
+    padding: 40px 48px !important;
+    text-align: center !important;
+    box-shadow: 0 2px 24px rgba(0,0,0,0.06) !important;
+    margin: 24px 8px 8px !important;
+    position: relative !important;
+}
+
+/* ===== Stars ===== */
+.testimonial-item .mb-3 {
+    margin-bottom: 20px !important;
+}
+
+.testimonial-item .fa-star {
+    font-size: 15px !important;
+    color: #E07820 !important;
+    margin: 0 2px !important;
+}
+
+.testimonial-item .far.fa-star {
+    font-size: 15px !important;
+    color: #D0CCC4 !important;
+    margin: 0 2px !important;
+}
+
+/* ===== Quote mark ===== */
+.testimonial-item p.fs-5::before {
+    content: '\201C' !important;
+    font-size: 80px !important;
+    line-height: 0.6 !important;
+    color: #F0EDE4 !important;
+    font-family: Georgia, serif !important;
+    display: block !important;
+    text-align: center !important;
+    margin-bottom: 8px !important;
+    position: static !important;
+}
+
+/* ===== Quote text ===== */
+.testimonial-item p.fs-5 {
+    font-size: 16px !important;
+    line-height: 1.8 !important;
+    color: #555555 !important;
+    margin: 0 auto 28px !important;
+    max-width: 640px !important;
+    font-style: italic !important;
+    position: relative !important;
+    padding: 0 !important;
+}
+
+/* ===== Divider ===== */
+.testimonial-item hr {
+    border: none !important;
+    border-top: 1px solid #F0EDE4 !important;
+    margin: 0 auto 20px !important;
+    width: 60px !important;
+    opacity: 1 !important;
+}
+
+/* ===== Author name ===== */
+.testimonial-item h4 {
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    color: #1A1A1A !important;
+    margin: 0 0 6px 0 !important;
+    letter-spacing: -0.2px !important;
+}
+
+/* ===== Position / company ===== */
+.testimonial-item span.text-primary {
+    font-size: 11px !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.8px !important;
+    text-transform: uppercase !important;
+    color: #E07820 !important;
+    display: block !important;
+}
+
+/* ===== Hide nav arrows ===== */
+.testimonial-carousel.owl-carousel .owl-nav {
+    display: none !important;
+}

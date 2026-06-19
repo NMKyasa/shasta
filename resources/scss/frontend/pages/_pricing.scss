@@ -1,0 +1,162 @@
+/* ===== Pricing Section ===== */
+.container-xxl.py-5 {
+    padding-top: 72px !important;
+    padding-bottom: 72px !important;
+    background: #ffffff;
+}
+
+/* Header */
+.text-center .bg-primary {
+    background: #E07820 !important;
+    width: 48px !important;
+    height: 2px !important;
+    margin-bottom: 20px !important;
+    border-radius: 0;
+}
+
+.text-center .display-5 {
+    font-size: 2rem;
+    font-weight: 500;
+    color: #1A1A1A;
+    letter-spacing: -0.5px;
+    margin-bottom: 48px !important;
+}
+
+/* Grid gap */
+.row.g-4 {
+    gap: 20px 0;
+}
+
+/* Card base */
+.card.h-100.border-0.shadow-sm {
+    border: 1px solid #E8E4DC !important;
+    border-radius: 16px !important;
+    box-shadow: none !important;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+    overflow: hidden;
+}
+
+.card.h-100.border-0.shadow-sm:hover {
+    border-color: #C8C0B0 !important;
+    transform: translateY(-3px);
+}
+
+/* Featured card */
+.card.h-100.border-0.shadow-sm:has(.badge.bg-primary) {
+    border: 2px solid #E07820 !important;
+}
+
+/* "Most Popular" badge */
+.badge.bg-primary {
+    background: #E07820 !important;
+    color: #ffffff !important;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    padding: 7px 16px;
+    border-radius: 0;
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+/* Card body */
+.card-body {
+    padding: 24px !important;
+}
+
+/* Service label (small.text-primary) */
+.card-body small.text-primary {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #E07820 !important;
+    display: block;
+    margin-bottom: 8px;
+}
+
+/* Plan title */
+.card-body h3 {
+    font-size: 20px;
+    font-weight: 500;
+    color: #1A1A1A;
+    margin-top: 0;
+    margin-bottom: 6px;
+}
+
+/* Subtitle */
+.card-body .text-muted {
+    font-size: 13px;
+    color: #888888 !important;
+    line-height: 1.5;
+    margin-bottom: 16px;
+}
+
+/* Divider */
+.card-body hr {
+    border: none;
+    border-top: 1px solid #F0EDE4;
+    margin: 16px 0;
+}
+
+/* Price */
+.card-body h2.text-primary {
+    font-size: 30px;
+    font-weight: 500;
+    color: #E07820 !important;
+    letter-spacing: -1px;
+    margin: 0 0 4px;
+}
+
+/* Pricing period */
+.card-body p {
+    font-size: 13px;
+    color: #aaaaaa;
+    margin: 0;
+}
+
+/* Description text */
+.card-body p:last-child {
+    font-size: 13px;
+    color: #666666;
+    line-height: 1.7;
+}
+
+/* Card footer */
+.card-footer.bg-white.border-0 {
+    padding: 0 24px 24px !important;
+    background: #ffffff !important;
+    border: none !important;
+}
+
+/* CTA button */
+.card-footer .btn.btn-primary.w-100 {
+    display: block;
+    width: 100%;
+    padding: 11px 0;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    text-decoration: none;
+    background: #F0EDE4 !important;
+    color: #1A1A1A !important;
+    border: 1px solid #DDD9D0 !important;
+    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.card-footer .btn.btn-primary.w-100:hover {
+    background: #E07820 !important;
+    color: #ffffff !important;
+    border-color: #E07820 !important;
+}
+
+/* Featured card button — always filled */
+.card:has(.badge.bg-primary) .card-footer .btn.btn-primary.w-100 {
+    background: #E07820 !important;
+    color: #ffffff !important;
+    border-color: #E07820 !important;
+}
+

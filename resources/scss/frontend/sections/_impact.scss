@@ -1,0 +1,202 @@
+/* ============================================
+   SHASTA IMPACT — Infinite Marquee Ticker
+   ============================================ */
+/* ========== SECTION WRAPPER ========== */
+.impact-section {
+    background: #F0EDE4;
+    padding-top: 80px !important;
+    padding-bottom: 80px !important;
+}
+
+.impact-section > .container {
+    max-width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+/* ========== HEADING AREA ========== */
+.impact-section .text-center.wow {
+    padding: 0 2rem;
+    margin-bottom: 52px !important;
+}
+
+.impact-section .text-center.wow .bg-primary[style*="width:60px"] {
+    width: auto !important;
+    height: auto !important;
+    background: transparent !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 10px !important;
+    margin-bottom: 12px !important;
+}
+
+.impact-section .text-center.wow .bg-primary[style*="width:60px"]::before,
+.impact-section .text-center.wow .bg-primary[style*="width:60px"]::after {
+    content: '';
+    display: block;
+    width: 36px;
+    height: 2px;
+    background: #E07820;
+    border-radius: 2px;
+    flex-shrink: 0;
+}
+
+.impact-section .text-center.wow h1.display-5 {
+    font-size: clamp(1.8rem, 4vw, 2.6rem) !important;
+    font-weight: 800 !important;
+    color: #1A1A1A !important;
+    letter-spacing: -0.03em !important;
+    margin-bottom: 0 !important;
+}
+
+/* ========== HIDE ORIGINAL GRID ========== */
+.impact-section .row.g-4 {
+    display: none !important;
+}
+
+/* ========== TICKER TRACK WRAPPER ========== */
+.imp-ticker-wrap {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+/* Soft fade on both edges */
+.imp-ticker-wrap::before,
+.imp-ticker-wrap::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 140px;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.imp-ticker-wrap::before {
+    left: 0;
+    background: linear-gradient(to right, #F0EDE4 0%, transparent 100%);
+}
+
+.imp-ticker-wrap::after {
+    right: 0;
+    background: linear-gradient(to left, #F0EDE4 0%, transparent 100%);
+}
+
+/* ========== SCROLLING TRACK ========== */
+.imp-ticker-track {
+    display: flex;
+    gap: 16px;
+    width: max-content;
+    animation: imp-scroll 40s linear infinite;
+    padding: 8px 0 12px;
+}
+
+.imp-ticker-track:hover {
+    animation-play-state: paused;
+}
+
+@keyframes imp-scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+}
+
+/* ========== INDIVIDUAL CARD ========== */
+.imp-ticker-card {
+    background: #1A1A1A;
+    border-radius: 12px;
+    padding: 30px 32px 26px;
+    min-width: 190px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    flex-shrink: 0;
+    cursor: default;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+/* Orange top accent */
+.imp-ticker-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: #E07820;
+    border-radius: 12px 12px 0 0;
+}
+
+/* Decorative circle */
+.imp-ticker-card::after {
+    content: '';
+    position: absolute;
+    bottom: -28px;
+    right: -14px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: rgba(224, 120, 32, 0.06);
+    pointer-events: none;
+}
+
+.imp-ticker-card:hover {
+    transform: translateY(-4px);
+    background: #222222;
+}
+
+/* Counter value */
+.imp-ticker-value {
+    font-size: 2.6rem;
+    font-weight: 800;
+    color: #E07820;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    margin-bottom: 10px;
+}
+
+/* Divider between value and label */
+.imp-ticker-divider {
+    width: 24px;
+    height: 2px;
+    background: rgba(224, 120, 32, 0.35);
+    border-radius: 2px;
+    margin: 0 auto 10px;
+}
+
+/* Label */
+.imp-ticker-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.68);
+    line-height: 1.45;
+    white-space: nowrap;
+}
+
+/* ========== MOBILE ========== */
+@media (max-width: 767px) {
+    .container-xxl.py-5:has(.row .col-lg-3 .bg-dark) {
+        padding-top: 52px !important;
+        padding-bottom: 52px !important;
+    }
+
+    .imp-ticker-wrap::before,
+    .imp-ticker-wrap::after {
+        width: 60px;
+    }
+
+    .imp-ticker-card {
+        min-width: 155px;
+        padding: 24px 20px 20px;
+    }
+
+    .imp-ticker-value {
+        font-size: 2rem;
+    }
+
+    .imp-ticker-track {
+        animation-duration: 28s;
+    }
+}

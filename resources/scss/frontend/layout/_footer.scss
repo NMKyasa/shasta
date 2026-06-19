@@ -211,3 +211,27 @@
     margin-bottom: 4px !important;
   }
 }
+
+
+/* ===== FOOTER ADMIN ICON ===== */
+.footer-admin-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 6px;
+    background: rgba(224, 120, 32, 0.1);
+    border: 1px solid rgba(224, 120, 32, 0.25);
+    color: #E07820;
+    font-size: 11px;
+    text-decoration: none;
+    transition: all 0.15s ease;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+.footer-admin-link:hover {
+    background: #E07820;
+    color: #ffffff;
+}
