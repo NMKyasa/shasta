@@ -1,0 +1,174 @@
+/* =====================================================
+   SHASTA ADMIN THEME VARIABLES
+   Derived directly from original style.css
+   ===================================================== */
+
+/* -----------------------------------------------------
+   Brand Colors
+   ----------------------------------------------------- */
+
+$primary: #E07820;
+$secondary: #1A1A1A;
+$light: #F0EDE4;
+$dark: #1A1A1A;
+
+
+/* -----------------------------------------------------
+   Sidebar Colors
+   ----------------------------------------------------- */
+
+$sidebar-bg: #181818;
+$sidebar-bg-soft: #1f1f1f;
+
+$sidebar-text: #B8B5AE;
+$sidebar-text-active: #FFFFFF;
+
+
+/* -----------------------------------------------------
+   Neutral Colors
+   ----------------------------------------------------- */
+
+$white: #FFFFFF;
+$black: #000000;
+
+$text-muted: #8A8578;
+
+$placeholder-color: #B3AEA1;
+
+$soft-background: #FBFAF7;
+
+
+/* -----------------------------------------------------
+   Borders
+   ----------------------------------------------------- */
+
+$border-color: #ECE8DD;
+$border-color-light: #F0EDE4;
+$border-color-soft: #D9D4C7;
+
+
+/* -----------------------------------------------------
+   Semantic Colors
+   ----------------------------------------------------- */
+
+$success: #4CAF7D;
+$success-dark: #2F8B5E;
+
+$danger: #D65A5A;
+$danger-hover: #C0392B;
+$danger-light: #FF6B6B;
+
+$warning: #E07820;
+
+$info: #3CA9D9;
+
+$primary-blue: #4A6FA5;
+
+$indigo: #6C5CE7;
+
+
+/* -----------------------------------------------------
+   Hover Colors
+   ----------------------------------------------------- */
+
+$primary-hover: #C4661A;
+
+
+/* -----------------------------------------------------
+   Transparencies — White
+   ----------------------------------------------------- */
+
+$white-06: rgba($white, 0.06);
+$white-08: rgba($white, 0.08);
+
+
+/* -----------------------------------------------------
+   Transparencies — Black
+   ----------------------------------------------------- */
+
+$black-02: rgba($secondary, 0.02);
+$black-04: rgba($secondary, 0.04);
+$black-05: rgba($secondary, 0.05);
+$black-06: rgba($secondary, 0.06);
+$black-10: rgba($secondary, 0.10);
+$black-18: rgba($black, 0.18);
+$black-25: rgba($black, 0.25);
+
+
+/* -----------------------------------------------------
+   Transparencies — Primary
+   ----------------------------------------------------- */
+
+$primary-05: rgba($primary, 0.05);
+$primary-08: rgba($primary, 0.08);
+$primary-10: rgba($primary, 0.10);
+$primary-12: rgba($primary, 0.12);
+$primary-14: rgba($primary, 0.14);
+$primary-20: rgba($primary, 0.20);
+$primary-25: rgba($primary, 0.25);
+$primary-30: rgba($primary, 0.30);
+$primary-40: rgba($primary, 0.40);
+
+
+/* -----------------------------------------------------
+   Transparencies — Danger
+   ----------------------------------------------------- */
+
+$danger-08: rgba($danger, 0.08);
+$danger-12: rgba($danger, 0.12);
+$danger-20: rgba($danger, 0.20);
+
+
+/* -----------------------------------------------------
+   Success Transparency
+   ----------------------------------------------------- */
+
+$success-15: rgba($success, 0.15);
+
+
+/* -----------------------------------------------------
+   Shadows
+   (Derived EXACTLY from style.css)
+   ----------------------------------------------------- */
+
+$shadow-header: 0 2px 8px rgba($secondary, 0.04);
+
+$shadow-card: 0 2px 10px rgba($secondary, 0.05);
+
+$shadow-card-hover: 0 8px 20px rgba($secondary, 0.10);
+
+$shadow-sidebar: 2px 0 12px rgba($black, 0.25);
+
+$shadow-modal: 0 10px 40px rgba($secondary, 0.18);
+
+$shadow-preview: 0 2px 6px rgba($secondary, 0.06);
+
+$shadow-primary: 0 2px 6px rgba($primary, 0.25);
+
+$shadow-primary-hover: 0 4px 10px rgba($primary, 0.30);
+
+
+/* -----------------------------------------------------
+   Border Radius
+   ----------------------------------------------------- */
+
+$radius-xs: 4px;
+
+$radius-sm: 6px;
+
+$radius-md: 8px;
+
+$radius-lg: 12px;
+
+
+/* -----------------------------------------------------
+   Transitions
+   ----------------------------------------------------- */
+
+$transition-fast: 0.15s ease;
+
+$transition-normal: 0.18s ease;
+
+$transition-medium: 0.20s ease;
+
+$transition-slow: 0.25s ease;

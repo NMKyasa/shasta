@@ -43,6 +43,7 @@
     <link rel="stylesheet"
           href="<?= asset('assets/admin/dist/css/style.css') ?>">
 
+
 </head>
 
 <body class="hold-transition sidebar-mini">
