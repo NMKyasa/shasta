@@ -319,3 +319,225 @@ nav.navbar .navbar-toggler-icon {
   background: $primary;
   color: $white;
 }
+
+
+/* ========== MOBILE NAVBAR FIXES ========== */
+@media (max-width: 991px) {
+
+    /* Reduce navbar padding */
+    nav.navbar.navbar-expand-lg {
+        padding: 8px 1rem !important;
+        height: auto !important;
+        min-height: 60px !important;
+    }
+
+    /* Shrink logo image */
+    nav.navbar .navbar-brand img {
+        max-height: 36px !important; 
+    }
+
+    /* Shrink brand name text and prevent overflow */
+    nav.navbar .navbar-brand .fw-bold.text-primary {
+        font-size: 0.78rem !important;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 220px !important;
+    }
+
+    /* Shrink the brand container itself */
+    nav.navbar .navbar-brand {
+        gap: 6px !important;
+        max-width: calc(100% - 60px) !important;
+        flex-shrink: 1 !important;
+        min-width: 0 !important;
+    }
+
+    /* Hamburger — smaller and tighter */
+    nav.navbar .navbar-toggler {
+        padding: 5px 7px !important;
+        font-size: 14px !important;
+        flex-shrink: 0 !important;
+    }
+
+    nav.navbar .navbar-toggler-icon {
+        width: 20px !important;
+        height: 20px !important;
+    }
+
+    /* Body top padding to match actual mobile navbar height */
+    body {
+        padding-top: 60px !important;
+    }
+
+    /* Collapsed menu */
+    nav.navbar .navbar-collapse {
+        background: #ffffff;
+        border-top: 1px solid rgba(26, 26, 26, 0.08);
+        margin-top: 8px;
+        padding: 8px 0;
+        border-radius: 0 0 10px 10px;
+    }
+
+    nav.navbar .navbar-collapse.show {
+        max-height: calc(100vh - 60px);
+        overflow-y: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Even smaller screens — further reduce brand name */
+    nav.navbar .navbar-brand .fw-bold.text-primary {
+        font-size: 0.70rem !important;
+        max-width: 200px !important;
+    }
+
+    nav.navbar .navbar-brand img {
+        max-height: 30px !important;
+    }
+
+    body {
+        padding-top: 56px !important;
+    }
+}
+
+/* ============================================
+   CAROUSEL / SLIDER FIXES
+   ============================================ */
+
+/* ===== OWL NAV ARROWS — reposition to bottom center ===== */
+.header-carousel .owl-nav {
+    position: absolute !important;
+    bottom: 28px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    display: flex !important;
+    gap: 12px !important;
+    margin: 0 !important;
+    z-index: 5;
+    /* Remove any left/right absolute positioning from default theme */
+    top: auto !important;
+    right: auto !important;
+    width: auto !important;
+}
+
+.header-carousel .owl-nav button.owl-prev,
+.header-carousel .owl-nav button.owl-next {
+    position: static !important;
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 50% !important;
+    background: rgba(255, 255, 255, 0.15) !important;
+    border: 2px solid rgba(255, 255, 255, 0.5) !important;
+    color: #ffffff !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: all 0.15s ease !important;
+    margin: 0 !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    transform: none !important;
+}
+
+.header-carousel .owl-nav button.owl-prev:hover,
+.header-carousel .owl-nav button.owl-next:hover {
+    background: var(--primary, #7b2d8b) !important;
+    border-color: var(--primary, #7b2d8b) !important;
+}
+
+.header-carousel .owl-nav button span {
+    font-size: 22px !important;
+    line-height: 1 !important;
+    margin-top: -2px;
+    display: block;
+    color: #ffffff !important;
+}
+
+/* ===== OWL DOTS — center above nav ===== */
+.header-carousel .owl-dots {
+    position: absolute !important;
+    bottom: 82px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    margin: 0 !important;
+    z-index: 5;
+}
+
+.header-carousel .owl-dots .owl-dot span {
+    width: 8px !important;
+    height: 8px !important;
+    border-radius: 50% !important;
+    background: rgba(255, 255, 255, 0.4) !important;
+    display: block !important;
+    margin: 0 !important;
+    transition: all 0.25s ease !important;
+    border: none !important;
+}
+
+.header-carousel .owl-dots .owl-dot.active span {
+    background: var(--primary, #7b2d8b) !important;
+    width: 26px !important;
+    border-radius: 4px !important;
+}
+
+/* ===== ENSURE SLIDE HAS ENOUGH BOTTOM SPACE FOR NAV ===== */
+.header-carousel .owl-carousel-item {
+    min-height: 500px;
+    padding-bottom: 100px;
+}
+
+.header-carousel .carousel-inner {
+    padding-bottom: 20px;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 767px) {
+    .header-carousel .owl-carousel-item {
+        min-height: 420px;
+        padding-bottom: 90px;
+    }
+
+    .header-carousel .owl-nav {
+        bottom: 16px !important;
+        gap: 10px !important;
+    }
+
+    .header-carousel .owl-nav button.owl-prev,
+    .header-carousel .owl-nav button.owl-next {
+        width: 38px !important;
+        height: 38px !important;
+    }
+
+    .header-carousel .owl-dots {
+        bottom: 68px !important;
+    }
+
+    .header-carousel h1.display-3 {
+        font-size: 1.6rem !important;
+    }
+
+    .header-carousel p.fs-5 {
+        font-size: 0.9rem !important;
+        padding: 0 1rem !important;
+    }
+
+    .header-carousel a.btn {
+        padding: 10px 24px !important;
+        font-size: 14px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .header-carousel h1.display-3 {
+        font-size: 1.3rem !important;
+    }
+
+    .header-carousel .owl-carousel-item {
+        min-height: 380px;
+    }
+}

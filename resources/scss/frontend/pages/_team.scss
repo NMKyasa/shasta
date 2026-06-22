@@ -339,3 +339,130 @@
     background: $primary;
     color: $white;
 }
+
+/* ============================================
+   TEAM CAROUSEL
+   ============================================ */
+
+.team-carousel {
+    margin-bottom: 8px;
+}
+
+/* Cards inside Owl need bottom margin for shadow + lift */
+.team-carousel .team-item {
+    margin: 6px 0 40px;
+}
+
+.team-carousel .owl-stage-outer {
+    overflow: visible;
+    padding: 4px 0;
+}
+
+/* ===== NAV WRAPPER ===== */
+.team-carousel .owl-nav {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+/* ===== ARROWS ===== */
+.team-carousel .owl-nav button.owl-prev,
+.team-carousel .owl-nav button.owl-next {
+    position: static !important;
+    width: 52px !important;
+    height: 52px !important;
+    border-radius: 50% !important;
+    background: $primary !important;
+    border: none !important;
+    color: $white !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 18px !important;
+    transition: all 0.15s ease !important;
+    margin: 0 !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    transform: none !important;
+    box-shadow: 0 6px 18px rgba($primary, 0.35) !important;
+}
+
+.team-carousel .owl-nav button.owl-prev:hover,
+.team-carousel .owl-nav button.owl-next:hover {
+    background: $primary-hover !important;
+    box-shadow: 0 10px 24px rgba($primary, 0.45) !important;
+    transform: translateY(-2px) !important;
+}
+
+.team-carousel .owl-nav button span,
+.team-carousel .owl-nav button i {
+    font-size: 18px !important;
+    line-height: 1 !important;
+    color: $white !important;
+    display: block;
+}
+
+/* ===== DOTS ===== */
+.team-carousel .owl-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.team-carousel .owl-dots .owl-dot span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba($secondary, 0.15);
+    display: block;
+    margin: 0;
+    transition: all 0.25s ease;
+}
+
+.team-carousel .owl-dots .owl-dot.active span {
+    background: $primary;
+    width: 26px;
+    border-radius: 4px;
+}
+
+.team-carousel .owl-dots .owl-dot:hover span {
+    background: rgba($primary, 0.5);
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 767px) {
+    .team-carousel .owl-nav {
+        display: flex !important;
+        gap: 10px;
+        margin-top: 12px;
+    }
+
+    .team-carousel .owl-nav button.owl-prev,
+    .team-carousel .owl-nav button.owl-next {
+        width: 44px !important;
+        height: 44px !important;
+        font-size: 16px !important;
+    }
+
+    .team-carousel .owl-nav button span,
+    .team-carousel .owl-nav button i {
+        font-size: 15px !important;
+    }
+}
+
+/* Fallback grid before Owl initializes */
+.team-carousel:not(.owl-loaded) {
+    display: flex !important;
+    flex-wrap: wrap;
+    gap: 22px;
+}
+
+.team-carousel:not(.owl-loaded) .team-item {
+    flex: 1 1 calc(25% - 17px);
+    min-width: 240px;
+}

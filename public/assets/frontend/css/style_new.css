@@ -346,6 +346,204 @@ nav.navbar .navbar-toggler-icon {
   color: #FFFFFF;
 }
 
+/* ========== MOBILE NAVBAR FIXES ========== */
+@media (max-width: 991px) {
+  /* Reduce navbar padding */
+  nav.navbar.navbar-expand-lg {
+    padding: 8px 1rem !important;
+    height: auto !important;
+    min-height: 60px !important;
+  }
+  /* Shrink logo image */
+  nav.navbar .navbar-brand img {
+    max-height: 36px !important;
+  }
+  /* Shrink brand name text and prevent overflow */
+  nav.navbar .navbar-brand .fw-bold.text-primary {
+    font-size: 0.78rem !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 220px !important;
+  }
+  /* Shrink the brand container itself */
+  nav.navbar .navbar-brand {
+    gap: 6px !important;
+    max-width: calc(100% - 60px) !important;
+    flex-shrink: 1 !important;
+    min-width: 0 !important;
+  }
+  /* Hamburger — smaller and tighter */
+  nav.navbar .navbar-toggler {
+    padding: 5px 7px !important;
+    font-size: 14px !important;
+    flex-shrink: 0 !important;
+  }
+  nav.navbar .navbar-toggler-icon {
+    width: 20px !important;
+    height: 20px !important;
+  }
+  /* Body top padding to match actual mobile navbar height */
+  body {
+    padding-top: 60px !important;
+  }
+  /* Collapsed menu */
+  nav.navbar .navbar-collapse {
+    background: #ffffff;
+    border-top: 1px solid rgba(26, 26, 26, 0.08);
+    margin-top: 8px;
+    padding: 8px 0;
+    border-radius: 0 0 10px 10px;
+  }
+  nav.navbar .navbar-collapse.show {
+    max-height: calc(100vh - 60px);
+    overflow-y: auto;
+  }
+}
+@media (max-width: 480px) {
+  /* Even smaller screens — further reduce brand name */
+  nav.navbar .navbar-brand .fw-bold.text-primary {
+    font-size: 0.7rem !important;
+    max-width: 200px !important;
+  }
+  nav.navbar .navbar-brand img {
+    max-height: 30px !important;
+  }
+  body {
+    padding-top: 56px !important;
+  }
+}
+/* ============================================
+   CAROUSEL / SLIDER FIXES
+   ============================================ */
+/* ===== OWL NAV ARROWS — reposition to bottom center ===== */
+.header-carousel .owl-nav {
+  position: absolute !important;
+  bottom: 28px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  display: flex !important;
+  gap: 12px !important;
+  margin: 0 !important;
+  z-index: 5;
+  /* Remove any left/right absolute positioning from default theme */
+  top: auto !important;
+  right: auto !important;
+  width: auto !important;
+}
+
+.header-carousel .owl-nav button.owl-prev,
+.header-carousel .owl-nav button.owl-next {
+  position: static !important;
+  width: 44px !important;
+  height: 44px !important;
+  border-radius: 50% !important;
+  background: rgba(255, 255, 255, 0.15) !important;
+  border: 2px solid rgba(255, 255, 255, 0.5) !important;
+  color: #ffffff !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.15s ease !important;
+  margin: 0 !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  transform: none !important;
+}
+
+.header-carousel .owl-nav button.owl-prev:hover,
+.header-carousel .owl-nav button.owl-next:hover {
+  background: var(--primary, #7b2d8b) !important;
+  border-color: var(--primary, #7b2d8b) !important;
+}
+
+.header-carousel .owl-nav button span {
+  font-size: 22px !important;
+  line-height: 1 !important;
+  margin-top: -2px;
+  display: block;
+  color: #ffffff !important;
+}
+
+/* ===== OWL DOTS — center above nav ===== */
+.header-carousel .owl-dots {
+  position: absolute !important;
+  bottom: 82px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  margin: 0 !important;
+  z-index: 5;
+}
+
+.header-carousel .owl-dots .owl-dot span {
+  width: 8px !important;
+  height: 8px !important;
+  border-radius: 50% !important;
+  background: rgba(255, 255, 255, 0.4) !important;
+  display: block !important;
+  margin: 0 !important;
+  transition: all 0.25s ease !important;
+  border: none !important;
+}
+
+.header-carousel .owl-dots .owl-dot.active span {
+  background: var(--primary, #7b2d8b) !important;
+  width: 26px !important;
+  border-radius: 4px !important;
+}
+
+/* ===== ENSURE SLIDE HAS ENOUGH BOTTOM SPACE FOR NAV ===== */
+.header-carousel .owl-carousel-item {
+  min-height: 500px;
+  padding-bottom: 100px;
+}
+
+.header-carousel .carousel-inner {
+  padding-bottom: 20px;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 767px) {
+  .header-carousel .owl-carousel-item {
+    min-height: 420px;
+    padding-bottom: 90px;
+  }
+  .header-carousel .owl-nav {
+    bottom: 16px !important;
+    gap: 10px !important;
+  }
+  .header-carousel .owl-nav button.owl-prev,
+  .header-carousel .owl-nav button.owl-next {
+    width: 38px !important;
+    height: 38px !important;
+  }
+  .header-carousel .owl-dots {
+    bottom: 68px !important;
+  }
+  .header-carousel h1.display-3 {
+    font-size: 1.6rem !important;
+  }
+  .header-carousel p.fs-5 {
+    font-size: 0.9rem !important;
+    padding: 0 1rem !important;
+  }
+  .header-carousel a.btn {
+    padding: 10px 24px !important;
+    font-size: 14px !important;
+  }
+}
+@media (max-width: 480px) {
+  .header-carousel h1.display-3 {
+    font-size: 1.3rem !important;
+  }
+  .header-carousel .owl-carousel-item {
+    min-height: 380px;
+  }
+}
 /* ============================================
    SHASTA FOOTER
    ============================================ */
@@ -922,6 +1120,129 @@ nav.navbar .navbar-toggler-icon {
 .team-modal-social a:hover {
   background: #E07820;
   color: #FFFFFF;
+}
+
+/* ============================================
+   TEAM CAROUSEL
+   ============================================ */
+.team-carousel {
+  margin-bottom: 8px;
+}
+
+/* Cards inside Owl need bottom margin for shadow + lift */
+.team-carousel .team-item {
+  margin: 6px 0 40px;
+}
+
+.team-carousel .owl-stage-outer {
+  overflow: visible;
+  padding: 4px 0;
+}
+
+/* ===== NAV WRAPPER ===== */
+.team-carousel .owl-nav {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+/* ===== ARROWS ===== */
+.team-carousel .owl-nav button.owl-prev,
+.team-carousel .owl-nav button.owl-next {
+  position: static !important;
+  width: 52px !important;
+  height: 52px !important;
+  border-radius: 50% !important;
+  background: #E07820 !important;
+  border: none !important;
+  color: #FFFFFF !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 18px !important;
+  transition: all 0.15s ease !important;
+  margin: 0 !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  transform: none !important;
+  box-shadow: 0 6px 18px rgba(224, 120, 32, 0.35) !important;
+}
+
+.team-carousel .owl-nav button.owl-prev:hover,
+.team-carousel .owl-nav button.owl-next:hover {
+  background: rgb(188.9354330709, 100.8220472441, 26.2645669291) !important;
+  box-shadow: 0 10px 24px rgba(224, 120, 32, 0.45) !important;
+  transform: translateY(-2px) !important;
+}
+
+.team-carousel .owl-nav button span,
+.team-carousel .owl-nav button i {
+  font-size: 18px !important;
+  line-height: 1 !important;
+  color: #FFFFFF !important;
+  display: block;
+}
+
+/* ===== DOTS ===== */
+.team-carousel .owl-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.team-carousel .owl-dots .owl-dot span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(26, 26, 26, 0.15);
+  display: block;
+  margin: 0;
+  transition: all 0.25s ease;
+}
+
+.team-carousel .owl-dots .owl-dot.active span {
+  background: #E07820;
+  width: 26px;
+  border-radius: 4px;
+}
+
+.team-carousel .owl-dots .owl-dot:hover span {
+  background: rgba(224, 120, 32, 0.5);
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 767px) {
+  .team-carousel .owl-nav {
+    display: flex !important;
+    gap: 10px;
+    margin-top: 12px;
+  }
+  .team-carousel .owl-nav button.owl-prev,
+  .team-carousel .owl-nav button.owl-next {
+    width: 44px !important;
+    height: 44px !important;
+    font-size: 16px !important;
+  }
+  .team-carousel .owl-nav button span,
+  .team-carousel .owl-nav button i {
+    font-size: 15px !important;
+  }
+}
+/* Fallback grid before Owl initializes */
+.team-carousel:not(.owl-loaded) {
+  display: flex !important;
+  flex-wrap: wrap;
+  gap: 22px;
+}
+
+.team-carousel:not(.owl-loaded) .team-item {
+  flex: 1 1 calc(25% - 17px);
+  min-width: 240px;
 }
 
 /* ===== TESTIMONIALS — Single Card Centered Style ===== */
@@ -2549,13 +2870,12 @@ nav.navbar .navbar-toggler-icon {
 }
 
 /* ============================================
-   SERVICES CAROUSEL
+   SERVICES CAROUSEL — Fixed Nav
    ============================================ */
 .services-carousel {
   margin-bottom: 8px;
 }
 
-/* Card sizing inside Owl items */
 .services-carousel .sv-card {
   margin: 6px 0 40px;
   height: calc(100% - 40px);
@@ -2566,27 +2886,37 @@ nav.navbar .navbar-toggler-icon {
   padding: 4px 0;
 }
 
-/* ===== NAV ARROWS ===== */
+/* ===== NAV WRAPPER ===== */
 .services-carousel .owl-nav {
-  display: flex;
+  display: flex !important;
   justify-content: center;
-  gap: 14px;
-  margin-top: 8px;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
 }
 
+/* ===== ARROWS — both desktop and mobile ===== */
 .services-carousel .owl-nav button.owl-prev,
 .services-carousel .owl-nav button.owl-next {
-  width: 46px;
-  height: 46px;
-  border-radius: 10px;
+  position: static !important;
+  width: 52px !important;
+  height: 52px !important;
+  border-radius: 50% !important;
   background: #FFFFFF !important;
-  border: 1px solid rgba(26, 26, 26, 0.1) !important;
-  color: #1A1A1A !important;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  transition: all 0.15s ease;
+  border: 1.5px solid rgba(224, 120, 32, 0.15) !important;
+  color: #E07820 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 20px !important;
+  transition: all 0.15s ease !important;
+  margin: 0 !important;
+  /* Critical — override Owl theme absolute positioning */
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  transform: none !important;
+  box-shadow: 0 10px 24px rgba(224, 120, 32, 0.45) !important;
 }
 
 .services-carousel .owl-nav button.owl-prev:hover,
@@ -2594,12 +2924,16 @@ nav.navbar .navbar-toggler-icon {
   background: #E07820 !important;
   border-color: #E07820 !important;
   color: #FFFFFF !important;
+  box-shadow: 0 4px 14px rgba(224, 120, 32, 0.3) !important;
 }
 
+/* Arrow icon text */
 .services-carousel .owl-nav button span {
-  font-size: 22px;
-  line-height: 1;
+  font-size: 20px !important;
+  line-height: 1 !important;
+  color: inherit !important;
   margin-top: -2px;
+  display: block;
 }
 
 /* ===== DOTS ===== */
@@ -2608,7 +2942,7 @@ nav.navbar .navbar-toggler-icon {
   justify-content: center;
   align-items: center;
   gap: 8px;
-  margin-top: 4px;
+  margin-top: 12px;
 }
 
 .services-carousel .owl-dots .owl-dot span {
@@ -2631,13 +2965,24 @@ nav.navbar .navbar-toggler-icon {
   background: rgba(224, 120, 32, 0.5);
 }
 
-/* ===== MOBILE ===== */
+/* ===== MOBILE — show arrows, just smaller ===== */
 @media (max-width: 767px) {
   .services-carousel .owl-nav {
-    display: none;
+    display: flex !important; /* was display: none — this was the bug */
+    gap: 14px;
+    margin-top: 16px;
+  }
+  .services-carousel .owl-nav button.owl-prev,
+  .services-carousel .owl-nav button.owl-next {
+    width: 48px !important;
+    height: 48px !important;
+    font-size: 18px !important;
+  }
+  .services-carousel .owl-nav button span {
+    font-size: 17px !important;
   }
 }
-/* Fallback: show cards as a grid before Owl initializes */
+/* Fallback grid before Owl initializes */
 .services-carousel:not(.owl-loaded) {
   display: flex !important;
   flex-wrap: wrap;

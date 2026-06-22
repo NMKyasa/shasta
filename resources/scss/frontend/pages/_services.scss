@@ -512,14 +512,12 @@
 
 
 /* ============================================
-   SERVICES CAROUSEL
+   SERVICES CAROUSEL — Fixed Nav
    ============================================ */
 
 .services-carousel {
     margin-bottom: 8px;
 }
-
-/* Card sizing inside Owl items */
 
 .services-carousel .sv-card {
     margin: 6px 0 40px;
@@ -531,29 +529,37 @@
     padding: 4px 0;
 }
 
-
-/* ===== NAV ARROWS ===== */
-
+/* ===== NAV WRAPPER ===== */
 .services-carousel .owl-nav {
-    display: flex;
+    display: flex !important;
     justify-content: center;
-    gap: 14px;
-    margin-top: 8px;
+    align-items: center;
+    gap: 12px;
+    margin-top: 16px;
 }
 
+/* ===== ARROWS — both desktop and mobile ===== */
 .services-carousel .owl-nav button.owl-prev,
 .services-carousel .owl-nav button.owl-next {
-    width: 46px;
-    height: 46px;
-    border-radius: $radius-md;
+    position: static !important;
+    width: 52px !important;
+    height: 52px !important;
+    border-radius: 50% !important;
     background: $white !important;
-    border: 1px solid rgba($secondary, 0.1) !important;
-    color: $secondary !important;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    transition: all $transition-fast;
+    border: 1.5px solid rgba($primary, 0.15) !important;
+    color: $primary !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 20px !important;
+    transition: all 0.15s ease !important;
+    margin: 0 !important;
+    /* Critical — override Owl theme absolute positioning */
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    transform: none !important;
+    box-shadow: 0 10px 24px rgba($primary, 0.45) !important;
 }
 
 .services-carousel .owl-nav button.owl-prev:hover,
@@ -561,23 +567,25 @@
     background: $primary !important;
     border-color: $primary !important;
     color: $white !important;
+    box-shadow: 0 4px 14px rgba($primary, 0.3) !important;
 }
 
+/* Arrow icon text */
 .services-carousel .owl-nav button span {
-    font-size: 22px;
-    line-height: 1;
+    font-size: 20px !important;
+    line-height: 1 !important;
+    color: inherit !important;
     margin-top: -2px;
+    display: block;
 }
-
 
 /* ===== DOTS ===== */
-
 .services-carousel .owl-dots {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 8px;
-    margin-top: 4px;
+    margin-top: 12px;
 }
 
 .services-carousel .owl-dots .owl-dot span {
@@ -600,17 +608,27 @@
     background: rgba($primary, 0.5);
 }
 
-/* ===== MOBILE ===== */
-
+/* ===== MOBILE — show arrows, just smaller ===== */
 @media (max-width: 767px) {
     .services-carousel .owl-nav {
-        display: none;
+        display: flex !important; /* was display: none — this was the bug */
+        gap: 14px;
+        margin-top: 16px;
+    }
+
+    .services-carousel .owl-nav button.owl-prev,
+    .services-carousel .owl-nav button.owl-next {
+        width: 48px !important;
+        height: 48px !important;
+        font-size: 18px !important;
+    }
+
+    .services-carousel .owl-nav button span {
+        font-size: 17px !important;
     }
 }
 
-
-/* Fallback: show cards as a grid before Owl initializes */
-
+/* Fallback grid before Owl initializes */
 .services-carousel:not(.owl-loaded) {
     display: flex !important;
     flex-wrap: wrap;
